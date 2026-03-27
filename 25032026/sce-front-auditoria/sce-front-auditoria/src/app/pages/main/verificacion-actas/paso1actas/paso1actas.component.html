@@ -1,0 +1,154 @@
+<div *ngIf="isVisibleSeccionFirma" class="d-flex between-flex">
+    <h3 class="titulos-article">Paso 1 de 3 - Firmas verificadas
+    <button #botonRecargar class="btn_actualizar"
+            (click)="recargarImagen()"
+            (keydown.tab)="handleTabReload($event)"
+            (focus)="onFocusChange(FocusElementVeri.RELOAD)"
+    ></button></h3>
+
+    <form [formGroup]="formGroupAcciones" autocomplete="off">
+      <div class="toogle d-flex between-flex gap-10">
+        <span>Sin Firma</span>
+        <mat-slide-toggle
+          id="CkeckCumple"
+          name="indCkeckCumple"
+          formControlName="indCheckCumple"
+          class="sin-firma"
+          #toggleFirma
+          (keydown.enter)="handleEnterKey($event)"
+          (keydown.tab)="handleTabKey($event)"
+        ></mat-slide-toggle>
+        <span>Con Firma</span>
+      </div>
+    </form>
+</div>
+<div>
+<div *ngIf="isVisibleSeccionFirma" class="content-cantidad mt-25">
+
+
+  <div >
+    <div class="d-flex gap-10 between-flex items-center">
+      <div>
+
+          <h4>Verificación de Firmas <br> (Acta de escrutinio)</h4>
+      </div>
+      <div class=" d-flex items-center center-flex gap-36 wdt-80" >
+          <div class="p-r content-proporcion">
+            <label *ngIf="imgFirmaCountPresidente !== ''"
+                  class="header-firmas color1"
+                  for="idImgFirmaEscruPresi">PRESIDENTE</label>
+            <canvas [ngClass]="imgFirmaCountPresidente == '' ? 'd_none' : '30%'"
+                    id="idImgFirmaEscruPresi"
+                    #imageCanvasescrutinio1>
+            </canvas>
+          </div>
+          <div class="p-r content-proporcion">
+            <label *ngIf="imgFirmaCountSecretario !== ''"
+                  class="header-firmas color1"
+                  for="idImgFirmaEscruSecre">SECRETARIO</label>
+            <canvas [ngClass]="imgFirmaCountSecretario == '' ? 'd_none' : '30%'"
+                    id="idImgFirmaEscruSecre"
+                    #imageCanvasescrutinio2>
+            </canvas>
+          </div>
+          <div class="p-r content-proporcion">
+            <label *ngIf="imgFirmaCountThirdMember !== ''"
+                  class="header-firmas color1"
+                  for="idImgFirmaEscruTercer">TERCER MIEMBRO</label>
+            <canvas [ngClass]="imgFirmaCountThirdMember == '' ? 'd_none' : '30%'"
+                    id="idImgFirmaEscruTercer"
+                    #imageCanvasescrutinio3>
+            </canvas>
+          </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div *ngIf="isVisibleSeccionFirma" class="content-cantidad mt-25">
+
+
+  <div >
+    <div class="d-flex gap-10 between-flex items-center">
+      <div>
+
+          <h4>Verificación de Firmas <br> (Acta de instalación)</h4>
+      </div>
+      <div class=" d-flex items-center center-flex gap-36 wdt-80" >
+
+
+          <div class="p-r content-proporcion" >
+            <label *ngIf="imgFirmaInstallPresidente !== ''" class="header-firmas color1" for="idImgFirmaInstaPresi">PRESIDENTE</label>
+            <canvas [ngClass] = "imgFirmaInstallPresidente == '' ? 'd_none':'30%'"
+                    id="idImgFirmaInstaPresi"
+                    #imageCanvasinstalacion1
+            >
+            </canvas>
+          </div>
+          <div class="p-r content-proporcion" >
+            <label *ngIf="imgFirmaInstallSecretario !== ''" class="header-firmas color1" for="idImgFirmaInstaSecre">SECRETARIO</label>
+            <canvas [ngClass] = "imgFirmaInstallSecretario == '' ? 'd_none':'30%'" id="idImgFirmaInstaSecre"
+            #imageCanvasinstalacion2></canvas>
+          </div>
+          <div class="p-r content-proporcion" >
+            <label *ngIf="imgFirmaInstallThirdMember !== ''" class="header-firmas color1" for="idImgFirmaInstaTercer">TERCER MIEMBRO</label>
+            <canvas [ngClass] = "imgFirmaInstallThirdMember == '' ? 'd_none':'30%'" id="idImgFirmaInstaTercer"
+
+            #imageCanvasinstalacion3></canvas>
+          </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<div *ngIf="isVisibleSeccionFirma" class="content-cantidad mt-25">
+
+
+  <div >
+    <div class="d-flex gap-10 between-flex items-center">
+      <div>
+
+          <h4>Verificación de Firmas <br> (Acta de sufragio)</h4>
+      </div>
+      <div class=" d-flex items-center center-flex gap-36 wdt-80" >
+          <div class="p-r content-proporcion">
+            <label *ngIf="imgFirmaVotePresidente !== ''" class="header-firmas color1" for="idImgFirmaSufraPresi">PRESIDENTE</label>
+
+            <canvas [ngClass] = "imgFirmaVotePresidente == '' ? 'd_none':'30%'" id="idImgFirmaSufraPresi"
+
+            #imageCanvassufragio1></canvas>
+          </div>
+          <div class="p-r content-proporcion" >
+            <label *ngIf="imgFirmaVoteSecretario !== ''" class="header-firmas color1" for="idImgFirmaSufraSecre">SECRETARIO</label>
+            <canvas [ngClass] = "imgFirmaVoteSecretario == '' ? 'd_none':'30%'" id="idImgFirmaSufraSecre"
+
+            #imageCanvassufragio2></canvas>
+          </div>
+          <div class="p-r content-proporcion">
+            <label *ngIf="imgFirmaVoteThirdMember !== ''" class="header-firmas color1" for="idImgFirmaSufraTercer">TERCER MIEMBRO</label>
+
+            <canvas [ngClass] = "imgFirmaVoteThirdMember == '' ? 'd_none':'30%'" id="idImgFirmaSufraTercer"
+
+            #imageCanvassufragio3></canvas>
+          </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+</div>
+
+

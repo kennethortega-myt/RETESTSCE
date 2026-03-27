@@ -1,0 +1,9 @@
+.botonera-control-calidad-p3{
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+  .estilo1, .estilo2, .estilo3{
+    margin: 0px;
+  }
+}

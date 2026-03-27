@@ -1,0 +1,107 @@
+<div class="content-cantidad border-radio-0 fitBox">
+        <div class="d-flex gap-10">
+            <div class="">
+                <div class="p-sticky item bg-white">
+                    <h3 class="titulos-article height-28">Organizaciones políticas</h3>
+                </div>
+                <div class="d-flex items-center center-flex gap-36">
+                    <img [ngClass]="isPreferencial? 'img-agrupol-pref' : 'img-agrupol-pres'" 
+                        [src]="srcImgAgrupol" 
+                        alt="" 
+                        *ngIf="srcImgAgrupol; else agrupacionManual"
+                    >
+                    <ng-template #agrupacionManual>
+                        <div [ngClass]="isPreferencial? 'img-agrupol-pref' : 'img-agrupol-pres'">
+                            <div *ngFor="let agrupacion of agrupacionesPoliticas"
+                                class="agrupacion"
+                                [ngClass]="{'agrupacion-pres': !isPreferencial, 'agrupacion-pref': isPreferencial, 'achurado': agrupacion.estado === codigoAchurado}">                            
+                                {{agrupacion.descripcion}}                            
+                            </div>
+                        </div>                        
+                    </ng-template>
+                </div>
+                <div *ngIf="isResolucionAplicada && indiceActualPref === 0" 
+                        class="d-flex items-center height-28" 
+                        style="height: 65px; margin-left: 2rem;"
+                        [ngClass]="isPreferencial? 'mt-12' : ''">
+                    <h2 class="votos-control">Total de ciudadanos que votaron</h2>
+                </div>                
+                <div *ngIf="isResolucionAplicada && indiceActualPref === 0" 
+                        class="d-flex items-center height-28" 
+                        style="height: 65px; margin-left: 2rem;" 
+                        [ngClass]="isPreferencial? 'mt-12' : ''">
+                    <h2 class="votos-control">Con solicitud de nulidad</h2>
+                </div>
+                <div *ngIf="isResolucionAplicada && indiceActualPref === 0" 
+                        class="d-flex items-center height-28" 
+                        style="height: 65px; margin-left: 2rem;" 
+                        [ngClass]="isPreferencial? 'mt-12' : ''">
+                    <h2 class="votos-control">Acta sin firma</h2>
+                </div>
+            </div>
+            <div style="width: 45px;">
+                <div class="p-sticky">
+                    <button 
+                        class="btn-flechas" 
+                        *ngIf="showPreviousPreferencial"                             
+                        (click)="previousPreferencial()">
+                        <img src="assets/img/flecha_iz.svg" alt="">
+                    </button>
+                </div>
+            </div>
+            <div class="col-agrupol">
+                <div class="p-sticky item bg-white padding-x-0">
+                    <h3 class="titulos-article height-28"                         
+                        style="text-align: center; width: max-content;" 
+                        *ngIf="showPreviousPreferencial; else presidencial"
+                    >Preferencial {{indiceActualPref}}</h3>
+                    <ng-template #presidencial>
+                        <h3 class="titulos-article height-28" style="text-align: center">&nbsp;</h3>
+                    </ng-template>                    
+                </div>
+                <img [ngClass]="classImgVotoCol" [src]="srcImagePreferencialActual" alt="">
+            </div>            
+            <div *ngIf="!isResolucionAplicada; else viewResolucionAplicada">
+                <app-columna-votos
+                    [isPreferencial]="isPreferencial"
+                    [detalleVotos]="detalleVotosPaso3"
+                    [indiceActualPref]="indiceActualPref"                    
+                    titulo="Votos">                    
+                </app-columna-votos>                
+            </div>
+            <ng-template #viewResolucionAplicada>
+                <app-columna-votos
+                    [isPreferencial]="isPreferencial"
+                    [detalleVotos]="detalleVotosAntes"
+                    [indiceActualPref]="indiceActualPref"
+                    [cvas]="votosResolucionAplicada?.cvasAntes"
+                    [isResolucionAplicada]="isResolucionAplicada"
+                    [isSolicitudNulidad]="votosResolucionAplicada?.solicitudNulidadAntes"
+                    [isNotEqualCvas]="isNotEqualsCvas()"
+                    [isActaSinFirma]="votosResolucionAplicada?.actaSinFirmaAntes"
+                    titulo="Antes">                    
+                </app-columna-votos>
+                <app-columna-votos
+                    [isPreferencial]="isPreferencial"
+                    [detalleVotos]="detalleVotosDespues"
+                    [indiceActualPref]="indiceActualPref"
+                    [cvas]="votosResolucionAplicada?.cvasDespues"
+                    [isResolucionAplicada]="isResolucionAplicada"
+                    [isSolicitudNulidad]="votosResolucionAplicada?.solicitudNulidadDespues"
+                    [isNotEqualCvas]="isNotEqualsCvas()"
+                    [isActaSinFirma]="votosResolucionAplicada?.actaSinFirmaDespues"
+                    titulo="Después">                    
+                </app-columna-votos>
+            </ng-template>
+            <div>
+                <div class="p-sticky">
+                    <button 
+                        class="btn-flechas" 
+                        *ngIf="showNextPreferencial"
+                        (click)="nextPreferencial()">
+                        <img src="assets/img/flecha_de.svg" alt="">
+                    </button>
+                </div>                
+            </div>
+        </div>
+    </div>

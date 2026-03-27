@@ -1,0 +1,123 @@
+<section class="secciones">
+    <h1 class="titulo1">{{tituloComponente}}</h1>
+    <div class="seccion-unidos ">
+        <article class="w-20 cuadro-blanco-2 flex-col-omiso">
+            <form [formGroup]="formularioBusqueda"
+            (ngSubmit)="buscar()"
+            class="formulario section-flex ">
+              <div class="w-100">
+                <div class="mt-1">
+                  <label for="dni">DNI:</label>
+                  <mat-form-field appearance="outline" class="input-filtro">
+                      <input matInput placeholder="Buscar por número de DNI"
+                      formControlName="dni"  maxlength="8" type="text" sceSoloNumerosFormReact />
+                  </mat-form-field>
+                </div>
+                <div class="mt-1">
+                  <label for="numeroMesa">Mesa:</label>
+                  <mat-form-field appearance="outline" class="input-filtro">
+                      <input matInput placeholder="Buscar por número de mesa"
+                      formControlName="numeroMesa" maxlength="6" type="text" sceSoloNumerosFormReact />
+                  </mat-form-field>
+                </div>
+                <div class="mt-1">
+                  <label for="nombres">Nombres:</label>
+                  <mat-form-field appearance="outline" class="input-filtro">
+                      <input matInput placeholder="Buscar por nombres"
+                      formControlName="nombres" maxlength="100" type="text"
+                      sceNoEspacioInicioReact sceSoloAlfabeticosReact
+                      />
+                  </mat-form-field>
+                </div>
+                <div class="mt-1">
+                  <label for="aPaterno">Apellido Paterno:</label>
+                  <mat-form-field appearance="outline" class="input-filtro">
+                      <input matInput placeholder="Buscar por apellido Paterno"
+                      formControlName="aPaterno" maxlength="100" type="text"
+                      sceNoEspacioInicioReact sceSoloAlfabeticosReact
+                      />
+                  </mat-form-field>
+                </div>
+                <div class="mt-1">
+                  <label for="aMaterno">Apellido Materno:</label>
+                  <mat-form-field appearance="outline" class="input-filtro">
+                      <input matInput placeholder="Buscar por apellido Materno"
+                      formControlName="aMaterno" maxlength="100" type="text"
+                      sceNoEspacioInicioReact sceSoloAlfabeticosReact
+                       />
+                  </mat-form-field>
+                </div>
+              </div>
+              <button class="estilo2 w-full"
+                      type="submit"
+                      [disabled]="loading">
+                {{ loading ? 'BUSCANDO...' : 'BUSCAR' }}
+              </button>
+              <button class="estilo1 w-full"
+                      type="button"
+                      (click)="limpiar()"
+                      [disabled]="loading">
+                LIMPIAR
+              </button>
+            </form>
+        </article>
+        <article class="w-80 eleminacion-omisos">
+          <div class="scrolltablListadoElectores">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+              <ng-container matColumnDef="position">
+                  <th mat-header-cell *matHeaderCellDef class="header-numero centrando-celda"> Nº </th>
+                  <td mat-cell *matCellDef="let element; let i = index" class="header-numero centrando-celda"> {{getNumeroFila(i)}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="dni">
+                  <th mat-header-cell *matHeaderCellDef class="centrando-celda"> DNI </th>
+                  <td mat-cell *matCellDef="let element" class="centrando-celda"> {{element.documentoIdentidad}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="nombres">
+                  <th mat-header-cell *matHeaderCellDef> Nombres </th>
+                  <td mat-cell *matCellDef="let element"> {{element.nombres}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="aPaterno">
+                  <th mat-header-cell *matHeaderCellDef> Apellido Paterno </th>
+                  <td mat-cell *matCellDef="let element"> {{element.apellidoPaterno}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="aMaterno">
+                  <th mat-header-cell *matHeaderCellDef> Apellido Materno </th>
+                  <td mat-cell *matCellDef="let element"> {{element.apellidoMaterno}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="mesa">
+                  <th mat-header-cell *matHeaderCellDef class="centrando-celda"> Mesa </th>
+                  <td mat-cell *matCellDef="let element" class="centrando-celda"> {{element.codigoMesa}} </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <div *ngIf="!busquedaRealizada && dataSource.data.length === 0" class="no-data-message">
+              <p>Complete al menos un campo y presione BUSCAR para ver resultados.</p>
+            </div>
+            <div *ngIf="busquedaRealizada && dataSource.data.length === 0" class="no-data-message">
+              <p>No se han encontrado registros con los criterios especificados.</p>
+            </div>
+          </div>
+          <mat-paginator
+              [length]="totalElements"
+              [pageSize]="pageSize"
+              [pageIndex]="pageIndex"
+              [pageSizeOptions]="[10, 20, 50, 100]"
+              (page)="onPageChange($event)"
+              showFirstLastButtons>
+          </mat-paginator>
+          <div>
+            <ul class="leyenda-lista">
+              <li>- Puedes dejar en blanco cualquiera de los campos.</li>
+              <li>- Para DNI, nombres y apellidos puede buscar parte o completo.</li>
+              <li>- Si busca por mesa ingrese el número de mesa completo.</li>
+            </ul>
+          </div>
+        </article>
+    </div>
+</section>

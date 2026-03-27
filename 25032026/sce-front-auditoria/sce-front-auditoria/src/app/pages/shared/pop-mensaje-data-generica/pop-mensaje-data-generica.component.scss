@@ -1,0 +1,6 @@
+.table-container-pop-actas-corregir{
+  max-height: 300px; /* Limita la altura máxima de la tabla */
+  overflow-y: auto;  /* Habilita el scroll vertical si el contenido excede la altura */
+  display: block;
+}
+

@@ -1,0 +1,46 @@
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="position">
+    <mat-header-cell *matHeaderCellDef> N°</mat-header-cell>
+    <mat-cell *matCellDef="let element; let i = index"> {{ getDisplayIndex(i) }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="acta">
+    <mat-header-cell *matHeaderCellDef> Acta</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.mesa }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="copia">
+    <mat-header-cell *matHeaderCellDef> Copia</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.copia }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="eleccion">
+    <mat-header-cell *matHeaderCellDef> Elección</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.eleccion }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="estado">
+    <mat-header-cell *matHeaderCellDef> Estado</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <div class="estado {{ getEstadoClass(element.descripcionEstadoActa) }}" title="{{ element.descripcionEstadoActa }}"></div>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="acciones">
+    <mat-header-cell *matHeaderCellDef class="w-acciones"> Acciones</mat-header-cell>
+    <mat-cell *matCellDef="let element; let i = index" class="w-acciones">
+      <ng-container *ngIf="element.flujoAutomatizado && element.descripcionEstadoActa?.toLowerCase() === 'observada'">
+        <button *ngIf="accionesVisibles.includes(ACCIONES_TABLA.VER_PLOMO)" (click)="verActa.emit({ acta: element, tipoSobre: 'PLOMO' })" title="Sobre Plomo" class="btn_sobre_gris"></button>
+        <button *ngIf="accionesVisibles.includes(ACCIONES_TABLA.VER_CELESTE) && !element.staeIntegrada" (click)="verActa.emit({ acta: element, tipoSobre: 'CELESTE' })" title="Sobre Celeste" class="btn_sobre_azul"></button>
+        <button *ngIf="accionesVisibles.includes(ACCIONES_TABLA.CARGO)" (click)="generarCargo.emit({ acta: element})" title="Generar Cargo" class="btn_sobre_blanco"></button>
+        <button *ngIf="accionesVisibles.includes(ACCIONES_TABLA.OFICIO)" (click)="generarOficio.emit({ acta: element})" title="Generar Oficio" class="btn_enlazar"></button>
+        <button *ngIf="accionesVisibles.includes(ACCIONES_TABLA.TRANSMITIR)" (click)="transmitirOficio.emit({ acta: element})" title="Transmitir Oficio" title="Enviar" class="btn_enviar"></button>
+      </ng-container>
+      <button *ngIf="accionesVisibles.includes(ACCIONES_TABLA.ELIMINAR)" (click)="eliminar.emit(i)" title="Eliminar" class="btn_eliminar" style="margin-left:10px"></button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<mat-paginator #paginator [pageSizeOptions]="[10, 20, 40]" showFirstLastButtons></mat-paginator>

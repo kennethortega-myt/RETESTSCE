@@ -1,0 +1,208 @@
+<div class="filtros">
+    <div class="filtro">
+        <label for="tipoProceso">Proceso:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="tipoProceso">
+                <mat-option [value]="0">SELECCIONE</mat-option>
+                <mat-option> opcion 1</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="filtro">
+        <label for="centroComputo">Centro de Cómputo:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="centroComputo">
+                <mat-option [value]="0">SELECCIONE</mat-option>
+                <mat-option>Presidente y Vicepresidente</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="filtro">
+        <label for="genero">Género:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="genero">
+                <mat-option [value]="0">SELECCIONE</mat-option>
+                <mat-option>Presidente y Vicepresidente</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="filtro_boton">
+        <button class="estilo1 noMarginLR" type="button">
+          Consultar
+        </button>
+    </div>
+</div>
+<h2 class="subtitulo_reportes">Detalle de registro por género y ausentismo</h2>
+<div class="cont-anuncio">
+    <div class="personaje-anuncio">
+      <p>
+        Por favor, seleccione el ámbito para realizar la búsqueda.
+      </p>
+      <img alt="" src="../assets/img/personaje1.svg" />
+    </div>
+</div>
+
+
+<mat-table [dataSource]="dataSource1" class="tabla-header-doble mb-25">
+    <ng-container matColumnDef="ubigeo">
+        <mat-header-cell *matHeaderCellDef class="header-ubigeo centrar-celda">Ubigeo</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="header-ubigeo centrar-celda">
+            {{ element.ubigeo }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="departamento">
+        <mat-header-cell *matHeaderCellDef>Departamento</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.departamento }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="provincia">
+        <mat-header-cell *matHeaderCellDef>Provincia</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.provincia}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="distrito">
+        <mat-header-cell *matHeaderCellDef>Distrito</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.distrito}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="TotalMesas">
+        <mat-header-cell *matHeaderCellDef>total de mesas</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="centrar-celda">
+            {{ element.TotalMesas}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="MesasRegistradas">
+        <mat-header-cell *matHeaderCellDef>Mesas Registradas</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="centrar-celda">
+            {{ element.MesasRegistradas}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="TotalElectores">
+        <mat-header-cell *matHeaderCellDef>Total Electores</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="centrar-celda">
+            {{ element.TotalElectores}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="varones">
+        <mat-header-cell *matHeaderCellDef>Varones</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.varones}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="mujeres">
+        <mat-header-cell *matHeaderCellDef>Mujeres</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.mujeres}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="total">
+        <mat-header-cell *matHeaderCellDef>Total</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.total}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="ausentismo">
+        <mat-header-cell *matHeaderCellDef class="header-ausentismo padding-0">
+            <div class="header-tabla-doble">
+                <span style="border-bottom: 1px solid #ffffff; width: 100%; text-align: center;">Ausentismo %</span>
+
+                <div class="header-tabla-doble-sub tabla-header-3col">
+                    <span>Varones</span>
+                    <span>Mujeres</span>
+                    <span>Total</span>
+                </div>
+            </div>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="header-ausentismo tabla-header-3col padding-0">
+            <span class="text-center">{{ element.AusentismoVarones }}</span>
+            <span class="text-center">{{ element.AusentismoMujeres }}</span>
+            <span class="text-center">{{ element.AusentismoTotal }}</span>
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="ParticipacionPor">
+        <mat-header-cell *matHeaderCellDef>Participación %</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="centrar-celda">
+            {{ element.ParticipacionPor}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="TotalPor">
+        <mat-header-cell *matHeaderCellDef>Total %</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="centrar-celda">
+            {{ element.TotalPor}}
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns1"></mat-row>
+</mat-table>
+<mat-table [dataSource]="dataSource2" class="tabla-header-doble mb-25 tabla-totalvotos">
+    <ng-container matColumnDef="ubigeo">
+        <mat-cell *matCellDef="let element" class="header-ubigeo centrar-celda" [ngClass]="element.bgColor">
+            {{ element.ubigeo }}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="departamento">
+        <mat-cell *matCellDef="let element" class="centrar-celda" [ngClass]="element.bgColor">
+            {{ element.departamento }}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="provincia">
+        <mat-cell *matCellDef="let element" class="centrar-celda" [ngClass]="element.bgColor">
+            {{ element.provincia}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="distrito">
+        <mat-cell *matCellDef="let element" class="centrar-celda" [ngClass]="element.bgColor">
+            {{ element.distrito}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="TotalMesas">
+        <mat-cell *matCellDef="let element" class="centrar-celda" [ngClass]="element.bgColor">
+            {{ element.TotalMesas }}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="MesasRegistradas">
+        <mat-cell *matCellDef="let element" class="centrar-celda" [ngClass]="element.bgColor">
+            {{ element.MesasRegistradas}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="TotalElectores">
+        <mat-cell *matCellDef="let element" class="centrar-celda" [ngClass]="element.bgColor">
+            {{ element.TotalElectores}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="AusentismoVarones">
+        <mat-cell *matCellDef="let element" class="header-ausentismo-subcols centrar-celda" [ngClass]="element.bgColor">
+            {{ element.AusentismoVarones}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="AusentismoMujeres">
+        <mat-cell *matCellDef="let element" class="header-ausentismo-subcols centrar-celda" [ngClass]="element.bgColor">
+            {{ element.AusentismoMujeres}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="AusentismoTotal">
+        <mat-cell *matCellDef="let element" class="header-ausentismo-subcols centrar-celda" [ngClass]="element.bgColor">
+            {{ element.AusentismoTotal}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="ParticipacionPor">
+        <mat-cell *matCellDef="let element" class="centrar-celda" [ngClass]="element.bgColor">
+            {{ element.ParticipacionPor}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="TotalPor">
+        <mat-cell *matCellDef="let element" class="centrar-celda" [ngClass]="element.bgColor">
+            {{ element.TotalPor}}
+        </mat-cell>
+    </ng-container>
+    <mat-row *matRowDef="let row; columns: displayedColumns2"></mat-row>
+</mat-table>

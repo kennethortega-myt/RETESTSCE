@@ -1,0 +1,29 @@
+$cantidadFilas: 41;//cantidad agrupols incluidos los vb, vn y vi
+$height-pres: 2300px;
+$height-pref: 3404px;
+
+.div-voto {
+  height: $height-pres/$cantidadFilas;
+  max-width: 100px;
+  .input-voto {
+    height: 33px;
+  }
+}
+
+.div-voto-pref {
+  height: $height-pref/$cantidadFilas;
+  max-width: 100px;
+  .input-voto {
+    height: 56.7px;
+  }
+}
+
+::ng-deep .achurado .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+  background-color: #5e5b5b !important;
+  padding: 5px;
+}
+
+::ng-deep .diferencias .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+  background-color: #fbf933 !important;
+  padding: 5px;
+}

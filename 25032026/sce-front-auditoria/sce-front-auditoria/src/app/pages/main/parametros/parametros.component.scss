@@ -1,0 +1,17 @@
+
+
+.tabla_grid { 
+    display: grid; 
+    grid-template-columns: 
+        50px /* No */ 
+        1fr /* Código */ 
+        1fr /* Centro de cómputo */
+        1fr /* Estado */ 
+        80px /* Protocolo */ 
+   
+}
+
+.clickable {
+    cursor: pointer;
+}
+

@@ -1,0 +1,244 @@
+<div class="w-full">
+  <div class="w-full mb-16">
+    <form [formGroup]="formGroupInfoActa"
+          class="formubigeo formulario section-flex between-flex items-center"
+    >
+      <div class="d-flex items-center gap-10">
+        <label for="numMesaInput" class="d-contents">Acta:</label>
+        <mat-form-field appearance="outline" class="width-input-acta">
+          <input
+            id="numMesaInput"
+            matInput
+            type="text"
+            placeholder=""
+            formControlName="numMesaFormControl"
+          />
+        </mat-form-field>
+      </div>
+      <div class="d-flex items-center gap-10 flex-1">
+        <label for="ubigeoInput" class="d-contents">Ubigeo:</label>
+        <mat-form-field appearance="outline" class="max-width-full">
+          <input
+            id="ubigeoInput"
+            matInput
+            type="text"
+            placeholder=""
+            formControlName="ubigeoFormControl"
+          />
+        </mat-form-field>
+      </div>
+      <div class="d-flex items-center gap-10">
+        <label for="electHabilesInput" class="text-end">Electores Hábiles:</label>
+        <mat-form-field class="width-input-elector" appearance="outline">
+          <input id="electHabilesInput" matInput type="text" placeholder=""
+                 formControlName="electoresHabilesFormControl"/>
+        </mat-form-field>
+      </div>
+
+      <button class="estilo2 h-36 m-acta" (click)="verImagenActa()">VER ACTA</button>
+    </form>
+  </div>
+  <div class="w-full d-flex">
+    <div class="w-full">
+      <div class="content-table-distrital">
+        <div class="table-distrital-grid w-full">
+          <div class="header-table-distrital">
+            <div class="celda-distrital t-c">N°</div>
+            <div class="celda-distrital">
+              Organizaciones Políticas
+            </div>
+            <div class="group-celda-distrital">
+              VOTOS
+              <div class="group-celda-distrital-item">
+                <div>1º Dig.</div>
+                <div>2º Dig.</div>
+                <div>3º Dig.</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="left-container" class="scroll-vertical " style="
+                        overflow-y: scroll;
+                        height: 330px; "
+               (scroll)="onScroll('left')">
+            <form [formGroup]="formGroupSeccionVoto" autocomplete="off">
+              <div formGroupName="params" class="focus">
+                <div *ngFor="let votoItem of this.actaPorCorregirBean.agrupacionesPoliticas ; index as i"
+                     class="item-content-distrital">
+                  <div class="item-table-distrital t-c">{{i+1}}</div>
+                  <div class="item-table-distrital">
+                    {{votoItem.organizacionPolitica}}
+                  </div>
+                  <div class="item-table-distrital tres">
+                    <mat-form-field
+                      *ngIf="votoItem.primeraDigitacion!=='null'; else achurado"
+                      [ngClass]="votoItem.primeraDigitacion == votoItem.segundaDigitacion ? 'acta-corregir-pref':'acta-corregir-pref yellow'"
+                      appearance="outline"
+                    >
+                      <input
+                        matInput
+                        type="text"
+                        placeholder=""
+                        [readonly]="true"
+                        [value]="votoItem.primeraDigitacion"
+                      />
+                    </mat-form-field>
+                    <mat-form-field
+                      *ngIf="votoItem.segundaDigitacion!=='null'; else achurado"
+                      [ngClass]="votoItem.primeraDigitacion == votoItem.segundaDigitacion ? 'acta-corregir-pref':'acta-corregir-pref yellow'"
+                      appearance="outline"
+                    >
+                      <input
+                        matInput
+                        type="text"
+                        placeholder=""
+                        [readonly]="true"
+                        [value]="votoItem.segundaDigitacion"
+                      />
+                    </mat-form-field>
+                    <mat-form-field class="acta-corregir-pref"
+                                    *ngIf="formGroupSeccionVoto.get('params.'+votoItem.idDetActa+'-'+i) && votoItem.terceraDigitacion !=='null'; else achuradoTemplateTotal"
+                                    appearance="outline"
+                    >
+                      <input #votoInput
+                             [id]="'mat-input-total-'+ i"
+                             matInput
+                             [formControlName]="votoItem.idDetActa+'-'+i"
+                             sceFocusActaCorregirEnterVotosTotales
+                             sceFocusActaCorregirFlechaVotosTotales
+                             [rowIndex]="i"
+                             (input)="onInputVoto(votoItem.idDetActa,i,$event)"
+                             (change)="changeVoto(votoItem.idDetActa,i)"
+                             (focus)="onFocus($event)"
+                             (blur)="onBlur()"
+                             (dblclick)="onDoubleClick($event)"
+                             [readonly] = "votoItem.terceraDigitacion == 'null' ? true : false"
+                             maxlength="3"
+                             [ngClass]="{'no-caret': !isEditingMode(i)}"
+                      />
+                    </mat-form-field>
+                    <ng-template #achuradoTemplateTotal>
+                      <ng-container *ngTemplateOutlet="achuradoTotal3Dig; context: { i: i }"></ng-container>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+<!--      tabla cvs -->
+
+      <div class="table-distrital-grid3">
+        <div class="header-table-distrital">
+          <div class="celda-distrital"></div>
+          <div class="celda-distrital"></div>
+
+          <div class="group-celda-distrital">
+            VOTOS
+            <div class="group-celda-distrital-item">
+              <div>1º Dig.</div>
+              <div>2º Dig.</div>
+              <div>3º Dig.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="scroll-vertical">
+          <form [formGroup]="formGroupSeccionCvas" autocomplete="off">
+            <div class="item-content-distrital">
+              <div class="item-table-distrital">
+                Ciudadanos que votaron
+              </div>
+              <div class="item-table-distrital tres vot">
+                <mat-form-field
+                  [ngClass]="actaPorCorregirBean.cvas.primeraDigitacion == actaPorCorregirBean.cvas.segundaDigitacion ? 'acta-corregir-pref':'acta-corregir-pref yellow'"
+                  appearance="outline"
+                >
+                  <input matInput type="text" placeholder=""
+                         [value]="actaPorCorregirBean.cvas.primeraDigitacion"
+                         readonly = true
+                  />
+                </mat-form-field>
+                <mat-form-field
+                  [ngClass]="actaPorCorregirBean.cvas.primeraDigitacion == actaPorCorregirBean.cvas.segundaDigitacion ? 'acta-corregir-pref':'acta-corregir-pref yellow'"
+                  appearance="outline"
+                >
+                  <input matInput type="text" placeholder=""
+                         [value]="actaPorCorregirBean.cvas.segundaDigitacion"
+                         readonly = true
+                  />
+                </mat-form-field>
+                <mat-form-field  class=" acta-corregir-pref" appearance="outline"
+                >
+                  <input #inputCvas matInput type="text" placeholder=""
+                         (change)="changeCvas()"
+                         maxlength="3"
+                         formControlName="ciudadanosControl"
+                         sceNumerosHashN
+
+
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </form>
+
+          <div *ngFor="let observacion of this.actaPorCorregirBean.observaciones; index as i" class="item-content-distrital">
+            <div class="item-table-distrital">
+              {{observacion.detalle}}
+            </div>
+            <div class="item-table-distrital tres">
+              <div class="content-checkvotos">
+                <mat-checkbox [checked]="observacion.primeraDigitacion=='SI'" disabled="true"></mat-checkbox>
+              </div>
+
+              <div class="content-checkvotos">
+                <mat-checkbox [checked]="observacion.segundaDigitacion=='SI'" disabled="true"></mat-checkbox>
+              </div>
+              <div class="content-checkvotos">
+                <mat-checkbox #observaciones [disabled] = "i==0 && observacion.terceraDigitacion == 'SI' ? true: false" [checked]="observacion.terceraDigitacion=='SI'" (change)="changeObservacion(i, $event)"></mat-checkbox>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #achurado>
+  <mat-form-field
+    class="acta-corregir-pref black"
+    appearance="outline"
+  >
+    <input
+      matInput
+      type="text"
+      placeholder=""
+      value=""
+      readonly = true
+    />
+  </mat-form-field>
+</ng-template>
+
+<ng-template #achuradoTotal3Dig let-i="i">
+  <mat-form-field
+    class="acta-corregir-pref black"
+    appearance="outline"
+  >
+    <input
+      matInput
+      [id]="'mat-input-total-'+ i"
+      sceFocusActaCorregirEnterVotosTotales
+      sceFocusActaCorregirFlechaVotosTotales
+      [rowIndex]="i"
+      [colIndex]="0"
+      type="text"
+      placeholder=""
+      readonly = true
+    />
+  </mat-form-field>
+</ng-template>

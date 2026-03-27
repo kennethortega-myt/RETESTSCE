@@ -1,0 +1,138 @@
+{
+	"info": {
+		"_postman_id": "6dcbdb79-cfe3-4205-8aa5-ab3370bcb19e",
+		"name": "cse_services",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2390238"
+	},
+	"item": [
+		{
+			"name": "registrar trama envio cc",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "nacion-api-key",
+						"value": "123123",
+						"type": "default"
+					},
+					{
+						"key": "X-Tenant-Id",
+						"value": "EG2026",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cvas\": 135,\r\n    \"detalleActa\": [\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000006\",\r\n            \"posicionAgrupacionPolitica\": 1,\r\n            \"estadoAgrupacionPolitica\": 20,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": null\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000012\",\r\n            \"posicionAgrupacionPolitica\": 2,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 15\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000005\",\r\n            \"posicionAgrupacionPolitica\": 3,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 0\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000011\",\r\n            \"posicionAgrupacionPolitica\": 4,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 0\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000017\",\r\n            \"posicionAgrupacionPolitica\": 5,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 1\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000022\",\r\n            \"posicionAgrupacionPolitica\": 6,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 16\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000001\",\r\n            \"posicionAgrupacionPolitica\": 7,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 2\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000003\",\r\n            \"posicionAgrupacionPolitica\": 8,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 0\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000018\",\r\n            \"posicionAgrupacionPolitica\": 9,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 3\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000008\",\r\n            \"posicionAgrupacionPolitica\": 10,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 8\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000015\",\r\n            \"posicionAgrupacionPolitica\": 11,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 0\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000007\",\r\n            \"posicionAgrupacionPolitica\": 12,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 28\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000021\",\r\n            \"posicionAgrupacionPolitica\": 14,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 0\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000020\",\r\n            \"posicionAgrupacionPolitica\": 15,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 7\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000019\",\r\n            \"posicionAgrupacionPolitica\": 16,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 0\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000010\",\r\n            \"posicionAgrupacionPolitica\": 17,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 5\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000014\",\r\n            \"posicionAgrupacionPolitica\": 18,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 0\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000004\",\r\n            \"posicionAgrupacionPolitica\": 19,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 0\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000002\",\r\n            \"posicionAgrupacionPolitica\": 20,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 2\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000080\",\r\n            \"posicionAgrupacionPolitica\": 80,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 43\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000081\",\r\n            \"posicionAgrupacionPolitica\": 81,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 5\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000082\",\r\n            \"posicionAgrupacionPolitica\": 82,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 0\r\n        }\r\n    ],\r\n    \"detalleMM\": [\r\n        {\r\n            \"cargo\": 1,\r\n            \"numeroDNI\": \"72361099\"\r\n        },\r\n        {\r\n            \"cargo\": 2,\r\n            \"numeroDNI\": \"73096633\"\r\n        },\r\n        {\r\n            \"cargo\": 3,\r\n            \"numeroDNI\": \"90887580\"\r\n        }\r\n    ],\r\n    \"eleccion\": 10,\r\n    \"estadoActa\": \"D\",\r\n    \"estadoActaResolucion\": \"\",\r\n    \"estadoCompu\": \"S\",\r\n    \"estadoErrorMaterial\": \"\",\r\n    \"horaEscrutinio\": \"21:00\",\r\n    \"horaInstalacion\": \"07:15\",\r\n    \"numeroActa\": \"062633\",\r\n    \"numeroCopia\": \"13L\",\r\n    \"observaciones\": \"\",\r\n    \"totalVotos\": 135,\r\n    \"votosCalculados\": 135\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8092/sce-backend/centroComputo/registrar_trama_envio_cc?idActa=101010110&esquema=SCE_NACION&codCentroComputo=C44001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"sce-backend",
+						"centroComputo",
+						"registrar_trama_envio_cc"
+					],
+					"query": [
+						{
+							"key": "idActa",
+							"value": "101010110"
+						},
+						{
+							"key": "esquema",
+							"value": "SCE_NACION"
+						},
+						{
+							"key": "tipoEleccion",
+							"value": "10",
+							"disabled": true
+						},
+						{
+							"key": "codCentroComputo",
+							"value": "C44001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "insertar acta stae",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "nacion-api-key",
+						"value": "123123",
+						"type": "default"
+					},
+					{
+						"key": "X-Tenant-Id",
+						"value": "EG2026",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cvas\": 135,\r\n    \"detalleActa\": [\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000006\",\r\n            \"posicionAgrupacionPolitica\": 1,\r\n            \"estadoAgrupacionPolitica\": 20,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": null\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000012\",\r\n            \"posicionAgrupacionPolitica\": 2,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 15\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000005\",\r\n            \"posicionAgrupacionPolitica\": 3,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 0\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000011\",\r\n            \"posicionAgrupacionPolitica\": 4,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 0\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000017\",\r\n            \"posicionAgrupacionPolitica\": 5,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 1\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000022\",\r\n            \"posicionAgrupacionPolitica\": 6,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 16\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000001\",\r\n            \"posicionAgrupacionPolitica\": 7,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 2\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000003\",\r\n            \"posicionAgrupacionPolitica\": 8,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 0\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000018\",\r\n            \"posicionAgrupacionPolitica\": 9,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 3\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000008\",\r\n            \"posicionAgrupacionPolitica\": 10,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 8\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000015\",\r\n            \"posicionAgrupacionPolitica\": 11,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 0\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000007\",\r\n            \"posicionAgrupacionPolitica\": 12,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 28\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000021\",\r\n            \"posicionAgrupacionPolitica\": 14,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 0\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000020\",\r\n            \"posicionAgrupacionPolitica\": 15,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 7\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000019\",\r\n            \"posicionAgrupacionPolitica\": 16,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 0\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000010\",\r\n            \"posicionAgrupacionPolitica\": 17,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 5\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000014\",\r\n            \"posicionAgrupacionPolitica\": 18,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 0\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000004\",\r\n            \"posicionAgrupacionPolitica\": 19,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 0\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000002\",\r\n            \"posicionAgrupacionPolitica\": 20,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 2\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000080\",\r\n            \"posicionAgrupacionPolitica\": 80,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 43\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000081\",\r\n            \"posicionAgrupacionPolitica\": 81,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 5\r\n        },\r\n        {\r\n            \"codigoAgrupacionPolitica\": \"00000082\",\r\n            \"posicionAgrupacionPolitica\": 82,\r\n            \"estadoAgrupacionPolitica\": 1,\r\n            \"dniPersonero\": \"\",\r\n            \"estadoErrorMaterial\": \"\",\r\n            \"votos\": 0\r\n        }\r\n    ],\r\n    \"detalleMM\": [\r\n        {\r\n            \"cargo\": 1,\r\n            \"numeroDNI\": \"72361099\"\r\n        },\r\n        {\r\n            \"cargo\": 2,\r\n            \"numeroDNI\": \"73096633\"\r\n        },\r\n        {\r\n            \"cargo\": 3,\r\n            \"numeroDNI\": \"90887580\"\r\n        }\r\n    ],\r\n    \"eleccion\": 10,\r\n    \"estadoActa\": \"D\",\r\n    \"estadoActaResolucion\": \"\",\r\n    \"estadoCompu\": \"S\",\r\n    \"estadoErrorMaterial\": \"\",\r\n    \"horaEscrutinio\": \"21:00\",\r\n    \"horaInstalacion\": \"07:15\",\r\n    \"numeroActa\": \"062633\",\r\n    \"numeroCopia\": \"13L\",\r\n    \"observaciones\": \"\",\r\n    \"totalVotos\": 135,\r\n    \"votosCalculados\": 135\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8092/sce-backend/stae/insertarActa?nroMesa=000001&esquema=SCE_NACION&tipoEleccion=10&centroComputo=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"sce-backend",
+						"stae",
+						"insertarActa"
+					],
+					"query": [
+						{
+							"key": "nroMesa",
+							"value": "000001"
+						},
+						{
+							"key": "esquema",
+							"value": "SCE_NACION"
+						},
+						{
+							"key": "tipoEleccion",
+							"value": "10"
+						},
+						{
+							"key": "centroComputo",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

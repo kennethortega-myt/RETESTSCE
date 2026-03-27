@@ -1,0 +1,74 @@
+<section class="secciones">
+  <h1 class="titulo1">Listado de PC</h1>
+  <div class="conte_sombra p-20">
+      <div class="cards-derecha">
+          <div class="cuadro-blanco-3 cantidad">
+              <img src="../assets/img/icono-pc.svg" alt="">
+              <span>Registros encontrados<b>{{totalElements}}</b></span>
+          </div>
+      </div>
+
+      <div class="scrolltablListadoPc">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table-listado-pc">
+          <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef class="header-numero centrando-celda"> Nº </th>
+              <td mat-cell *matCellDef="let element; let i = index" class="header-numero centrando-celda"> {{getNumeroFila(i)}} </td>
+          </ng-container>
+          <ng-container matColumnDef="fecha">
+              <th mat-header-cell *matHeaderCellDef>Fecha de registro </th>
+              <td mat-cell *matCellDef="let element"> {{element.fechaAccesoPc}} </td>
+          </ng-container>
+          <ng-container matColumnDef="usuario">
+              <th mat-header-cell *matHeaderCellDef class="centrando-celda"> Usuario</th>
+              <td mat-cell *matCellDef="let element" class="centrando-celda"> {{element.usuarioAccesoPc}} </td>
+          </ng-container>
+          <ng-container matColumnDef="ip">
+              <th mat-header-cell *matHeaderCellDef class="centrando-celda"> IP</th>
+              <td mat-cell *matCellDef="let element" class="centrando-celda">
+                  {{ element.ipAccesoPc }}
+              </td>
+          </ng-container>
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef class="centrando-celda"> NOMBRE</th>
+            <td mat-cell *matCellDef="let element" class="centrando-celda">
+              {{ element.nombre }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="apellidoPaterno">
+            <th mat-header-cell *matHeaderCellDef class="centrando-celda"> APELLIDO PATERNO</th>
+            <td mat-cell *matCellDef="let element" class="centrando-celda">
+              {{ element.apellidoPaterno }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="apellidoMaterno">
+            <th mat-header-cell *matHeaderCellDef class="centrando-celda"> APELLIDO MATERNO</th>
+            <td mat-cell *matCellDef="let element" class="centrando-celda">
+              {{ element.apellidoMaterno }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="accion">
+              <th mat-header-cell *matHeaderCellDef class="centrando-celda"> Eliminar PC </th>
+              <td mat-cell *matCellDef="let element" class="centrando-celda">
+                <button title="Eliminar" class="btn_eliminar" (click)="eliminarPc(element)"></button>
+              </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+
+      <mat-paginator
+          [length]="totalElements"
+          [pageSize]="pageSize"
+          [pageIndex]="pageIndex"
+          [pageSizeOptions]="pageSizeOptions"
+          (page)="pageChangeEvent.emit($event)"
+          showFirstLastButtons
+          aria-label="Seleccionar página">
+      </mat-paginator>
+  </div>
+
+  <div class="cont-btn" *ngIf="mostrarBotonImpresion">
+      <button class="estilo1" (click)="imprimirReporte()" [disabled]="!totalElements || totalElements === 0">IMPRIMIR</button>
+  </div>
+</section>

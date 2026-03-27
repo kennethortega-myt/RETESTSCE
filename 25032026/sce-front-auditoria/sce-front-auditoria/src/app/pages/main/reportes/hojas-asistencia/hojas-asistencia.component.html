@@ -1,0 +1,18 @@
+<section class="secciones">
+    <h1 class="titulo1">Reportes - Hojas Asistencia</h1>
+        <div class="conte_sombra p-20">
+            <div class="botonera_header">
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/hojas-asistencia/avance'}" (click)="navegar('/main/reportes/hojas-asistencia/avance')">AVANCE</button>
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/hojas-asistencia/asistencia'}" (click)="navegar('/main/reportes/hojas-asistencia/asistencia')">ASISTENCIA</button>
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/hojas-asistencia/transmision'}" (click)="navegar('/main/reportes/hojas-asistencia/transmision')">TRANSMISIÓN</button>
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/hojas-asistencia/personeros'}" (click)="navegar('/main/reportes/hojas-asistencia/personeros')">PERSONEROS</button>
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/hojas-asistencia/por-genero'}" (click)="navegar('/main/reportes/hojas-asistencia/por-genero')">POR GENERO</button>
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/hojas-asistencia/mm-acta-escrutinio'}" (click)="navegar('/main/reportes/hojas-asistencia/mm-acta-escrutinio')">MM según Acta de escrutinio</button>
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/hojas-asistencia/digitalizacion'}" (click)="navegar('/main/reportes/hojas-asistencia/digitalizacion')">DIGITALIZACIÓN</button>
+            </div>
+            <router-outlet></router-outlet>
+        </div>
+        <div class="cont-btn">
+            <button class="estilo1">IMPRIMIR</button>
+        </div>
+</section>

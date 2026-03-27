@@ -1,0 +1,46 @@
+<section class="secciones">
+  <h1 class="titulo1">Registro de Actas devueltas</h1>
+  <article class="w-100">
+    <div class="smallTabs">
+      <div class="section-flex">
+        <section class="w-100 cont-info pr-0 pl-2">
+          <article class=" section-flex pr-0">
+            <div class="w-full flex-bottom d-flex between-flex">
+              <div class="d-flex items-end">
+                <div>
+                  <label for="actaInput">Acta</label>
+                  <div class="d-flex">
+                    <input id="actaInput" name="numeActa" #refNumeActa maxlength="6" (keydown)="onKeyNumeActa($event)"
+                           [formControl]="actaFormControl"  type="text" class="input_buscar" autocomplete="off" sceSoloNumeros />
+                  </div>
+                </div>
+                <div class="ml-2">
+                  <label for="copiaInput">Copia</label>
+                  <div class="d-flex">
+                    <input id="copiaInput" name="numeCopia" #refNumeCopia maxlength="3" (keydown)="agregarActaOn($event)"
+                           [formControl]="copiaFormControl" type="text" class="input_buscar" autocomplete="off"
+                           sceUppercaseFormReact sceSoloAlfabeticosNumeros />
+                  </div>
+                </div>
+                <div class="">
+                  <div class="d-flex">
+                    <button class="estilo2 ml-2" (click)="agregarActa()">BUSCAR</button>
+                  </div>
+                </div>
+              </div>
+              <button class="mr-0 estilo1" (click)="generarCargoEntrega();">Generar Cargo de Entrega</button>
+            </div>
+          </article>
+          <div class="contenido-scroll px-0">
+            <app-tabla-actas
+              [dataSource]="dataSource"
+              [displayedColumns]="displayedColumns"
+              [accionesVisibles]="[ACCIONES_TABLA.ELIMINAR]"
+              (eliminar)="eliminarActa($event)">
+            </app-tabla-actas>
+          </div>
+        </section>
+      </div>
+    </div>
+  </article>
+</section>

@@ -1,0 +1,130 @@
+<div *ngIf="resultadosActasContabilizadas.cantidadVotosPref === 0">
+    <mat-table [dataSource]="resultadosActasContabilizadas.detalleResultado" class="tabla-header-doble mb-25">
+        <ng-container matColumnDef="numero">
+            <mat-header-cell *matHeaderCellDef class="header-numero">Nº</mat-header-cell>
+            <mat-cell *matCellDef="let element" class="header-numero centrar-celda">
+                {{ element.numeroAp }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="op">
+            <mat-header-cell *matHeaderCellDef class="header-op">Organizaciones Políticas</mat-header-cell>
+            <mat-cell *matCellDef="let element" class="header-op">
+
+                {{ element.agrupacionPolitica }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="cantidadvotos">
+            <mat-header-cell *matHeaderCellDef>Total de Votos </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="centrar-celda">
+                {{ element.cantidadVotos}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="porVotos" >
+            <mat-header-cell *matHeaderCellDef>% Votos Válidos</mat-header-cell>
+            <mat-cell *matCellDef="let element" class="centrar-celda">
+                {{ element.votosValidados | number: '.3'}} %
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="porVotosEmitidos">
+            <mat-header-cell *matHeaderCellDef>% Votos Emitidos</mat-header-cell>
+            <mat-cell *matCellDef="let element" class="centrar-celda">
+                {{ element.votosEmitidos | number: '.3'}} %
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedResultados"></mat-header-row>
+
+        <mat-row *matRowDef="let row; columns: displayedResultados"></mat-row>
+    </mat-table>
+
+    <mat-table [dataSource]="resultadosActasContabilizadas.detalleTotal" class="tabla-header-doble mb-25 tabla-totalvotos">
+        <ng-container matColumnDef="dato">
+            <mat-cell *matCellDef="let element" class="col-dato-total" [ngClass]="colorRow(element)">
+                {{ element.agrupacionPolitica }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="cantidadvotos">
+            <mat-cell *matCellDef="let element" class="centrar-celda" [ngClass]="colorRow(element)">
+                {{ element.cantidadVotos}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="porVotos" >
+            <mat-cell *matCellDef="let element" class="centrar-celda"
+                    [ngClass]="colorRow(element)">
+                <span *ngIf="element.codigoAp === '00'" [ngClass]="colorRow(element)">{{ element.votosValidados | number: '.3'}} %</span>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="porVotosEmitidos">
+            <mat-cell *matCellDef="let element" class="centrar-celda" [ngClass]="colorRow(element)">
+                {{ element.votosEmitidos | number: '.3'}} %
+            </mat-cell>
+        </ng-container>
+        <mat-row *matRowDef="let row; columns: displayedTotales"></mat-row>
+    </mat-table>
+</div>
+
+<div *ngIf="resultadosActasContabilizadas.cantidadVotosPref > 0">
+    <mat-table [dataSource]="resultadosActasContabilizadas.detalleResultado" class="tabla-header-doble mb-25 table-scroll">
+        <ng-container matColumnDef="numero">
+            <mat-header-cell *matHeaderCellDef class="header-numero" style="min-width: 50px;">Nº</mat-header-cell>
+            <mat-cell *matCellDef="let element" class="header-numero centrar-celda" style="min-width: 50px;">
+                {{ element.numeroAp }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="op">
+            <mat-header-cell *matHeaderCellDef [ngClass]="classOrgPol">
+                Organizaciones Políticas</mat-header-cell>
+            <mat-cell *matCellDef="let element" [ngClass]="classOrgPol">
+                {{ element.agrupacionPolitica }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="cantidadvotos">
+            <mat-header-cell *matHeaderCellDef>Total de Votos</mat-header-cell>
+            <mat-cell *matCellDef="let element" class="centrar-celda">
+                {{ element.cantidadVotos}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container *ngFor="let indexPref of indexVotosPref" [matColumnDef]="displayedResultadosPref[indexPref+3]">
+            <mat-header-cell *matHeaderCellDef class="width-pref">{{displayedResultadosPref[indexPref+3]}}</mat-header-cell>
+            <mat-cell *matCellDef="let element" class="centrar-celda width-pref">
+                {{element.votosPreferenciales[indexPref]}}
+            </mat-cell>
+        </ng-container>
+        
+        <mat-header-row *matHeaderRowDef="displayedResultadosPref"></mat-header-row>
+
+        <mat-row *matRowDef="let row; columns: displayedResultadosPref"></mat-row>
+        
+    </mat-table>
+
+    <mat-table [dataSource]="resultadosActasContabilizadas.detalleTotal" class="tabla-header-doble mb-25 tabla-totalvotos">
+        <ng-container matColumnDef="dato">
+            <mat-cell *matCellDef="let element" [ngClass]="classOrgPolTotal(element)">
+                {{ element.agrupacionPolitica }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="cantidadvotos">
+            <mat-cell *matCellDef="let element" class="centrar-celda" [ngClass]="colorRow(element)">
+                {{ element.cantidadVotos}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container *ngFor="let indexPref of indexVotosPref" [matColumnDef]="displayedResultadosPref[indexPref+3]">
+            <mat-header-cell *matHeaderCellDef>{{displayedResultadosPref[indexPref+3]}}</mat-header-cell>
+            <mat-cell *matCellDef="let element" class="centrar-celda" [ngClass]="colorRow(element)">
+
+            </mat-cell>
+        </ng-container>
+
+        <mat-row *matRowDef="let row; columns: displayedTotalesPref"></mat-row>
+    </mat-table>
+</div>

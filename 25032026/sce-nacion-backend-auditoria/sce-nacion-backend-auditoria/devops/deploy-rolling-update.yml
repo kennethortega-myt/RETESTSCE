@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    tags.datadoghq.com/env: k8s
+    tags.datadoghq.com/service: sce-nacion
+    tags.datadoghq.com/version: dev
+  name: sce-nacion-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sce-nacion-backend
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: sce-nacion-backend
+        tier: backend
+        tierType: bussines
+        tags.datadoghq.com/env: k8s
+        tags.datadoghq.com/service: sce-nacion
+        tags.datadoghq.com/version: dev
+      annotations:
+        admission.datadoghq.com/java-lib.version: v1.47.0
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: node-role
+                    operator: In
+                    values:
+                      - worker   #pruebas-carga
+      containers:
+        - name: sce-nacion-backend
+          image: harbor-registry.onpe.gob.pe/sce/sce-nacion-backend:2.7
+          imagePullPolicy: Always
+          ports:
+            - name: app-port
+              containerPort: 8080
+          resources:
+            requests:
+              memory: "6Gi"
+              cpu: "1000m"
+          volumeMounts:
+            - name: data
+              mountPath: "/data"
+            - name: install
+              mountPath: "/install"
+          env:
+            - name: DD_LOGS_INJECTION
+              value: "true"
+          envFrom:
+            - configMapRef:
+                name: sce-nacion-backend-cm
+            - secretRef:
+                name: sce-nacion-backend-secret
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: false
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: sce-nacion-data-pvc
+        - name: install
+          persistentVolumeClaim:
+            claimName: sce-nacion-installer-pvc

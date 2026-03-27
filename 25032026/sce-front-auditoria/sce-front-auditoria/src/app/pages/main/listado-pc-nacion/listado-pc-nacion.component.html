@@ -1,0 +1,12 @@
+<app-listado-pc-tabla
+  [displayedColumns]="displayedColumns"
+  [dataSource]="dataSource"
+  [totalElements]="totalElements"
+  [pageSize]="pageSize"
+  [pageIndex]="pageIndex"
+  [pageSizeOptions]="pageSizeOptions"
+  [mostrarBotonImpresion]="true"
+  (eliminarEvent)="eliminarPc($event)"
+  (pageChangeEvent)="onPageChange($event)"
+  (imprimirEvent)="imprimirReporte()">
+</app-listado-pc-tabla>

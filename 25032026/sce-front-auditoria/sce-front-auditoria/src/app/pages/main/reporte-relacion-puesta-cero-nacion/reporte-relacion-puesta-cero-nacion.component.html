@@ -1,0 +1,185 @@
+<section class="secciones">
+  <div>
+    <h1 class="titulo1">Relación de Puesta a Cero por Centro de Cómputo </h1>
+    <section class="seccion-unidos">
+      <article class="w-20">
+        <form class="formulario" [formGroup]="formGroupRepoAvanEstActFiltro">
+          <div class="formulario section-flex ">
+            <div class="w-100">
+              <label for="procesoFormControl">Proceso:</label>
+
+              <mat-form-field appearance="outline">
+                <mat-select name="idProceso" formControlName="procesoFormControl">
+                  <mat-option value="0">SELECCIONE</mat-option>
+                  <mat-option *ngFor="let proceso of listProceso" [value]="proceso.id">
+                    {{proceso.cnombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="w-100">
+              <label for="eleccionFormControl">Tipo de elección:</label>
+
+              <mat-form-field appearance="outline">
+                <mat-select name="idEleccion" formControlName="eleccionFormControl">
+                  <mat-option value="0">SELECCIONE</mat-option>
+                  <mat-option *ngFor="let eleccion of listEleccion" [value]="eleccion.id">
+                    {{eleccion.cnombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="w-100">
+              <label for="ambitoFormControl">{{ambito.nombreTipoAmbito}}:</label>
+
+              <mat-form-field appearance="outline">
+                <mat-select name="idAmbito" formControlName="ambitoFormControl">
+                  <mat-option value="0">SELECCIONE</mat-option>
+                  <mat-option *ngFor="let ambito of listAmbitos" [value]="ambito.id">
+                    {{ambito.nombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="w-100">
+              <label for="centroComputoFormControl">Centro de cómputo:</label>
+
+              <mat-form-field appearance="outline">
+                <mat-select name="idCentroComputo" formControlName="centroComputoFormControl">
+                  <mat-option value="0">SELECCIONE</mat-option>
+                  <mat-option *ngFor="let centroComputo of listCentrosComputo" [value]="centroComputo.id">
+                    {{centroComputo.nombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="w-100">
+              <label for="estadoFormControl">Estado:</label>
+
+              <mat-form-field appearance="outline">
+                <mat-select name="idEstado" formControlName="estadoFormControl">
+                  <mat-option value="0">Todos</mat-option>
+                  <mat-option value="1">Pendientes</mat-option>
+                  <mat-option value="2">Completas</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="boton-full">
+              <button class="estilo1 full noMarginLR" type="button" (click)="buscarReporteAvanceEstActas()">
+                BUSCAR
+              </button>
+            </div>
+
+          </div>
+        </form>
+        <form class="formulario" [formGroup]="formGroupRepoAvanEstActFiltro">
+          <div class="formulario section-flex ">
+            <div class="w-100  ">
+              <h3 class="titulo3">Configuración de Actualización de Datos</h3>
+            </div>
+            <div class="w-100">
+
+              <label for="idActualizar">Actualizar cada:</label>
+              <select class="input input-100" type="" #txtActualizar required name="idActualizar"  >
+                <option value="5" >5 MINUTOS</option>
+                <option value="10">10 MINUTOS</option>
+              </select>
+            </div>
+
+            <div class="boton-full">
+              <button class="estilo2 full noMarginLR" type="button" >
+                Actualizar
+              </button>
+            </div>
+
+          </div>
+        </form>
+      </article>
+      <article class="w-80" >
+        <div *ngIf="true">
+          <div class="d-flex-wrap">
+
+
+
+            <div class="w-100">
+              <article  class=" section-flex  ">
+                <div class="w-33">
+                  <div class="cuadro-blanco-2 cantidad">
+                    <img alt="" src="../assets/img/estado01.svg">
+                    <span class="validados mr-0">Realizada
+                                        <b>0</b>
+                                    </span>
+                  </div>
+                </div>
+                <div class="w-33">
+                  <div class="cuadro-blanco-2 cantidad">
+                    <img alt="" src="../assets/img/estado02.svg">
+                    <span class="observados mr-0">Pendiente
+                                        <b>0</b>
+                                    </span>
+                  </div>
+                </div>
+                <div class="w-33">
+                  <div class="cuadro-blanco-2 cantidad">
+                    <img alt="" src="../assets/img/estado03.svg">
+                    <span class="verificar mr-0">Total
+                                        <b>0</b>
+                                    </span>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <mat-table   [dataSource]="[]" class="mat-elevation-z8">
+            <ng-container matColumnDef="codigo">
+              <mat-header-cell *matHeaderCellDef> Código</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.codigoCc}}  </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="ccomputo">
+              <mat-header-cell *matHeaderCellDef> Centro de Cómputo </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.nombreCc}}  </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="envio">
+                <mat-header-cell *matHeaderCellDef> Fecha/Horario <br> Envio CC </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.fechaUltModificacion}}  </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="recepcion">
+              <mat-header-cell *matHeaderCellDef> Fecha/Horario <br> Recepción CC</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.totalActas}}  </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="estado">
+              <mat-header-cell *matHeaderCellDef> Estado</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.actasIngresadas}}  </mat-cell>
+            </ng-container>
+
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row  *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+        </div>
+
+
+        <div *ngIf="!isShowReporte" class="contenedor-documento-muestra">
+          <div class=" contenido-scroll cont-anuncio">
+            <div class="personaje-anuncio">
+              <p>Llene los campos del reporte para poder descargar el archivo a imprimir</p>
+              <img alt="" src="../assets/img/personaje1.svg">
+            </div>
+          </div>
+        </div>
+
+      </article>
+    </section>
+    <div class="cont-btn">
+      <button *ngIf="isShowReporte" class=" estilo1" (click)="descargarReporte()"> DESCARGAR </button>
+    </div>
+  </div>
+</section>

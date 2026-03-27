@@ -1,0 +1,23 @@
+.rotated-image-container {
+    width: fit-content; /* Ajusta el ancho del contenedor al contenido */
+    height: fit-content; /* Ajusta la altura del contenedor al contenido */
+    overflow: hidden; /* Oculta cualquier parte de la imagen que se salga del contenedor */
+  }
+  
+  .rotated-image-container img {
+    transform-origin: top left; /* Define el punto de origen de la rotación */
+  }
+  
+
+  .imagenproporcion{
+    margin-top: -33px;     max-width: 100%;     height: auto;     transform: rotate(90deg);     width: 58.3%;
+  }
+
+  .content-proporcion{
+
+    overflow: hidden; max-width: 100%; width: 33.3%; text-align: center;
+    canvas{
+      margin-top: 0px;
+    }
+
+  }

@@ -1,0 +1,32 @@
+<form [formGroup]="formGroupConfigLateral" >
+  <h2 class="titulo3" >Configuración del documento </h2>
+  <label for="tamanioHoja">Tamaño</label>
+  <mat-form-field appearance="outline">
+    <mat-select formControlName="tamanioHoja">
+      <mat-option [value]="0"> Seleccione</mat-option>
+      <mat-option *ngFor="let ta of listTamanio" [value]="ta.codigoI"> {{ta.nombre}}</mat-option>
+
+    </mat-select>
+  </mat-form-field>
+
+  <label for="tipoImagen">Orientación</label>
+  <mat-form-field appearance="outline">
+    <mat-select formControlName="tipoImagen" >
+      <mat-option [value]="0"> Seleccione</mat-option>
+      <mat-option *ngFor="let ori of listOrientacion" [value]="ori.codigoI"> {{ori.nombre}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <label for="multipagina">Multipágina</label>
+  <mat-form-field appearance="outline">
+    <mat-select formControlName="multipagina" >
+      <mat-option [value]="0"> Seleccione</mat-option>
+      <mat-option *ngFor="let mu of listMultipagina" [value]="mu.codigoI"> {{mu.nombre}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <label for="abreviatura">Acrónimo</label>
+  <mat-form-field appearance="outline">
+    <input matInput formControlName="abreviatura" >
+  </mat-form-field>
+</form>

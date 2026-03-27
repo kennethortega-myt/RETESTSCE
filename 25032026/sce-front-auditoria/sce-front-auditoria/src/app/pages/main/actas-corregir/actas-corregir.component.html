@@ -1,0 +1,55 @@
+<section class="secciones veri-resolucion">
+
+  <div>
+    <h1 class="titulo1">Actas por corregir</h1>
+    <section>
+
+      <div *ngIf="isShowInicio" class="seccion-unidos">
+        <article class="w-80 p-r">
+          <div class="contenedor-documento-muestra2 w-100 text-center" >
+            <div class=" contenido-scroll cont-anuncio">
+              <div class="personaje-anuncio">
+                <p>
+                  No se encontraron actas por corregir.
+                </p>
+                <img src="../assets/img/personaje1.svg" alt="">
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+      <div *ngIf="!isShowInicio" class="seccion-unidos scroll-actas" >
+        <article  class="w-20 w-40 p-r">
+          <div class="seccion-lista-control contenido-scroll-control w-full">
+            <mat-list class="list-actas">
+              <mat-list-item *ngFor="let acta of listaActasPorCorregir" class="item-lista"
+                             [id]="acta.mesa"
+                             (click)="verActa(acta)"
+                             (keydown)="ignoreKeyPress($event)"
+                             [ngClass]="{ active: acta.mesa+acta.copia+acta.digitoChequeo === nroMesaCompleto }">
+                <div class="centrar-item-list-actas">
+                  <img class="ico-estado-acta" src="../assets/img/ico-foto.svg" alt="Icono foto" />
+                  <span>{{ acta.mesa }}-{{acta.copia}}{{acta.digitoChequeo}}</span>
+                </div>
+                <ng-container>
+                  <img src="../assets/img/ico-alert-gris.svg" alt="icono alerta gris" />
+                </ng-container>
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </article>
+
+        <article class="w-80 d-flex flex-column">
+          <router-outlet></router-outlet>
+        </article>
+
+      </div>
+    </section>
+  </div>
+
+  <div *ngIf="!isShowInicio && isVerActa" class="d-flex j-end mt-18 cont-btn">
+    <button class="estilo1 m-0" (click)="validar3DigitacionAntesGuardar()" type="button">GUARDAR </button>
+
+  </div>
+</section>

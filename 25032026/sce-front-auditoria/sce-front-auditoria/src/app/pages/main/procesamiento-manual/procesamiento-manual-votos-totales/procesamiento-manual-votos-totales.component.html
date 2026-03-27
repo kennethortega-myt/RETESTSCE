@@ -1,0 +1,88 @@
+
+<div class="w-full d-flex">
+  <div class="w-70">
+    <!-- tabla para votos totales -->
+      <h3 class="titulo3 m-0">
+      Listado de organizaciones políticas y votos
+    </h3>
+    <div class="mt-10" >
+      <div class="content-table-preferencial">
+        <div class="table-preferencial-grid w-full">
+          <div class="header-table-preferencial2">
+            <div class="celda-preferencial">N°</div>
+            <div class="celda-preferencial">Organizaciones Políticas</div>
+            <div class="group-celda-preferencial">
+              <div class="group-celda-preferencial-item">
+                <div>Total de votos</div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="scroll-vertical"
+            style="overflow-y: scroll; height: 534px"
+            id="left-container"
+            (scroll)="onScroll('left')"
+          >
+            <form [formGroup]="formGroupSeccionVoto" autocomplete="off">
+              <div formGroupName="params" class="focus">
+                <div *ngFor = "let votoItem of actaParaProcesamientoManualBean.voteSection.items; index as i" class="item-content-preferencial2 item-focus">
+                  <div class="item-table-preferencial">{{votoItem.position}}</div>
+                  <div class="item-table-preferencial">
+                    {{votoItem.nombreAgrupacionPolitica}}
+                  </div>
+                  <div class="item-table-preferencial tres item-focus-input">
+                    <mat-form-field *ngIf="votoItem.estado !== Constantes.CODIGO_ESTADO_ACHURADO;else achuradoTemplate" class="acta-corregir-pref cant-input" appearance="outline" (dblclick)="onDoubleClick($event)">
+                      <input [id]="'mat-input-total-'+ i"
+                              matInput
+                              [formControlName]="votoItem.fileId+'-'+i"
+                              sceFocusVeriResolucionEnter
+                              sceFocusVeriResolucionFlecha
+                              [rowIndex]="i"
+                              [colIndex]="0"
+                              [flagPresi]=true
+                              (focus)="onFocus($event)"
+                              (blur)="onBlur()"
+                              (input)="onInputVoto(votoItem.fileId, false, $event, i)"
+                              [readonly] = "votoItem.estado === Constantes.CODIGO_ESTADO_ACHURADO"
+                              maxlength="3"
+                              [ngClass]="{'no-caret': !isEditingMode(i)}"
+
+                      />
+                    </mat-form-field>
+                    <ng-template #achuradoTemplate>
+                      <app-pm-celda-achurada [rowIndex]="i" [colIndex]="0" [flagPresi]="true"></app-pm-celda-achurada>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-pm-footer-cvas
+      [cvasFC]="cvasFC"
+      (cvasChange)="changeCvas()"
+    ></app-pm-footer-cvas>
+  </div>
+  <div class="w-30">
+    <app-pm-panel-lateral
+      [checkSinDatosFC]="checkSinDatosFC"
+      [checkSinFirmasFC]="checkSinFirmasFC"
+      [checkSolNulidadFC]="checkSolNulidadFC"
+      [formGroupIntalacion]="formGroupIntalacion"
+      [formGroupEscrutinio]="formGroupEscrutinio"
+      [minFechaInstalacion]="minFechaInstalacion"
+      [maxFechaInstalacion]="maxFechaInstalacion"
+      [minFechaEscrutinio]="minFechaEscrutinio"
+      [maxFechaEscrutinio]="maxFechaEscrutinio"
+      [isHoraEscrutinioN]="isHoraEscrutinioN"
+      (changeHoraInicio)="changeHoraInicio()"
+      (changeHoraFin)="changeHoraFin()"
+      (sinDatosChange)="changeCheckSinDatos($event)"
+      (sinFirmasChange)="changeCheckSinFirmas($event)"
+      (solNulidadChange)="changeCheckSolNulidad($event)"
+    ></app-pm-panel-lateral>
+  </div>
+</div>
+

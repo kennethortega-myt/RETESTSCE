@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<AnchorPane id="AnchorPane" fx:id="anchorPane" focusTraversable="true" styleClass="ap_message_box" stylesheets="@../styles/styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.gob.onpe.scescanner.controller.VerImagenController">
+    
+    <children>
+        
+        <AnchorPane id="back_modal_boxdal_box" styleClass="back_modal_box" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+            </children>
+        </AnchorPane>
+                
+        <GridPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" />
+                <ColumnConstraints hgrow="NEVER" minWidth="0.0" />
+                <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="0.0" vgrow="ALWAYS" />
+                <RowConstraints minHeight="0.0" vgrow="NEVER" />
+                <RowConstraints minHeight="0.0" vgrow="ALWAYS" />
+            </rowConstraints>
+            <children>
+                <!--prefHeight="215.0"-->
+                <AnchorPane prefHeight="975.0" prefWidth="1560.0" styleClass="ventana_selec_doc" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <children>
+                        <AnchorPane styleClass="ventana_selec_doc_content" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+
+                                <Label fx:id="tituloImagen" alignment="CENTER_LEFT" focusTraversable="false" styleClass="lbl_tit_ventana_selec_doc" text="" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0" />
+                                
+                                <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" prefHeight="600" prefWidth="800" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="67.0">
+                                    <content>
+                                        <StackPane>
+                                           <children>
+                                               <ImageView fx:id="imageView" />
+                                           </children>
+                                        </StackPane>
+                                        <!--styleClass="img_tmp_acta"-->
+                                    </content>
+                                </ScrollPane>
+                                                                
+                                <!--onAction="#onRefreshButton"-->
+                                
+                                <HBox alignment="CENTER_LEFT" spacing="35" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0">
+                                                                   <children>
+                                       
+                                       <HBox alignment="CENTER_LEFT" spacing="10">
+                                          <children>
+                                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#onRotarImagen" prefHeight="36.0" prefWidth="37.0" styleClass="buttons_tools,button_rotate">
+                                                  <tooltip>
+                                          <Tooltip text="Rotar Imagen" />
+                                       </tooltip>
+                                              </Button>
+                                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#zoomIn" prefHeight="36.0" prefWidth="37.0" styleClass="buttons_tools,button_zoom_in">
+                                                  <tooltip>
+                                          <Tooltip text="Agrandar Vista" />
+                                       </tooltip>
+                                              </Button>
+                                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#zoomOut" prefHeight="36.0" prefWidth="37.0" styleClass="buttons_tools,button_zoom_out">
+                                                  <tooltip>
+                                          <Tooltip text="Reducir Vista" />
+                                       </tooltip>
+                                              </Button>
+                                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#onFitWidth" prefHeight="36.0" prefWidth="37.0" styleClass="buttons_tools,button_fit_width">
+                                                  <tooltip>
+                                          <Tooltip text="Ajustar Vista al Ancho del Recuadro" />
+                                       </tooltip>
+                                              </Button>
+                                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#onFitHeight" prefHeight="36.0" prefWidth="37.0" styleClass="buttons_tools,button_fit_height">
+                                                  <tooltip>
+                                          <Tooltip text="Ajustar Vista al Alto del Recuadro" />
+                                       </tooltip>
+                                              </Button>
+                                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#onFullSize" prefHeight="36.0" prefWidth="37.0" styleClass="buttons_tools,button_full_size">
+                                                  <tooltip>
+                                          <Tooltip text="Ver Tamaño Real" />
+                                       </tooltip>
+                                              </Button>
+                                          </children>
+                                       </HBox>
+                                       <HBox alignment="CENTER_LEFT" spacing="10">
+                                          <children>
+                                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#onPagAnterior" prefHeight="36.0" prefWidth="37.0" styleClass="buttons_tools,button_page_prev">
+                                                  <tooltip>
+                                          <Tooltip text="Página Anterior" />
+                                       </tooltip>
+                                              </Button>
+                                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#onPagSiguiente" prefHeight="36.0" prefWidth="37.0" styleClass="buttons_tools,button_page_next">
+                                                  <tooltip>
+                                          <Tooltip text="Página Siguiente" />
+                                       </tooltip>
+                                              </Button>
+                                              <Label fx:id="pagesImagen" alignment="CENTER_LEFT" focusTraversable="false" styleClass="lbl_tit_ventana_selec_doc" text="Página 0 de 0" />
+                                          </children>
+                                       </HBox>
+                                                                   </children>
+                                </HBox>
+                                
+                                <Button alignment="CENTER" mnemonicParsing="false" onAction="#onCerrar" prefHeight="32.0" prefWidth="102.0" text="CERRAR" AnchorPane.bottomAnchor="28.0" AnchorPane.rightAnchor="25.0" />
+                                
+                            </children>
+                        </AnchorPane>
+
+                    </children>
+                </AnchorPane>
+                
+            </children>
+        </GridPane>
+        
+    </children>
+    
+</AnchorPane>

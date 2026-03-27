@@ -1,0 +1,94 @@
+<h2 class="modalHead titulo2">{{ tituloComponente }}</h2>
+<mat-dialog-content class="mat-typography" *ngIf="isMostrarModal">
+
+  <div class="w-50">
+    <label for="resoInput">Nro. denuncia</label>
+    <mat-form-field appearance="outline">
+      <input id="resoInput" matInput type="text" placeholder="Ingrese el nro de la denuncia" [maxLength]="50"
+             [formControl]="numeroDocumentoFC"
+             sceNoEspacioInicio
+             sceUppercaseFormReact>
+    </mat-form-field>
+  </div>
+
+  <div class="w-50">
+    <label for="fechaInput">Fecha de registro</label>
+    <mat-form-field appearance="outline">
+      <input matInput
+             id="fechaInput"
+             [matDatepicker]="dp3"
+             [formControl]="fechaFC"
+             [min]="minDate" [max]="maxDate"
+             readonly>
+      <mat-hint>DD/MM/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="dp3"></mat-datepicker-toggle>
+      <mat-datepicker #dp3 [startAt]="fechaFC.value" ></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="w-25">
+    <label for="cmbTipoDocumento">Tipo documento:</label>
+    <mat-form-field appearance="outline">
+      <mat-select id="cmbTipoDocumento" [formControl]="tipoDocumentoFC" placeholder="Seleccione" >
+        <mat-option [value]="null">SELECCIONE</mat-option>
+        <mat-option *ngFor="let catalogo of listTiposDocumentos"
+                    [value]="catalogo">{{catalogo.nombre}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="w-25">
+    <label for="cmbTipoPerdida">Tipo pérdida</label>
+    <mat-form-field appearance="outline">
+      <mat-select id="cmbTipoPerdida" [formControl]="tipoPerdidaFC" placeholder="Seleccione" >
+        <mat-option [value]="null">SELECCIONE</mat-option>
+        <mat-option *ngFor="let catalogo of listTipoPerdidas"
+                    [value]="catalogo">{{catalogo.nombre}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="w-25">
+    <label for="mesaInput">Nro. mesa</label>
+    <mat-form-field appearance="outline">
+      <input id="mesaInput" matInput type="text" placeholder="Ingrese el nro de mesa" [maxLength]="6"
+             [formControl]="nroMesaFC"
+             sceNoEspacioInicio
+             sceUppercaseFormReact
+             sceValidacionInputCustomReact
+             inputPattern="0-9 /_-">
+    </mat-form-field>
+  </div>
+
+  <div class="w-25" >
+    <button class="btn-azul mt-1" (click)="validarDetOtroDocumento()">Agregar</button>
+  </div>
+
+  <div class="w-100" >
+    <h3 style="margin-top: 1em" >Lista de mesas asociadas a la denuncia</h3>
+  </div>
+  <div class="w-100" >
+    <mat-form-field class="w-100 chipBox">
+      <mat-chip-grid #chipGrid aria-label="Enter mesa">
+        <mat-chip-row *ngFor="let detDocumento of detOtrosDocumentosDtoList"
+                      (removed)="remove(detDocumento)"
+                      [editable]="false">
+            {{detDocumento.numeroMesa + ' - ' + detDocumento.descTipoDocumento + ' - ' + detDocumento.descTipoPerdida}}
+          <button matChipRemove [title]="'Quitar'">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip-row>
+        <input class="ml-2" [readOnly]="true"
+               [matChipInputFor]="chipGrid"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               (input)="restringirNumeros($event)"/>
+      </mat-chip-grid>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions class="mr-1" align="end" *ngIf="isMostrarModal">
+
+  <button class="btn-azul mr-1" (click)="cerrarDialogo()">CANCELAR</button>
+  <button class="estilo1" (click)="registrarAsociacion()">REGISTRAR</button>
+
+</mat-dialog-actions>

@@ -1,0 +1,53 @@
+  
+    <mat-table [dataSource]="resultadosActasContabilizadas.detalleResultado" class="tabla-header-doble mb-25">       
+        <ng-container matColumnDef="op">
+            <mat-header-cell *matHeaderCellDef class="header-op">Autoridades en Consulta</mat-header-cell>
+            <mat-cell *matCellDef="let element" class="header-op">
+              
+                {{ element.agrupacionPolitica }}
+            </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="votosSi">
+            <mat-header-cell *matHeaderCellDef>Votos SI</mat-header-cell>
+            <mat-cell *matCellDef="let element" class="centrar-celda">
+                {{ element.votosSi}}
+            </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="votosNo" >            
+            <mat-header-cell *matHeaderCellDef>Votos NO</mat-header-cell>
+            <mat-cell *matCellDef="let element" class="centrar-celda">
+                {{ element.votosNo }}
+            </mat-cell>            
+        </ng-container>
+        <ng-container matColumnDef="votosBlancos">            
+            <mat-header-cell *matHeaderCellDef>Votos Blancos</mat-header-cell>
+            <mat-cell *matCellDef="let element" class="centrar-celda">
+                {{ element.votosBlancos }}
+            </mat-cell>            
+        </ng-container>
+        <ng-container matColumnDef="votosNulos">            
+            <mat-header-cell *matHeaderCellDef>Votos Nulos</mat-header-cell>
+            <mat-cell *matCellDef="let element" class="centrar-celda">
+                {{ element.votosNulos }}
+            </mat-cell>            
+        </ng-container>
+        <ng-container matColumnDef="ciudadanosVotaron">            
+            <mat-header-cell *matHeaderCellDef>Ciudadanos que Votaron</mat-header-cell>
+            <mat-cell *matCellDef="let element" class="centrar-celda">
+                {{ element.ciudadanosVotaron }}
+            </mat-cell>            
+        </ng-container>
+        <ng-container matColumnDef="votosSiNo2">            
+            <mat-header-cell *matHeaderCellDef>1 + (SI + NO) / 2</mat-header-cell>
+            <mat-cell *matCellDef="let element" class="centrar-celda">
+                {{ element.votosSiNo2 }}
+            </mat-cell>            
+        </ng-container>
+    
+        <mat-header-row *matHeaderRowDef="displayedResultados"></mat-header-row>
+    
+        <mat-row *matRowDef="let row; columns: displayedResultados"></mat-row>
+    </mat-table>
+

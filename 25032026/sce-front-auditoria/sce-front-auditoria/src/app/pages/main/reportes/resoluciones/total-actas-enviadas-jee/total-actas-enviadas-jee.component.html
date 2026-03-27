@@ -1,0 +1,17 @@
+<section class="secciones">
+    <h1 class="titulo1">Total de Actas Enviadas al JEE por Centro Cómputo</h1>
+    <div class="conte_sombra p-20">
+        <app-filtro-reporte-actas-enviadas-jee-nacion [textoBoton]="'Consultar'" (eventBuscar)="buscarReporte($event)"></app-filtro-reporte-actas-enviadas-jee-nacion>
+        <h2 class="subtitulo_reportes">Listado de Actas Enviadas al JEE por Centro Cómputo</h2>
+        <div class="cont-anuncio">
+            <app-mensaje-personaje [mensaje]="mensaje"></app-mensaje-personaje>
+        </div>
+        <article class="pdf_incrustado">
+            <div class="contenedor-documento-muestra">
+                <div #idDivImagen *ngIf="isShowReporte">
+                </div>
+            </div>
+
+        </article>
+    </div>
+</section>

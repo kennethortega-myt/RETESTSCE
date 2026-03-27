@@ -1,0 +1,116 @@
+<div class="filtros" [formGroup]="form">
+    <div class="filtro">
+        <label for="tipoProceso">Proceso:</label>
+
+        <mat-form-field appearance="outline">
+            <mat-select id="proceso" formControlName="proceso">                
+                <mat-option *ngFor="let proceso of listProceso" [value]="proceso">{{proceso.nombre}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="filtro">
+        <label for="tipoProceso">Centro de Cómputo:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="centroComputo" formControlName="centroComputo">                
+                <mat-option *ngFor="let centroComputo of listCentrosComputo"
+                    [value]="centroComputo">
+                    {{centroComputo.codigo}} - {{centroComputo.nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="filtro">
+        <label for="tipoProceso">Estado:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="estado" formControlName="estado">                
+                <mat-option *ngFor="let estado of listEstados"
+                     [value]="estado">{{estado.nombre}}
+                </mat-option>                
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="filtro_boton">
+        <button class="estilo1 full noMarginLR" type="button" (click)="consultar()">
+            Consultar
+        </button>
+    </div>
+</div>
+<div class="conte-cards">
+    <div class="tarjeta">
+        <div class="cuadro-blanco-2 gris-claro cantidad">
+            <img alt="" src="../assets/img/ico_procesadas.svg">
+            <span class="observados mr-0">Completo
+                <b>{{totalCompletas}}</b>
+            </span>
+        </div>
+    </div>
+    <div class="tarjeta">
+        <div class="cuadro-blanco-2 gris-claro cantidad">
+            <img alt="" src="../assets/img/ico_porprocesar.svg">
+            <span class="verificar mr-0">Pendiente
+                <b>{{totalPendientes}}</b>
+            </span>
+        </div>
+    </div>
+    <div class="tarjeta_actualizarcada">
+        <div class="conte_actualizar">
+            <label for="departamento">Actualizar cada</label>
+            <mat-form-field appearance="outline">
+                <input matInput sceSoloNumerosFormReact maxlength="2" [(ngModel)]="timeUpdate" maxlength="2" 
+                (change)="timeUpdateOnchange()"/>
+                <span matTextSuffix class="span-sufijo"> minutos</span>
+            </mat-form-field>
+        </div>
+
+        <button class=" estilo1" (click)="consultar()"><img alt="" src="../assets/img/icons/ico-actualizacion-blanco.svg"></button>
+    </div>
+</div>
+<h2 class="subtitulo_reportes">Relación de puestas a cero por centro de cómputo</h2>
+<div class="cont-anuncio" *ngIf="mensaje">
+    <app-mensaje-personaje [mensaje]="mensaje"></app-mensaje-personaje>
+</div>
+<mat-table *ngIf="!mensaje" [dataSource]="listConsultaReporteRelacionPuestaCero" class="tabla-header-doble mb-25">
+    <ng-container matColumnDef="codigo">
+        <mat-header-cell *matHeaderCellDef class="header-codigo">Código</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="header-codigo centrar-celda" [ngClass]="colorRow(element.estado)">
+            {{ element.codigoCentroComputo }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="cc">
+        <mat-header-cell *matHeaderCellDef class="header-cc">Centro de cómputo</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="header-cc" [ngClass]="colorRow(element.estado)">
+            {{ element.nombreCentroComputo }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="FechaEnvioCC">
+        <mat-header-cell *matHeaderCellDef class="header-asistencia">Fecha / hora envío CC</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="header-asistencia centrar-celda" [ngClass]="colorRow(element.estado)">
+            {{ element.fechaHoraPuestaCeroCC}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="FechaRecepcionCC">
+        <mat-header-cell *matHeaderCellDef class="header-asistencia">Fecha / hora recepción CC</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="header-asistencia centrar-celda" [ngClass]="colorRow(element.estado)">
+            {{ element.fechaHoraRecepcionCC}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="estado">
+        <mat-header-cell *matHeaderCellDef class="header-estado">Estado</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="header-estado centrar-celda" [ngClass]="colorRow(element.estado)">
+            {{ element.estado == 0 ? 'PENDIENTE' : 'COMPLETO'}}
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns1"></mat-row>
+</mat-table>
+<div class="filtro_boton" *ngIf="!mensaje && listConsultaReporteRelacionPuestaCero.length>0">
+    <button class="estilo1 full noMarginLR" type="button" (click)="imprimir()">
+        Imprimir
+    </button>
+</div>

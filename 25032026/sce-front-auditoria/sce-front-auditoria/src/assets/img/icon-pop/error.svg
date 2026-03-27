@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="70" height="70" viewBox="0 0 70 70">
+  <defs>
+    <clipPath id="clip-Mesa_de_trabajo_3">
+      <rect width="70" height="70"/>
+    </clipPath>
+  </defs>
+  <g id="Mesa_de_trabajo_3" data-name="Mesa de trabajo – 3" clip-path="url(#clip-Mesa_de_trabajo_3)">
+    <g id="icono_x_rojo" data-name="icono x rojo" transform="translate(1.001 1)">
+      <path id="Trazado_4675" data-name="Trazado 4675" d="M68.991,33.434A34.014,34.014,0,1,0,33.465,68.992c.495.031,1.02.031,1.546.031A34.031,34.031,0,0,0,69.022,35.011C69.022,34.486,69.022,33.96,68.991,33.434Zm-33.98,28.91A26.922,26.922,0,0,1,24.869,60.4,27.334,27.334,0,1,1,60.4,24.87a26.923,26.923,0,0,1,1.948,10.142A27.361,27.361,0,0,1,35.011,62.344Z" transform="translate(-1 -1)" fill="#e4072d"/>
+      <path id="Trazado_4676" data-name="Trazado 4676" d="M37.714,8.032a4.161,4.161,0,0,0-5.906,0l-8.936,8.936L13.937,8.032a4.176,4.176,0,1,0-5.906,5.906l8.936,8.936L8.032,31.808a4.162,4.162,0,0,0,0,5.906A4.218,4.218,0,0,0,11,38.951a4.142,4.142,0,0,0,2.968-1.237l8.9-8.936,8.936,8.936a4.218,4.218,0,0,0,2.968,1.237,4.19,4.19,0,0,0,2.968-7.142l-8.966-8.936,8.936-8.936A4.162,4.162,0,0,0,37.714,8.032Z" transform="translate(11.138 11.138)" fill="#e4072d"/>
+    </g>
+  </g>
+</svg>

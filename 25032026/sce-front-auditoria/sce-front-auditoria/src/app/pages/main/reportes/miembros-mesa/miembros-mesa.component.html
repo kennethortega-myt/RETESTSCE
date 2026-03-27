@@ -1,0 +1,19 @@
+<section class="secciones">
+    <h1 class="titulo1">Reportes - Miembros Mesa</h1>
+        <div class="conte_sombra p-20">
+            <div class="botonera_header">
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/miembros-mesa/asistencia-miembro-mesa'}" (click)="navegar('/main/reportes/miembros-mesa/asistencia-miembro-mesa')">ASISTENCIA MIEMBROS MESA</button>
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/miembros-mesa/asistencia-personeros'}" (click)="navegar('/main/reportes/miembros-mesa/asistencia-personeros')">ASISTENCIA PERSONEROS</button>
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/miembros-mesa/asistencia-mm-escrutinio'}" (click)="navegar('/main/reportes/miembros-mesa/asistencia-mm-escrutinio')">ASISTENCIA MIEMBROS DE MESA ESCRUTINIO</button>
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/miembros-mesa/detalle-avance-registro-ubigeo'}" (click)="navegar('/main/reportes/miembros-mesa/detalle-avance-registro-ubigeo')">DETALLE DE AVANCE DE REGISTRO POR UBIGEO</button>
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/miembros-mesa/miembros-mesa'}" (click)="navegar('/main/reportes/miembros-mesa/miembros-mesa')">AVANCE MIEMBROS DE MESA</button>
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/miembros-mesa/personeros'}" (click)="navegar('/main/reportes/miembros-mesa/personeros')">AVANCE PERSONEROS</button>
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/miembros-mesa/miembros-mesa-acta-escrutinio'}" (click)="navegar('/main/reportes/miembros-mesa/miembros-mesa-acta-escrutinio')">AVANCE ACTA DE ESCRUTINIO</button>
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/miembros-mesa/mesas-sin-omisos-miembros-mesa'}" (click)="navegar('/main/reportes/miembros-mesa/mesas-sin-omisos-miembros-mesa')">MESAS SIN OMISOS</button>
+                <button mat-button *ngIf="esPerfilNacion"  [ngClass]="{'activo': activeMenu === '/main/reportes/miembros-mesa/procede-pago'}" (click)="navegar('/main/reportes/miembros-mesa/procede-pago')">PROCEDE PAGO</button>
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/miembros-mesa/avance-digitalizacion'}" (click)="navegar('/main/reportes/miembros-mesa/avance-digitalizacion')">AVANCE DE DIGITALIZACION HOJA DE ASISTENCIA</button>
+           </div>
+            <router-outlet></router-outlet>
+        </div>
+
+</section>

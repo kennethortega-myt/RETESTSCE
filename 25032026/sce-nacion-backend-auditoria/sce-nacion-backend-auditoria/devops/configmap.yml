@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sce-nacion-backend-cm
+data:
+  APP_NAME: "sce-nacion-backend"
+  APPLICATION_ROOT: "/sce-nacion-backend"
+  DB_HOST: "192.168.44.50"
+  DB_NAME: "sce"
+  DB_PORT: "5433"
+  DB_DEFAULT_SCHEMA: "sce_admin"
+  FILE_SERVER_PATH: "/data"
+  FILE_SERVER_FILES: "/data"
+  SCE_IMAGES_INSTALL: "/install"
+  COORDENADA_URL: http://10.220.80.87/api/modelos
+  SASA_URL: "http://sasa-backend-service.sasa.svc.cluster.local/sasa-backend/v1/api"
+  PR_ADMIN_URL: "http://pr-admin-backend-service.presentacionadminrevocatoria.svc.cluster.local/pr-admin-backend/"
+
+  FIRMADOC_ACTIVADO: "true"
+  FIRMADOC_CONFIG_URL: "http://192.168.48.106:8080/firmaperuagente/api/signature"
+  FIRMADOC_PARAM_WEB_TSA: "http://tsa.onpe.gob.pe/signserver/process?workerName=TimeStampSignerF"
+  FIRMADOC_PARAM_USER_TSA: "SIGPE"
+  JOB_RECEPCION_DELAY: "60000"
+  JOB_RECEPCION_INITIAL_DELAY: "600000"

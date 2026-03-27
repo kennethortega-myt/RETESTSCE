@@ -1,0 +1,145 @@
+
+<div class="w-full d-flex">
+  <div class="w-70">
+    <!-- tabla para votos totales -->
+      <h3 class="titulo3 m-0">
+      Listado de organizaciones políticas y votos
+    </h3>
+    <div class="mt-10" >
+      <div class="content-table-preferencial">
+        <div class="table-preferencial-grid width-60">
+          <div class="header-table-preferencial2">
+            <div class="celda-preferencial">N°</div>
+            <div class="celda-preferencial">Organizaciones Políticas</div>
+            <div class="group-celda-preferencial">
+              <div class="group-celda-preferencial-item">
+                <div>Total de votos</div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="scroll-vertical"
+            style="overflow-y: scroll; height: 497px"
+            id="left-container"
+            (scroll)="onScroll('left')"
+          >
+            <form [formGroup]="formGroupSeccionVoto" autocomplete="off">
+              <div formGroupName="params" class="focus">
+                <div *ngFor = "let votoItem of actaParaProcesamientoManualBean.voteSection.items; index as i" class="item-content-preferencial2 item-focus">
+                  <div class="item-table-preferencial">{{votoItem.position}}</div>
+                  <div class="item-table-preferencial">
+                    {{votoItem.nombreAgrupacionPolitica}}
+                  </div>
+                  <div class="item-table-preferencial tres item-focus-input">
+                    <mat-form-field
+                    *ngIf="votoItem.estado !== Constantes.CODIGO_ESTADO_ACHURADO;else achuradoTemplate"
+                    class="acta-corregir-pref cant-input" appearance="outline" (dblclick)="onDoubleClick($event)">
+                      <input [id]="'mat-input-total-'+ i"
+                              matInput
+                              [formControlName]="votoItem.fileId+'-'+i"
+                              sceFocusVeriResolucionEnter
+                              sceFocusVeriResolucionFlecha
+                              [rowIndex]="i"
+                              [colIndex]="0"
+                              [flagPresi]=false
+                              (focus)="onFocus($event)"
+                              (blur)="onBlur()"
+                              (input)="onInputVoto(votoItem.fileId, false, $event, i)"
+                              [readonly] = "votoItem.estado === Constantes.CODIGO_ESTADO_ACHURADO"
+                              maxlength="3"
+                              [ngClass]="{'no-caret': !isEditingMode(i)}"
+
+                      />
+                    </mat-form-field>
+                    <ng-template #achuradoTemplate>
+                      <app-pm-celda-achurada [rowIndex]="i" [colIndex]="0" [flagPresi]="false"></app-pm-celda-achurada>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="table-preferencial-grid2 width-40">
+          <div
+            id="right-container"
+            class="table-preferencial-grid2 container-scroll-none2"
+            style="overflow: auto; height: 535px"
+            id="right-container"
+            (scroll)="onScroll('right')"
+          >
+            <div class="header-table-preferencial p-sticky">
+              <div *ngFor="let votPref of times; index as jj" class="group-celda-preferencial">
+                <div class="group-celda-preferencial-item">
+                  <div>VP{{jj+1}}</div>
+                </div>
+              </div>
+            </div>
+            <div class="scroll-vertical" #scrollContainer>
+              <form [formGroup]="formGroupSeccionVotoPref" autocomplete="off">
+                <div formGroupName="params">
+                  <div *ngFor="let votoItem of actaParaProcesamientoManualBean.voteSection.items; index as i" style="display: flex" class="focus focus-group">
+                    <ng-container *ngIf="votoItem && votoItem.votoPreferencial; else nullCase">
+                      <div *ngFor="let votoPref of votoItem.votoPreferencial | slice:0: cantVotosPrefe; index as j" class="item-table-votos2">
+                        <mat-form-field  class=" cant-input"
+                                          *ngIf="votoItem.estado !== Constantes.CODIGO_ESTADO_ACHURADO; else achuradoTemplatePref"
+                                          appearance="outline" (dblclick)="onDoubleClick($event)"
+                        >
+                          <input [id]="'mat-input-pref-'+ i+'-'+ j" matInput [formControlName]="votoItem.fileId+'-'+i+'-'+j"
+                                  sceFocusVeriResolucionEnter
+                                  sceFocusVeriResolucionFlecha
+                                  [rowIndex]="i"
+                                  [colIndex]="j"
+                                  [flagPresi]="false"
+                                  (input)="onInputVoto(votoItem.fileId, true,$event,i,j)"
+                                  (focus)="onFocus($event)"
+                                  (blur)="onBlur()"
+                                  [readonly] = "votoItem.estado == Constantes.CODIGO_ESTADO_ACHURADO"
+                                  maxlength="3"
+                                  [ngClass]="{'no-caret': !isEditingMode(i, j)}"
+                          />
+                        </mat-form-field>
+                        <ng-template #achuradoTemplatePref>
+                          <app-pm-celda-achurada [rowIndex]="i" [colIndex]="j" [flagPresi]="false"></app-pm-celda-achurada>
+                        </ng-template>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-pm-footer-cvas
+      [cvasFC]="cvasFC"
+      (cvasChange)="changeCvas()"
+    ></app-pm-footer-cvas>
+  </div>
+  <div class="w-30">
+    <app-pm-panel-lateral
+      [checkSinDatosFC]="checkSinDatosFC"
+      [checkSinFirmasFC]="checkSinFirmasFC"
+      [checkSolNulidadFC]="checkSolNulidadFC"
+      [formGroupIntalacion]="formGroupIntalacion"
+      [formGroupEscrutinio]="formGroupEscrutinio"
+      [minFechaInstalacion]="minFechaInstalacion"
+      [maxFechaInstalacion]="maxFechaInstalacion"
+      [minFechaEscrutinio]="minFechaEscrutinio"
+      [maxFechaEscrutinio]="maxFechaEscrutinio"
+      [isHoraEscrutinioN]="isHoraEscrutinioN"
+      (changeHoraInicio)="changeHoraInicio()"
+      (changeHoraFin)="changeHoraFin()"
+      (sinDatosChange)="changeCheckSinDatos($event)"
+      (sinFirmasChange)="changeCheckSinFirmas($event)"
+      (solNulidadChange)="changeCheckSolNulidad($event)"
+    ></app-pm-panel-lateral>
+  </div>
+</div>
+<ng-template #nullCase let-i="index">
+  <div *ngFor="let votoPref of times; index as j" class="item-table-votos2">
+
+  </div>
+</ng-template>
+

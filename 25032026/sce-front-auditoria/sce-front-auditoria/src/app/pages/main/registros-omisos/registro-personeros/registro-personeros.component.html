@@ -1,0 +1,155 @@
+<section class="secciones">
+  <h1 class="titulo1">Registro de personeros</h1>
+  <div *ngIf="isConsulta" class="seccion-unidos ">
+    <article class="w-20 cuadro-blanco-2 flex-col-omiso">
+      <div class="formulario section-flex ">
+        <div class="w-100">
+          <label for="cmbTipoFiltro">Tipo Filtro:</label>
+          <mat-form-field appearance="outline">
+            <mat-select id="cmbTipoFiltro" [formControl]="tipoFiltroControl" name="tipoFiltro" >
+              <mat-option *ngFor="let tipoFiltro of listTipoFiltro" [value]="tipoFiltro.id">
+                {{tipoFiltro.descripcion}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+        <div class="w-100">
+          <label for="cmbProceso">Proceso:</label>
+          <mat-form-field appearance="outline">
+            <mat-select id="cmbProceso" [formControl]="procesoControl" name="idProceso">
+              <mat-option [value]="0">SELECCIONE</mat-option>
+              <mat-option *ngFor="let proceso of listProceso" [value]="proceso">
+                {{proceso.cnombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="w-100">
+          <mat-checkbox [formControl]="reprocesamientoControl">Reprocesamiento</mat-checkbox>
+        </div>
+        <button class="estilo2 w-full" (click)="buscarHAPersoneros()"> BUSCAR</button>
+      </div>
+    </article>
+    <article class="w-80">
+      <div class=" contenido-scroll cont-anuncio">
+        <div class="personaje-anuncio">
+          <p>
+            <span class="text-tooltip text-left">Registro de personeros</span>
+            <span class="text-tooltip2 text-center">Para Iniciar el Registro de personeros seleccione un proceso</span>
+          </p>
+          <img
+            [src]="filePngUrl"
+            alt="Preferencial" class="img-voto2" />
+          <img src="../assets/img/personaje1.svg" alt="">
+        </div>
+      </div>
+    </article>
+  </div>
+  <div *ngIf="!isConsulta" class="conte_sombra p-20">
+    <h2 class="titulo2">Registro de Personeros de mesa {{mesaInfo.mesa}}</h2>
+      <div class="filtros mb-15">
+        <div class="filtro2">
+          <label for="electoresInput">Nº Electores</label>
+          <mat-form-field appearance="outline">
+            <input id="electoresInput" matInput [(ngModel)]="mesaInfo.electoresHabiles" [readonly]="true" type="text"
+              placeholder="">
+          </mat-form-field>
+        </div>
+        <div class="filtro2">
+          <label for="ausentesInput">Nº Electores Ausentes</label>
+          <mat-form-field appearance="outline">
+            <input id="ausentesInput" matInput [(ngModel)]="mesaInfo.electoresAusentes" [readonly]="true" type="text"
+              placeholder="">
+          </mat-form-field>
+        </div>
+        <div class="filtro2">
+          <label for="departamentoInput">Departamento</label>
+          <mat-form-field appearance="outline">
+            <input id="departamentoInput" matInput [(ngModel)]="mesaInfo.departamento" [readonly]="true" type="text"
+              placeholder="">
+          </mat-form-field>
+        </div>
+        <div class="filtro2">
+          <label for="provinciaInput">Provincia</label>
+          <mat-form-field appearance="outline">
+            <input id="provinciaInput" matInput [(ngModel)]="mesaInfo.provincia" [readonly]="true" type="text" placeholder="">
+          </mat-form-field>
+        </div>
+        <div class="filtro2">
+          <label for="distritoInput">Distrito</label>
+          <mat-form-field appearance="outline">
+            <input id="distritoInput" matInput [(ngModel)]="mesaInfo.distrito" [readonly]="true" type="text" placeholder="">
+          </mat-form-field>
+        </div>
+        <div class="filtro3">
+          <label for="localInput">Local</label>
+          <mat-form-field appearance="outline">
+            <input id="localInput" matInput [(ngModel)]="mesaInfo.localVotacion" [readonly]="true" type="text" placeholder="">
+          </mat-form-field>
+        </div>
+      </div>
+
+
+
+
+    <div class="registro_personeros">
+      <div class="w-100 p-0">
+        <div class="content-img-firmas conte-firmas-verticales mb-2">
+          <img [src]="filePngUrl" alt="">
+        </div>
+      </div>
+      <div class="w-100 mb-1 p-0 d-flex gap-10" [formGroup]="personerosForm">
+
+          <div>
+            <label for="cmbOP">{{tituloCombo}}</label>
+            <mat-form-field appearance="outline">
+              <mat-select id="cmbOP" name="idProceso" formControlName="org" >
+                 <mat-option value="">SELECCIONE</mat-option>
+                <mat-option [value]="{id:0, descripcion: 'ORGANIZACIÓN POLÍTICA NO ESPECIFICADA'}">Organización política no especificada</mat-option>
+                <mat-option [value]="org" *ngFor="let org of listOrganizacionPolitica">{{org.descripcion}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        <div class="filtros2">
+          <div class="filtro">
+            <label for="dniInput">DNI</label>
+            <mat-form-field appearance="outline">
+              <input id="dniInput" matInput type="text" placeholder="Número de documento" maxlength="8" sceSoloNumeros formControlName="dni"
+                     (keydown.enter)="consultaPadron()"  (keydown.tab)="consultaPadron()">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="filtros2 flex-grow-1">
+          <div class="filtro flex-grow-1">
+            <label for="nombrepersonero">&nbsp;</label>
+            <mat-form-field appearance="outline">
+              <input id="nombrepersonero" matInput  [readonly]="true" type="text" placeholder="" formControlName="apellidos">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="filtros2">
+          <div class="filtro_boton">
+            <button class="estilo2 full noMarginLR" (click)="agregarPersonero()" type="button" [disabled]="personerosForm.disabled">AGREGAR</button>
+          </div>
+
+        </div>
+      </div>
+      <div class="w-100 p-0">
+        <sce-mat-table [columns]="columns" [data]="dataFiltrado" [displayedColumns]="displayedColumns" [pageSize]="5"
+          [pageSizeOptions]="[5, 10, 20]" [heightOffset]="680" [addIndexColumn]="addIndexColumn"
+          [enableSorting]="enableSorting" (actionClicked)="onActionClicked($event)"></sce-mat-table>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!isConsulta" class="cont-btn d-flex j-end">
+    <button class=" estilo2" (click)="resetComponent(true)" > SALTAR </button>
+    <button class=" estilo1" (click)="guardarInformacion()" > REGISTRAR</button>
+    <button class=" estilo2" (click)="verImagenActa()" *ngIf="this.mesaInfo.archivoEscrutinioId">VER ACTA</button>
+  </div>
+</section>
+<style>
+  .img-voto2{
+    display: none;
+  }
+</style>

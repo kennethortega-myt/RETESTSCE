@@ -1,0 +1,63 @@
+<article
+  class="height-scroldlactas height-scrollactasvotos "
+  style="background-color: #f5f6f7; overflow: hidden"
+>
+  <h3 class="titulos-article">Paso 2 de 3 - Votos validados</h3>
+  <div style="display: flex; gap: 40px; margin-top: 2rem">
+    <div class="w-container-100">
+      <div id="right-container"class="container-scroll h-560">
+        <div class="container-1 revo p-sticky">
+          <div *ngFor="let votoPref of times; index as jj" class="item">
+            <h3 class="titulos-article" style="text-align: center">{{tituloCabecera[jj+1]}}</h3>
+          </div>
+
+        </div>
+
+        <form *ngIf="formularioListo()" [formGroup]="formGroupSeccionVoto" autocomplete="off">
+          <div formGroupName="params">
+            <div *ngFor="let votoItem of this.seccionVoto.items; index as i" class="container-1 p">
+              <ng-container>
+                <div *ngFor="let voto of votoItem.votoRevocatoria.slice(0,5); index as j" class="item">
+                  <div [ngClass]="voto.isEditable == false ? 'cont-valida-voto2 min valVoto2 gris-desabilitado':'cont-valida-voto2 min valVoto2' ">
+                    <div
+                      class="imgBox2"
+                      fxLayout="row"
+                      fxLayoutAlign="center center"
+                    >
+                      <img #lazyImagePref     alt="Voto preferencial"
+                           [src]="'../../../../../assets/loader/loader.svg'"
+                           [attr.data-index-i]="i"
+                           [attr.data-index-j]="j"
+                           class="img-voto2" />
+                    </div>
+                    <mat-form-field appearance="outline">
+                      <input #inputRefs
+                             [id]="'mat-input-pref-'+ i+'-'+ j"
+                             matInput
+                             [formControlName]="voto.fileId+'-'+i+'-'+j"
+                             sceFocusNextRevoEnter
+                             sceFocusNextRevoFlecha
+                             [rowIndex]="i"
+                             [colIndex]="j"
+                             (input)="onInputVoto(voto.fileId,i,j,$event)"
+                             (change)="changeVoto(voto.fileId,i,j)"
+                             (focus)="onFocus($event)"
+                             (blur)="onBlur()"
+                             (dblclick)="onDoubleClick($event)"
+                             [readonly] = "!voto.isEditable"
+                             maxlength="3"
+                             [ngClass]="{'no-caret': !isEditingMode(i, j)}"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+              </ng-container>
+
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</article>
+

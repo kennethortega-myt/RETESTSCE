@@ -1,0 +1,42 @@
+<section class="secciones puestacero">
+  <div>
+    <h1 class="titulo1">{{tituloComponent}}</h1>
+    <section class="seccion-unidos puestacero">
+      <article class="w-20 w-40 altura-flex">
+        <div class="w-100">
+          <label for="procesoFormControl">Proceso:</label>
+          <mat-form-field appearance="outline">
+            <mat-select (selectionChange)="seleccionarProceso()" [formControl]="procesoFormControl"
+                        placeholder="SELECCIONE">
+              <mat-option *ngFor="let proc of listProceso" [value]="proc">{{proc.nombre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="w-100 h-full p-r flex_abajo">
+
+        </div>
+      </article>
+      <article class="w-80 d-flex center-flex items-center">
+        <div class="personaje-anuncio">
+          <p>{{mensajePersonaje}}</p>
+          <img alt="" src="../assets/img/personaje1.svg" />
+        </div>
+
+      </article>
+    </section>
+    <div class="cont-btn">
+      <button (click)="confirmarPuestaCeroVerificaNacion()" class="m-0 estilo2 mb-40" *ngIf="isVisibleBtnPuestaCero">
+        PUESTA A CERO
+      </button>
+      <button (click)="confirmarProcesarPuestaCeroNacion()" class="m-0 estilo2 mb-40" *ngIf="isVisibleBtnProcesar">
+        PROCESAR
+      </button>
+
+      <button (click)="reporteVerificaVersionNacion()" class="m-0 estilo1 mb-40" *ngIf="isVisibleBtnReporte">
+        VER REPORTE
+      </button>
+    </div>
+  </div>
+</section>
+
+

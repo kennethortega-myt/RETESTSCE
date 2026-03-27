@@ -1,0 +1,82 @@
+package pe.gob.onpe.scebackend.model.orc.repository.reportes;
+
+import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+import pe.gob.onpe.scebackend.model.dto.request.reporte.ReporteMesasObservacionesRequestDto;
+import pe.gob.onpe.scebackend.model.dto.response.reporte.ReporteAvanceDigitalizacionDenunciasDto;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
+
+@Log4j2
+@Repository
+public class ReporteAvanceDigitalizacionDenunciasRepository implements IReporteAvanceDigitalizacionDenunciasRepository{
+    private final JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public ReporteAvanceDigitalizacionDenunciasRepository(@Qualifier("jdbcTemplateNacion") JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public List<ReporteAvanceDigitalizacionDenunciasDto> listarReporteAvanceDigitalizacionDenuncia(ReporteMesasObservacionesRequestDto filtro) {
+        String sql = "SELECT * FROM fn_reporte_avance_digitalizacion_denuncias(?, ?, ?, ?)";
+        return jdbcTemplate.execute(sql, (PreparedStatement ps) -> {
+
+            mapaerParametros(filtro, ps);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                List<ReporteAvanceDigitalizacionDenunciasDto> lista = new ArrayList<>();
+                while (rs.next()) {
+                    llenarDatos(rs, lista);
+                }
+                return lista;
+            }
+        });
+    }
+
+    private static void mapaerParametros(ReporteMesasObservacionesRequestDto filtro, PreparedStatement ps) throws SQLException {
+        ps.setString(1, filtro.getEsquema());
+        if(filtro.getIdEleccion() == null) {
+            ps.setNull(2, Types.NULL);
+        } else {
+            ps.setInt(2, filtro.getIdEleccion());
+        }
+        if(filtro.getIdCentroComputo() == null) {
+            ps.setNull(3, Types.NULL);
+        } else {
+            ps.setInt(3, filtro.getIdCentroComputo());
+        }
+        if(filtro.getUbigeo() == null) {
+            ps.setNull(4, Types.NULL);
+        } else {
+            ps.setObject(4, filtro.getUbigeo());
+        }
+
+    }
+
+    private static void llenarDatos(ResultSet rs, List<ReporteAvanceDigitalizacionDenunciasDto> lista) throws SQLException {
+        ReporteAvanceDigitalizacionDenunciasDto reporte = new ReporteAvanceDigitalizacionDenunciasDto();
+        reporte.setNombreEleccion(rs.getString("c_nombre_eleccion"));
+        reporte.setCodigoCentroComputo(rs.getString("c_codigo_centro_computo"));
+        reporte.setNombreCentroComputo(rs.getString("c_nombre_centro_computo"));
+        reporte.setCodigoUbigeo(rs.getString("c_codigo_ubigeo"));
+        reporte.setDepartamento(rs.getString("c_departamento"));
+        reporte.setProvincia(rs.getString("c_provincia"));
+        reporte.setDistrito(rs.getString("c_distrito"));
+        reporte.setEstadoDigitalizacion(rs.getString("c_estado_digitalizacion"));
+        reporte.setMesa(rs.getString("c_mesa"));
+        reporte.setNumeroDocumento(rs.getString("c_numero_documento"));
+        reporte.setEstadoDocumento(rs.getString("c_estado_documento"));
+        reporte.setTipoDocumento(rs.getString("c_tipo_documento"));
+        reporte.setTipoPerdida(rs.getString("c_tipo_perdida"));
+        lista.add(reporte);
+    }
+}

@@ -1,0 +1,136 @@
+<div class="p-2">
+    <h2 class="titulo2">Cifra repartidora</h2>
+    <div class="cols2">
+        <div>
+            <label for="idDepartamento">Proceso</label>
+            <mat-form-field appearance="outline">
+              <input matInput
+                id="proceso"
+                name="proceso"
+                type="text"
+                class="input"
+                [disabled]="true"
+                [matTooltip]="proceso"
+                matTooltipPosition="above"
+                value="{{proceso}}"
+              />
+            </mat-form-field>
+        </div>
+        <div >
+            <label for="idDepartamento">Tipo de elección</label>
+            <mat-form-field appearance="outline">
+              <input matInput
+                id="tipoEleccion"
+                name="tipoEleccion"
+                type="text"
+                class="input"
+                [disabled]="true"
+                [matTooltip]="tipoEleccion"
+                matTooltipPosition="above"
+                value="{{tipoEleccion}}"
+              />
+            </mat-form-field>
+        </div>
+    </div>
+    <h3 class="subtitulo-form mt-2">Distrito electorales con empate</h3>
+    <div *ngIf="!listEmpate || listEmpate.length === 0" class="no-data-message">
+        <p>No se encontraron distritos con empate</p>
+    </div>
+    <div class="scroll-desplegables">
+      <div class="mt-1" *ngFor="let distrito of listEmpate">
+          <mat-accordion class="desplegable-cifra">
+              <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+                  <mat-expansion-panel-header>
+                  <mat-panel-title>{{distrito.distritoElectoral}} {{distrito.descripcionDistritoElectoral}}</mat-panel-title>
+                  <mat-panel-description>
+                    <span *ngIf="isDistritoResuelto(distrito)">Resuelto</span>
+                    <span *ngIf="isDistritoGuardado(distrito.distritoElectoral) && !isDistritoResuelto(distrito)">Guardado</span>
+                  </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div class="px-2 pb-1">
+                    <div class="scrolltablCifraEmpate">
+                      <mat-table [dataSource]="distrito.agrupacionesPoliticas" class="mat-elevation-z8">
+                        <ng-container matColumnDef="op">
+                            <mat-header-cell *matHeaderCellDef class="header-organizaciones-politicas">Organizaciones Políticas</mat-header-cell>
+                            <mat-cell *matCellDef="let agrupacion" class="header-organizaciones-politicas"> {{agrupacion.descripcionAgrupacionPolitica}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="votos">
+                            <mat-header-cell *matHeaderCellDef class="header-votos center-flex">Votos</mat-header-cell>
+                            <mat-cell *matCellDef="let agrupacion" class="header-votos center-flex"> {{agrupacion.votosValidos}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="ganador">
+                            <mat-header-cell *matHeaderCellDef class="header-ganador center-flex">Ganador</mat-header-cell>
+                            <mat-cell *matCellDef="let agrupacion" class="header-ganador center-flex">
+                              <mat-checkbox
+                              [checked]="isGanadorSeleccionado(distrito.distritoElectoral, agrupacion.agrupacionPolitica)"
+                              [disabled]="isDistritoResuelto(distrito) || isDistritoGuardado(distrito.distritoElectoral)"
+                              (change)="seleccionarGanador(distrito, agrupacion)">
+                              </mat-checkbox>
+                            </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row >
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                      </mat-table>
+                    </div>
+                    <div class="item-doble mt-1">
+                      <label for="idDepartamento">Nro documento</label>
+                      <mat-form-field appearance="outline">
+                        <input
+                        matInput
+                        placeholder="Ingresar Nro resolución"
+                        [value]="getNumeroResolucion(distrito.distritoElectoral)"
+                        [disabled]="isDistritoResuelto(distrito) || isDistritoGuardado(distrito.distritoElectoral)"
+                        (input)="setNumeroResolucion(distrito.distritoElectoral, $any($event.target).value)"
+                        maxlength="20"
+                        sceNoEspacioInicioReact
+                        sceUppercaseFormReact
+                        sceValidacionInputCustomReact
+                        inputPattern="0-9a-zA-Z /_-"
+                        >
+                      </mat-form-field>
+                      <div *ngIf="tieneMensajeError(distrito.distritoElectoral)" class="mensaje-error">
+                            {{getMensajeError(distrito.distritoElectoral)}}
+                        </div>
+                    </div>
+                    <div class="d-flex center-flex mt-18 cont-btn"
+                    *ngIf="mostrarBotonesAccion(distrito.distritoElectoral)">
+                        <button
+                        class="estilo2 my-0"
+                        type="button"
+                        [disabled]="isDistritoGuardado(distrito.distritoElectoral)"
+                        (click)="guardarDistrito(distrito)"
+                        >GUARDAR</button>
+                        <button
+                        class="estilo3 my-0"
+                        type="button"
+                        (click)="limpiarDistrito(distrito)"
+                        >LIMPIAR</button>
+                    </div>
+                    <div class="mensaje-resuelto" *ngIf="isDistritoResuelto(distrito)">
+                        <p><em>Este distrito ya tiene una resolución registrada</em></p>
+                    </div>
+                  </div>
+              </mat-expansion-panel>
+          </mat-accordion>
+      </div>
+    </div>
+
+
+    <div class="d-flex center-flex mt-18 cont-btn">
+      <button
+        class="estilo2 my-0"
+        type="button"
+        [disabled]="!tieneDistritosParaGrabar()"
+        (click)="grabarYCerrar()">GRABAR
+      </button>
+      <button
+        class="estilo1 my-0"
+        type="button"
+        (click)="cerrar()">CANCELAR
+      </button>
+    </div>
+
+</div>

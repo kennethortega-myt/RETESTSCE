@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<AnchorPane id="AnchorPane" fx:id="anchorPane" focusTraversable="true"
+            prefHeight="782.0"
+            prefWidth="881.0"
+            styleClass="ap_message_box"
+            stylesheets="@../styles/styles.css"
+            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.gob.onpe.scescanner.controller.RenombrarActasController">
+    
+    <children>
+            <AnchorPane styleClass="ventana_selec_doc_content" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <children>
+
+                                                              <Label fx:id="lblTitleMain" alignment="CENTER" focusTraversable="false" layoutY="18.0" styleClass="lbl_tit_ventana_selec_doc" text="Digite el número de documento del código de barras visible en la imagen." AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="18.0" />
+                    
+                                                                          <Button alignment="CENTER" layoutX="798.0" layoutY="177.0" mnemonicParsing="false" onAction="#onRefreshButton" prefHeight="26.0" prefWidth="26.0" styleClass="buttons_tools,button_rotate" text="" AnchorPane.rightAnchor="62.0" AnchorPane.topAnchor="177.0">
+                        <tooltip>
+                            <Tooltip text="Rotar Imagen" />
+                        </tooltip>
+                    </Button>
+
+                                                              <!--(495/2)-(102/2)-->
+<!--                                
+                    <Button alignment="CENTER" AnchorPane.rightAnchor="169.0" AnchorPane.bottomAnchor="28.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="102.0" text="ACEPTAR" onAction="#onAceptarButton"  />
+                                                                          <Button alignment="CENTER" AnchorPane.rightAnchor="47.0" AnchorPane.bottomAnchor="28.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="102.0" text="CANCELAR" onAction="#onCancelarButton" styleClass="button_cancel"  />
+                                                                          -->
+                    
+                                                                          <HBox layoutX="555.0" layoutY="264.0" spacing="15" AnchorPane.bottomAnchor="486.0" AnchorPane.rightAnchor="107.0">
+<children>
+                           <Button alignment="CENTER" mnemonicParsing="false" onAction="#onAceptarButton" prefHeight="32.0" prefWidth="102.0" text="ACEPTAR" />
+                           <Button alignment="CENTER" mnemonicParsing="false" onAction="#onCancelarButton" prefHeight="32.0" prefWidth="102.0" styleClass="button_cancel" text="CANCELAR" />
+</children>
+                    </HBox>
+            <Button alignment="CENTER" layoutX="500.0" layoutY="55.0" mnemonicParsing="false" onAction="#onGirarArchivo" prefHeight="36.0" prefWidth="37.0" styleClass="buttons_tools,button_rotate" text="">
+               <tooltip>
+                  <Tooltip text="Rotar Imagen" />
+               </tooltip>
+            </Button>
+                      
+                                                                                        <StackPane layoutX="542.0" layoutY="55.0" prefHeight="103.0" prefWidth="309.0">
+                         <children>
+                             <Pane disable="true" layoutX="0.0" layoutY="0.0" maxHeight="103.0" maxWidth="285.0" style="-fx-background-color: #646464;">
+                                 <children>
+                                     <!--<StackPane fx:id="paneImgPage1" layoutX="1.0" layoutY="1.0" prefHeight="101.0" prefWidth="283.0" style="-fx-background-color: #E6E6E6;" />-->
+                                     <ImageView fx:id="imagePage1" fitHeight="101" fitWidth="283" layoutX="1.0" layoutY="1.0" preserveRatio="true" />
+                                 </children>
+                             </Pane>
+                         </children>
+                      </StackPane>
+                       <Label fx:id="lblTitleBox1" focusTraversable="false" layoutX="555.0" layoutY="180.0" text="Número de acta" />
+                       <TextField fx:id="textNunActa" alignment="CENTER" focusTraversable="false" layoutX="555.0" layoutY="210.0" prefWidth="283.0" />
+            <Button alignment="CENTER" layoutX="500.0" layoutY="160.0" mnemonicParsing="false" onAction="#zoomOut" prefHeight="36.0" prefWidth="37.0" styleClass="buttons_tools,button_zoom_out">
+               <tooltip>
+                  <Tooltip text="Reducir Vista" />
+               </tooltip>
+            </Button>
+            <Button alignment="CENTER" layoutX="500.0" layoutY="107.0" mnemonicParsing="false" onAction="#zoomIn" prefHeight="36.0" prefWidth="37.0" styleClass="buttons_tools,button_zoom_in">
+               <tooltip>
+                  <Tooltip text="Agrandar Vista" />
+               </tooltip>
+            </Button>
+                    
+                                                                      </children>
+            </AnchorPane>
+      <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" layoutX="10.0" layoutY="55.0" prefHeight="687.0" prefWidth="480.0">
+         <content>
+            <StackPane>
+               <children>
+                  <ImageView fx:id="imageView" />
+               </children>
+            </StackPane>
+         </content>
+      </ScrollPane>
+        
+    </children>
+    
+</AnchorPane>

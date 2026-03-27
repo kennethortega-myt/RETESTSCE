@@ -1,0 +1,113 @@
+<section class="secciones">
+  <div>
+    <h1 class="titulo1">{{tituloComponente}}</h1>
+    <section class="section-flex">
+      <article class="w-20 cuadro-blanco-2 ">
+        <div class="formulario section-flex ">
+          <div class="w-100">
+            <label for="procesoFormControl">Proceso:</label>
+            <mat-form-field appearance="outline">
+              <mat-select (selectionChange)="obtenerEleccion()" [formControl]="procesoFormControl"
+                placeholder="SELECCIONE">
+                <mat-option *ngFor="let proc of listProceso" [value]="proc">{{proc.nombre}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="w-100">
+          <button class="estilo1 w-full mx-0" (click)="listarSolicitudes()"> BUSCAR</button>
+        </div>
+      </article>
+      <section class="w-80 pb-0 cont-info pl-2 pr-0 ">
+        <article class=" section-flex " >
+
+          <div class="w-full px-0">
+            <div class="scrolltablAutorizaciones">
+              <mat-table [dataSource]="dataSource" class="mat-elevation-z8 table-autorizaciones-nacion">
+                <ng-container matColumnDef="numero"  >
+                  <mat-header-cell *matHeaderCellDef > Nº. </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.numeroAutorizacion}}  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="centroComputo"  >
+                  <mat-header-cell *matHeaderCellDef > Centro de Cómputo </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element | centroComputoCompletoNacion}}  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="tipoAutorizacion"  >
+                  <mat-header-cell *matHeaderCellDef > Tipo de Autorización </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.descTipoAutorizacion}}  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="detalle">
+                  <mat-header-cell *matHeaderCellDef> Detalle </mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <span [innerHTML]="resaltarTexto(element.detalle)"></span>
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="fechaHora">
+                  <mat-header-cell *matHeaderCellDef>Última Modificación </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.fechaModificacion == null ? element.fechaCreacion : element.fechaModificacion}}  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="estado">
+                  <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <div [ngClass]="element.estadoAprobacion=='P'?'estado pendiente_de_autorizacion':
+                  element.estadoAprobacion=='A'?'estado aprobada_de_autorizacion' :
+                  element.estadoAprobacion=='R'?'estado rechazada_de_autorizacion' :
+                  element.estadoAprobacion=='E'?'estado ejecutado_de_autorizacion' : ''"  ></div>
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="descEstado">
+                  <mat-header-cell *matHeaderCellDef> Desc. Estado </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.descEstadoAprobacion}}   </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="acciones">
+                  <mat-header-cell *matHeaderCellDef class="w-acciones"> Acciones </mat-header-cell>
+                  <mat-cell *matCellDef="let element" class="w-acciones">
+                    <span mat-raised-button style="cursor: pointer;"
+                        matTooltipPosition="above"
+                        matTooltip="Aprobar"
+                        matTooltipClass="example-tooltip-uppercase"
+                        aria-label="Button that shows a red tooltip" *ngIf="element.estadoAprobacion==='P'"  (click)="confirmarAutorizacion(element)" onkeypress="" class="material-icons aprobar-icon" >
+                    check_circle
+                    </span>
+                    <span
+                    class="material-icons color-rojo cursor-pointer"
+                    matTooltip="Rechazar"
+                    *ngIf="element.estadoAprobacion===Constantes.ESTADO_APROBACION_AUTORIZACION_PENDIENTE"
+                    (click)="confirmarCancelarAutorizacion(element)" onkeypress=""
+                    >cancel
+                    </span>
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row  *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+              <div *ngIf="dataSource.data.length === 0" class="no-data-message">
+                No se han encontrado registros.
+              </div>
+            </div>
+            <div class="d-flex">
+              <ul class="leyenda w-50">
+                <li><div class="estado pendiente_de_autorizacion"></div> Pendiente</li>
+                <li><div class="estado aprobada"></div> Aprobado</li>
+                <li><div class="estado rechazada"></div> Rechazado</li>
+                <li><div class="estado verificar"></div> Ejecutado</li>
+              </ul>
+              <mat-paginator class="w-50" #paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+            </div>
+
+          </div>
+        </article>
+      </section>
+    </section>
+  </div>
+</section>
+
+

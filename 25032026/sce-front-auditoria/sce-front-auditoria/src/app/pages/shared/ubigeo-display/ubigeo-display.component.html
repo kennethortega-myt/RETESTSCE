@@ -1,0 +1,30 @@
+<h3 class="titulo3">Ubigeo</h3>
+
+<label for="depaInput">Departamento:</label>
+<mat-form-field appearance="outline">
+  <input id="depaInput" matInput [value]="departamento" [disabled]="true" />
+</mat-form-field>
+
+<label for="proviInput">Provincia:</label>
+<mat-form-field appearance="outline">
+  <input id="proviInput" matInput [value]="provincia" [disabled]="true" />
+</mat-form-field>
+
+<label for="distrInput">Distrito:</label>
+<mat-form-field appearance="outline">
+  <input id="distrInput" matInput [value]="distrito" [disabled]="true" />
+</mat-form-field>
+
+<label for="locVoInput">Local de votación:</label>
+<mat-form-field appearance="outline">
+  <input id="locVoInput" matInput [value]="localVotacion" [disabled]="true" />
+</mat-form-field>
+
+<label for="mesaInput">Mesa:</label>
+<mat-form-field appearance="outline">
+  <input id="mesaInput" matInput [value]="numMesa" [disabled]="true" />
+</mat-form-field>
+
+<button *ngIf="mostrarVerActa" class="estilo2 w-full mx-0" (click)="verActaClick.emit()">
+  VER ACTA
+</button>

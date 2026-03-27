@@ -1,0 +1,35 @@
+
+<section class="secciones version">
+    <div>
+      <h1 class="titulo1">Verificación de versión</h1>
+
+      <section class="seccion-unidos section-version ">
+
+        <article class="w-100 content-version">
+
+
+          <h1 class="titulo1" *ngIf="false">SCE Versión 1.0</h1>
+
+            <div class="personaje-anuncio">
+                <p>{{mensajePersonaje}}</p>
+                <img alt="" src="../assets/img/personaje1.svg" />
+              </div>
+
+        </article>
+      </section>
+
+    </div>
+  </section>
+  <div class="d-flex j-end p10-p25 ">
+    <button (click)="confirmarPuestaCeroVerifica()" class="m-0 estilo2 mb-40" *ngIf="isVisibleBtnPuestaCero">
+        PUESTA A CERO
+     </button>
+    <button (click)="confirmarProcesarPuestaCero()" class="m-0 estilo2 mb-40" *ngIf="isVisibleBtnProcesar">
+       PROCESAR
+     </button>
+
+    <button (click)="reporteVerificaVersion()" class="m-0 estilo1 mb-40" *ngIf="isVisibleBtnReporte">
+        VER REPORTE
+     </button>
+  </div>
+

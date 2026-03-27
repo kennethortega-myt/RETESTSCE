@@ -1,0 +1,60 @@
+<form>
+    <div style="height: calc(100vh - 510px); overflow: auto;">        
+        <div class="content-cantidad mt-25">
+            <div class="d-flex between-flex">
+                <h4>Cantidad de ciudadanos que votaron (Acta de sufragio)</h4>
+                <div class="d-flex gap-10 items-center alert-success">
+                </div>
+            </div>
+            <div class=" mt-25">
+                <div class="d-flex gap-10 between-flex items-center">
+                    <div class=" d-flex items-center center-flex gap-10 wdt-80" style="width: 85%;">
+                        <div class="content-total text-center flex1">
+                            <div class="p-0">
+                                <canvas class="mt-0" #canvasCvasLetrasSufragio></canvas>
+                            </div>
+                        </div>
+                        <div class="content-total text-center" style="width: 15%;">
+                            <canvas class="mt-0" #canvasCvasNumSufragio></canvas>                            
+                        </div>
+                    </div>
+                    <div  class="wdt-136px">
+                        <label for="TextCantidadCiudadanosVotaron">Número</label>
+                        <div fxLayout="row" fxLayoutAlign="space-between center">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <input matInput disabled="true" name="totalCiudadanosVotaron" [(ngModel)]="totalCiudadanosVotaron">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-cantidad mt-25">
+            <mat-accordion>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title style="color:#003770; font-size: 14px;font-weight: 600;">
+                        Cantidad de ciudadanos que votaron (Acta de escrutinio)
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>          
+                    <div class="d-flex gap-10 between-flex items-center">
+                        <div class=" d-flex items-center center-flex gap-10 wdt-80" style="width: 85%;">
+                            <div class="content-total text-center flex1">                        
+                            </div>
+                            <div class="content-total text-center" style="width: 15%;">                            
+                                <img 
+                                    id="idCvasNumSufragio" 
+                                    #idCvasNumSufragio 
+                                    [src]="srcImagenesPaso1?.srcCvasNumEscrutinio" 
+                                    alt="" 
+                                    style="width: 100%;">                            
+                            </div>
+                        </div>
+                        <div  class="wdt-136px">
+                        </div>
+                    </div>            
+                </mat-expansion-panel>
+            </mat-accordion>      
+        </div>
+    </div>
+</form>

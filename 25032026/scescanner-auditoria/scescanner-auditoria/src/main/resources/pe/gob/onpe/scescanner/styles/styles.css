@@ -1,0 +1,579 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 30 may 2023, 15:05:17
+    Author     : LRestan
+    
+    NOTA: Este archivo usa pseudo-clases específicas de JavaFX CSS que no son estándar web CSS.
+    Pseudo-clases válidas en JavaFX incluyen: :pressed, :hover, :focused, :selected, :odd, :even, etc.
+    Ver: https://openjfx.io/javadoc/17/javafx.graphics/javafx/scene/doc-files/cssref.html
+*/
+
+#AnchorPane
+{
+    -fx-background-color:transparent;    
+}
+
+
+.label{
+    -fx-text-fill: #707070;
+    -fx-font-size: 13px;
+}
+
+.text-input, .text-field_general{
+    -fx-border-color: #999999;
+    -fx-border-width: 1.2px;  
+    -fx-font-size: 14pt;
+    -fx-font-weight: bold;
+    -fx-text-fill: #535353;
+    -fx-padding: -1 15 -1 15;
+    -fx-pref-height: 32;
+    -fx-border-radius: 0 0 0 0;
+    -fx-background-radius: 0 0 0 0;
+    -fx-background-color:  #FFFFFF;
+    -fx-highlight-fill: #707070;
+    
+}
+
+.text-input:focused, .text-field_general:focused {
+    -fx-background-color:  #FFFFFF;
+}
+
+.text_login{
+    -fx-border-color: #999999;
+    -fx-border-width: 1.2px;  
+    -fx-font-size: 12pt;
+    -fx-font-weight: normal;
+    -fx-text-fill: #535353;
+    -fx-padding: -1 10 -1 10;
+    -fx-pref-height: 32;
+    -fx-border-radius: 0 0 0 0;
+    -fx-background-radius: 0 0 0 0;
+    -fx-background-color:  #FFFFFF;
+    -fx-highlight-fill: #707070;
+    
+}
+
+.button{
+    -fx-cursor: hand;
+    -fx-background-color: #3572B7;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 12px;
+    -fx-border-radius:0;
+    -fx-background-radius: 0;
+    -fx-padding: 0 0 0 0;
+}
+.button:hover{
+    -fx-background-color: #2B5B91;
+}
+.button:disabled{
+    -fx-opacity: 0.7;
+} 
+
+
+.button_cancel{
+    -fx-cursor: hand;
+    -fx-background-color: #E20C27;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 12px;
+    -fx-border-radius:0;
+    -fx-background-radius: 0;
+    -fx-padding: 0 0 0 0;
+}
+.button_cancel:hover{
+    -fx-background-color: #B10A1F;
+}
+.button_cancel:disabled{
+    -fx-opacity: 0.7;
+} 
+
+.buttonojo {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+    -fx-background-position: center;
+    -fx-background-size: contain;
+    -fx-background-size: 22px 22px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-image: url("../images/pass_visible_off.png");
+    -fx-pref-width: 30px;
+    -fx-pref-height: 30px;
+}
+.buttonojo:hover {
+    -fx-background-color: transparent;
+}
+.buttonojo:pressed {
+    -fx-background-color: transparent;
+    -fx-background-image: url("../images/pass_visible.png");
+}
+
+.combo-box {
+    -fx-background-color:  #FFFFFF;
+    -fx-background-insets: 0, 0;
+    -fx-border-color: #989898;
+    -fx-border-width: 1.2px;  
+    -fx-font-size: 10pt;
+    -fx-text-fill: #707070;
+    -fx-pref-height: 33;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+.combo-box:focused{
+    -fx-background-color:  #FFFFFF;
+}
+
+
+.viewport {
+   -fx-background-color: #646464;
+}
+
+/*.............TABLE VIEW..............*/
+
+.table-view {           
+    -fx-background-color: transparent;       
+    -fx-border-color: #C5C5C7; 
+    -fx-padding: -1 0 0 0;
+}
+
+.column-header ,.filler{
+    -fx-background-color: #0063AC;        
+    -fx-pref-height : 30px;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #FFFFFF;    
+    -fx-font-family: "Tahoma";
+    -fx-font-weight: bold;
+    -fx-font-size: 8pt;
+    -fx-wrap-text: true;
+    -fx-padding: 0 10 0 10;
+    -fx-alignment: BASELINE_LEFT;
+}
+
+.table-view .column-header .arrow {
+   -fx-mark-color: #FFFFFF ;
+}
+
+.table-cell {
+    -fx-text-fill:#535353;
+    -fx-font-family:  "Tahoma";
+    -fx-font-size: 10.5pt;
+    -fx-padding: 0 10 0 10;    
+    -fx-alignment: BASELINE_LEFT;
+    -fx-border-color: transparent transparent transparent transparent;
+}
+
+.table-row-cell{
+    -fx-background-color: #FFFFFF;      
+    -fx-pref-height : 33px;
+}
+
+/*color filas pares*/
+.table-row-cell:odd  {
+    -fx-background-color: #F7F8F8;
+}
+
+.table-row-cell:selected, .table-row-cell:hover, .table-row-cell:odd:selected, .table-row-cell:odd:hover {
+    -fx-background-color: #EDEDED;       
+}
+
+.table-row-cell:empty, .table-row-cell:empty:hover, .table-row-cell:odd:empty, .table-row-cell:odd:empty:hover  {
+    -fx-background-color: #FFFFFF;      
+    -fx-pref-height : 33px;
+}
+
+
+.table-view:focused{
+    -fx-background-color: -fx-faint-focus-color, -fx-focus-color, -fx-control-inner-background; 
+    -fx-background-insets: -1.4, -0.3, 1;
+    -fx-background-radius: 2, 0, 0;
+    -fx-border-color: #C5C5C7; 
+}
+
+.column_center{
+    -fx-alignment: center;
+    -fx-padding: 0;
+}
+
+.ultima_columna{
+    -fx-border-color: transparent !important;
+}
+
+
+
+.list-cell{
+    -fx-background-color:  #FFFFFF;
+}
+
+.list-cell:hover, .list-cell:selected:hover{
+    -fx-background-color: #8D8D8D;
+}
+.list-cell:selected{
+    -fx-text-fill: black;
+    -fx-background-color: #F8F8F8;
+}
+
+.ventana_login
+{
+    -fx-background-image: url("../images/bg_login_sce.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: stretch;
+    -fx-background-color:#FFFFFF;
+    -fx-pref-width: 1024;
+    -fx-pref-height: 600;
+}
+
+.login{
+    
+    -fx-background-color: #FFFFFF;
+    -fx-border-radius:15; 
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow( gaussian, #D5D5DD, 15, 0, 5.0, 5.0 );
+}
+
+.login_logo_onpe{
+    -fx-image:url("../images/logo-onpe.png");
+}
+
+.login_persona{
+    -fx-background-image: url("../images/caracter-1.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100%;
+}
+
+.ventana_principal
+{
+    -fx-background-color: transparent;
+}
+
+.win_principal
+{
+    -fx-background-color:#F8F8F8;
+    -fx-border-width:10px 10px 10px 10px;
+    -fx-effect: dropshadow( gaussian, #000000, 15, 0.1, 1, 1 );
+}
+
+.titulo_principal
+{
+    -fx-background-color:#FFFFFF;
+    -fx-effect: dropshadow( gaussian, #D5D5DD, 10, 0, 0, 5);
+}
+
+.img_user{
+    -fx-image:url("../images/ico_user.png");  
+}
+
+.main_logo_onpe{
+    -fx-image:url("../images/logo_generales.png");  
+}
+
+.button_main_scan{
+    
+    -fx-background-color: #FFFFFF;
+    -fx-cursor: hand;
+    -fx-background-position: center 23px, center;
+    -fx-padding: 0 40pt -130pt 40pt;
+    -fx-text-fill: #1E69B5;
+    -fx-font-size: 20px;
+    -fx-border-radius:10;
+    -fx-background-radius: 10;
+    -fx-background-repeat: no-repeat;
+    -fx-background-image: url("../images/ico-scanner.png"); 
+    -fx-effect: dropshadow( gaussian, #D5D5DD, 15, 0, 5.0, 5.0 );
+    -fx-pref-width: 251px;
+    -fx-pref-height: 251px;    
+    -fx-wrap-text: true;     
+    -fx-text-alignment: center;
+    -fx-line-spacing: -6px;
+    -fx-font-weight: bold;
+}
+.button_main_scan:hover{
+    -fx-background-color:#F2F2F2;    
+}
+.button_main_scan:pressed{
+    -fx-background-color:#E6E6E6;    
+}
+.button_main_scan:disabled{
+    -fx-opacity: 0.5;
+}
+
+.button_main_veractas{
+    -fx-background-color: #FFFFFF;
+    -fx-cursor: hand;
+    -fx-background-position: center 45px, center;
+    -fx-padding: 0 40pt -130pt 40pt;
+    -fx-text-fill: #1E69B5;
+    -fx-font-size: 20px;
+    -fx-border-radius:10;
+    -fx-background-radius: 10;
+    -fx-background-repeat: no-repeat;
+    -fx-background-image: url("../images/ico-papeles.png"); 
+    -fx-effect: dropshadow( gaussian, #D5D5DD, 15, 0, 5.0, 5.0 );
+    -fx-pref-width: 251px;
+    -fx-pref-height: 251px;    
+    -fx-wrap-text: true;     
+    -fx-text-alignment: center;
+    -fx-line-spacing: -6px;
+    -fx-font-weight: bold;    
+}
+.button_main_veractas:hover{
+    -fx-background-color:#F2F2F2;
+}
+.button_main_veractas:pressed{
+    -fx-background-color:#E6E6E6;
+}
+.button_main_veractas:disabled{
+    -fx-opacity: 0.5;
+}
+
+.lbl_text_escaneo{
+    -fx-text-fill: #707070;
+    -fx-font-size: 14px;
+    -fx-text-alignment: center;
+    -fx-line-spacing: 1px;
+}
+.lbl_text_saludo1{
+    -fx-text-fill: #002A67;
+    -fx-font-size: 24px;
+    -fx-text-alignment: center;
+    -fx-line-spacing: 1px;
+    -fx-font-weight: bold;
+}
+.lbl_text_saludo2{
+    -fx-text-fill: #002A67;
+    -fx-font-size: 20px;
+    -fx-text-alignment: center;
+    -fx-line-spacing: 1px;
+}
+.lbl_text_ccomputo{
+    -fx-text-fill: #1E69B5;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+.button_cerrar_sesion{
+    -fx-cursor: hand;
+    -fx-background-color: transparent;
+    -fx-text-fill: #1E69B5;
+    -fx-font-size: 12.5px;
+    -fx-font-weight: bold;
+    -fx-border-radius:0;
+    -fx-background-radius: 0;
+    -fx-padding: 0 0 0 0;
+}
+.button_cerrar_sesion:hover{
+    -fx-background-color: transparent;
+    -fx-text-fill: #D83420;
+}
+
+
+.buttons_tools{
+    -fx-background-color: #FFFFFF;
+    -fx-cursor: hand;
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+}
+.buttons_tools:hover{
+    -fx-background-color:#F2F2F2;    
+}
+.buttons_tools:pressed{
+    -fx-background-color:#E6E6E6;    
+}
+.buttons_tools:disabled{
+    -fx-opacity: 0.5;
+}
+
+.button_rotate{
+    -fx-background-image: url("../images/ico-rotar.png"); 
+}
+.button_zoom_in{
+    -fx-background-image: url("../images/ico-zoom-in.png"); 
+}
+.button_zoom_out{
+    -fx-background-image: url("../images/ico-zoom-out.png"); 
+}
+.button_fit_width{
+    -fx-background-image: url("../images/ico-fit-width.png"); 
+}
+.button_fit_height{
+    -fx-background-image: url("../images/ico-fit-height.png"); 
+}
+.button_full_size{
+    -fx-background-image: url("../images/ico-full-size.png"); 
+}
+.button_page_prev{
+    -fx-background-image: url("../images/ico-pag-prev.png"); 
+}
+.button_page_next{
+    -fx-background-image: url("../images/ico-pag-next.png"); 
+}
+
+.button_doc_rename{
+    -fx-background-image: url("../images/ico_renombrar.png"); 
+}
+.button_page_add{
+    -fx-background-image: url("../images/ico_agregar.png"); 
+}
+.button_page_insert{
+    -fx-background-image: url("../images/ico_insertar.png"); 
+}
+.button_page_delete{
+    -fx-background-image: url("../images/ico_eliminar.png"); 
+}
+
+
+
+
+.buttons_win{
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+    -fx-background-size: 21px 21px;   /* tamaño exacto de la imagen */
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;  /* centra la imagen */
+    
+}
+.buttons_win:hover{
+    -fx-background-color:#F2F2F2;    
+}
+.buttons_win:pressed{
+    -fx-background-color:#E6E6E6;    
+}
+.buttons_win:disabled{
+    -fx-opacity: 0.5;
+}
+
+.button_win_minimize{
+    -fx-background-image: url("../images/win_minimize.png");
+    -fx-background-position: center -3px;
+}
+.button_win_restore{
+    -fx-background-image: url("../images/win_restore25.png"); 
+    -fx-background-size: 17px 17px;
+}
+.button_win_maximize{
+    -fx-background-image: url("../images/win_maximize.png"); 
+    -fx-background-size: 17px 17px;
+}
+.button_win_close{
+    -fx-background-image: url("../images/win_close.png"); 
+    -fx-background-size: 19px 19px;
+}
+
+
+/*Estilos del Message Box*/
+
+.ap_message_box{
+    -fx-background-color: transparent;    
+} 
+
+.back_modal_box{
+    -fx-background-color: #000000;    
+    -fx-opacity: 0.5;
+}
+
+.ventana_selec_doc{
+    -fx-background-color: transparent;
+    -fx-border-radius:15; 
+    -fx-background-radius: 15;
+    -fx-border-color: #525252;
+}
+
+.ventana_selec_doc_content{
+    -fx-background-color: #FFFFFF;
+    -fx-border-radius:15; 
+    -fx-background-radius: 15;
+}
+
+.lbl_tit_ventana_selec_doc{
+    -fx-text-fill: #265184;
+    -fx-font-size: 15px;
+    -fx-text-alignment: center;
+    -fx-line-spacing: 1px;
+    -fx-font-weight: bold;
+}
+
+.lbl_version{
+    -fx-text-fill: #C5C5C5;
+    -fx-font-size: 15px;
+    -fx-text-alignment: center;
+    -fx-line-spacing: 1px;
+    -fx-font-weight: bold;
+}
+
+
+.verescan_panel_izquierdo
+{
+    -fx-background-color:#FFFFFF;
+}
+
+
+
+
+.menu-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #1E69B5;
+    -fx-text-alignment: left;
+    -fx-padding: 15;
+    -fx-pref-width: 250px;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-wrap-text: true;
+    -fx-line-spacing: 0;
+}
+.menu-button:hover{
+    -fx-background-color:#F2F2F2;
+    -fx-text-fill: #D83420;
+}
+.menu-button:selected{
+    -fx-background-color:#F8F8F8;
+}
+.menu-button:pressed{
+    -fx-background-color:#F8F8F8;
+}
+.selected-menu-button {
+    -fx-background-color: #F8F8F8;
+}
+
+.lbl_tit_ventana_ver_actas{
+    -fx-text-fill: #265184;
+    -fx-font-size: 17px;
+    -fx-text-alignment: left;
+    -fx-line-spacing: 1px;
+    -fx-font-weight: bold;
+}
+
+
+.img_tmp_acta{
+    -fx-image:url("../images/IM0000054.jpg");  
+}
+
+
+.img_status_verde{
+    -fx-image:url("../images/status_verde.png");
+}
+
+.img_status_rojo{
+    -fx-image:url("../images/status_rojo.png");
+}
+
+.img_status_azul{
+    -fx-image:url("../images/status_azul.png");
+}
+
+.img_status_celeste{
+    -fx-image:url("../images/status_celeste.png");
+}
+
+.img_status_celeste_claro{
+    -fx-image:url("../images/status_celeste_claro.png");
+}
+
+.img_status_plomo{
+    -fx-image:url("../images/status_plomo.png");
+}
+
+.img_status_negro{
+    -fx-image:url("../images/status_negro.png");
+}
+
+

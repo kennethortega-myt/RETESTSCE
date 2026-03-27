@@ -1,0 +1,175 @@
+<section class="secciones">
+    <div>
+        <h1 class="titulo1">Avance de Estado de Actas </h1>
+        <section class="seccion-unidos">
+            <article class="w-20">
+              <form class="formulario" [formGroup]="formGroupRepoAvanEstActFiltro">
+                <div class="formulario section-flex ">
+                  <div class="w-100">
+                    <label for="cmbProceso">Proceso:</label>
+
+                    <mat-form-field appearance="outline">
+                      <mat-select id="cmbProceso" name="idProceso" formControlName="procesoFormControl">
+                        <mat-option value="0">SELECCIONE</mat-option>
+                        <mat-option *ngFor="let proceso of listProceso" [value]="proceso.id">
+                          {{proceso.cnombre}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="w-100">
+                    <label for="cmbTipoEleccion">Tipo de elección:</label>
+
+                    <mat-form-field appearance="outline">
+                      <mat-select id="cmbTipoEleccion" name="idEleccion" formControlName="eleccionFormControl">
+                        <mat-option value="0">SELECCIONE</mat-option>
+                        <mat-option *ngFor="let eleccion of listEleccion" [value]="eleccion.id">
+                          {{eleccion.cnombre}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="w-100">
+                    <label for="cmbTipoAmbito">{{ambito.nombreTipoAmbito}}:</label>
+
+                    <mat-form-field appearance="outline">
+                      <mat-select id="cmbTipoAmbito" name="idAmbito" formControlName="ambitoFormControl">
+                        <mat-option value="0">SELECCIONE</mat-option>
+                        <mat-option *ngFor="let ambito of listAmbitos" [value]="ambito.id">
+                          {{ambito.nombre}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="w-100">
+                    <label for="cmbCentroComp">Centro de cómputo:</label>
+
+                    <mat-form-field appearance="outline">
+                      <mat-select id="cmbCentroComp" name="idCentroComputo" formControlName="centroComputoFormControl">
+                        <mat-option value="0">SELECCIONE</mat-option>
+                        <mat-option *ngFor="let centroComputo of listCentrosComputo" [value]="centroComputo.id">
+                          {{centroComputo.nombre}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="boton-full">
+                    <button class="estilo1 full noMarginLR" type="button" (click)="buscarReporteAvanceEstActas()">
+                      BUSCAR
+                    </button>
+                  </div>
+
+                </div>
+              </form>
+            </article>
+            <article class="w-80" >
+                <div *ngIf="isShowReporte">
+                  <div class="d-flex-wrap">
+
+                    <div class="w-100  ">
+                      <h3 class="titulo3">Configuración de Actualización de Datos</h3>
+                    </div>
+                    <div class="w-33">
+                    </div>
+                    <div class="w-66">
+                      <article  class=" section-flex  ">
+                        <div class="w-33">
+                          <div class="cuadro-blanco-2 cantidad">
+                            <img alt="" src="../assets/img/estado01.svg">
+                            <span class="validados mr-0">Contabilizadas
+                                        <b>{{avanceEstadoMesaReporteBean.resumen.contabilizadas}}</b>
+                                    </span>
+                          </div>
+                        </div>
+                        <div class="w-33">
+                          <div class="cuadro-blanco-2 cantidad">
+                            <img alt="" src="../assets/img/estado02.svg">
+                            <span class="observados mr-0">Procesadas
+                                        <b>{{avanceEstadoMesaReporteBean.resumen.procesadas}}</b>
+                                    </span>
+                          </div>
+                        </div>
+                        <div class="w-33">
+                          <div class="cuadro-blanco-2 cantidad">
+                            <img alt="" src="../assets/img/estado03.svg">
+                            <span class="verificar mr-0">Por Procesar
+                                        <b>{{avanceEstadoMesaReporteBean.resumen.porProcesar}}</b>
+                                    </span>
+                          </div>
+                        </div>
+                      </article>
+                    </div>
+                  </div>
+
+                  <mat-table   [dataSource]="avanceEstadoMesaReporteBean.detalleAvanceEstadoMesa" class="mat-elevation-z8">
+                    <ng-container matColumnDef="codigo">
+                      <mat-header-cell *matHeaderCellDef> Código</mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.codigoCc}}  </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="ccomputo">
+                      <mat-header-cell *matHeaderCellDef> Centro de Cómputo </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.nombreCc}}  </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="UltimaModif">
+                      <mat-header-cell *matHeaderCellDef> Última Modificación </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.fechaUltModificacion}}  </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="AIngresada">
+                      <mat-header-cell *matHeaderCellDef> Total de Actas </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.totalActas}}  </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="AProcesada">
+                      <mat-header-cell *matHeaderCellDef> Actas Pendientes</mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.actasIngresadas}}  </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="PorAProcesada">
+                      <mat-header-cell *matHeaderCellDef>Actas Procesadas</mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.actasProcesadas}}  </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="AConta">
+                      <mat-header-cell *matHeaderCellDef>(%) de Actas Procesadas</mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.actasProcesadasPorcen}}  </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="ProAComta">
+                      <mat-header-cell *matHeaderCellDef>Actas Contabilizadas</mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.actasContabilizadas}}  </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="APendiente">
+                      <mat-header-cell *matHeaderCellDef>(%) de Actas Contabilizadas</mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.actasContabilizadasPorcen}}  </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="PorAPendiente">
+                      <mat-header-cell *matHeaderCellDef>Actas  Pendientes Resolver JEE</mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.actasPendientesResolverJEE}}  </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row  *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                  </mat-table>
+                </div>
+
+
+                <div *ngIf="!isShowReporte" class="contenedor-documento-muestra">
+                    <div class=" contenido-scroll cont-anuncio">
+                        <div class="personaje-anuncio">
+                            <p>Llene los campos del reporte para poder descargar el archivo a imprimir</p>
+                            <img alt="" src="../assets/img/personaje1.svg">
+                        </div>
+                    </div>
+                </div>
+
+            </article>
+        </section>
+      <div class="cont-btn">
+        <button *ngIf="isShowReporte" class=" estilo1" (click)="descargarReporte()"> DESCARGAR </button>
+      </div>
+    </div>
+</section>

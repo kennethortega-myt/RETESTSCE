@@ -1,0 +1,64 @@
+<section class="secciones">
+  <div>
+    <h1 class="titulo1">Respaldo</h1>
+    <section class="section-flex">
+
+      <!-- Tabla -->
+      <section class="w-100 p-0 cont-info">
+
+        <article class=" section-flex p-r">
+          <div class="w-100  contenido-scrosll px-0 ">
+            <div class="scrolltablarespaldo">
+              <mat-table [dataSource]="dataSource" class="mat-elevation-z8 scrollheadermon">
+                <!-- # -->
+                <ng-container matColumnDef="#">
+                  <mat-header-cell *matHeaderCellDef class="w-n">No.</mat-header-cell>
+                  <mat-cell *matCellDef="let row; let i = index" class="w-n">{{ i + 1 }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="fecha">
+                  <mat-header-cell *matHeaderCellDef >Fecha y Hora</mat-header-cell>
+                  <mat-cell *matCellDef="let row;" >{{ row.fechaHora }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="archivo">
+                  <mat-header-cell *matHeaderCellDef >Archivo</mat-header-cell>
+                  <mat-cell *matCellDef="let row;" >{{ row.nombreArchivo }}
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="acciones">
+                  <mat-header-cell *matHeaderCellDef >Descargar</mat-header-cell>
+                  <mat-cell *matCellDef="let row;" >
+                      <button mat-icon-button matTooltip="Descargar" (click)="descargar(row.nombreArchivo)">
+                        <mat-icon>download</mat-icon>
+                      </button>
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+              <div *ngIf="dataSource.data.length === 0" class="no-data-message">
+                No se han encontrado registros.
+              </div>
+            </div>
+
+          </div>
+        </article>
+        <mat-card class="example" *ngIf="descargando">
+          <mat-card-content>
+            <h2 class="mt-0"> Descargando {{ progreso }}%</h2>
+
+            <section class="example-section">
+              <mat-progress-bar
+                class="example-margin"
+                [mode]="'determinate'"
+                [value]="progreso"
+                [bufferValue]="progreso">
+              </mat-progress-bar>
+            </section>
+          </mat-card-content>
+        </mat-card>
+      </section>
+    </section>
+  </div>
+</section>

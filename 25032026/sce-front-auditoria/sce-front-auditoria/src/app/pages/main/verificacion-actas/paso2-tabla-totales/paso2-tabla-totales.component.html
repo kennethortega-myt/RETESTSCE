@@ -1,0 +1,55 @@
+<div class="d-flex-wrap">
+
+  <div class="w-100">
+      <h3 class="titulos-article">Paso 2 de 3 - Digitación de Votos</h3>
+    </div>
+
+
+  <div style="overflow-y: auto;
+  overflow-x: clip;" class="w-100" #scrollContainer>
+    <div class="votos  mediaquery " style="height: calc(100vh - 330px);
+    ">
+      <div id="left-container" class="grid-container-votos" >
+        <form *ngIf="formularioListo()" [formGroup]="formGroupSeccionVoto" autocomplete="off">
+          <div formGroupName="params">
+            <div *ngFor="let votoItem of this.seccionVoto.items; index as i"  class="t-c d-flex justify-content-center">
+              <div *ngIf="votoItem!=null" class="w-100 fila">
+                <div [ngClass]="votoItem.isEditable == false ? 'cont-valida-voto min valVoto gris-desabilitado-sin-voto-pref' : 'cont-valida-voto min valVoto'">
+                  
+                  <span *ngIf="seccionVoto.autorizado" class="nombre-agrupacion" [title]="votoItem.nombreAgrupacionPolitica">
+                    {{ votoItem.nombreAgrupacionPolitica }}
+                  </span>
+
+                  <div class="imgBox" fxLayout="row" fxLayoutAlign="center center">
+                    <img #lazyImage alt="voto total" [src]="'../../../../../assets/loader/loader.svg'" [attr.data-index-i]="i"  class="img-voto-{{tipoEleccionDescripcion}}"/>
+                  </div>
+
+                  <mat-form-field appearance="outline" (dblclick)="onDoubleClick($event)">
+                    <input #inputRefs
+                           [id]="'mat-input-total-'+ i"
+                           matInput
+                           [formControlName]="votoItem.fileId+'-'+i"
+                           class="text-center"
+                           sceFocusNextFlechaTotal
+                           sceFocusNextEnterTotal
+                           [rowIndex]="i"
+                           [seccionVotoItems]="seccionVoto.items"
+                           (focus)="onFocus($event)"
+                           (blur)="onBlur()"
+                           (input)="onInputVoto(votoItem.fileId, false, $event, i)"
+                           [readonly] = "!votoItem.isEditable"
+                           maxlength="3"
+                           [ngClass]="{'no-caret': !isEditingMode(i)}"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+

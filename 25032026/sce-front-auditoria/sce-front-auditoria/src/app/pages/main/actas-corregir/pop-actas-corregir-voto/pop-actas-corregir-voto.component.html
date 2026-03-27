@@ -1,0 +1,58 @@
+<div class="maxcontent-modal-votos">
+  <h1 *ngIf="indexJ==-1" class="pop-title-modal" >Votos Totales</h1>
+  <h1 *ngIf="indexJ>-1" class="pop-title-modal" >VP {{indexJ+1}}</h1>
+  <div class="content-modal-votos" >
+    <div class="min valVoto2" >
+      <mat-form-field *ngIf="primeraDigValue!=='null'; else achurado"
+                      [ngClass]="primeraDigValue == segundaDigValue ? 'estado-corregir center-input-digitacion' : 'estado-corregir center-input-digitacion yellow'"
+                      appearance="outline">
+        <input matInput [(ngModel)]="primeraDigValue" #voteInputPrimeraDig
+               [readonly]="true"
+               maxlength="3"
+        />
+      </mat-form-field>
+      <mat-form-field *ngIf="segundaDigValue!=='null'; else achurado"
+                      [ngClass]="primeraDigValue == segundaDigValue ? 'estado-corregir center-input-digitacion' : 'estado-corregir center-input-digitacion yellow'"
+                      appearance="outline">
+        <input matInput [(ngModel)]="segundaDigValue" #voteInputSegunDig
+               [readonly]="true"
+               maxlength="3"
+        />
+      </mat-form-field>
+      <form [formGroup]="formGroup" autocomplete="off">
+        <mat-form-field appearance="outline" class="borde-azul">
+          <input matInput formControlName="inputValueForm" #voteInput
+                 (blur)="onBlur()" (focus)="onFocus()"
+                 [readonly] = "fileId == null || (primeraDigValue == 'null' && segundaDigValue == 'null' ) ? true : false"
+                 maxlength="3" sceNumerosHash
+          />
+        </mat-form-field>
+      </form>
+    </div>
+
+  </div>
+
+
+
+  <div class="d-flex center-flex gap-10" >
+    <button class="estilo3 m-0" (click)="cerrar()">CERRAR</button>
+    <button [disabled]="!(indexI==0 && indexJ==-1)? false:true" class="estilo2 m-0" (click)="atras()">ATRAS</button>
+    <button [disabled]="indexI<votos.length-1 ? false:true" class="estilo1 m-0"  (click)="siguiente()" >SIGUIENTE</button>
+  </div>
+</div>
+
+
+<ng-template #achurado>
+  <mat-form-field
+    class="estado-corregir center-input-digitacion black"
+    appearance="outline"
+  >
+    <input
+      matInput
+      type="text"
+      placeholder=""
+      value=""
+      readonly = true
+    />
+  </mat-form-field>
+</ng-template>

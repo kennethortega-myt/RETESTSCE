@@ -1,0 +1,24 @@
+export class FiltroBase {
+  esquema:string;
+  acronimo?:string;
+  proceso:string;
+  idEleccion:number;
+  idAmbitoElectoral:number;
+  codigoAmbitoElectoral:string;
+  codigoEleccion:string;
+  idProceso:number;
+  eleccion:string;
+  ambitoElectoral:string;
+  centroComputo:string;
+  idCentroComputo:number;
+  codigoCentroComputo:string;
+  idUbigeoNivelUno:number;
+  idUbigeoNivelDos:number;
+  idUbigeoNivelTres:number;
+  ubigeoNivelUno:string;
+  ubigeoNivelDos:string;
+  ubigeoNivelTres:string;
+  codigoUbigeoNivelUno:string;
+  codigoUbigeoNivelDos:string;
+  codigoUbigeoNivelTres:string;
+}

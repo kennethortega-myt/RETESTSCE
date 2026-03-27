@@ -1,0 +1,215 @@
+<section class="secciones">
+    <div>
+        <h1 class="titulo1">Monitoreo de Actas</h1>
+        <section class="seccion-unidos">
+            <article class="w-20">
+                <div class="formulario section-flex ">
+                  <form [formGroup]="formGroupFiltroBusqueda" autocomplete="off">
+                    <div class="w-100">
+                      <span>
+                        Búsqueda por ubigeo
+                        <mat-slide-toggle
+                          id="indCkeckTipoBusqueda"
+                          name="indCkeckTipoBusqueda"
+                          class="example-margin"
+                          color="primary"
+                          formControlName="indCheckTipoBusqueda"
+                          (keydown.enter)="$event.preventDefault()"
+                          (keydown.space)="$event.preventDefault()"
+                        > </mat-slide-toggle>
+                        Búsqueda directa
+                      </span>
+                    </div>
+                    <div class="w-100">
+                      <label for="cmbProceso">Proceso:</label>
+
+                      <mat-form-field appearance="outline">
+                        <mat-select id="cmbProceso" name="idProceso" formControlName="procesoFormControl">
+                          <mat-option value="0">SELECCIONE</mat-option>
+                          <mat-option *ngFor="let proceso of listProceso" [value]="proceso.id">
+                            {{proceso.cnombre}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="w-100">
+                      <label for="cmbEleccion">Tipo de elección:</label>
+
+                      <mat-form-field appearance="outline">
+                        <mat-select id="cmbEleccion" name="idEleccion" formControlName="eleccionFormControl">
+                          <mat-option value="0">SELECCIONE</mat-option>
+                          <mat-option *ngFor="let eleccion of listEleccion" [value]="eleccion.id">
+                            {{eleccion.cnombre}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                    <div *ngIf="!isBusquedaDirecta" class="w-100">
+                      <label for="cmbAmbito">{{ambito.nombreTipoAmbito}}:</label>
+
+                      <mat-form-field appearance="outline">
+                        <mat-select id="cmbAmbito" name="idAmbito" formControlName="ambitoFormControl">
+                          <mat-option value="0">SELECCIONE</mat-option>
+                          <mat-option *ngFor="let ambito of listAmbitos" [value]="ambito.id">
+                            {{ambito.nombre}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                    <div *ngIf="!isBusquedaDirecta" class="w-100">
+                      <label for="cmbCentroCom">Centro de cómputo:</label>
+
+                      <mat-form-field appearance="outline">
+                        <mat-select id="cmbCentroCom" name="idCentroComputo" formControlName="centroComputoFormControl">
+                          <mat-option value="0">SELECCIONE</mat-option>
+                          <mat-option *ngFor="let centroComputo of listCentrosComputo" [value]="centroComputo.id">
+                            {{centroComputo.nombre}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                    <div *ngIf="!isBusquedaDirecta" class="w-100">
+                      <label for="cmbDepartamento">Departamento:</label>
+                      <mat-form-field appearance="outline">
+                        <mat-select id="cmbDepartamento" name="idDepartamento" formControlName="departamentoFormControl">
+                          <mat-option value="0">SELECCIONE</mat-option>
+                          <mat-option *ngFor="let departamento of listDepartamento" [value]="departamento.idUbigeo">
+                            {{departamento.ubigeo}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                    <div *ngIf="!isBusquedaDirecta" class="w-100">
+                      <label for="cmbProvincia">Provincia:</label>
+
+                      <mat-form-field appearance="outline">
+                        <mat-select id="cmbProvincia" name="idProvincia" formControlName="provinciaFormControl">
+                          <mat-option value="0">SELECCIONE</mat-option>
+                          <mat-option *ngFor="let provincia of listProvincia" [value]="provincia.idUbigeo">
+                            {{provincia.ubigeo}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                    <div *ngIf="!isBusquedaDirecta" class="w-100">
+                      <label for="cmbDistrito">Distrito:</label>
+
+                      <mat-form-field appearance="outline">
+                        <mat-select id="cmbDistrito" name="idDistrito" formControlName="distritoFormControl">
+                          <mat-option value="0">SELECCIONE</mat-option>
+                          <mat-option *ngFor="let distrito of listDistrito" [value]="distrito.idUbigeo">
+                            {{distrito.ubigeo}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                    <div *ngIf="!isBusquedaDirecta" class="w-100">
+                      <label for="cmbLocalVot">Local de votación:</label>
+                      <mat-form-field appearance="outline">
+                        <mat-select id="cmbLocalVot" name="idLocalVotacion" formControlName="localVotacionFormControl">
+                          <mat-option value="0">SELECCIONE</mat-option>
+                          <mat-option *ngFor="let localVotacion of listLocalVotacion" [value]="localVotacion.id">
+                            {{localVotacion.nombre}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                    <div *ngIf="!isBusquedaDirecta" class="w-100">
+                      <label for="cmbMesa">Mesa:</label>
+
+                      <mat-form-field appearance="outline">
+                        <mat-select id="cmbMesa" name="idMesa" formControlName="numeroMesaCmbFormControl">
+                          <mat-option value="0">SELECCIONE</mat-option>
+                          <mat-option *ngFor="let mesa of listMesa" [value]="mesa.mesa">
+                            {{mesa.mesa}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                    <div *ngIf="isBusquedaDirecta" class="w-100">
+                      <label for="mesaInput">Nª de Mesa:</label>
+                      <mat-form-field appearance="outline" >
+                        <input id="mesaInput" matInput  placeholder="Digite numero de mesa" formControlName="numeroMesaTxtFormControl"
+                               maxlength="6" sceSoloNumeros/>
+                      </mat-form-field>
+                    </div>
+
+
+                    <div class="boton-full">
+                      <button class="estilo1 full noMarginLR" type="button" (click)="buscarActa()">
+                        Buscar
+                      </button>
+                    </div>
+                  </form>
+                </div>
+            </article>
+            <article class="w-80">
+              <div *ngIf="isShowReporte">
+                <mat-table   [dataSource]="reporteMonitoreo.actaVotos" class="mat-elevation-z8">
+                  <ng-container matColumnDef="position">
+                    <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.posicion}}  </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="OPolitica">
+                    <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.agrupacionPolitica}}  </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="votos">
+                    <mat-header-cell *matHeaderCellDef> votos </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.votos}}  </mat-cell>
+                  </ng-container>
+
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row  *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+                <mat-tab-group>
+                  <mat-tab label="Detalle de Acta">
+                    <app-reporte-monitoreo-detalle-actas
+                      [GRUPO_ESCANEO]="reporteMonitoreo.detalleActa.grupoEscaneo"
+                      [NUMERO_MESA]="reporteMonitoreo.detalleActa.numeroMesa"
+                      [ESTADO_MESA]="reporteMonitoreo.detalleActa.estadoMesa"
+                      [USUARIO_MODIFICADO]="reporteMonitoreo.detalleActa.usuarioModificacion"
+                      [FECHA_MODIFICACION]="reporteMonitoreo.detalleActa.fechaModificacion"
+                      [ESTADOS_ACTA]="reporteMonitoreo.detalleActa.estadosActa"
+                      [ESTADOS_PROCESO]="reporteMonitoreo.detalleActa.estadosProceso"
+                    ></app-reporte-monitoreo-detalle-actas>
+                  </mat-tab>
+                  <mat-tab label="Electores y Ciudadanos">
+                    <app-reporte-monitoreo-electores [ELECTORES_CIUDADANOS]="reporteMonitoreo.electoresCiudadanos"></app-reporte-monitoreo-electores>
+                  </mat-tab>
+                  <mat-tab label="Observaciones">
+                    <app-reporte-monitoreo-actas-obserbaciones
+                      [OBSERVACIONES]="observaciones"
+                      [OBSERVACIONES_ACTA]="observacionesActa"
+                      [OBSERVACIONES_ACTA_DETALLE]="observacionesActaDetalle"
+                    ></app-reporte-monitoreo-actas-obserbaciones>
+                  </mat-tab>
+
+                </mat-tab-group>
+              </div>
+
+                <div *ngIf="!isShowReporte" class="contenedor-documento-muestra">
+                    <div class=" contenido-scroll cont-anuncio">
+                        <div class="personaje-anuncio">
+                            <p>Llene los campos del reporte para poder descargar el archivo a imprimir</p>
+                            <img src="../assets/img/personaje1.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+
+            </article>
+        </section>
+    </div>
+</section>

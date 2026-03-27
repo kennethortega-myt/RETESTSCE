@@ -1,0 +1,26 @@
+<div class="padding">
+  <h1 class="titulo1">Documentos Electorales por Proceso</h1>
+  <section class="seccion-unidos scroll-doc-procesal">
+
+    <article class="w-80 paddTRBL20">
+      <div class="">
+        <div class="cuadro-blanco-1">
+          <span>Seleccione los documentos requeridos</span>
+          <ul class="ul-opciones" [formGroup]="formGroupParent">
+            <li class="colorPrimary" *ngFor="let documento of listDocumentoElectoral">
+              {{documento.documentoElectoral.nombre}}
+              <mat-slide-toggle
+                class="example-margin" [formControlName]="documento.documentoElectoral.id+'-radio'">
+              </mat-slide-toggle>
+
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </article>
+  </section>
+  <div class="cont-btn">
+    <button class="estilo1"  (click)="continuar()"> CONFIRMAR DOCUMENTOS</button>
+  </div>
+</div>

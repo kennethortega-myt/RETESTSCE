@@ -1,0 +1,62 @@
+.content-table-habilitar-acta-stae .mat-mdc-header-row{
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  height: 48px;
+}
+
+.content-table-habilitar-acta-stae{
+  height: calc(100vh - 270px);
+  overflow: auto;
+}
+
+// Estilos para el checkbox en el header
+::ng-deep .mat-mdc-header-cell {
+  .mat-mdc-checkbox {
+    .mdc-checkbox__background {
+      border-color: white !important;
+    }
+    
+    .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate):not([data-indeterminate=true]) ~ .mdc-checkbox__background {
+      border-color: white !important;
+      background-color: transparent !important;
+    }
+    
+    .mdc-checkbox__native-control:enabled:checked ~ .mdc-checkbox__background,
+    .mdc-checkbox__native-control:enabled:indeterminate ~ .mdc-checkbox__background {
+      border-color: white !important;
+      background-color: white !important;
+      
+      .mdc-checkbox__checkmark {
+        color: #1976d2 !important;
+      }
+    }
+  }
+}
+
+// Ocultar el separador de columna (barra vertical) - eliminar border-left del span
+::ng-deep .mat-column-tipo-transmision {
+  &::before {
+    display: none !important;
+  }
+  
+  .mat-mdc-header-cell::before,
+  .mat-mdc-cell::before {
+    display: none !important;
+  }
+  
+  // Eliminar el border-left del span dentro del header
+  span {
+    border-left: none !important;
+  }
+}
+
+// Eliminar cualquier borde izquierdo
+::ng-deep .mat-column-tipo-transmision.mat-mdc-header-cell,
+::ng-deep .mat-column-tipo-transmision.mat-mdc-cell {
+  border-left: none !important;
+  
+  span {
+    border-left: none !important;
+  }
+}

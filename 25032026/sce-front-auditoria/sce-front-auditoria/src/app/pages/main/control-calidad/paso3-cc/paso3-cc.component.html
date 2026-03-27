@@ -1,0 +1,10 @@
+<div class=" mt-20" style="height: calc(100vh - 520px); overflow: auto;" (scroll)="onScroll($event)">
+    <app-seccion-votos 
+        [dataPaso3]="dataPaso3"
+        [srcImgAgrupol]="srcImgAgrupol"
+        [srcImgVotos1]="srcImgVotos1"
+        [srcImgPreferenciales]="srcImgPreferenciales"
+        [isResolucionAplicada]="false"
+        (revisoTodosPreferenciales)="revisoTodosPreferenciales($event)">
+    </app-seccion-votos>
+</div>

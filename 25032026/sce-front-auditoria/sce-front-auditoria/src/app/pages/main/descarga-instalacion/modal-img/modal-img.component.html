@@ -1,0 +1,23 @@
+
+<div class="content-img-descarga" >
+  <div *ngFor="let step of steps; let i = index" [hidden]="currentIndex !== i">
+    <div>
+      <span class="text-descrip">{{ step.description }}</span>
+    </div>
+    <br />
+    <img [src]="step.imageUrl" alt="" class="w-full" />
+  </div>
+
+  
+  </div>
+  <div style="display: flex ; gap: 12px; justify-content: center;">
+   
+        <img style="width: 35px;" *ngIf="showPreviousButton()" (click)="previousStep()" onkeypress="" src="../../../../../assets/circle_left.svg" class="cursor-pointer p-o l-15 t-0 b-0 m-auto animate-hover" alt="">
+        <img  style="width: 35px;"  *ngIf="showNextButton()" (click)="nextStep()" onkeypress="" src="../../../../../assets/circle_right.svg" class="cursor-pointer p-o r-15 t-0 b-0 m-auto animate-hover" alt="">
+
+
+
+  </div>
+  <div style="display: flex; justify-content: end;">
+    <button class="estilo2" *ngIf="isLastStep()" (click)="close()">Cerrar</button>
+  </div>

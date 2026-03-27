@@ -1,0 +1,6 @@
+projectKey=sce_nacion_job
+serverUrl=http://10.220.80.60:9000
+serverVersion=25.2.0.102705
+dashboardUrl=http://10.220.80.60:9000/dashboard?id=sce_nacion_job
+ceTaskId=c6f61944-69e1-434d-81d4-ccccd94475d1
+ceTaskUrl=http://10.220.80.60:9000/api/ce/task?id=c6f61944-69e1-434d-81d4-ccccd94475d1

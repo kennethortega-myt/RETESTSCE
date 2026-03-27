@@ -1,0 +1,211 @@
+<form class="filtros" [formGroup]="form">
+    <div class="filtro">
+        <label for="proceso">Proceso:</label>
+        <mat-form-field appearance="outline">
+            <mat-select name="idProceso" formControlName="proceso">
+                <mat-option *ngFor="let proceso of listProceso" [value]="proceso">
+                  {{proceso.nombre}}
+                </mat-option>
+              </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="filtro">
+        <label for="eleccion">Tipo de elección:</label>
+        <mat-form-field appearance="outline">
+              <mat-select name="idEleccion" formControlName="eleccion">
+                <mat-option *ngFor="let eleccion of listEleccion" [value]="eleccion">
+                  {{eleccion.nombre}}
+                </mat-option>
+              </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="filtro">
+        <label for="centroComputo">Centro de Cómputo:</label>
+        <mat-form-field appearance="outline">
+            <mat-select name="idCentroComputo" formControlName="centroComputo">
+                <mat-option *ngFor="let centroComputo of listCentrosComputo" [value]="centroComputo">
+                  {{centroComputo.codigo}} {{centroComputo.nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="filtro">
+        <label for="estado">Estado:</label>
+        <mat-form-field appearance="outline">
+            <mat-select name="idEstado" formControlName="estado">
+              <mat-option [value]="filtroTodos">{{filtroTodos.nombre}}</mat-option>
+              <mat-option *ngFor="let estado of listEstado" [value]="estado">{{estado.nombre}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="filtro_boton">
+        <button class="estilo1 full noMarginLR" type="button" (click)="buscarReporteAvanceEstActas()">
+              Consultar
+        </button>
+    </div>
+
+</form>
+
+    <article class="w-full">
+        <div *ngIf="isShowReporte">
+          <div class="conte-cards">
+            <div class="tarjeta">
+              <div class="cuadro-blanco-2 gris-claro cantidad">
+                <img alt="" src="../assets/img/ico_contabilizadas.svg">
+                <span class="validados mr-0 leyenda">Centros de Cómputos<br> Contabilizados
+                  <b>{{avanceEstadoMesaReporteBean.resumen.contabilizadas}}</b>
+                </span>
+              </div>
+            </div>
+            <div class="tarjeta">
+              <div class="cuadro-blanco-2 gris-claro cantidad">
+                <img alt="" src="../assets/img/ico_procesadas.svg">
+                <span class="observados mr-0 leyenda">Centros de Cómputos<br> Procesados
+                  <b>{{avanceEstadoMesaReporteBean.resumen.procesadas}}</b>
+                </span>
+              </div>
+            </div>
+            <div class="tarjeta">
+              <div class="cuadro-blanco-2 gris-claro cantidad">
+                <img alt="" src="../assets/img/ico_porprocesar.svg">
+                <span class="verificar mr-0 leyenda">Centros de Cómputos <br> Por Procesar
+                  <b>{{avanceEstadoMesaReporteBean.resumen.porProcesar}}</b>
+                </span>
+              </div>
+            </div>
+
+            <div class="tarjeta_actualizarcada">
+              <div class="conte_actualizar">
+                <label for="departamento">Actualizar cada</label>
+                <mat-form-field appearance="outline" >
+                    <input matInput [(ngModel)]="timeUpdate" maxlength="2"
+                    type="text"
+                    sceSoloNumerosFormReact
+                    (change)="timeUpdateOnchange()"/>
+                    <span matTextSuffix class="span-sufijo"> minutos</span>
+                  </mat-form-field>
+              </div>
+              <button class=" estilo1" (click)="buscarReporteAvanceEstActas()"><img alt="ico-actualizacion"  src="../assets/img/icons/ico-actualizacion-blanco.svg"></button>
+            </div>
+          </div>
+
+          <div class="conte_subtitulos">
+            <h2 class="subtitulo_reportes">Avance de estado de actas</h2>
+            <h2 class="subtitulo_eleccion_reportes">{{ this.form.get('eleccion').value.nombre }}</h2>
+          </div>
+
+          <div class="conte_tabla_sticky">
+            <mat-table   [dataSource]="dataSourceDetail" class="mat-elevation-z8 centrar-cabecera">
+              <ng-container matColumnDef="codigoCc">
+                <mat-header-cell *matHeaderCellDef> Código</mat-header-cell>
+                <mat-cell *matCellDef="let element" [ngClass]="colorRow(element)"> {{element.codigoCc}}  </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="nombreCc">
+                <mat-header-cell *matHeaderCellDef> Centro de Cómputo </mat-header-cell>
+                <mat-cell *matCellDef="let element" [ngClass]="colorRow(element)"> {{element.nombreCc}}  </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="fechaUltModificacion">
+                <mat-header-cell *matHeaderCellDef> Última Modificación </mat-header-cell>
+                <mat-cell *matCellDef="let element" [ngClass]="colorRow(element)"> {{element.fechaUltModificacion}}  </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="totalActas">
+                <mat-header-cell *matHeaderCellDef> Total de Actas </mat-header-cell>
+                <mat-cell *matCellDef="let element" [ngClass]="colorRow(element)"> {{element.mesasHabiles}}  </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="actasIngresadas">
+                <mat-header-cell *matHeaderCellDef> Actas Ingresadas</mat-header-cell>
+                <mat-cell *matCellDef="let element" [ngClass]="colorRow(element)"> {{element.actasIngresadas}}  </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="actasProcesadas">
+                <mat-header-cell *matHeaderCellDef>Actas Procesadas</mat-header-cell>
+                <mat-cell *matCellDef="let element" [ngClass]="colorRow(element)"> {{element.actasProcesadas}}  </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="actasProcesadasPorcen">
+                <mat-header-cell *matHeaderCellDef>(%) de Actas Procesadas</mat-header-cell>
+                <mat-cell *matCellDef="let element" [ngClass]="colorRow(element)"> {{element.actasProcesadasPorcen | number: '.3'}} %</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="actasContabilizadas">
+                <mat-header-cell *matHeaderCellDef>Actas Contabilizadas</mat-header-cell>
+                <mat-cell *matCellDef="let element" [ngClass]="colorRow(element)"> {{element.actasContabilizadas}}  </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="actasContabilizadasPorcen">
+                <mat-header-cell *matHeaderCellDef>(%) de Actas Contabilizadas</mat-header-cell>
+                <mat-cell *matCellDef="let element" [ngClass]="colorRow(element)"> {{element.actasContabilizadasPorcen | number: '.3'}} %</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="actasPendientesResolverJEE">
+                <mat-header-cell *matHeaderCellDef>Actas  Pendientes Resolver JEE</mat-header-cell>
+                <mat-cell *matCellDef="let element" [ngClass]="colorRow(element)"> {{element.actasPendientesResolverJEE}}  </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="actasPendientesResolverJEEPorcen">
+                  <mat-header-cell *matHeaderCellDef>% Actas  Pendientes Resolver JEE</mat-header-cell>
+                  <mat-cell *matCellDef="let element" [ngClass]="colorRow(element)"> {{element.actasPendientesResolverJEEPorcen | number: '.3'}} %</mat-cell>
+                </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns;  sticky: true"></mat-header-row>
+              <mat-row  *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+          </div>
+
+
+          <mat-table   [dataSource]="dataSourceTotal" class="mat-elevation-z8 centrar-cabecera mt-10">
+            <ng-container matColumnDef="codigoCc">
+              <mat-cell *matCellDef="let element" ngClass="bg_total"> {{element.codigoCc}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="nombreCc">
+              <mat-cell *matCellDef="let element" ngClass="bg_total"> {{element.nombreCc}}  </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="fechaUltModificacion">
+              <mat-cell *matCellDef="let element" ngClass="bg_total"> {{element.fechaUltModificacion}}  </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="totalActas">
+              <mat-cell *matCellDef="let element" ngClass="bg_total"> {{element.mesasHabiles}}  </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="actasIngresadas">
+              <mat-cell *matCellDef="let element" ngClass="bg_total"> {{element.actasIngresadas}}  </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="actasProcesadas">
+              <mat-cell *matCellDef="let element" ngClass="bg_total"> {{element.actasProcesadas}}  </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="actasProcesadasPorcen">
+              <mat-cell *matCellDef="let element" ngClass="bg_total"> {{element.actasProcesadasPorcen | number: '.3'}} % </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="actasContabilizadas">
+              <mat-cell *matCellDef="let element" ngClass="bg_total"> {{element.actasContabilizadas}}  </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="actasContabilizadasPorcen">
+              <mat-cell *matCellDef="let element" ngClass="bg_total"> {{element.actasContabilizadasPorcen | number: '.3'}} %</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="actasPendientesResolverJEE">
+              <mat-cell *matCellDef="let element" ngClass="bg_total"> {{element.actasPendientesResolverJEE}}  </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="actasPendientesResolverJEEPorcen">
+                <mat-cell *matCellDef="let element" ngClass="bg_total"> {{element.actasPendientesResolverJEEPorcen | number: '.3'}} %</mat-cell>
+              </ng-container>
+
+            <mat-row  *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+
+        </div>
+
+        <div class="cont-btn" *ngIf="isShowReporte">
+          <button class="estilo1" (click)="descargarReporte()">IMPRIMIR</button>
+        </div>
+
+        <div *ngIf="!isShowReporte" class="contenedor-documento-muestra">
+          <div class=" contenido-scroll cont-anuncio">
+            <div class="personaje-anuncio">
+              <p>Llene los campos del reporte para poder descargar el archivo a imprimir</p>
+              <img alt="" src="../assets/img/personaje1.svg">
+            </div>
+          </div>
+        </div>
+
+    </article>

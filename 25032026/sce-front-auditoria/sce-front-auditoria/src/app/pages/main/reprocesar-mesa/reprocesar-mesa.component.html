@@ -1,0 +1,93 @@
+<app-autorizacion-wrapper>
+  <section class="secciones veri-resolucion">
+    <div>
+      <h1 class="titulo1">Reprocesar Mesa</h1>
+      <section>
+        <div class="seccion-unidos scroll-actas" >
+          <article  class="w-20 w-40 p-r">
+            <div class="seccion-lista-control contenido-scroll-control w-full">
+              <label for="TextCantidadCiudadanosVotaron">Ingrese número de mesa</label>
+              <div fxLayout="row" fxLayoutAlign="space-between center">
+                <mat-form-field class="example-full-width " appearance="outline">
+                  <input matInput placeholder="Ingrese mesa" [formControl]="mesaControl" name="mesa" maxlength="6" sceSoloNumerosFormReact>
+                </mat-form-field>
+              </div>
+              @if (listTipoDocumentos().length > 0){
+                <h3 class="titulos-reprocesar-mesa mt-20">Seleccionar tipo de documento</h3>
+                <ul class="lista-observaciones ml-menos7">
+                  @for (documento of listTipoDocumentos(); track documento; let i = $index) {
+                    <li >
+                      <mat-checkbox class="example-margin" [checked]="documento.reprocesar" (change)="update($event.checked, i)">{{documento.nombre}}</mat-checkbox>
+                    </li>
+                  }
+
+                </ul>
+              }
+              <div class="boton-full p-0">
+                @if (listTipoDocumentos().length > 0){
+                  <button  class="estilo1 full noMarginLR " type="button" (click)="agregarMesa()">
+                    AGREGAR
+                  </button>
+                }@else{
+                  <button  class="estilo1 full noMarginLR " type="button" (click)="buscarMesa()">
+                    BUSCAR
+                  </button>
+                }
+
+
+              </div>
+            </div>
+          </article>
+
+          <article class="w-80 d-flex flex-column items-center">
+            <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+              <ng-container matColumnDef="position">
+                <mat-header-cell *matHeaderCellDef class="centrando-celda w-n"> Nº </mat-header-cell>
+                <mat-cell *matCellDef="let element; let i= index" class="centrando-celda w-n"> {{i+1}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="mesa">
+                <mat-header-cell *matHeaderCellDef class="centrando-celda"> Mesa </mat-header-cell>
+                <mat-cell *matCellDef="let element" class="centrando-celda"> {{element.mesa}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="LE">
+                <mat-header-cell *matHeaderCellDef class="centrando-celda"> LE </mat-header-cell>
+                <mat-cell *matCellDef="let element"> <span class="mr-05" [ngClass]="{'circle-acta-reprocesada': element.LE, 'circle-acta-noreprocesada': !element.LE}"></span>
+                  {{element.LE ? 'HABILITADO' :  'NO HABILITADO'}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="HA">
+                <mat-header-cell *matHeaderCellDef class="centrando-celda"> HA </mat-header-cell>
+                <mat-cell *matCellDef="let element"> <span class="mr-05" [ngClass]="{'circle-acta-reprocesada': element.HA, 'circle-acta-noreprocesada': !element.HA}"></span>
+                  {{element.HA ? 'HABILITADO' :  'NO HABILITADO'}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="MMAE">
+                <mat-header-cell *matHeaderCellDef class="centrando-celda"> MMAE </mat-header-cell>
+                <mat-cell *matCellDef="let element"> <span class="mr-05" [ngClass]="{'circle-acta-reprocesada': element.MMAE, 'circle-acta-noreprocesada': !element.MMAE}"></span>
+                  {{element.MMAE ? 'HABILITADO' :  'NO HABILITADO'}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="PER">
+                <mat-header-cell *matHeaderCellDef class="centrando-celda"> PER </mat-header-cell>
+                <mat-cell *matCellDef="let element"> <span class="mr-05" [ngClass]="{'circle-acta-reprocesada': element.PER, 'circle-acta-noreprocesada': !element.PER}"></span>
+                  {{element.PER ? 'HABILITADO' :  'NO HABILITADO'}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="ACCION">
+                <mat-header-cell *matHeaderCellDef class="w-acciones"> Acciones </mat-header-cell>
+                <mat-cell *matCellDef="let element" class="w-acciones"><button title="Eliminar" class="btn_eliminar" (click)="eliminar(element)"></button>  </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+          </article>
+
+
+
+        </div>
+      </section>
+      <div class="d-flex j-end mt-18 cont-btn">
+        <button class="estilo1 my-0" type="button" (click)="guardarInformacion()">GUARDAR</button>
+      </div>
+    </div>
+
+  </section>
+</app-autorizacion-wrapper>
+

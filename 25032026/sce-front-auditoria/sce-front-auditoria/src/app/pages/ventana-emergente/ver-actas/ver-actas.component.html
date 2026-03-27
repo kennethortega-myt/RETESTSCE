@@ -1,0 +1,28 @@
+<div class="bg-white p-20">
+  <mat-tab-group class="tabs-iz" (selectedTabChange)="onTabChange($event)">
+    <mat-tab label="Acta de Escrutinio" >
+        <div class="cont-img-acta-control acta-doble">
+          <div class="viewerBox container-scroll-bg">
+            <img [id]="'img-' + Constantes.CE_TIPO_ACTA_ESCRUTINIO" alt="Acta de escrutinio"
+                 [src]="imgPngBase64Escrutinio" style="scale: 100%" class="scaler" />
+          </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Acta de Instalación y Sufragio" >
+      <div class="cont-img-acta-control acta-doble">
+        <div class="viewerBox container-scroll-bg">
+          <img [id]="'img-' + Constantes.CE_TIPO_ACTA_INSTALACION_SUFRAGIO" alt="Acta de Instalación y Sufragio"
+               [src]="imgPngBase64Instalacion" style="scale: 100%" class="scaler" />
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  <div>
+    <button class="btn-ico-control mr-05" (click)="rotarActa()"><img src="../../assets/img/icons/ico-rotar.svg" alt="icono rotar"></button>
+    <button class="btn-ico-control mr-05" (click)="zoomInActa()"><img src="../../assets/img/icons/ico-zoom-in.svg" alt="icono zoom in"></button>
+    <button class="btn-ico-control" (click)="zoomOutActa()"><img src="../../assets/img/icons/ico-zoom-out.svg" alt="icono zoom out"></button>
+  </div>
+  <div class="content-end-button">
+    <button class="estilo2" cdkFocusInitial  (click)="onCerrarModal()" >Cerrar</button>
+  </div>
+</div>

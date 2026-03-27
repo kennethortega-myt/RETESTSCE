@@ -1,0 +1,19 @@
+<section class="section-flex">
+    <article class="w-100 cuadro-blanco-2">
+        <div class="titleModel">
+            <h2 class="titulo2">Secciones adicionales</h2>
+        </div>
+        <form class="formulario2 section-flex " [formGroup]="formGroup" >
+            <div class="paddLR docAdd">
+                <label for="nombre">Sección adicional</label>
+                <mat-form-field appearance="outline" class="w-100 paddT6">
+                <input matInput formControlName="nombre" placeholder="Nombre de sección" name="docplus" sceSoloAlfaNumerico>
+                </mat-form-field>
+            </div>
+            <div class="boton-full fixProcElect">
+                <button class="estilo3 w-50" mat-dialog-close> Cancelar</button>
+                <button class="estilo1 w-50" (click)="guardar()" [disabled]="formGroup.invalid">Crear</button>
+            </div>
+        </form>
+    </article>
+</section>

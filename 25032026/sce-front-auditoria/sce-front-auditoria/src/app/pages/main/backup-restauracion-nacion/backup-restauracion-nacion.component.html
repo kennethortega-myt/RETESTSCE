@@ -1,0 +1,12 @@
+<app-shared-backup-restore
+  [accion]="accion"
+  [finalizado]="finalizado"
+  [enProceso]="enProceso"
+  [listProceso]="listProceso"
+  [procesoFormControl]="procesoFormControl"
+  [showProcessSelector]="true"
+  (confirmacionBackupEvent)="confirmacionBackup()"
+  (confirmacionRestoreEvent)="confirmacionRestore($event)"
+  (fileSelectedEvent)="onFileSelected($event)"
+  (seleccionarProcesoEvent)="seleccionarProceso()">
+</app-shared-backup-restore>

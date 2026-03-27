@@ -1,0 +1,142 @@
+<form [formGroup]="form">
+    <div class="filtros">
+        <div class="filtro">
+            <label for="tipoProceso">Proceso:</label>
+
+            <mat-form-field appearance="outline">
+                <mat-select id="proceso" formControlName="proceso">
+                    <mat-option *ngFor="let proceso of listProceso" [value]="proceso">{{proceso.nombre}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="filtro">
+            <label for="eleccion">Elección:</label>
+            <mat-form-field appearance="outline">
+                <mat-select id="eleccion" formControlName="eleccion">
+                    <mat-option *ngFor="let eleccion of listEleccion" [value]="eleccion">
+                        {{eleccion.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>        
+
+        <div class="filtro">
+            <label for="distritoElectoral">Distrito Electoral:</label>
+            <mat-form-field appearance="outline">
+                <mat-select id="distritoElectoral" formControlName="distritoElectoral">
+                    <mat-option value="0">TODOS</mat-option>
+                    <mat-option *ngFor="let distritoElectoral of listDistritosElectorales" [value]="distritoElectoral">
+                        {{distritoElectoral.codigo}} {{distritoElectoral.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="filtros">        
+        <div class="filtro">
+            <label for="agrupol">Agrupación Política:</label>
+            <mat-form-field appearance="outline">
+                <mat-select id="agrupol" formControlName="agrupol">
+                    <mat-option value="0">TODOS</mat-option>
+                    <mat-option *ngFor="let agrupol of listAgrupol" [value]="agrupol"> {{agrupol.codigoAgrupol}} {{agrupol.agrupacionPolitica}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="filtro_boton">
+            <button class="estilo1 full noMarginLR" type="button" (click)="consultarProbablesCandidatos()">
+            Consultar
+            </button>
+        </div>
+    </div>
+    
+
+</form>
+
+<h2 class="subtitulo_reportes">Posibles candidatos electos</h2>
+<div class="cont-anuncio" *ngIf="!isShowReporte">
+    <div class="personaje-anuncio">
+      <p>
+        Por favor, seleccione los filtros para realizar la búsqueda.
+      </p>
+      <img alt="" src="../assets/img/personaje1.svg" />
+    </div>
+</div>
+
+<mat-table *ngIf="isShowReporte" [dataSource]="listaProbablesCandidatos" class="tabla-header-doble mb-25">
+    <ng-container matColumnDef="distritoElecDesc">
+        <mat-header-cell *matHeaderCellDef class="header-codigo">Distrito Electoral</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="header-codigo centrar-celda text-center">
+            {{ element.distritoElecDesc }}
+        </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="agrupolDesc">
+        <mat-header-cell *matHeaderCellDef>Organización Política</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="centrar-celda text-center">
+            {{ element.agrupolDesc }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="nombreElecto">
+        <mat-header-cell *matHeaderCellDef>Nombre del Candidato</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="centrar-celda text-center">
+            {{ element.nombreElecto }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="numeroDni">
+        <mat-header-cell *matHeaderCellDef >Doc. Identidad</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="centrar-celda text-center">
+            {{ element.numeroDni }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="votosAgrupol">
+        <mat-header-cell *matHeaderCellDef class="header-ubigeo">Votos</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="header-ubigeo centrar-celda text-center">
+            {{ element.votosAgrupol }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="ordenCandidato">
+        <mat-header-cell *matHeaderCellDef class="header-ubigeo">Orden Lista Original</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="header-ubigeo centrar-celda text-center">
+            {{ element.ordenCandidato }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="ordenObtenido">
+        <mat-header-cell *matHeaderCellDef class="header-ubigeo">Orden Lista Obtenido</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="header-ubigeo centrar-celda text-center">
+            {{ element.ordenObtenido }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="estadoCandidato">
+        <mat-header-cell *matHeaderCellDef class="header-ubigeo">Estado</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="header-ubigeo centrar-celda text-center">
+            {{ element.estadoCandidato }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="cargoCandidato">
+        <mat-header-cell *matHeaderCellDef >Cargo</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="centrar-celda text-center">
+            {{ element.cargoCandidato }}
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns1"></mat-row>
+</mat-table>
+
+
+
+
+
+<div class="cont-btn" *ngIf="isShowReporte">
+    <button class="estilo1" (click)="imprimirReporte()">IMPRIMIR</button>
+</div>

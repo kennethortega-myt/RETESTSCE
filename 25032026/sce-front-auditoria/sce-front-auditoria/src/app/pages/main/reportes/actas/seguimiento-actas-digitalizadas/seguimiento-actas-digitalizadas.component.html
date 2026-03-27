@@ -1,0 +1,97 @@
+<div class="filtros">
+    <div class="filtro">
+        <label for="tipoProceso">Proceso:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="tipoProceso">
+                <mat-option >SELECCIONE</mat-option>
+                <mat-option> opcion 1</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="filtro">
+        <label for="departamento">ODPE:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="departamento">
+                <mat-option >SELECCIONE</mat-option>
+                <mat-option>Opcion 1</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="filtro d-flex gap-10">
+        <div>
+            <!-- Datepicker -->
+            <label for="datePicker">Fecha desde</label>
+            <mat-form-field appearance="outline" class="form-field">
+                <input matInput
+                [matDatepicker]="datePicker"
+                placeholder="Selecciona una fecha"
+                [(ngModel)]="selectedDate"
+                />
+                <mat-datepicker-toggle matSuffix [for]="datePicker">
+                <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #datePicker touchUi></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div>
+            <!-- Timepicker -->
+            <label for="selectedTime">&nbsp;</label>
+            <mat-form-field appearance="outline" class="form-field">
+                
+                <input matInput
+                type="time"
+                placeholder="Selecciona una hora"
+                [(ngModel)]="selectedTime"
+                />
+                <button mat-icon-button matSuffix>
+                <mat-icon>access_time</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="filtro d-flex gap-10">
+        <div>
+            <!-- Datepicker -->
+            <label for="datePicker">Fecha hasta</label>
+            <mat-form-field appearance="outline" class="form-field">
+                <input matInput
+                [matDatepicker]="datePicker"
+                placeholder="Selecciona una fecha"
+                [(ngModel)]="selectedDate"
+                />
+                <mat-datepicker-toggle matSuffix [for]="datePicker">
+                <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #datePicker touchUi></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div>
+            <!-- Timepicker -->
+            <label for="selectedTime">&nbsp;</label>
+            <mat-form-field appearance="outline" class="form-field">
+                <input matInput
+                type="time"
+                placeholder="Selecciona una hora"
+                [(ngModel)]="selectedTime"
+                />
+                <button mat-icon-button matSuffix>
+                <mat-icon>access_time</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="filtro_boton">
+        <button class="estilo1">CONSULTAR</button>
+    </div>
+
+</div>
+<h2 class="subtitulo_reportes">Seguimiento de Actas Digitalizadas</h2>
+<div class="cont-anuncio">
+    <div class="personaje-anuncio">
+        <p>
+            Por favor, ingrese el número de acta para realizar la búsqueda.
+        </p>
+        <img alt="" src="../assets/img/personaje1.svg" />
+    </div>
+</div>
+<iframe title="pdf" class="pdf_incrustado" src="../../../../../assets/pdfs/cargo.pdf"></iframe>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<AnchorPane id="AnchorPaneLogin" fx:id="anchorPaneLogin" stylesheets="@../styles/styles.css"
+            focusTraversable="true" styleClass="ventana_login"
+            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="pe.gob.onpe.scescanner.controller.LoginController">
+    
+    <children>
+        
+<!--        <AnchorPane styleClass="login"
+            AnchorPane.rightAnchor="10.0" AnchorPane.bottomAnchor="10.0" >
+            
+        </AnchorPane>
+            
+        <ImageView pickOnBounds="true" preserveRatio="true" styleClass="login_persona" />-->
+
+        <GridPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" />
+                <ColumnConstraints hgrow="NEVER" minWidth="0.0" />
+                <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="0.0" vgrow="ALWAYS" />
+                <RowConstraints minHeight="0.0" vgrow="NEVER" />
+                <RowConstraints minHeight="0.0" vgrow="ALWAYS" />
+            </rowConstraints>
+            <children>
+                <!--prefHeight="445.0"-->
+                <AnchorPane  prefWidth="396.0" prefHeight="425.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <children>
+                        
+                        <AnchorPane styleClass="login"
+                            AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.bottomAnchor="10.0" >
+                            <children>
+                                
+                                <VBox spacing="15" alignment="BOTTOM_CENTER"
+                                    AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="37.0" AnchorPane.rightAnchor="25.0" >
+                                    <children>
+                                        <ImageView pickOnBounds="true" preserveRatio="true" styleClass="login_logo_onpe" />
+                                        <Label focusTraversable="false" text="Sistema de Cómputo Electoral" styleClass="lbl_tit_ventana_selec_doc" />
+                                    </children>
+                                </VBox>
+                                
+                                <VBox spacing="14"
+                                    AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="150.0" AnchorPane.rightAnchor="25.0" >
+                                    <children>
+                                        <VBox spacing="6">
+                                            <Label focusTraversable="false" text="Usuario"/>
+                                            <TextField fx:id="textUser" focusTraversable="true" promptText="Usuario"  styleClass="text_login" />
+                                        </VBox>
+                                        <VBox spacing="6">
+                                            <Label focusTraversable="false" text="Contraseña" />
+                                            <!-- <PasswordField fx:id="textPassword" focusTraversable="true" promptText="Contraseña" styleClass="text_login"/> -->
+                                            <StackPane>
+                                                <TextField fx:id="textPasswordVisible" focusTraversable="true" promptText="Contraseña" visible="false" styleClass="text_login" StackPane.alignment="CENTER_LEFT"/>
+                                                
+                                                <!-- PasswordField -->
+                                                <PasswordField fx:id="textPassword" 
+                                                               focusTraversable="true" 
+                                                               promptText="Contraseña" 
+                                                               styleClass="text_login"
+                                                               StackPane.alignment="CENTER_LEFT" />
+
+                                                <!-- Botón del ojo -->
+                                                <Button fx:id="btnTogglePassword" 
+                                                        focusTraversable="false" 
+                                                        styleClass="buttonojo"
+                                                        StackPane.alignment="CENTER_RIGHT"
+                                                        />
+                                            </StackPane>
+                                        </VBox>
+                                    </children>
+                                </VBox>
+                                
+                                
+                                <VBox spacing="15" alignment="BOTTOM_CENTER"
+                                    AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.bottomAnchor="25.0" >
+                                    <children>
+                                        
+                                        <Button fx:id="btnIngresar" alignment="CENTER" mnemonicParsing="false" prefHeight="32.0" maxWidth="1.7976931348623157E308" text="INGRESAR" onAction="#onLogin"  />
+                                        <Button fx:id="btnSalir" alignment="CENTER" mnemonicParsing="false" prefHeight="32.0" maxWidth="1.7976931348623157E308" text="SALIR DEL SISTEMA" styleClass="button_cancel" />
+                                        
+                                    </children>
+                                </VBox>
+                                
+                            </children>
+                        </AnchorPane>
+                        
+                    </children>
+                </AnchorPane>
+                
+                <AnchorPane GridPane.rowIndex="0" GridPane.columnIndex="2" GridPane.rowSpan="3" >
+                    <AnchorPane styleClass="login_persona"
+                                AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="150.0" AnchorPane.rightAnchor="0.0" AnchorPane.bottomAnchor="0.0" >
+                        
+                    </AnchorPane>
+                </AnchorPane>
+                
+            </children>
+        </GridPane>
+        <Label fx:id="lbVersion" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" focusTraversable="false" styleClass="lbl_version"/>
+        
+        <VBox alignment="CENTER_RIGHT" spacing="0" AnchorPane.topAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <AnchorPane>
+                <HBox alignment="CENTER_RIGHT" spacing="0" AnchorPane.rightAnchor="5.0">
+                    
+                    <Button id="btn_minimize" fx:id="btnMinimize" onAction="#onMinimize" alignment="CENTER" mnemonicParsing="false" prefWidth="41.0" prefHeight="25.0" styleClass="buttons_win,button_win_minimize">
+                        <tooltip><Tooltip text="Minimizar"/></tooltip>
+                    </Button>
+                    <Button id="btn_maximize" fx:id="btnMaximize" onAction="#onMaximize" alignment="CENTER" mnemonicParsing="false" prefWidth="41.0" prefHeight="25.0" styleClass="buttons_win,button_win_restore">
+                        <tooltip><Tooltip text="Restaurar"/></tooltip>
+                    </Button>
+                    <Button id="btn_close" fx:id="btnClose" onAction="#onClose" alignment="CENTER" mnemonicParsing="false" prefWidth="41.0" prefHeight="25.0" styleClass="buttons_win,button_win_close">
+                        <tooltip><Tooltip text="Cerrar"/></tooltip>
+                    </Button>
+                                                
+                </HBox>
+            </AnchorPane>
+        </VBox>
+        
+    </children>
+    
+</AnchorPane>

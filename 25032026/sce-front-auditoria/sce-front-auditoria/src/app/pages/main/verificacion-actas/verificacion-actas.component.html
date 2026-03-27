@@ -1,0 +1,144 @@
+<section class="section-flex secciones">
+  <article class="w-100">
+    <h1 class="titulo1">Digitación de Actas</h1>
+  </article>
+  <section class="seccion-unidos">
+    <article class="w-20 responsiactas cuadro-blanco-2">
+      <form class="formulario" [formGroup]="formGroupUbigeo">
+        <label for="cmbProceso">Proceso:</label>
+        <mat-form-field appearance="outline">
+          <mat-select id="cmbProceso" name="idProceso" formControlName="procesoFormControl">
+            <mat-option value="0">SELECCIONE</mat-option>
+            <mat-option
+              *ngFor="let proceso of listProceso"
+              [value]="proceso.id"
+            >
+              {{ proceso.cnombre }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="mt-10">
+          <label for="cmbEleccion" >Tipo de elección:</label>
+          <mat-form-field appearance="outline">
+            <mat-select id="cmbEleccion" name="idEleccion" formControlName="eleccionFormControl">
+              <mat-option value="0">SELECCIONE</mat-option>
+              <mat-option
+                *ngFor="let eleccion of listEleccion"
+                [value]="eleccion.ccodigo"
+              >
+                {{ eleccion.cnombre }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+
+        <div *ngIf="isConsulta" class="boton-full p-0">
+          <button
+            #btnVerificar
+            class="estilo2 full noMarginLR "
+            type="button"
+            (click)="verificarActa()"
+            [disabled]="isLoadingBtn.verificar"
+          >
+            BUSCAR
+          </button>
+        </div>
+
+        <!-- Mensaje de estado de verificación automática -->
+        <div *ngIf="isConsulta && mostrarMensajeEstado"
+             style="margin-top: 10px; padding: 10px; background-color: #fff3cd; border: 1px solid #ffc107; border-radius: 4px; color: #856404; text-align: center;">
+          <p style="margin: 0; font-size: 14px;">{{ mensajeEstadoVerificacion }}</p>
+        </div>
+
+        <div *ngIf="!isConsulta">
+          <app-ubigeo-display
+            [departamento]="formGroupUbigeo.get('departamentoFormControl')?.value"
+            [provincia]="formGroupUbigeo.get('provinciaFormControl')?.value"
+            [distrito]="formGroupUbigeo.get('distritoFormControl')?.value"
+            [localVotacion]="formGroupUbigeo.get('localVotacionFormControl')?.value"
+            [numMesa]="numMesa"
+          ></app-ubigeo-display>
+        </div>
+      </form>
+    </article>
+    <article class="w-80 height-scrollactas">
+
+      <router-outlet></router-outlet>
+
+    </article>
+  </section>
+</section>
+
+<div class="cont-btn secciones d-flex m-0">
+  <div *ngIf="!isConsulta" class="d-flex center-flex flex1 items-center gap-10" >
+    <div class="check-actas" *ngIf="(numeroPaso===Constantes.N_PASO_FIRMAS_VERIFICACION || numeroPaso===Constantes.N_PASO_CVAS_VERIFICACION) && solicitudNulidad">
+      <mat-checkbox
+        #checkSolicitudNulidad
+        id="checkSolicitudNulidad"
+        [checked]="solicitudNulidad"
+        [disabled]="true"
+        (change)="changeSolicitudNulidad($event)"
+        (keydown.tab)="handleTabSolicitudNulidad($event)"
+        (focusin)="onFocusChange(FocusElementVeri.SOLI_NULIDAD)"
+      > Solicitud de Nulidad</mat-checkbox>
+    </div>
+    <div class="check-actas" *ngIf="numeroPaso===2">
+      <mat-checkbox
+        #checkSinDatos
+        id="checkSinDatos"
+        [disabled]="isDisabledCheckboxSinDatos"
+        [checked]="sinDatos"
+        (change)="changeSinDatos($event)"
+        (keydown.tab)="handleTabSinDatos($event)"
+      > Acta sin Datos</mat-checkbox>
+    </div>
+
+  </div>
+  <div *ngIf="!isConsulta" class="d-flex">
+    <button #botonAnterior *ngIf="numeroPaso!=1 && numeroPaso !=0" class=" estilo3"
+            (keydown.tab)="handleTabAnterior($event)" (click)="pasoAnterior()"
+            (focus)="onFocusChange(FocusElementVeri.ANTERIOR)"> PASO ANTERIOR</button>
+    <button #botonRechazar class=" estilo1" (keydown.tab)="handleTabRechazar($event)"
+            (click)="confirmarRechazarActa()" (focus)="onFocusChange(FocusElementVeri.RECHAZAR)" > RECHAZAR </button>
+    <button #botonObservaciones class=" estilo2" (keydown.tab)="handleTabObservaciones($event)"
+            (click)="verObservaciones()" (focus)="onFocusChange(FocusElementVeri.OBSERVACIONES)" > VER OBSERVACIONES </button>
+    <button #botonContinuar class="estilo1" (keydown.tab)="handleTabContinuar($event)"
+            (click)="guardarContinuar()"
+            [disabled]="isDisabledBtnGuardar"
+    > {{txtBtnGuardar}}</button>
+  </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ng-template #validacionManualObservacion>
+  <img class="img-voto ml-2" src="../assets/img/ico_alert.svg" alt="ico alert"/>
+  <span class="leyenda-cambiado">Cambiado manualmente</span>
+</ng-template>
+
+<ng-template #validacionAutomaticaObservacion>
+  <img class="img-voto ml-2" src="../assets/img/ico_check.svg" alt="ico check"/>
+  <span class="leyenda-verificacion">Validado automaticamente por ONPE</span>
+</ng-template>
+<ng-template #validacionManual>
+  <div class="w-40 validacion-titulo">
+    <img class="img-voto" src="../assets/img/ico_alert.svg" alt="Icono alert" />
+    <span class="leyenda-cambiado">Cambiado manualmente</span>
+  </div>
+</ng-template>

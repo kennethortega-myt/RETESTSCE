@@ -1,0 +1,135 @@
+<app-filtro-reporte-modelo-uno
+[textoBoton]="'Consultar'"
+[nombreReporte]="tituloAlert"
+(eventBuscar)="consultar($event)">
+</app-filtro-reporte-modelo-uno>
+<h2 class="subtitulo_reportes">Monitoreo de Información Oficial</h2>
+<div class="cont-anuncio" *ngIf="mensaje">
+    <app-mensaje-personaje [mensaje]="mensaje"></app-mensaje-personaje>
+</div>
+
+<mat-table *ngIf="!mensaje" [dataSource]="listConsulta" class="tabla-header-doble mb-25">
+    <ng-container matColumnDef="ubigeo">
+        <mat-header-cell *matHeaderCellDef class="header-ubigeo centrar-celda">Ubigeo</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="header-ubigeo centrar-celda">
+            {{ element.ubigeo }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="departamento">
+        <mat-header-cell *matHeaderCellDef>{{labelNivelUbigeoUno}}</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.nivelUbigeoUno }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="provincia">
+        <mat-header-cell *matHeaderCellDef>{{labelNivelUbigeoDos}}</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.nivelUbigeoDos}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="distrito">
+        <mat-header-cell *matHeaderCellDef>{{labelNivelUbigeoTres}}</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.nivelUbigeoTres}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="ElectoresHabiles">
+        <mat-header-cell *matHeaderCellDef>Electores hábiles</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="j-end">
+            {{ element.electoresHabiles | number:'1.0-0'}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Ciudadanos">
+        <mat-header-cell *matHeaderCellDef>Ciudadanos que votaron</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="j-end">
+            {{ element.ciudadanoVotaron | number:'1.0-0'}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="ausentismo">
+        <mat-header-cell *matHeaderCellDef>Ausentismo en cifras</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="j-end">
+            {{ element.ausentismoCifras | number:'1.0-0'}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="porParticipacion">
+        <mat-header-cell *matHeaderCellDef>% de participación</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="j-end">
+            {{ element.porcentajeParticipacion | number:'1.3'}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="porAusentismo">
+        <mat-header-cell *matHeaderCellDef>% de ausentismo</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="j-end">
+            {{ element.porcentajeAusentismo | number:'1.3'}}
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns1"></mat-row>
+</mat-table>
+
+<!-- Tabla de totales -->
+<mat-table *ngIf="!mensaje && listConsulta.length > 0 && totalData" [dataSource]="[totalData]" class="tabla-totales mb-25">
+    <ng-container matColumnDef="ubigeo">
+        <mat-cell *matCellDef="let element" class="header-ubigeo centrar-celda font-weight-bold">
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="departamento">
+        <mat-cell *matCellDef="let element" class="font-weight-bold">
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="provincia">
+        <mat-cell *matCellDef="let element" class="font-weight-bold">
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="distrito">
+        <mat-cell *matCellDef="let element" class="font-weight-bold">
+            {{ element.distrito }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="ElectoresHabiles">
+        <mat-cell *matCellDef="let element" class="j-end font-weight-bold">
+            {{ element.electoresHabiles | number:'1.0-0'}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Ciudadanos">
+        <mat-cell *matCellDef="let element" class="j-end font-weight-bold">
+            {{ element.ciudadanoVotaron | number:'1.0-0'}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="ausentismo">
+        <mat-cell *matCellDef="let element" class="j-end font-weight-bold">
+            {{ element.ausentismoCifras | number:'1.0-0'}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="porParticipacion">
+        <mat-cell *matCellDef="let element" class="j-end font-weight-bold">
+            {{ element.porcentajeParticipacion | number:'1.0-3'}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="porAusentismo">
+        <mat-cell *matCellDef="let element" class="j-end font-weight-bold">
+            {{ element.porcentajeAusentismo | number:'1.0-3'}}
+        </mat-cell>
+    </ng-container>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns1"></mat-row>
+</mat-table>
+
+<div class="filtro_boton" *ngIf="!mensaje && listConsulta.length>0">
+    <button class="estilo1 full noMarginLR" type="button" (click)="imprimir()">
+        Imprimir
+    </button>
+</div>

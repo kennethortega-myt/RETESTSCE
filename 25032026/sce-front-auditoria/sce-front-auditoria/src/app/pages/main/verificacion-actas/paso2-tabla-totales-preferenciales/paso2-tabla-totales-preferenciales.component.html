@@ -1,0 +1,132 @@
+<article
+  class="height-scroldlactas height-scrollactasvotos "
+  style="background-color: #f5f6f7;"
+>
+  <h3 class="titulos-article">Paso 2 de 3 - Digitación de Votos</h3>
+  <div style="display: flex; gap: 20px; margin-top: 2rem" [ngClass]="seccionVoto.autorizado ?  'con_nombre-op' : '' ">
+    <div class="cont-votos">
+      <div class="container-1 vt p-sticky">
+        <h3 class="titulos-article">Total de Votos</h3>
+      </div>
+
+      <div style="display: flex; flex-direction: column">
+        <div id="left-container" (scroll)="onScroll('left')" class="container-1 total container-scroll-none" style="flex-direction: column; padding-bottom: 20px">
+          <form [formGroup]="formGroupSeccionVoto" autocomplete="off">
+            <div formGroupName="params" class="focus">
+              <div  *ngFor="let votoItem of this.seccionVoto.items; index as i" class="item2">
+                <div [ngClass]="votoItem.isEditable == false ? 'cont-valida-voto2 min valVoto2 gris-desabilitado' : 'cont-valida-voto2 min valVoto2'" >
+                  <span *ngIf="seccionVoto.autorizado" class="nombre-agrupacion" [title]="votoItem.nombreAgrupacionPolitica">
+                    {{ votoItem.nombreAgrupacionPolitica }}
+                  </span>
+                  <div class="imgBox2" fxLayout="row" fxLayoutAlign="center center">
+                    <img #lazyImage
+                         alt=""
+                         [src]="'../../../../../assets/loader/loader.svg'"
+                         [attr.data-index-i]="i"
+                         [attr.data-index-j]="-1"
+                         class="img-votos-{{tipoEleccionDescripcion}}"
+                    />
+                  </div>
+                  <mat-form-field appearance="outline" (dblclick)="onDoubleClick($event)">
+                    <input #inputRefs
+                           [id]="'mat-input-total-'+ i"
+                           matInput
+                           [formControlName]="votoItem.fileId+'-'+i"
+                           sceFocusNextEnterTotalPreferencial
+                           sceFocusNextFlechaTotalPreferencial
+                           [rowIndex]="i"
+                           [colIndex]="0"
+                           [seccionVotoItems]="seccionVoto.items"
+                           [isPreferencial]="false"
+                           (focus)="onFocus($event)"
+                           (blur)="onBlur()"
+                           (input)="onInputVoto(votoItem.fileId, false, $event, i)"
+                           [readonly] = "!votoItem.isEditable"
+                           maxlength="3"
+                           [ngClass]="{'no-caret': !isEditingMode(i)}"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="w-container-80">
+      <div class="content-right-input">
+
+        <div class="container-1 vt p-sticky sin-voto-prefe">
+          <h3 class="titulos-article">Votos Preferenciales</h3>
+        </div>
+
+        <div id="right-container" (scroll)="onScroll('right')"  class="container-scroll h-560" style="padding-bottom: 20px" #scrollContainer>
+          
+          <div class="container-1 vt p-sticky voto-prefe">
+            <div *ngFor="let votoPref of times; index as jj" class="item">
+              <h3 class="titulos-article" style="text-align: center">VP{{jj+1}}</h3>
+            </div>
+          </div>
+
+          <form [formGroup]="formGroupSeccionVotoPref" autocomplete="off">
+            <div formGroupName="params">
+              <div *ngFor="let votoItem of this.seccionVoto.items; index as i" class="container-1 p">
+                <ng-container *ngIf="votoItem.votoPreferencial && votoItem.votoPreferencial.length>0; else nullCase">
+                  <div *ngFor="let votoPref of votoItem.votoPreferencial; index as j" class="item">
+                    <div [ngClass]="votoPref.isEditable == false ? 'cont-valida-voto2 min valVoto2 gris-desabilitado' : 'cont-valida-voto2 min valVoto2'">
+                      <div
+                        class="imgBox2"
+                        fxLayout="row"
+                        fxLayoutAlign="center center"
+                      >
+                        <img #lazyImagePref
+                             alt="Voto preferencial"
+                             [src]="'../../../../../assets/loader/loader.svg'"
+                             [attr.data-index-i]="i"
+                             [attr.data-index-j]="j"
+                             class="img-votos-{{tipoEleccionDescripcion}}"
+                        />
+                      </div>
+                      <mat-form-field appearance="outline" (dblclick)="onDoubleClick($event)">
+                        <input #inputRefs
+                               [id]="'mat-input-pref-'+ i+'-'+ j"
+                               matInput
+                               [formControlName]="votoPref.fileId+'-'+i+'-'+j"
+                               sceFocusNextEnterTotalPreferencial
+                               sceFocusNextFlechaTotalPreferencial
+                               [rowIndex]="i"
+                               [colIndex]="j"
+                               [seccionVotoItems]="seccionVoto.items"
+                               [isPreferencial]="true"
+                               (focus)="onFocus($event)"
+                               (blur)="onBlur()"
+                               (input)="onInputVoto(votoPref.fileId, true, $event, i, j)"
+                               [readonly] = "!votoPref.isEditable"
+                               maxlength="3"
+                               [ngClass]="{'no-caret': !isEditingMode(i, j)}"
+
+
+                        />
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </ng-container>
+
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<ng-template #nullCase let-i="index">
+  <div *ngFor="let votoPref of times; index as j" class="item">
+    <div class="cont-valida-voto2 min valVoto2">
+
+    </div>
+  </div>
+</ng-template>

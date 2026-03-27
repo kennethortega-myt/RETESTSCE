@@ -1,0 +1,37 @@
+<h2 class="modalHead titulo2">Resolución {{numeroResolucion}}</h2>
+<mat-dialog-content class="mat-typography">
+
+    <section class="w-100 cont-info  ">
+      <div class="contenido-scroll">
+        <mat-table [dataSource]="dataSourceAgrupacionesActas" class="mat-elevation-z8">
+          <ng-container matColumnDef="position">
+            <mat-header-cell *matHeaderCellDef> Nº</mat-header-cell>
+            <mat-cell *matCellDef="let element;let i = index"> {{i+1}}  </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="acta">
+            <mat-header-cell *matHeaderCellDef> Acta Asociada</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.mesa}}  </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="copia">
+            <mat-header-cell *matHeaderCellDef> Copia</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.copia}}  </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="estado">
+            <mat-header-cell *matHeaderCellDef> Estado</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <div class="estado {{element.descripcionEstadoActa}}" title="{{element.descripcionEstadoActa.replaceAll('_',' ')}}"></div>
+
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumnsActas"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumnsActas;"></mat-row>
+        </mat-table>
+      </div>
+    </section>
+
+</mat-dialog-content>
+<mat-dialog-actions class="mr-1" align="end">
+
+  <button class="btn-azul mr-1" mat-dialog-close>ACEPTAR</button>
+
+</mat-dialog-actions>

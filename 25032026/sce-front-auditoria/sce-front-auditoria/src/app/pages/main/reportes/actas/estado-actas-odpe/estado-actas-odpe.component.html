@@ -1,0 +1,177 @@
+<div class="filtros">
+    <div class="filtro">
+        <label for="tipoProceso">Proceso:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="tipoProceso">
+                <mat-option [value]="0">SELECCIONE</mat-option>
+                <mat-option> opcion 1</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="filtro">
+        <label for="eleccion">Elección:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="eleccion">
+                <mat-option [value]="0">SELECCIONE</mat-option>
+                <mat-option> opcion 1</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="filtro">
+        <label for="centroComputo">Centro de Cómputo:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="centroComputo">
+                <mat-option [value]="0">SELECCIONE</mat-option>
+                <mat-option>Presidente y Vicepresidente</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="filtro">
+        <label for="odpe">ODPE:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="odpe">
+                <mat-option [value]="0">SELECCIONE</mat-option>
+                <mat-option> opcion 1</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="filtro_boton">
+        <button class="estilo1 noMarginLR" type="button">
+              Consultar
+        </button>
+    </div>
+    <div class="filtro-hora">
+
+        <div class="conte_actualizar">
+          <label for="departamento">Actualizar cada</label>
+          <mat-form-field appearance="outline" >
+              <input matInput maxlength="2" />
+              <span matTextSuffix class="span-sufijo"> minutos</span>
+            </mat-form-field>
+        </div>
+
+        <button class=" estilo1" ><img alt="" src="../assets/img/icons/ico-actualizacion-blanco.svg"></button>
+      </div>
+
+</div>
+<h2 class="subtitulo_reportes">Detalle del estado de actas por ODPE</h2>
+<div class="cont-anuncio">
+    <div class="personaje-anuncio">
+      <p>
+        Por favor, seleccione los filtros para realizar la búsqueda.
+      </p>
+      <img alt="" src="../assets/img/personaje1.svg" />
+    </div>
+</div>
+
+
+<mat-table [dataSource]="dataSource1" class="tabla-header-doble mb-25">
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef class="header-ubigeo centrar-celda">ID</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="header-ubigeo centrar-celda">
+            {{ element.id }}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="odpe">
+        <mat-header-cell *matHeaderCellDef>ODPE</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.odpe }}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="cc">
+        <mat-header-cell *matHeaderCellDef>Centro Cómputo</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.cc}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actasProcesar">
+        <mat-header-cell *matHeaderCellDef>Actas a Procesar</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="j-end">
+            {{ element.actasProcesar}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actasPendientesProcesar">
+        <mat-header-cell *matHeaderCellDef>Actas Pendientes Procesar</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="j-end">
+            {{ element.actasPendientesProcesar}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actasProcesadas">
+        <mat-header-cell *matHeaderCellDef>Actas Procesadas</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="j-end">
+            {{ element.actasProcesadas}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="JEExResolver">
+        <mat-header-cell *matHeaderCellDef>Actas para envío al JEE por resolver</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="j-end">
+            {{ element.JEExResolver}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="jeeResueltas">
+        <mat-header-cell *matHeaderCellDef>Actas para envío al JEE resueltas</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="j-end">
+            {{ element.jeeResueltas}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="resolverResueltas">
+        <mat-header-cell *matHeaderCellDef>Actas para resolver y resueltas</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="j-end">
+            {{ element.resolverResueltas}}
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns1"></mat-row>
+</mat-table>
+
+<mat-table   [dataSource]="dataSource2" class="tabla-header-doble mb-25 tabla-totalvotos">
+    <ng-container matColumnDef="id">
+        <mat-cell *matCellDef="let element" class="header-ubigeo centrar-celda" [ngClass]="element.bgColor">
+            {{ element.id }}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="odpe">
+        <mat-cell *matCellDef="let element" [ngClass]="element.bgColor">
+            {{ element.odpe }}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="cc">
+        <mat-cell *matCellDef="let element" [ngClass]="element.bgColor">
+            {{ element.cc}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actasProcesar">
+        <mat-cell *matCellDef="let element" class="j-end" [ngClass]="element.bgColor">
+            {{ element.actasProcesar}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actasPendientesProcesar">
+        <mat-cell *matCellDef="let element" class="j-end" [ngClass]="element.bgColor">
+            {{ element.actasPendientesProcesar}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actasProcesadas">
+        <mat-cell *matCellDef="let element" class="j-end" [ngClass]="element.bgColor">
+            {{ element.actasProcesadas}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="JEExResolver">
+        <mat-cell *matCellDef="let element" class="j-end" [ngClass]="element.bgColor">
+            {{ element.JEExResolver}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="jeeResueltas">
+        <mat-cell *matCellDef="let element" class="j-end" [ngClass]="element.bgColor">
+            {{ element.jeeResueltas}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="resolverResueltas">
+        <mat-cell *matCellDef="let element" class="j-end" [ngClass]="element.bgColor">
+            {{ element.resolverResueltas}}
+        </mat-cell>
+    </ng-container>
+
+    <mat-row  *matRowDef="let row; columns: displayedColumns2;"></mat-row>
+  </mat-table>

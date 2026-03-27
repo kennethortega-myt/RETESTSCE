@@ -1,0 +1,142 @@
+<div [formGroup]="form">
+    <div class="filtros fila-filtro">
+        <div class="filtro">
+            <label for="tipoProceso">Proceso:</label>
+
+            <mat-form-field appearance="outline">
+                <mat-select id="proceso" formControlName="proceso">
+                    <mat-option *ngFor="let proceso of listProceso" [value]="proceso">{{proceso.nombre}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="filtro">
+            <label for="eleccion">Elección:</label>
+            <mat-form-field appearance="outline">
+                <mat-select id="eleccion" formControlName="eleccion">
+                    <mat-option *ngFor="let eleccion of listEleccion" [value]="eleccion">
+                        {{eleccion.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="filtro">
+            <label for="centroComputo">Centro de Cómputo:</label>
+            <mat-form-field appearance="outline">
+                <mat-select id="centroComputo" formControlName="centroComputo">
+                    <mat-option *ngFor="let centroComputo of listCentrosComputo" [value]="centroComputo">
+                        {{centroComputo.codigo}} {{centroComputo.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="filtro">
+            <label for="centroComputo">ODPE:</label>
+            <mat-form-field appearance="outline">
+                <mat-select id="odpe" formControlName="odpe">
+                    <mat-option *ngFor="let odpe of listOdpe" [value]="odpe">
+                        {{odpe.codigo}} {{odpe.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="filtros">
+        <div class="filtro d-flex gap-10">
+            <div>
+                <!-- Datepicker -->
+                <label for="datePicker">Fecha desde</label>
+                <mat-form-field appearance="outline" class="form-field">
+                    <input matInput
+                    [matDatepicker]="datePickerDesde"
+                    placeholder="Selecciona una fecha"
+                    formControlName="fechaDesde"
+                    [min]="minDate"
+                    [max]="maxDate"
+                    [readonly]="true"
+                    />
+                    <mat-datepicker-toggle matSuffix [for]="datePickerDesde">
+                    <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #datePickerDesde touchUi></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div>
+                <!-- Timepicker -->
+                <label for="horaDesde">&nbsp;</label>
+                <mat-form-field appearance="outline" class="form-field">
+                    <input matInput
+                    type="time"
+                    placeholder="Selecciona una hora"
+                    formControlName="horaDesde"
+                    />
+                    <button mat-icon-button matSuffix>
+                    <mat-icon>access_time</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="filtro d-flex gap-10">
+            <div>
+                <!-- Datepicker -->
+                <label for="datePicker">Fecha hasta</label>
+                <mat-form-field appearance="outline" class="form-field">
+                    <input matInput
+                    [matDatepicker]="datePickerHasta"
+                    placeholder="Selecciona una fecha"
+                    formControlName="fechaHasta"
+                    [min]="minDate"
+                    [max]="maxDate"
+                    [readonly]="true"
+                    />
+                    <mat-datepicker-toggle matSuffix [for]="datePickerHasta">
+                    <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #datePickerHasta touchUi></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div>
+                <!-- Timepicker -->
+                <label for="horaHasta">&nbsp;</label>
+                <mat-form-field appearance="outline" class="form-field">
+                    <input matInput
+                    type="time"
+                    placeholder="Selecciona una hora"
+                    formControlName="horaHasta"
+                    />
+                    <button mat-icon-button matSuffix>
+                    <mat-icon>access_time</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="filtro_boton" *ngIf="Constantes.CB_PERFILES_SCE.includes(usuario.perfil.descripcion)">
+            <button  class="estilo1 full noMarginLR" type="button" (click)="buscarReporte()">
+                buscar
+            </button>
+        </div>
+        <div class="filtro_boton" *ngIf="Constantes.CB_PERFILES_TODOS.includes(usuario.perfil.descripcion)">
+            <button class="estilo1 full noMarginLR" type="button" (click)="descargarExcel()">
+                Excel
+            </button>
+        </div>
+    </div>
+</div>
+<h2 class="subtitulo_reportes">Seguimiento de Digitalización</h2>
+<div class="cont-anuncio" *ngIf="!isShowReporte">
+    <div class="personaje-anuncio">
+      <p>
+        Por favor, seleccione los filtros para realizar la búsqueda.
+      </p>
+      <img alt="" src="../assets/img/personaje1.svg" />
+    </div>
+</div>
+
+<article class="pdf_incrustado">
+    <div class="contenedor-documento-muestra">
+      <div #idDivImagen *ngIf="isShowReporte">
+      </div>
+    </div>
+</article>

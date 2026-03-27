@@ -1,0 +1,41 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: sce-nacion-backend-hpa
+  labels:
+    app: sce-nacion-backend
+    tier: backend
+    tierType: bussines
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: sce-nacion-backend
+  minReplicas: 1  
+  maxReplicas: 1
+  metrics:
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 80  # Ajustado a 80 para usar más recursos antes de escalar
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 80  # Ajustado a 80 para permitir mayor uso de CPU antes de escalar
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300  # Espera 5 minutos antes de reducir réplicas
+      policies:
+        - type: Percent
+          value: 10
+          periodSeconds: 60
+    scaleUp:
+      stabilizationWindowSeconds: 0  # Escala inmediatamente cuando es necesario
+      policies:
+        - type: Pods
+          value: 2
+          periodSeconds: 30  # Escala de 1 en 1 pod por cada minuto

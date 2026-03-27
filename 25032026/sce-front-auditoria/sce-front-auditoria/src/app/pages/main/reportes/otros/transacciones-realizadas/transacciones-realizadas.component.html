@@ -1,0 +1,122 @@
+    <div [formGroup]="form">
+        <div class="filtros">
+            <div class="filtro">
+                <label for="tipoProceso">Proceso:</label>
+                <mat-form-field appearance="outline">
+                    <mat-select id="proceso" formControlName="proceso">
+                        <mat-option *ngFor="let proceso of listProceso" [value]="proceso">{{proceso.nombre}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="filtro" style="display: none;">
+                <label for="centroComputo">Centro de Cómputo:</label>
+                <mat-form-field appearance="outline">
+                    <mat-select id="centroComputo" formControlName="centroComputo">
+                        <mat-option *ngFor="let centroComputo of listCentrosComputo" [value]="centroComputo">
+                            {{centroComputo.codigo}} {{centroComputo.nombre}}
+                          </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="filtro">
+                <label for="usuario">Usuario:</label>
+                <mat-form-field appearance="outline">
+                    <mat-select id="usuario" formControlName="usuario">
+                        <mat-option value="0">TODOS</mat-option>
+                        <mat-option *ngFor="let usuario of listUsuarios" [value]="usuario">
+                            {{usuario.nombre}}
+                          </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="filtros">
+            <div class="filtro">
+                <!-- Datepicker -->
+                <label for="datePickerFechaDesde">Fecha desde</label>
+                <mat-form-field appearance="outline" class="form-field">
+                    <input matInput
+                    [matDatepicker]="datePickerFechaDesde"
+                    placeholder="Selecciona una fecha"
+                    formControlName="fechaDesde"
+                    [max]="maxDate"
+                    [min]="minDate"
+                    />
+                    <mat-datepicker-toggle matSuffix [for]="datePickerFechaDesde">
+                    <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #datePickerFechaDesde touchUi></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="filtro">
+                <!-- Timepicker -->
+                <label for="horaDesde">&nbsp;</label>
+                <mat-form-field appearance="outline" class="form-field">
+                    <input matInput
+                    type="time"
+                    placeholder="Selecciona una hora"
+                    formControlName="horaDesde"                    
+                    />
+                    <button mat-icon-button matSuffix>
+                    <mat-icon>access_time</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <div class="filtro">
+                <!-- Datepicker -->
+                <label for="datePickerFechaHasta">Fecha hasta</label>
+                <mat-form-field appearance="outline" class="form-field">
+                    <input matInput
+                    [matDatepicker]="datePickerFechaHasta"
+                    placeholder="Selecciona una fecha"
+                    formControlName="fechaHasta"
+                    [max]="maxDate"
+                    [min]="minDate"
+                    />
+                    <mat-datepicker-toggle matSuffix [for]="datePickerFechaHasta">
+                    <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #datePickerFechaHasta touchUi></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="filtro">
+                <!-- Timepicker -->
+                <label for="horaHasta">&nbsp;</label>
+                <mat-form-field appearance="outline" class="form-field">
+                    <input matInput
+                    type="time"
+                    placeholder="Selecciona una hora"
+                    formControlName="horaHasta"
+                    />
+                    <button mat-icon-button matSuffix>
+                    <mat-icon>access_time</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+
+            <div class="filtro d-flex align-item-end">
+                <mat-checkbox class="example-margin" formControlName="soloConAutorizacion">Solo con autorización</mat-checkbox>
+            </div>
+            <div class="filtro_boton">
+                <button class="estilo1"  (click)="consultar()">CONSULTAR</button>
+            </div>
+        </div>
+    </div>
+<h2 class="subtitulo_reportes">Transacciones realizadas</h2>
+<div class="cont-anuncio" *ngIf="!isShowReporte">
+    <div class="personaje-anuncio">
+        <p> Por favor, ingrese los parámetros para realizar la búsqueda. </p>
+        <img alt="" src="../assets/img/personaje1.svg" />
+    </div>
+</div>
+<article class="pdf_incrustado">
+    <div class="contenedor-documento-muestra">
+      <div #idDivImagen *ngIf="isShowReporte">
+      </div>
+    </div>
+</article>
+<div class="filtro_boton div-imprimir" *ngIf="isShowReporte">
+    <button class="estilo1 full noMarginLR" type="button" (click)="imprimirReporte()">
+      IMPRIMIR
+    </button>
+</div>

@@ -1,0 +1,19 @@
+<div class="item">
+  <span>
+    <img [src]="getIconPath()" alt="estado {{item.codEstadoActa}}">
+  </span>
+  <div class="content">
+    <div class="title">
+      <h3>{{item.descripcionEstado}}</h3>
+    </div>
+    <p class="fecha pbt-5">
+      {{ formatearFecha(item.fecha)}}
+    </p>
+    <div class="caption">
+      <p [innerHTML]="item.detalle"></p>
+    </div>
+    <div class="caption mt-1">
+      <p [innerHTML]="item.fechaInicioFin"></p>
+    </div>
+  </div>
+</div>

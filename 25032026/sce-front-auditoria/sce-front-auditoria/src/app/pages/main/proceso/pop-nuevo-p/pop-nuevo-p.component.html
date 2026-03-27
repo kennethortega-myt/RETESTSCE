@@ -1,0 +1,78 @@
+<section class="">
+  <section class="section-flex">
+    <article class="w-100 cuadro-blanco-2">
+      <div class="titleModel">
+        <h2 class="titulo2">Nuevo Proceso</h2>
+      </div>
+      <form class="formulario2 section-flex " [formGroup]="formGroupParent">
+        <div class="w-100">
+          <label for="nombre">Proceso:</label>
+          <mat-form-field appearance="outline" class="w-100 paddT6">
+            <input matInput placeholder="Ingrese nombre de proceso electoral" name="nombre"  minlength="6" formControlName="nombre">
+          </mat-form-field>
+        </div>
+        <div class="w-40">
+          <label for="acronimo">Acrónimo:</label>
+          <mat-form-field appearance="outline" class="w-100 paddT6">
+            <input matInput placeholder="Ingrese nombre corto" name="acronimo" maxlength="15" minlength="6" formControlName="acronimo">
+          </mat-form-field>
+        </div>
+        <div class="w-60">
+          <label for="fechaConvocatoria">Fecha de elección:</label>
+          <mat-form-field appearance="outline" class="w-100 paddT6">
+            <input matInput [matDatepicker]="picker2"
+                   name="fechaConvocatoria"
+                   formControlName="fechaConvocatoria"
+                   [matDatepickerFilter]="filtroFechaHabil">
+            <mat-datepicker-toggle matIconSuffix [for]="picker2"  ></mat-datepicker-toggle>
+            <mat-datepicker #picker2 disabled="false"></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="w-100">
+          <label for="">Logo de proceso electoral:</label>
+          <mat-form-field appearance="outline">
+          <button mat-icon-button matSuffix (click)="f_input.click()">
+              <mat-icon>folder</mat-icon>
+            </button>
+            <input type="text" readonly matInput [value]="imagenSeleccionado.name" />
+            <input type="file" accept=".jpg,.png" hidden #f_input (change)="upload($event.target)" />
+          </mat-form-field>
+        </div>
+
+        <div class="w-100">
+          <label for="nombreDbLink">Nombre de DbLink</label>
+          <mat-form-field appearance="outline" class="w-100 paddT6">
+            <input matInput placeholder="Ingrese nombre de dblink" name="nombreDbLink" minlength="6" formControlName="nombreDbLink">
+          </mat-form-field>
+        </div>
+
+        <div class="w-100">
+          <label for="nombreEsquemaPrincipal">Nombre de Esquema Principal</label>
+          <mat-form-field appearance="outline" class="w-100 paddT6">
+            <input matInput placeholder="Ingrese nombre esquema principal" name="nombreEsquemaPrincipal"
+              formControlName="nombreEsquemaPrincipal" minlength="6">
+          </mat-form-field>
+        </div>
+
+        <div class="w-100">
+          <label for="nombreEsquemaBdOnpe">Nombre de Esquema BDONPE</label>
+          <mat-form-field appearance="outline" class="w-100 paddT6">
+            <input matInput placeholder="Ingrese esquema BDONPE" name="nombreEsquemaBdOnpe" minlength="6" formControlName="nombreEsquemaBdOnpe">
+          </mat-form-field>
+        </div>
+
+
+
+        <div class="boton-full">
+          <button class="estilo2 full2" (click)="cargarDatos()" *ngIf="idProceso!=0">Cargar datos</button>
+        </div>
+
+        <br><br>
+        <div class="boton-full fixProcElect">
+          <button class="estilo3 w-50" (click)="cancelar()"> Cancelar</button>
+          <button class="estilo1 w-50" (click)="guardar()" [disabled]="formGroupParent.invalid">Crear</button>
+        </div>
+      </form>
+    </article>
+  </section>
+</section>

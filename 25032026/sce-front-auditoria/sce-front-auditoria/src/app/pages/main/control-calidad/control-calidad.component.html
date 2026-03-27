@@ -1,0 +1,118 @@
+<section class="secciones veri-resolucion">
+  <div>
+    <h1 class="titulo1">Control de calidad</h1>
+    <section>
+      <div class="seccion-unidos scroll-actas" >
+        <article  class="w-20 w-40 p-r">
+            <div [formGroup]="form" class="seccion-lista-control w-full">
+                <label for="cmbProceso">Proceso:</label>
+                <mat-form-field appearance="outline">
+                    <mat-select id="cmbProceso" name="idProceso" formControlName="proceso">                        
+                        <mat-option *ngFor="let proceso of listProceso" [value]="proceso">{{proceso.cnombre}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="mt-10">
+                    <label for="cmbEleccion" >Tipo de elección:</label>
+                    <mat-form-field appearance="outline">
+                        <mat-select id="cmbEleccion" name="idEleccion" formControlName="eleccion">                            
+                            <mat-option *ngFor="let eleccion of listEleccion" [value]="eleccion">
+                                {{eleccion.cnombre}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field> 
+                </div>
+                <div class="boton-full p-0">
+                <button                    
+                    class="estilo2 full noMarginLR "
+                    type="button"
+                    (click)="verificarActas()"
+                >
+                    Verificar
+                </button>
+                </div>
+                <div class="w-full scroll-control-actas">
+                    <mat-list class="list-actas">
+                        <mat-list-item
+                            *ngFor="let acta of listaActasPendientes"
+                            tabindex="0"
+                            role="button"
+                            (click)="seleccionarActa(acta)"
+                            (keydown.enter)="seleccionarActa(acta)"
+                            (keydown.space)="seleccionarActa(acta)">
+                            <div class="centrar-item-list-actas">
+                                <img class="ico-estado-acta" src="../assets/img/ico-foto.svg" alt="Icono foto" />
+                                <span>{{actaDescripcion(acta)}}</span>
+                            </div>
+                        </mat-list-item>                        
+                    </mat-list>
+                </div>
+            </div>
+
+            <div>
+                <div class="w-100 estados">
+                    <div class="cuadro-blanco-3 cantidad">
+                        <img src="../assets/img/check-verde.svg" alt="">
+                        <span class="">Actas validadas<b>{{summary.validado}}</b></span>
+                    </div>
+                </div>
+                <div class="w-100 estados">
+                    <div class="cuadro-blanco-3 cantidad">
+                        <img src="../assets/img/icono-alert-gris.svg" alt="">
+                        <span class="">Actas pendientes<b>{{summary.pendiente}}</b></span>
+                    </div>
+                </div>
+                <div class="w-100 estados" style="text-align: center;">
+                    <button [disabled]="!hayActasPendientes" class="estilo1 full my-0" type="button" (click)="cancelarDialog()">FINALIZAR ATENCIÓN</button>
+                </div>
+            </div>
+            
+        </article>
+
+        <article class="w-80 d-flex flex-column" [ngSwitch]="pasoActual">            
+            <app-seccion-ver-resols-acta 
+                *ngIf="showSectionResolActa"
+                [acta]="actaPendienteSeleccionada" 
+                [pasoActual]="pasoActual"
+                [listaResoluciones]="listaResoluciones">
+            </app-seccion-ver-resols-acta>
+
+            <app-seccion-datos-acta
+                *ngIf="showSectionResolActa"
+                [acta]="actaPendienteSeleccionada">
+            </app-seccion-datos-acta>
+
+            <app-paso1-cc 
+                *ngSwitchCase="pasosControlCalidad.paso1"
+                [acta]="actaPendienteSeleccionada">
+            </app-paso1-cc>
+
+            <app-paso2-cc
+                *ngSwitchCase="pasosControlCalidad.paso2"
+                [acta]="actaPendienteSeleccionada">
+            </app-paso2-cc>
+
+            <app-paso3-cc
+                *ngSwitchCase="pasosControlCalidad.paso3"
+                [acta]="actaPendienteSeleccionada">
+            </app-paso3-cc>
+            
+            <div class="row">
+                <div class="w-20 w-40"></div>
+                <div class="w-80 d-flex mt-18" style="justify-content: end; padding: 0px;" *ngIf="actaPendienteSeleccionada">                            
+                    <button class="estilo1 my-0" type="button" *ngIf="showButtonPrevious" (click)="goToPreviousStep()">ANTERIOR</button>
+                    <button class="estilo3 my-0" type="button" [disabled]="disableButtonRechazar" (click)="rechazarDialog()">RECHAZAR</button>            
+                    <button class="estilo2 my-0" type="button" [disabled]="!isPaso3" (click)="observarDialog()">OBSERVAR</button>
+                    <button class="estilo1 my-0" type="button" *ngIf="showButtonNext" (click)="goToNextStep()">CONTINUAR</button>
+                    <button class="estilo1 my-0" type="button" *ngIf="isPaso3" (click)="aceptarControlCalidadDialog()">ACEPTAR</button>                    
+                </div>    
+            </div>
+            
+        </article>
+        
+      </div>
+    </section>
+  </div>
+
+  
+  
+</section>

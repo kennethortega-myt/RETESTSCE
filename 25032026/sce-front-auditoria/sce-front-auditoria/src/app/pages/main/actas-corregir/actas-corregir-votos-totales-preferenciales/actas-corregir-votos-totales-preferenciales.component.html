@@ -1,0 +1,360 @@
+<div class="w-full w-97">
+  <div class="w-full mb-16">
+    <form [formGroup] = "formGroupInfoActa"
+          class="formubigeo formulario section-flex between-flex items-center"
+    >
+      <div class="d-flex items-center gap-10">
+        <label for="numMesaInput" class="d-contents">Acta:</label>
+        <mat-form-field appearance="outline">
+          <input
+            id="numMesaInput"
+            matInput
+            type="text"
+            placeholder=""
+            formControlName="numMesaFormControl"
+          />
+        </mat-form-field>
+      </div>
+      <div class="d-flex items-center gap-10 flex-1">
+        <label for="ubigeoInput" class="d-contents">Ubigeo:</label>
+        <mat-form-field appearance="outline" class="max-width-full">
+          <input
+            id="ubigeoInput"
+            matInput
+            type="text"
+            placeholder=""
+            formControlName="ubigeoFormControl"
+          />
+        </mat-form-field>
+      </div>
+      <div class="d-flex items-center gap-10">
+        <label for="electHabilesInput" class="text-end">Electores Hábiles:</label>
+        <mat-form-field class="width-input-elector " appearance="outline">
+          <input id="electHabilesInput" matInput type="text" placeholder="" formControlName="electoresHabilesFormControl" />
+        </mat-form-field>
+      </div>
+
+      <button class="estilo2 h-36 m-acta" (click)="verImagenActa()">VER ACTA</button>
+    </form>
+  </div>
+  <div class="w-full d-flex">
+    <div class="w-full">
+      <div class="content-table-preferencial">
+        <div class="table-preferencial-grid">
+          <div class="header-table-preferencial">
+            <div class="celda-preferencial">N°</div>
+            <div class="celda-preferencial">
+              Organizaciones Políticas
+            </div>
+
+            <div class="group-celda-preferencial">
+              VOTOS
+              <div class="group-celda-preferencial-item">
+                <div>1º Dig.</div>
+                <div>2º Dig.</div>
+                <div>3º Dig.</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="left-container"
+            class="scroll-vertical "
+            style="
+
+                        overflow-y: scroll;
+                        height: 330px;
+                      "
+            id="left-container"
+            (scroll)="onScroll('left')"
+          >
+            <form [formGroup]="formGroupSeccionVoto" autocomplete="off">
+              <div formGroupName="params" class="focus">
+                <div *ngFor="let votoItem of this.actaPorCorregirBean.agrupacionesPoliticas ; index as i" class="item-content-preferencial">
+                  <div class="item-table-preferencial">{{i+1}}</div>
+                  <div class="item-table-preferencial">
+                    {{votoItem.organizacionPolitica}}
+                  </div>
+                  <div class="item-table-preferencial tres">
+                    <mat-form-field
+                      *ngIf="votoItem.primeraDigitacion!=='null'; else achurado"
+                      [ngClass]="votoItem.primeraDigitacion == votoItem.segundaDigitacion ? 'acta-corregir-pref':'acta-corregir-pref yellow'"
+                      appearance="outline"
+                    >
+                      <input
+                        matInput
+                        type="text"
+                        placeholder=""
+                        [readonly]="true"
+                        [value]="votoItem.primeraDigitacion"
+                      />
+                    </mat-form-field>
+                    <mat-form-field
+                      *ngIf="votoItem.segundaDigitacion!=='null'; else achurado"
+                      [ngClass]="votoItem.primeraDigitacion == votoItem.segundaDigitacion ? 'acta-corregir-pref':'acta-corregir-pref yellow'"
+                      appearance="outline"
+                    >
+                      <input
+                        matInput
+                        type="text"
+                        placeholder=""
+                        [readonly]="true"
+                        [value]="votoItem.segundaDigitacion"
+                      />
+                    </mat-form-field>
+                    <mat-form-field class="acta-corregir-pref"
+                                    *ngIf="formGroupSeccionVoto.get('params.'+votoItem.idDetActa+'-'+i) && votoItem.terceraDigitacion !=='null'; else achuradoTemplateTotal"
+                                    appearance="outline"
+                    >
+                      <input #votoInput
+                             [id]="'mat-input-total-'+ i"
+                             matInput
+                             [formControlName]="votoItem.idDetActa+'-'+i"
+                             sceFocusActaCorregirEnter
+                             sceFocusActaCorregirFlecha
+                             [rowIndex]="i"
+                             [colIndex]="0"
+                             sceNumerosHash
+                             maxlength="3"
+                             (change)="changeVoto(votoItem.idDetActa,false,i)"
+                             [readonly] = "votoItem.terceraDigitacion == 'null' ? true : false"
+                      />
+                    </mat-form-field>
+                    <ng-template #achuradoTemplateTotal>
+                      <ng-container *ngTemplateOutlet="achuradoTotal3Dig; context: { i: i }"></ng-container>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div id="right-container"
+          class="table-preferencial-grid2 container-scroll-none2"
+          style="overflow: auto; height: 385px"
+          id="right-container"
+          (scroll)="onScroll('right')"
+        >
+          <div class="header-table-preferencial p-sticky">
+            <div *ngFor="let votPref of times; index as jj" class="group-celda-preferencial">
+              VP{{jj+1}}
+              <div class="group-celda-preferencial-item">
+                <div>1º Dig.</div>
+                <div>2º Dig.</div>
+                <div>3º Dig.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="scroll-vertical">
+            <form [formGroup]="formGroupSeccionVotoPref" autocomplete="off">
+              <div formGroupName="params">
+                <div *ngFor="let votoItem of this.actaPorCorregirBean.agrupacionesPoliticas; index as i" style="display: flex" class="focus">
+                  <ng-container *ngIf="votoItem.votosPreferenciales && votoItem.votosPreferenciales.length>0; else nullCase">
+                    <div *ngFor="let votoPref of votoItem.votosPreferenciales; index as j" class="item-table-votos">
+                      <mat-form-field
+                        *ngIf="votoPref.primeraDigitacion!=='null'; else achurado"
+                        [ngClass]="votoPref.primeraDigitacion == votoPref.segundaDigitacion ? 'acta-corregir-pref':'acta-corregir-pref yellow'"
+                        appearance="outline"
+                      >
+                        <input
+                          matInput
+                          type="text"
+                          placeholder=""
+                          [value]="votoPref.primeraDigitacion"
+                          readonly = true
+                        />
+                      </mat-form-field>
+                      <mat-form-field
+                        *ngIf="votoPref.segundaDigitacion!=='null'; else achurado"
+                        [ngClass]="votoPref.primeraDigitacion == votoPref.segundaDigitacion ? 'acta-corregir-pref':'acta-corregir-pref yellow'"
+                        appearance="outline"
+                      >
+                        <input
+                          matInput
+                          type="text"
+                          placeholder=""
+                          [value]="votoPref.segundaDigitacion"
+                          readonly = true
+                        />
+                      </mat-form-field>
+                      <mat-form-field  class=" acta-corregir-pref"
+                                       *ngIf="formGroupSeccionVotoPref.get('params.'+votoPref.idDetActaPreferencial+'-'+i+'-'+j) && votoPref.terceraDigitacion!=='null'; else achuradoTemplatePref"
+                                       appearance="outline"
+                      >
+                        <input #votoInput [id]="'mat-input-pref-'+ i+'-'+ j" matInput [formControlName]="votoPref.idDetActaPreferencial+'-'+i+'-'+j"
+                               sceFocusActaCorregirEnter
+                               sceFocusActaCorregirFlecha
+                               [rowIndex]="i"
+                               [colIndex]="j"
+                               sceNumerosHash
+                               (change)="changeVoto(votoPref.idDetActaPreferencial,true,i,j)"
+                               maxlength="3"
+                               [readonly] = "votoPref.terceraDigitacion == 'null' ? true : false"
+                        />
+                      </mat-form-field>
+                      <ng-template #achuradoTemplatePref>
+                        <ng-container *ngTemplateOutlet="achuradoPref3Dig; context: { i: i,j:j }"></ng-container>
+                      </ng-template>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-preferencial-grid3">
+        <div class="header-table-preferencial">
+          <div class="celda-preferencial"></div>
+          <div class="celda-preferencial"></div>
+
+          <div class="group-celda-preferencial">
+            VOTOS
+            <div class="group-celda-preferencial-item">
+              <div>1º Dig.</div>
+              <div>2º Dig.</div>
+              <div>3º Dig.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="scroll-vertical">
+          <form [formGroup]="formGroupSeccionCvas" autocomplete="off">
+            <div class="item-content-preferencial">
+              <div class="item-table-preferencial">
+                Ciudadanos que votaron
+              </div>
+              <div class="item-table-preferencial tres vot">
+                <mat-form-field
+                  [ngClass]="actaPorCorregirBean.cvas.primeraDigitacion == actaPorCorregirBean.cvas.segundaDigitacion ? 'acta-corregir-pref':'acta-corregir-pref yellow'"
+                  appearance="outline"
+                >
+                  <input matInput type="text" placeholder=""
+                         [value]="actaPorCorregirBean.cvas.primeraDigitacion"
+                         readonly = true
+                  />
+                </mat-form-field>
+                <mat-form-field
+                  [ngClass]="actaPorCorregirBean.cvas.primeraDigitacion == actaPorCorregirBean.cvas.segundaDigitacion ? 'acta-corregir-pref':'acta-corregir-pref yellow'"
+                  appearance="outline"
+                >
+                  <input matInput type="text" placeholder=""
+                         [value]="actaPorCorregirBean.cvas.segundaDigitacion"
+                         readonly = true
+                  />
+                </mat-form-field>
+                <mat-form-field  class=" acta-corregir-pref" appearance="outline"
+                >
+                  <input #inputCvas matInput type="text" placeholder=""
+                         (change)="changeCvas()"
+                         maxlength="3"
+                         formControlName="ciudadanosControl"
+                         sceNumerosHashN
+
+
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </form>
+
+          <div *ngFor="let observacion of this.actaPorCorregirBean.observaciones; index as i" class="item-content-preferencial">
+            <div class="item-table-preferencial">
+              {{observacion.detalle}}
+            </div>
+            <div class="item-table-preferencial tres">
+              <div class="content-checkvotos">
+                <mat-checkbox [checked]="observacion.primeraDigitacion=='SI'" disabled="true"></mat-checkbox>
+              </div>
+
+              <div class="content-checkvotos">
+                <mat-checkbox [checked]="observacion.segundaDigitacion=='SI'" disabled="true"></mat-checkbox>
+              </div>
+              <div class="content-checkvotos">
+                <mat-checkbox #observaciones [disabled] = "i==0 && observacion.terceraDigitacion == 'SI' ? true: false" [checked]="observacion.terceraDigitacion=='SI'" (change)="changeObservacion(i, $event)"></mat-checkbox>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<ng-template #nullCase let-i="index">
+  <div *ngFor="let votoPref of times; index as j" class="item-table-votos sinvotos">
+    <div class="inputfalso"></div>
+    <div class="inputfalso"></div>
+    <div class="inputfalso"></div>
+  </div>
+</ng-template>
+
+<ng-template #achurado>
+  <mat-form-field
+    class="acta-corregir-pref black"
+    appearance="outline"
+  >
+    <input
+      matInput
+      type="text"
+      placeholder=""
+      value=""
+      readonly = true
+    />
+  </mat-form-field>
+</ng-template>
+
+<ng-template #achuradoTotal3Dig let-i="i">
+  <mat-form-field
+    class="acta-corregir-pref black"
+    appearance="outline"
+  >
+    <input
+      matInput
+      [id]="'mat-input-total-'+ i"
+      sceFocusActaCorregirEnter
+      sceFocusActaCorregirFlecha
+      [rowIndex]="i"
+      [colIndex]="0"
+      type="text"
+      placeholder=""
+      readonly = true
+    />
+  </mat-form-field>
+</ng-template>
+
+<ng-template #achuradoPref3Dig let-i = "i" let-j = "j">
+  <mat-form-field
+    class="acta-corregir-pref black"
+    appearance="outline"
+  >
+    <input
+      matInput
+      sceFocusActaCorregirEnter
+      sceFocusActaCorregirFlecha
+      [rowIndex]="i"
+      [colIndex]="j"
+      type="text"
+      placeholder=""
+      readonly = true
+    />
+  </mat-form-field>
+</ng-template>
+
+<ng-template #achuradoDisabled>
+  <mat-form-field
+    class="acta-corregir-pref black"
+    appearance="outline"
+  >
+    <input
+      matInput
+      type="text"
+      placeholder=""
+      value=""
+      disabled = true
+    />
+  </mat-form-field>
+</ng-template>

@@ -1,0 +1,63 @@
+<section class="secciones">
+  <h1 class="titulo1">{{tituloComponente}}</h1>
+  <article class="w-100">
+    <div class="smallTabs">
+      <div class="section-flex">
+        <section class="w-100 cont-info pr-0 pl-2">
+          <article class=" section-flex pr-0">
+            <div class="w-full flex-bottom d-flex between-flex">
+              <div class="d-flex items-end">
+                <div>
+                  <label for="actaInput">Mesa</label>
+                  <div class="d-flex">
+                    <input id="actaInput" name="numeMesa" #refNumeMesa maxlength="6"
+                           [formControl]="mesaFormControl"  type="text" class="input_buscar" autocomplete="off" sceSoloNumeros />
+                  </div>
+                </div>
+
+                <div class="">
+                  <div class="d-flex">
+                    <button class="estilo2 ml-2" (click)="buscarMesa()">BUSCAR</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+          <div class="scrolltablReimpresion px-0">
+            <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+              <ng-container matColumnDef="position">
+                <mat-header-cell *matHeaderCellDef class="header-numero-pagina"> N°</mat-header-cell>
+                <mat-cell *matCellDef="let element;let i = index" class="header-numero-pagina"> {{getDisplayIndex(i)}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="acta">
+                <mat-header-cell *matHeaderCellDef> Acta</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.acta}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="eleccion">
+                <mat-header-cell *matHeaderCellDef class="header-nombre-eleccion"> Elección</mat-header-cell>
+                <mat-cell *matCellDef="let element" class="header-nombre-eleccion"> {{element.eleccion}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="descripcionCargo">
+                <mat-header-cell *matHeaderCellDef> Descripción de cargo</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.descripcionCargo}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="nombreArchivo">
+                <mat-header-cell *matHeaderCellDef class="header-nombre-reimpresion"> Cargo</mat-header-cell>
+                <mat-cell *matCellDef="let element" class="header-nombre-reimpresion"> {{element.nombreArchivo}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="acciones">
+                <mat-header-cell *matHeaderCellDef class="w-acciones"> Acciones</mat-header-cell>
+                <mat-cell *matCellDef="let element;let i = index " class="w-acciones">
+                  <button (click)="descargarCargo(element)" title="Ver cargo" class="btn_observar"></button>
+                </mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+          </div>
+          <mat-paginator #paginator [pageSizeOptions]="[10, 20, 40]" showFirstLastButtons></mat-paginator>
+        </section>
+      </div>
+    </div>
+  </article>
+</section>

@@ -1,0 +1,21 @@
+.header-op-pref-10{
+    min-width: 30%;
+  }
+
+.col-dato-total-pref-10{
+    min-width: calc(30% + 50px);
+}
+
+// Ajuste para la columna "Total de Votos"
+::ng-deep .mat-column-cantidadvotos {
+    min-width: 120px !important;
+    width: 120px;
+}
+
+.table-scroll {
+    overflow-x: auto;
+}
+
+.width-pref {
+    min-width: 100px;
+}

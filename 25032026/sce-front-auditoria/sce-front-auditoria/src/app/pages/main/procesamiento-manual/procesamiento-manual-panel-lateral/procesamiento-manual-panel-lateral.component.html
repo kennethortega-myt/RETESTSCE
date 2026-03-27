@@ -1,0 +1,81 @@
+<div class="card-procesamiento-manual mt-18">
+  <h3 class="titulo3 m-0">Motivo de envío de Acta a observada</h3>
+  <div class="d-flex flex-column mt-10 gap-10">
+    <div class="check-actas">
+      <input type="checkbox" [formControl]="checkSinDatosFC" (change)="sinDatosChange.emit($event)">
+      <label>Acta Sin Datos</label>
+    </div>
+    <div class="check-actas">
+      <input type="checkbox" [formControl]="checkSinFirmasFC" (change)="sinFirmasChange.emit($event)">
+      <label>Acta Sin Firmas</label>
+    </div>
+    <div class="check-actas">
+      <input type="checkbox" [formControl]="checkSolNulidadFC" (change)="solNulidadChange.emit($event)">
+      <label>Solicitud de Nulidad</label>
+    </div>
+  </div>
+</div>
+
+<div class="card-procesamiento-manual mt-18">
+  <form [formGroup]="formGroupIntalacion" autocomplete="off">
+    <h3 class="titulo3 m-0">Fecha y hora de instalación</h3>
+    <div class="d-flex flex-column mt-10 gap-10">
+      <div>
+        <mat-form-field appearance="outline">
+          <input matInput formControlName="fechaInstalacion"
+                 (dateChange)="changeHoraInicio.emit()"
+                 [matDatepicker]="dp1"
+                 [min]="minFechaInstalacion"
+                 [max]="maxFechaInstalacion" readonly>
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="dp1"></mat-datepicker-toggle>
+          <mat-datepicker #dp1></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="form-field">
+          <input matInput type="text" placeholder="HH:MM"
+                 formControlName="horaInicioFormControl"
+                 (change)="changeHoraInicio.emit()"
+                 maxlength="5"
+                 sceUppercaseFormReact sceNoEspacioInicio sceNumerosDosPuntoN />
+          <button mat-icon-button matSuffix><mat-icon>access_time</mat-icon></button>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="card-procesamiento-manual mt-18">
+  <form [formGroup]="formGroupEscrutinio" autocomplete="off">
+    <h3 class="titulo3 m-0">Fecha y hora de finalización del escrutinio</h3>
+    <div class="d-flex flex-column mt-10 gap-10">
+      <div>
+        <mat-form-field appearance="outline" [style.display]="isHoraEscrutinioN ? 'block' : 'none'">
+          <input matInput value="N" readonly disabled>
+          <mat-hint>DD/MM/YYYY</mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="outline" [style.display]="!isHoraEscrutinioN ? 'block' : 'none'">
+          <input matInput formControlName="fechaEscrutinio"
+                 (dateChange)="changeHoraFin.emit()"
+                 [matDatepicker]="dp2"
+                 [min]="minFechaEscrutinio"
+                 [max]="maxFechaEscrutinio" readonly>
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="dp2"></mat-datepicker-toggle>
+          <mat-datepicker #dp2></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="form-field">
+          <input matInput type="text" placeholder="HH:MM"
+                 formControlName="horaFinFormControl"
+                 (change)="changeHoraFin.emit()"
+                 maxlength="5"
+                 sceUppercaseFormReact sceNoEspacioInicio sceNumerosDosPuntoN />
+          <button mat-icon-button matSuffix><mat-icon>access_time</mat-icon></button>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</div>

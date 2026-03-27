@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sce-front
+spec:
+  replicas: 1 #MIN_REPLICAS
+  selector:
+    matchLabels:
+      app: sce-front
+  strategy:
+    type: RollingUpdate #ESTATEGIA DE CREACION
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: sce-front
+        tier: frontend
+        tierType: bussines #support,commons
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: node-role
+                    operator: In
+                    values:
+                      - worker   #pruebas-carga
+      containers:
+        - name: sce-front
+          image: harbor-registry.onpe.gob.pe/sce/sce-nacion-frontend:2.7
+          imagePullPolicy: Always
+          ports:
+            - name: app-port
+              containerPort: 80
+          resources:
+            requests:
+              memory: "4Gi"
+              cpu: "1000m"
+          env:
+            - name: APP_NAME
+              value: sce-front

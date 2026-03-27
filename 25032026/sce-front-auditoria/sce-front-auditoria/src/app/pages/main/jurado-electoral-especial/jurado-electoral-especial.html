@@ -1,0 +1,160 @@
+<section class="secciones">
+  <div>
+    <h1 class="titulo1">Jurado Electoral Especial</h1>
+    <section class="section-flex ">
+
+      <article class="w-20 cuadro-blanco-2 ">
+        <div class="w-100" *ngIf="isNacion">
+          <label for="procesoFormControl">Proceso:</label>
+          <mat-form-field appearance="outline">
+            <mat-select (selectionChange)="seleccionarProceso()" [formControl]="procesoFormControl"  placeholder="SELECCIONE">
+              <mat-option *ngFor="let proc of listProceso" [value]="proc">{{proc.nombre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="formulario section-flex ">
+          <div class="w-100">
+            <label for="buscar">Buscar:</label>
+            <mat-form-field appearance="outline" class="w-100 paddT6">
+              <input matInput placeholder="Buscar" name="buscar" [(ngModel)]="search">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="w-100">
+          <button class="estilo1 w-full mx-0" (click)="buscar()" *ngIf="!clearSearch"> BUSCAR</button>
+          <button class="estilo2 w-full mx-0" (click)="clear()" *ngIf="clearSearch"> LIMPIAR</button>
+        </div>
+      </article>
+      <section class="w-80 pb-0 cont-info pl-2 pr-0 ">
+        <article class=" section-flex p-r">
+          <div class="w-100  contenido-scrosll px-0 ">
+            <div class="scrolltablajee">
+               <table mat-table [dataSource]="listJuradoElectoral">
+
+                  <!-- Nº -->
+                  <ng-container matColumnDef="numero">
+                    <th mat-header-cell *matHeaderCellDef class="txt-center"> No. </th>
+                    <td mat-cell *matCellDef="let jurado; let i = index" class="txt-center">
+                      {{ getRowIndex(i) }}
+                    </td>
+                  </ng-container>
+
+                  <!-- Código CC -->
+                  <ng-container matColumnDef="codigoCC">
+                    <th mat-header-cell *matHeaderCellDef class="txt-center"> Código CC </th>
+                    <td mat-cell *matCellDef="let jurado" class="txt-center">
+                      {{ jurado.codigoCentroComputo }}
+                    </td>
+                  </ng-container>
+
+                  <!-- Nombre CC -->
+                  <ng-container matColumnDef="nombreCC">
+                    <th mat-header-cell *matHeaderCellDef class="txt-center"> Nombre CC </th>
+                    <td mat-cell *matCellDef="let jurado" class="txt-center">
+                      {{ jurado.nombreCentroComputo }}
+                    </td>
+                  </ng-container>
+
+                  <!-- JEE -->
+                  <ng-container matColumnDef="jee">
+                    <th mat-header-cell *matHeaderCellDef class="txt-center"> JEE </th>
+                    <td mat-cell *matCellDef="let jurado" class="txt-center">
+                      <span *ngIf="!jurado.isEdit">{{ jurado.nombreJEE }}</span>
+
+                      <mat-form-field *ngIf="jurado.isEdit" appearance="outline" class="w-full">
+                        <mat-select [(ngModel)]="jurado.idJEE">
+                          <mat-option *ngFor="let tipo of listODPEJEE" [value]="tipo.codigoS">
+                            {{ tipo.nombre }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </td>
+                  </ng-container>
+
+                  <!-- Dirección -->
+                  <ng-container matColumnDef="direccion">
+                    <th mat-header-cell *matHeaderCellDef class="txt-center"> Dirección </th>
+                    <td mat-cell *matCellDef="let jurado" class="txt-center">
+                      <span *ngIf="!jurado.isEdit">{{ jurado.direccion }}</span>
+                      <mat-form-field *ngIf="jurado.isEdit" appearance="outline" class="w-full">
+                        <input matInput [(ngModel)]="jurado.direccion">
+                      </mat-form-field>
+                    </td>
+                  </ng-container>
+
+                  <!-- Apellido Paterno -->
+                  <ng-container matColumnDef="apellidoPaterno">
+                    <th mat-header-cell *matHeaderCellDef class="txt-center"> Apellido Paterno </th>
+                    <td mat-cell *matCellDef="let jurado" class="txt-center">
+                      <span *ngIf="!jurado.isEdit">{{ jurado.apellidoPaterno }}</span>
+                      <mat-form-field *ngIf="jurado.isEdit" appearance="outline" class="w-full">
+                        <input matInput [(ngModel)]="jurado.apellidoPaterno">
+                      </mat-form-field>
+                    </td>
+                  </ng-container>
+
+                  <!-- Apellido Materno -->
+                  <ng-container matColumnDef="apellidoMaterno">
+                    <th mat-header-cell *matHeaderCellDef class="txt-center"> Apellido Materno </th>
+                    <td mat-cell *matCellDef="let jurado" class="txt-center">
+                      <span *ngIf="!jurado.isEdit">{{ jurado.apellidoMaterno }}</span>
+                      <mat-form-field *ngIf="jurado.isEdit" appearance="outline" class="w-full">
+                        <input matInput [(ngModel)]="jurado.apellidoMaterno">
+                      </mat-form-field>
+                    </td>
+                  </ng-container>
+
+                  <!-- Nombres -->
+                  <ng-container matColumnDef="nombres">
+                    <th mat-header-cell *matHeaderCellDef class="txt-center"> Nombres </th>
+                    <td mat-cell *matCellDef="let jurado" class="txt-center">
+                      <span *ngIf="!jurado.isEdit">{{ jurado.nombreRepresentante }}</span>
+                      <mat-form-field *ngIf="jurado.isEdit" appearance="outline" class="w-full">
+                        <input matInput [(ngModel)]="jurado.nombreRepresentante">
+                      </mat-form-field>
+                    </td>
+                  </ng-container>
+
+                  <!-- Acciones -->
+                  <ng-container matColumnDef="acciones">
+                    <th mat-header-cell *matHeaderCellDef class="txt-center"> Acciones </th>
+                    <td mat-cell *matCellDef="let jurado" class="txt-center">
+                      <ng-container *ngIf="!jurado.isEdit">
+                        <button mat-icon-button aria-label="Editar" (click)="editarJEE(jurado)">
+                          <mat-icon>edit</mat-icon>
+                        </button>
+                      </ng-container>
+
+                      <ng-container *ngIf="jurado.isEdit">
+                        <button mat-icon-button aria-label="Cancelar" (click)="cancelarJEE(jurado)">
+                          <mat-icon>cancel</mat-icon>
+                        </button>
+                        <button mat-icon-button aria-label="Guardar" (click)="guardarJEE(jurado)">
+                          <mat-icon>save</mat-icon>
+                        </button>
+                      </ng-container>
+                    </td>
+                  </ng-container>
+
+                  <!-- Header y filas -->
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                </table>
+            </div>
+
+            <mat-paginator
+              (page)="eventosPaginador($event)"
+              [length]="totalRegistro"
+              [pageSize]="pageSize"
+              [pageSizeOptions]="[50, 100]"
+              showFirstLastButtons
+            ></mat-paginator>
+          </div>
+
+        </article>
+
+      </section>
+    </section>
+  </div>
+</section>

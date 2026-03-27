@@ -1,0 +1,245 @@
+<section class="secciones">
+  <h1 class="titulo1">{{tituloAlert}}</h1>
+  <div *ngIf="isConsulta" class="seccion-unidos" style="height: calc(100vh - 224px);">
+    <article class="w-20 cuadro-blanco-2 flex-col-omiso">
+      <div class="formulario section-flex">
+        <div class="w-100">
+          <label for="cmbProceso">Proceso:</label>
+          <mat-form-field appearance="outline">
+            <mat-select id="cmbProceso" [formControl]="procesoControl" name="idProceso">
+              <mat-option [value]="0">SELECCIONE</mat-option>
+              <mat-option *ngFor="let proceso of listProceso" [value]="proceso.id">
+                {{ proceso.cnombre }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="w-100">
+          <label for="cmbTipoPerdida">Tipo pérdida</label>
+          <mat-form-field appearance="outline">
+            <mat-select id="cmbTipoPerdida" [formControl]="tipoPerdidaFC" placeholder="Sin Pérdida" >
+              <mat-option [value]="null">Sin Pérdida</mat-option>
+              <mat-option *ngFor="let catalogo of listTipoPerdidas"
+                          [value]="catalogo" [disabled]="catalogo.codigoS === 'S'">{{catalogo.nombre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="w-100">
+          <mat-checkbox [formControl]="reprocesamientoControl">Reprocesamiento</mat-checkbox>
+        </div>
+        <button class="estilo2 w-full" (click)="buscarRegistoMM()">
+          BUSCAR
+        </button>
+      </div>
+    </article>
+    <article class="w-80">
+      <div class="contenido-scroll cont-anuncio">
+        <div class="personaje-anuncio">
+          <p>
+            <span class="text-tooltip text-left">Hoja de asistencia de miembros de mesa
+              pendientes</span>
+            <span class="text-center text-tooltip2">Para Iniciar el Registro de Omisos de Click en Buscar</span>
+          </p>
+          <img src="../assets/img/personaje1.svg" alt="" />
+        </div>
+      </div>
+    </article>
+  </div>
+  <section *ngIf="!isConsulta" class="seccion-unidos" style="height: calc(100vh - 225px);">
+    <article class="w-20 cuadro-blanco-2 flex-col-omiso">
+      <form [formGroup]="formGroupMesa" class="formulario section-flex">
+        <h3 class="titulo2">Mesa {{data.mesa}}</h3>
+
+        <div class="content-grid-two">
+          <div class="grid-two">
+            <div class="mt-10">
+              <label for="electInput">Nº Electores</label>
+              <mat-form-field appearance="outline">
+                <input id="electInput" matInput type="text" placeholder="" formControlName="electoresHabiles" />
+              </mat-form-field>
+            </div>
+            <div class="mt-10">
+              <label for="electAusentes">Nº Electores Ausentes</label>
+              <mat-form-field appearance="outline">
+                <input id="electAusentes" matInput type="text" placeholder="" formControlName="electoresAusentes" />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full mt-10">
+          <label for="departInput">Departamento</label>
+          <mat-form-field appearance="outline">
+            <input id="departInput" matInput type="text" placeholder="" formControlName="departamento" />
+          </mat-form-field>
+        </div>
+        <div class="w-full mt-10">
+          <label for="provinInput">Provincia</label>
+          <mat-form-field appearance="outline">
+            <input id="provinInput" matInput type="text" placeholder="" formControlName="provincia" />
+          </mat-form-field>
+        </div>
+        <div class="w-full mt-10">
+          <label for="distritoInput">Distrito</label>
+          <mat-form-field appearance="outline">
+            <input id="distritoInput" matInput type="text" placeholder="" formControlName="distrito" />
+          </mat-form-field>
+        </div>
+        <div class="w-full mt-10">
+          <label for="localInput">Local</label>
+          <mat-form-field appearance="outline">
+            <input id="localInput" matInput type="text" placeholder="" formControlName="localVotacion" />
+          </mat-form-field>
+        </div>
+      </form>
+      <div class="content-alert-reg-omisos">
+        <img src="../../assets/icon-alert-rojo.svg" alt="" />
+        <div class="alert-reg-omisos">
+          <h5 class="mr-12 ml-05">{{totalOmisos}}</h5>
+          <h6 class="ml-05">
+            Omisos
+          </h6>
+        </div>
+      </div>
+    </article>
+    <article *ngIf="currentPage === 0" class="w-80" style="overflow-y: scroll">
+      <div class="contenedor-documento-muestra " style="display: none">
+        <div class="contenido-scroll cont-anuncio">
+          <div class="personaje-anuncio">
+            <p>
+              <span>
+                No hay hoja de asistencia de miembros de mesa
+                pendientes</span><br />
+              Para iniciar el registro de Omisos de Click en Buscar
+            </p>
+            <img src="../assets/img/personaje1.svg" alt="" />
+          </div>
+        </div>
+      </div>
+      <div class="pagina_hoja_mm" >
+        <div class="paginador_lista_omisos">
+          <div>
+            <h3 class="titulo2">Ciudadanos sorteados</h3>
+          </div>
+          <div class="flechas_navegador">
+            <button [ngClass]="+currentPage == 0 ? 'flecha_iz_grey': 'flecha_iz'"  [disabled]="+currentPage == 0" (click)="changePage('prev')"></button>
+            <button  [ngClass]="!isMesaNoInstalada ? (+currentPage == 1 ? 'flecha_de_grey' : 'flecha_de') : 'flecha_de_grey'" [disabled]="+currentPage == 1 || isMesaNoInstalada || data.paginas[currentPage].tipoDenuncia === 'L'" (click)="changePage('next')" ></button>
+          </div>
+        </div>
+        <div *ngFor="let seccion of data.paginas[currentPage].secciones; let i = index" class="columnas_participacion bg-white-omiso" >
+          <div class="lista_electores lista_miembrosmesa acta-reg-omiso w-elect">
+            <div>
+              <img [src]="seccion.archivoSeccionPng" alt="" />
+            </div>
+          </div>
+          <div class="botonera-omisos" *ngIf="seccion.estado == 1 || seccion.estado==5">
+            <div class="conte_botones">
+              <div class="datos_dni">
+                <div class="content-datos-dni mb-6">
+                  <div class="text-dni">DNI:</div>
+                  <div class="w-70 pl-0 pt-0 pb-0">
+                    <span [ngClass]="{ 'underline': seccion.estado != 1 }" style="font-weight: bold;">
+                      {{seccion.dni}}
+                    </span>
+                  </div>
+                </div>
+                <div class="datos-dni">
+                  <p [ngClass]="{ 'underline': seccion.estado != 1 }">
+                    {{seccion.apellidoPaterno}} {{seccion.apellidoMaterno}}
+                  </p>
+                  <p [ngClass]="{ 'underline': seccion.estado != 1 }">
+                    {{seccion.nombres}}
+                  </p>
+                </div>
+              </div>
+
+              <div class="botones_omisos">
+                <button [ngClass]="(!isMesaNoInstalada && seccion.estado == 1) ? getClaseAsistio(seccion) : ''" (click)="marcarAsistio(seccion,i)" title="Asistió" [disabled]="isMesaNoInstalada || seccion.estado!=1 || data.paginas[currentPage].tipoDenuncia === 'L'">
+                  <img src="../assets/img/icons/check_blanco2.svg" alt="Asistió" />
+                  <div [ngClass]="getClaseTxtAsistio(seccion)">Asistió</div>
+                </button>
+                <button [ngClass]="(!isMesaNoInstalada && seccion.estado == 1) ? getClaseNoAsistio(seccion) : ''" title="No Asistió" (click)="marcarNoAsistio(seccion,i)" [disabled]="isMesaNoInstalada || seccion.estado!=1 || data.paginas[currentPage].tipoDenuncia === 'L'">
+                  <img src="../assets/img/icons/x_blanco2.svg" alt="No Asistió" />
+                  <div class="txt_btn_asistencia p_txt_asistencia">
+                    No Asistió
+                  </div>
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </article>
+    <article *ngIf="currentPage == 1" class="w-80">
+      <div class="contenedor-documento-muestra" style="display: none">
+        <div class="contenido-scroll cont-anuncio">
+          <div class="personaje-anuncio">
+            <p>
+              <span>
+                No hay hojas de control de asistencia de miembros de mesa
+                pendientes</span><br />
+              Para iniciar el registro de Omisos de Click en iniciar
+            </p>
+            <img alt="" src="../assets/img/personaje1.svg" />
+          </div>
+        </div>
+      </div>
+
+      <div class="paginador_lista_omisos">
+        <div>
+          <h3 class="titulo2">
+            Ciudadanos no sorteados
+          </h3>
+        </div>
+        <div class="flechas_navegador">
+          <button [ngClass]="+currentPage == 0 ? 'flecha_iz_grey': 'flecha_iz'"  [disabled]="+currentPage == 0" (click)="changePage('prev')"></button>
+          <button [ngClass]="+currentPage == 1 ? 'flecha_de_grey' : 'flecha_de'" [disabled]="+currentPage == 1" (click)="changePage('next')"></button>
+        </div>
+      </div>
+      <div class="bg-registro">
+        <div class="d-flex">
+          <div class="lista_electocres">
+            <div class="d-flex items-center gap-12">
+              <table class="document-table">
+                <caption class="d-none"></caption>
+                <tr>
+                  <th class="w-doc">DOCUMENTO NACIONAL DE IDENTIDAD</th>
+                  <th class="w-apellidos">APELLIDOS Y NOMBRES</th>
+                  <th>CARGO</th>
+                  <th>FIRMA</th>
+                </tr>
+              </table>
+            </div>
+
+            <div *ngFor="let seccion of data.paginas[currentPage].secciones; let i = index"
+              class="d-flex items-center gap-12 lista-nosorteados">
+              <img alt="" class="width-70" [src]="seccion.archivoSeccionPng" />
+              <div>
+                <div class="datos_dni flex-dni">
+                  <div class="label_dni">DNI:</div>
+                  <mat-form-field appearance="outline">
+                    <input matInput type="text" placeholder="" maxlength="8" [value]="seccion.dni"
+                      (keydown.enter)="onEnter($event, seccion.archivoSeccion)"
+                      (input)="onInputChange($event, seccion.archivoSeccion)" sceSoloNumeros />
+                  </mat-form-field>
+                </div>
+                <div class="content-data">
+                  {{seccion.apellidoPaterno}} {{seccion.apellidoMaterno}} <br>
+                  {{seccion.nombres}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+  <div *ngIf="!isConsulta" class="cont-btn">
+    <button class="estilo1" (click)="openModal()" [disabled]="isMesaNoInstalada || data.paginas[currentPage].tipoDenuncia === 'L'">OBSERVACIONES</button>
+    <button class="estilo2" (click)="confirmarRechazarActa()" [disabled]="isMesaNoInstalada || data.paginas[currentPage].tipoDenuncia === 'L'">RECHAZAR</button>
+    <button class="estilo2" (click)="registrarOmisosMM()">REGISTRAR</button>
+  </div>
+</section>

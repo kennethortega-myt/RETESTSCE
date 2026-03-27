@@ -1,0 +1,91 @@
+<section class="secciones">
+  <div>
+    <h1 class="titulo1">{{ titulo }}</h1>
+    <section class="section-flex ">
+
+      <article class="w-20 cuadro-blanco-2 ">
+        <!-- cambiado form por div -->
+        <div class="formulario section-flex ">
+          <div class="w-100 px-0">
+            <label for="buscar">Usuario:</label>
+            <mat-form-field appearance="outline" class="w-100 paddT6">
+              <input matInput placeholder="Buscar" name="buscar" [(ngModel)]="search">
+            </mat-form-field>
+          </div>
+
+        </div>
+        <div class="w-100 px-0">
+          <button class="estilo1 w-full mx-0" (click)="buscar()" *ngIf="!clearSearch"> BUSCAR</button>
+          <button class="estilo2 w-full mx-0" (click)="clear()" *ngIf="clearSearch"> LIMPIAR</button>
+        </div>
+
+
+      </article>
+
+
+      <section class="w-80 pb-0 cont-info pl-2 pr-0 ">
+
+        <article class=" section-flex p-r">
+
+
+          <div class="w-100  contenido-scrosll px-0 ">
+            <div class="scrolltablamonitoreo">
+              <mat-table [dataSource]="dataSource" class="mat-elevation-z8 table-cierre-sesiones scrollheadermon">
+                <ng-container matColumnDef="#">
+                  <mat-header-cell *matHeaderCellDef class="w-n"> No.</mat-header-cell>
+                  <mat-cell *matCellDef="let row; let i = index" class="w-n">{{ getRowIndex(i) }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="usuario">
+                  <mat-header-cell *matHeaderCellDef> Usuario</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.usuario}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="nombre">
+                  <mat-header-cell *matHeaderCellDef> Nombre</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.nombres}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="apellidoPaterno">
+                  <mat-header-cell *matHeaderCellDef> Apellido Paterno</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.apellidoPaterno}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="apellidoMaterno">
+                  <mat-header-cell *matHeaderCellDef> Apellido Materno</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.apellidoMaterno}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="centro">
+                  <mat-header-cell *matHeaderCellDef> Centro de Cómputo</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.centroComputo}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="sesion">
+                  <mat-header-cell *matHeaderCellDef> Sesión activa</mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" [fontIcon]="element.sesionActiva === 1 ? 'check' : 'close'"
+                    [ngClass]="{'sesion-activa':element.sesionActiva === 1,'sesion-inactiva': element.sesionActiva === 0}"
+                    ></mat-icon>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="accion">
+                  <mat-header-cell *matHeaderCellDef > Acciones </mat-header-cell>
+                  <mat-cell *matCellDef="let element" class="d-flex gap-10">
+                    <button class="btn_reset_sesion" (click)="cerrarSesion(element)" *ngIf="element.sesionActiva === 1 && element.usuario !== usuario.nombre" matTooltip="Cerrar sesión"></button>
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+            </div>
+            <mat-paginator
+              (page)="eventosPaginador($event)"
+              [length]="totalRegistro"
+              [pageSize]="pageSize"
+              [pageSizeOptions]="[50, 100]"
+              showFirstLastButtons
+            ></mat-paginator>
+          </div>
+
+        </article>
+
+      </section>
+    </section>
+  </div>
+</section>

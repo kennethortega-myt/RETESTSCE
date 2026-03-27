@@ -1,0 +1,24 @@
+<h2 class="modalHead titulo2">Documento {{this.nroMesa}}</h2>
+<mat-dialog-content class="mat-typography">
+    <div class="docBox ddd">
+        <div class="bigViewer container-scroll-bg">
+            <img id="actaLado" [src]="imgPngBase64" class="scaler" alt="">
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <div class="bottom-actas-verificar-pop justify-content-between">
+        <div class="d-flex">
+            <div>
+                <button class="btn-ico-control mr-05" (click)="rotarActa()"><img src="../../assets/img/icons/ico-rotar.svg" alt="icono rotar"></button>
+                <button class="btn-ico-control mr-05" (click)="zoomInActa()"><img src="../../assets/img/icons/ico-zoom-in.svg" alt="icono zoom in"></button>
+                <button class="btn-ico-control" (click)="zoomOutActa()"><img src="../../assets/img/icons/ico-zoom-out.svg" alt="icono zoom out"></button>
+            </div>
+            <div class="centrar-leyenda-verificacion mr-0">
+                <img *ngIf="isVisibleTxtLeyenda" class="img-voto" src="../assets/img/ico_check.svg" alt="icono check">  <span *ngIf="isVisibleTxtLeyenda" class="leyenda-verificacion">Validado automaticamente por ONPE</span>
+            </div>
+        </div>
+    </div>
+    <button class="estilo2" cdkFocusInitial (click)="onCerrarModal()" >Cerrar</button>
+</mat-dialog-actions>
+

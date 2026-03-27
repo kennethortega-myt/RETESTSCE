@@ -1,0 +1,34 @@
+<div>
+    <div class="p-sticky px-0 item bg-white">
+        <h3 class="d-flex items-center center-flex m-0 height-28">                        
+            <span class="titulos-article">{{titulo}}</span>                        
+        </h3>
+    </div>    
+
+    <div *ngFor="let voto of detalleVotos" 
+        class="d-flex items-center"         
+        [ngClass]="isPreferencial? 'div-voto-pref' : 'div-voto'">
+        <mat-form-field class="example-full-width"
+            *ngIf="showVoto(voto.idAgrupacion)"
+            [ngClass]="classVoto(voto)" appearance="outline">
+            <input matInput [value]="voto.estado === codigoAchurado ? '' : voto.votos" class="text-center input-voto" disabled="true">
+        </mat-form-field>
+    </div>    
+    
+    <div *ngIf="isResolucionAplicada && indiceActualPref === 0 && cvas" class="d-flex items-center" [ngClass]="isPreferencial? 'div-voto-pref' : 'div-voto'">
+        <mat-form-field class="example-full-width" 
+            appearance="outline"
+            [ngClass]="isNotEqualCvas ? 'diferencias' : ''">
+            <input matInput [value]="cvas" class="text-center input-voto" disabled="true">
+        </mat-form-field>
+    </div>
+
+    <div *ngIf="isResolucionAplicada && indiceActualPref === 0 && detalleVotos && detalleVotos.length > 0 && cvas" class="d-flex items-center justify-content-center" [ngClass]="isPreferencial? 'div-voto-pref' : 'div-voto'">        
+        <mat-checkbox [checked]="isSolicitudNulidad" class="example-margin sol-nulidad" disabled="true"></mat-checkbox>
+    </div>
+
+    <div *ngIf="isResolucionAplicada && indiceActualPref === 0 && detalleVotos && detalleVotos.length > 0 && cvas" class="d-flex items-center justify-content-center" [ngClass]="isPreferencial? 'div-voto-pref' : 'div-voto'">        
+        <mat-checkbox [checked]="isActaSinFirma" class="example-margin sol-nulidad" disabled="true"></mat-checkbox>
+    </div>
+
+</div>

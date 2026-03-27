@@ -1,0 +1,17 @@
+<section class="secciones">
+    <h1 class="titulo1">Reportes - Resoluciones</h1>
+        <div class="conte_sombra p-20">
+            <div class="botonera_header">
+              <button mat-button
+                       *ngIf="Constantes.CB_PERFILES_TODOS.includes(usuario.perfil.descripcion)"
+                       [ngClass]="{'activo': activeMenu === '/main/reportes/resoluciones/digitalizacion'}" (click)="navegar('/main/reportes/resoluciones/digitalizacion')">DIGITALIZACIÓN</button>
+              <button mat-button
+                        *ngIf="Constantes.CB_PERFILES_SCE.includes(usuario.perfil.descripcion)"
+                        [ngClass]="{'activo': activeMenu === '/main/reportes/resoluciones/actas-no-devueltas'}" (click)="navegar('/main/reportes/resoluciones/actas-no-devueltas')">ACTAS NO DEVUELTAS</button>
+              <button mat-button
+                      *ngIf="Constantes.CB_PERFILES_SCE.includes(usuario.perfil.descripcion)"
+                        [ngClass]="{'activo': activeMenu === '/main/reportes/resoluciones/total-actas-enviadas-jee'}" (click)="navegar('/main/reportes/resoluciones/total-actas-enviadas-jee')">TOTAL DE ACTAS ENVIADAS AL JEE</button>
+            </div>
+            <router-outlet></router-outlet>
+        </div>
+</section>

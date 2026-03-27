@@ -1,0 +1,47 @@
+<section class="section-flex  ">
+    <article class="w-50">
+        <div class="cuadro-blanco-2">
+            <div class="lista-num">
+            <ol>
+                <li>Error Materia en el Acta</li>
+                <li>Votos Impugnados </li>
+                <li> Solicitudes de Nulidad </li>
+                <li>Acta sin Datos</li>
+                <li>Legibilidad en el Acta  </li>
+                <li>Acta Incompleta  </li>
+                <li>Acta Extraviada  </li>
+                <li>Error Aritmético en Org. Político/Consulta  </li>
+                <li>Legibilidad en Org. Político/Consulta</li>
+                <li>Acta en Reprocesamiento </li>
+                <li>Acta Sin Firma  </li>
+                <li>Ata Siniestrada</li>
+            </ol>
+        </div>
+        </div>
+    </article>
+
+
+    <article class="w-50">
+        <div class="cuadro-blanco-2">
+
+            <div class="w-100 full">
+              <label for="distInput">Distrital:</label>
+                <mat-form-field *ngFor="let item of OBSERVACIONES" appearance="outline">
+                    <input id="distInput" matInput [value]="item.descripcion" disabled="disabled" />
+                </mat-form-field>
+            </div>
+
+        </div>
+
+
+        <div class="cuadro-blanco-2">
+
+            <div class="w-100 t-c">
+                <button type="button" class="estilo2" (click)="observacionesActa()"> Acta </button>
+
+                <button type="button" class="estilo2" (click)="observacionesDetalle()"> Detalle </button>
+            </div>
+        </div>
+
+    </article>
+</section>

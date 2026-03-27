@@ -1,0 +1,215 @@
+
+.table-actas-corregir .mat-mdc-header-row{
+  display: none;
+}
+
+
+.table-actas-corregir.mat-mdc-table .mdc-data-table__row:nth-child(even){
+  background-color: #ffffff!important;
+}
+
+.table-actas-corregir.mat-mdc-table{
+  box-shadow: 5px 5px 5px -5px rgba(0, 0, 0, 0) !important;
+
+}
+
+
+.table-actas-corregir.mat-mdc-table .mdc-data-table__row:first-child{
+  background-color: #05ABE3!important;
+
+}
+
+.table-actas-corregir.mat-mdc-table .mdc-data-table__row{
+  transition: 0.5s ease;
+  background-color: #ffffff!important;
+}
+
+
+
+
+.table-actas-corregir.mat-mdc-table .mdc-data-table__row:hover
+
+{
+  background-color: #05ABE3!important;
+  cursor: pointer;
+}
+.table-actas-corregir.mat-mdc-table .mdc-data-table__row:hover .mat-column-imagen span,
+.table-actas-corregir.mat-mdc-table .mdc-data-table__row:hover td{
+  color: white !important;
+
+}
+
+.table-actas-corregir.mat-mdc-table .mdc-data-table__row:first-child td{
+
+  color: white !important;
+}
+
+.table-actas-corregir.mat-mdc-table .mdc-data-table__row:first-child .mat-column-imagen span{
+
+  color: white!important;
+}
+
+.table-actas-corregir.mat-mdc-table .mdc-data-table__row .mat-column-imagen span{
+  color: #003770!important;
+
+}
+
+.table-actas-corregir.mat-mdc-table .mdc-data-table__row .mat-column-estado span{
+  color: #D1D1D1!important;
+
+}
+
+
+.table-actas-corregir.mat-mdc-table .mdc-data-table__row .mat-column-imagen{
+
+  width: 10px;
+
+}
+
+.table-actas-corregir.mat-mdc-table .mdc-data-table__row .mat-column-estado{
+
+  width: 10px;
+
+}
+
+.h-36{
+  height: 36px;
+}
+.m-acta{
+  margin: 0px 0px 0px!important;
+}
+
+.max-width-full{
+  max-width: 100%!important;
+}
+
+.d-contents{
+  display: contents;
+}
+.flex-1{
+  flex:1
+}
+
+
+
+
+
+// tabla2
+.table-actas-votaron.mat-mdc-table .mdc-data-table__row .mat-column-numero,
+.table-actas-organizaciones.mat-mdc-table .mdc-data-table__row .mat-column-numero{
+
+  width: 10px;
+
+}
+.table-actas-votaron.mat-mdc-table .mdc-data-table__row .mat-column-digitacion1,
+.table-actas-organizaciones.mat-mdc-table .mdc-data-table__row .mat-column-digitacion1{
+
+  width: 100px;
+  max-width: 100px;
+}
+.table-actas-votaron.mat-mdc-table .mdc-data-table__row .mat-column-digitacion2,
+.table-actas-organizaciones.mat-mdc-table .mdc-data-table__row .mat-column-digitacion2{
+
+  width: 100px;
+  max-width: 100px;
+
+}
+.table-actas-votaron .mat-mdc-form-field,
+.table-actas-organizaciones .mat-mdc-form-field{
+  max-width: 100px!important;
+
+}
+
+
+.table-actas-votaron .mat-mdc-header-row,
+.table-actas-organizaciones .mat-mdc-header-row{
+  height: 48px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+
+.mat-mdc-form-field-infix{
+  background-color: red!important;
+}
+
+.table-actas-votaron  .mdc-data-table__cell,
+.table-actas-organizaciones .mdc-data-table__cell{
+  padding: 0 10px 0px 10px!important;
+}
+.content-table-actas-organizaciones{
+  height: calc(100vh - 603px);
+  min-height: 200px;
+  overflow: auto;
+
+}
+
+.content-table-actas-votaron{
+  height: calc(20vh);
+  overflow: auto;
+}
+
+.width-input-elector{
+  width: 100px;
+  input{
+    text-align: center;
+  }
+}
+.width-input-acta{
+  width: 120px;
+  input{
+    text-align: center;
+  }
+}
+
+
+.center-input-digitacion{
+  input{
+    text-align: center;
+  }
+}
+
+.table-actas-organizaciones{
+
+  .mat-column-nro{
+    width: 5%;
+
+  }
+  .mat-column-organizacionPolitica {
+    width: 45%;
+  }
+  .mat-column-segundaDigitacion,
+  .mat-column-primeraDigitacion,
+  .mat-column-terceraDigitacion
+  {
+    width: 16.66%;
+
+  }
+}
+
+.table-actas-votaron{
+  .mat-column-detalle{
+    width: 50%;
+  }
+  .mat-column-primeraDigitacion{
+    padding: 0 0px 0px 5px !important;
+  }
+  .mat-column-segundaDigitacion,
+  .mat-column-primeraDigitacion,
+  .mat-column-terceraDigitacion
+  {
+    width: 16.66%; padding: 0 0px 0px 5px !important;
+
+  }
+}
+
+.scroll-actas{
+  height: calc(100vh - 227px);
+}
+
+@media (max-width: 1444px) and (max-height: 800px) {
+  .scroll-actas{
+    height: auto;
+  }
+}

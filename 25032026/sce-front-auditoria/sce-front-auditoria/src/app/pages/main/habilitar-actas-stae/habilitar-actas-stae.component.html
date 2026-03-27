@@ -1,0 +1,112 @@
+<section class="secciones veri-resolucion">
+  <div>
+    <h1 class="titulo1">{{tituloAlert}}</h1>
+    <section>
+      <div class="seccion-unidos" style="height: calc(100vh - 227px);">
+        <article class="w-20 w-40 p-r d-flex between-flex flex-column">
+          <form class="formulario section-flex" [formGroup]="formHabilitar" autocomplete="off">
+            <div class="w-100 px-0">
+              <label for="numMesaInput" class="mt-14">Ingrese número de mesa:</label>
+              <div class="d-flex gap-10">
+                <mat-form-field appearance="outline" class="w-100 mx-0 mb-0 paddT6">
+                  <input #numMesaInput id="numMesaInput" matInput placeholder="Número de mesa"
+                         name="numActa" formControlName="numMesaFormControl" maxlength="6" sceSoloNumeros
+                         (keydown.enter)="agregarMesa()"
+                  >
+                </mat-form-field>
+              </div>
+            </div>
+
+            <button class="estilo1 w-full m-0" type="button" (click)="agregarMesa()" [disabled]="isAgregarDisabled">AGREGAR</button>
+
+
+          </form>
+        </article>
+        <article *ngIf="isConsulta" class="w-80 d-flex flex-column">
+          <div class="contenedor-documento-muestra2 w-100 text-center" >
+            <div class=" contenido-scroll cont-anuncio">
+              <div class="personaje-anuncio">
+                <p>
+                  Ingrese el número del mesa.
+                </p>
+                <img src="../assets/img/personaje1.svg" alt="">
+              </div>
+            </div>
+          </div>
+        </article>
+        <article *ngIf="!isConsulta" class="w-80 d-flex flex-column">
+          <div class="w-full">
+            <div class="w-100  contenido-scrosll px-0 " >
+              <div class="scrolltablaHabilitarStae">
+                <mat-table [dataSource]="dataSource" class="mat-elevation-z8 scrollheaderHabilitarStae">
+                  <ng-container matColumnDef="numero">
+                    <mat-header-cell *matHeaderCellDef>Nº</mat-header-cell>
+                    <mat-cell *matCellDef="let element; index as i" class="">{{ getCorrectIndex(i) + 1 }}</mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="mesa">
+                    <mat-header-cell *matHeaderCellDef>
+                      Acta
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let element" class="">
+                      {{element.mesa}}
+                    </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="eleccion">
+                    <mat-header-cell  *matHeaderCellDef>Tipo de elección</mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                      {{element.eleccion}}
+                    </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="tipo-transmision">
+                    <mat-header-cell  *matHeaderCellDef>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <mat-checkbox 
+                          [checked]="todosSeleccionados"
+                          [indeterminate]="algunosSeleccionados"
+                          (change)="seleccionarTodos($event)"
+                          style="margin: 0;">
+                        </mat-checkbox>
+                        <span>Tipo de transmisión</span>
+                      </div>
+                    </mat-header-cell>
+                    <mat-cell  *matCellDef="let element; index as i">
+                      <mat-radio-group aria-label="Select an option" (change)="onRadioChange($event, getCorrectIndex(i))">
+                        <mat-radio-button *ngIf="false" [value]="Constantes.N_TIPO_TRANSMISION_NO_TRANSMITIDA" [checked]="element.tipoTransmision === Constantes.N_TIPO_TRANSMISION_NO_TRANSMITIDA">STAE no transmitida</mat-radio-button>
+                        <mat-radio-button [value]="Constantes.N_TIPO_TRANSMISION_CONTINGENCIA" [checked]="element.tipoTransmision === Constantes.N_TIPO_TRANSMISION_CONTINGENCIA">STAE contingencia</mat-radio-button>
+                      </mat-radio-group>
+                    </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="acciones">
+                    <mat-header-cell  *matHeaderCellDef>Acciones</mat-header-cell>
+                    <mat-cell  *matCellDef="let element; index as i">
+                            <span class="material-icons color-blue cursor-pointer"
+                                  (click)="quitaMesa(i)" onkeypress=""
+                            >
+                                delete
+                                </span>
+                    </mat-cell>
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+                  <mat-row  *matRowDef="let row; columns: displayedColumns2;"></mat-row>
+                </mat-table>
+              </div>
+              <mat-paginator #paginatorStae [pageSize] = "6" [pageSizeOptions]="[6, 12, 24]" showFirstLastButtons >
+              </mat-paginator>
+            </div>
+
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <div class="d-flex j-end mt-18 cont-btn">
+    <button *ngIf="!isConsulta" class="estilo1 m-0" (click)="confirmarGrabar()" type="button">GUARDAR </button>
+
+  </div>
+</section>

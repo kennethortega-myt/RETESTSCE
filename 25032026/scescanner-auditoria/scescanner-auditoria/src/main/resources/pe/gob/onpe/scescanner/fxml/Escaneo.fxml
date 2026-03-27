@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<AnchorPane id="AnchorPaneEscaneo" fx:id="anchorPaneEscaneo" stylesheets="@../styles/styles.css"
+            focusTraversable="true" styleClass="ventana_principal"
+            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="pe.gob.onpe.scescanner.controller.EscaneoController">
+    
+    <children>
+
+        <GridPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" />
+                <ColumnConstraints hgrow="NEVER" minWidth="0.0" />
+                <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="0.0" vgrow="ALWAYS" />
+                <RowConstraints minHeight="0.0" vgrow="NEVER" />
+                <RowConstraints minHeight="0.0" vgrow="ALWAYS" />
+            </rowConstraints>
+            <children>
+                <AnchorPane GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="3"  >
+                    <children>
+                        <AnchorPane AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0.0"> 
+                            <children>
+                                <Label id="lblSaludo1" fx:id="lblSaludo1" focusTraversable="false" styleClass="lbl_text_saludo1" text="Saludos al SCE" alignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.bottomAnchor="30.0"/>
+                                <Label id="lblSaludo2" focusTraversable="false" styleClass="lbl_text_saludo2" text="(Sistema de Cómputo Electoral)" alignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.bottomAnchor="0.0" />
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </AnchorPane>
+                    
+                <AnchorPane  prefHeight="391.0" prefWidth="582.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <children>
+
+                        <!--<AnchorPane AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" AnchorPane.rightAnchor="0" prefHeight="60.0">
+                            <children>
+                                <Label id="lblSaludo1" fx:id="lblSaludo1" focusTraversable="false" styleClass="lbl_text_saludo1" text="Saludos al SCE 2024" alignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" prefHeight="30" />
+                                <Label id="lblSaludo2" focusTraversable="false" styleClass="lbl_text_saludo2" text="(Sistema de Cómputo Electoral)" alignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0" prefHeight="30" />
+                            </children>
+                        </AnchorPane>-->
+
+
+                        <AnchorPane AnchorPane.leftAnchor="2.0" AnchorPane.bottomAnchor="0.0" prefHeight="60.0" prefWidth="274.0">
+                            <children>
+                                <!--<Label id="lblEscaneo" focusTraversable="false" styleClass="lbl_text_escaneo" text="Aun no se realiza el escaneo.&#10;Los archivos escaneados se guardaran&#10;en C:\Documentos\ACTAS_ESCANEADAS..." alignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" />-->
+                            </children>
+                        </AnchorPane>
+
+                        <AnchorPane AnchorPane.rightAnchor="2.0" AnchorPane.bottomAnchor="0.0" prefHeight="60.0" prefWidth="274.0">
+                            <children>
+                                <!--<Label id="lblEscaneo" focusTraversable="false" styleClass="lbl_text_escaneo" text="Existen 160 actas escaneadas por procesar" alignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" />-->
+                            </children>
+                        </AnchorPane>
+
+                        <Button fx:id="btnEscanearDocs" alignment="CENTER" AnchorPane.leftAnchor="14.0" AnchorPane.bottomAnchor="79.0" mnemonicParsing="false" prefHeight="251.0" prefWidth="251.0" styleClass="button_main_scan" text="Escaneo de Documentos" onAction="#onEscanear"/>
+                        <Button fx:id="btnVerDocsEscaneados" alignment="CENTER" AnchorPane.rightAnchor="14.0" AnchorPane.bottomAnchor="79.0" mnemonicParsing="false" prefHeight="251.0" prefWidth="251.0" styleClass="button_main_veractas" text="Documentos Escaneados" onAction="#onVerEscaneados"/>
+                            
+
+                    </children>
+                </AnchorPane>
+            </children>
+        </GridPane>
+        
+        <!--<Label fx:id="lbVersion" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" focusTraversable="false" styleClass="lbl_version"/>-->
+        
+    </children>
+    
+</AnchorPane>

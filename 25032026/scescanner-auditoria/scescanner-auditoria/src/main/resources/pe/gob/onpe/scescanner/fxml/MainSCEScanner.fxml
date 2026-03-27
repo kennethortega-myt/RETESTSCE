@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import java.net.URL?>
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.gob.onpe.scescanner.controller.MainSCEScannerController">
+    <children>
+    <AnchorPane fx:id="anchorPaneMain" styleClass="win_principal" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+        <children>
+            
+            <AnchorPane fx:id="anchorPaneDashboard" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <children>
+                    <AnchorPane prefHeight="96.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <children>
+                            <AnchorPane prefHeight="85.0" styleClass="titulo_principal" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <children>
+                                    
+                                    <StackPane alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                           <ImageView id="iconSCE" pickOnBounds="true" preserveRatio="true" styleClass="main_logo_onpe" />
+                                       </children>
+                                    </StackPane>
+                                    
+                                    <VBox alignment="CENTER_RIGHT" spacing="0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                           <AnchorPane>
+                                              <children>
+                                                  <HBox alignment="CENTER_RIGHT" spacing="0" AnchorPane.rightAnchor="5.0">
+                                                     <children>
+                                                         <Button id="btn_minimize" fx:id="btnMinimize" alignment="CENTER" mnemonicParsing="false" onAction="#onMinimize" prefHeight="25.0" prefWidth="41.0" styleClass="buttons_win,button_win_minimize">
+                                                             <tooltip>
+                                                      <Tooltip text="Minimizar" />
+                                                   </tooltip>
+                                                         </Button>
+                                                         <Button id="btn_maximize" fx:id="btnMaximize" alignment="CENTER" mnemonicParsing="false" onAction="#onMaximize" prefHeight="25.0" prefWidth="41.0" styleClass="buttons_win,button_win_restore">
+                                                             <tooltip>
+                                                      <Tooltip text="Restaurar" />
+                                                   </tooltip>
+                                                         </Button>
+                                                         <Button id="btn_close" fx:id="btnClose" alignment="CENTER" mnemonicParsing="false" onAction="#onClose" prefHeight="25.0" prefWidth="41.0" styleClass="buttons_win,button_win_close">
+                                                             <tooltip>
+                                                      <Tooltip text="Cerrar" />
+                                                   </tooltip>
+                                                         </Button>
+                                                     </children>
+                                                  </HBox>
+                                              </children>
+                                           </AnchorPane>
+                                           <AnchorPane VBox.vgrow="ALWAYS">
+                                              <children>
+                                                  <HBox alignment="CENTER" spacing="7" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
+                                                     <children>
+                                                         <StackPane>
+                                                            <children>
+                                                                <ImageView fx:id="image" fitHeight="32" fitWidth="32" preserveRatio="true" styleClass="img_user" />
+                                                                <Circle fx:id="circle" fill="transparent" radius="20" stroke="#808080" strokeWidth="1.5" />
+                                                            </children>
+                                                         </StackPane>
+                                                         <VBox alignment="CENTER_RIGHT" spacing="0">
+                                                            <children>
+                                                                <Label id="lblComputo" fx:id="lblUsuario" focusTraversable="false" styleClass="lbl_text_ccomputo" text="C.C.LIMA ESTE 2 - SAN JUAN" />
+                                                      <Label id="lblComputo" fx:id="lblComputo" focusTraversable="false" styleClass="lbl_text_ccomputo" text="C.C.LIMA ESTE 2 - SAN JUAN" />
+                                                                <Button id="btn_cerrar" fx:id="btnCerrarSesion" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onCerrarSesion" prefHeight="19.0" prefWidth="78.0" styleClass="button_cerrar_sesion" text="Cerrar Sesión" />
+                                                            </children>
+                                                         </VBox>
+                                                     </children>
+                                                  </HBox>
+                                              </children>
+                                           </AnchorPane>
+                                       </children>
+                                    </VBox>
+
+                                </children>
+                            </AnchorPane>
+
+                            
+
+                        </children>
+                    </AnchorPane>
+
+                    <AnchorPane id="AnchorPaneContenido" fx:id="anchorPaneContenido" AnchorPane.bottomAnchor="38" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="96">
+                        <children>
+                            
+                        </children>
+                    </AnchorPane>
+                    <Label fx:id="lbVersion" focusTraversable="false" styleClass="lbl_version" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
+                </children>
+            </AnchorPane>
+            
+        </children>
+    </AnchorPane>
+    </children>
+            
+    
+    <stylesheets>
+        <URL value="@../styles/styles.css" />
+    </stylesheets>
+</AnchorPane>

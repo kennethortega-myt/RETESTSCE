@@ -1,0 +1,92 @@
+<section class="secciones">
+    <h1 class="titulo1">Reportes Actas</h1>
+        <div class="conte_sombra p-20">
+            <div class="botonera_header">
+                <button mat-button >RESUMEN TOTAL</button>
+                <button mat-button >AVANCE DE ESTADO DE ACTAS</button>
+                <button mat-button class="activo">MESA POR MESA</button>
+                <button mat-button >MESA POR ESTADO</button>
+                <button mat-button >RESULTADOS</button>
+                <button mat-button >DIGITALIZACIÓN</button>
+            </div>
+            <div class="filtros">
+                <div class="filtro">
+                    <label for="tipoProceso">Proceso:</label>
+                    <mat-form-field appearance="outline">
+                        <mat-select id="tipoProceso">
+                            <mat-option [value]="0">SELECCIONE</mat-option>
+                            <mat-option> opcion 1</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="filtro">
+                    <label for="eleccion">Elección:</label>
+                    <mat-form-field appearance="outline">
+                        <mat-select id="eleccion">
+                            <mat-option [value]="0">SELECCIONE</mat-option>
+                            <mat-option>Presidente y Vicepresidente</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="filtro">
+                    <label for="centroComputo">Centro de Cómputo:</label>
+                    <mat-form-field appearance="outline">
+                        <mat-select id="centroComputo">
+                            <mat-option [value]="0">SELECCIONE</mat-option>
+                            <mat-option>Presidente y Vicepresidente</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="filtro">
+                    <label for="departamento">Departamento:</label>
+                    <mat-form-field appearance="outline">
+                        <mat-select id="departamento">
+                            <mat-option [value]="0">SELECCIONE</mat-option>
+                            <mat-option>Presidente y Vicepresidente</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="filtro">
+                    <label for="provincia">Provincia:</label>
+                    <mat-form-field appearance="outline">
+                        <mat-select id="provincia">
+                            <mat-option [value]="0">SELECCIONE</mat-option>
+                            <mat-option>Presidente y Vicepresidente</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="filtro">
+                    <label for="distrito">Distrito:</label>
+                    <mat-form-field appearance="outline">
+                        <mat-select id="distrito">
+                            <mat-option [value]="0">SELECCIONE</mat-option>
+                            <mat-option>Presidente y Vicepresidente</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="filtro">
+                    <label for="numMesaInput">Número de Mesa:</label>
+                    <mat-form-field appearance="outline" >
+                      <input id="numMesaInput" matInput placeholder="Digite numero de mesa" formControlName="numeroMesaFormControl"  />
+                    </mat-form-field>
+                </div>
+                <div class="filtro_boton">
+                    <button class="estilo1">IMPRIMIR</button>    
+                </div>
+                  
+            </div>
+            <h2 class="subtitulo_reportes">Avance de mesa por mesa</h2>
+            <div class="cont-anuncio">
+                <div class="personaje-anuncio">
+                  <p>
+                    Por favor, ingrese el número de acta para realizar la búsqueda.
+                  </p>
+                  <img alt="" src="../assets/img/personaje1.svg" />
+                </div>
+            </div>
+            <iframe title="cargo" class="pdf_incrustado" src="../../../../../assets/pdfs/cargo.pdf"></iframe>
+        </div>
+        <div class="cont-btn">
+            <button class="estilo1">IMPRIMIR</button>
+        </div>
+</section>

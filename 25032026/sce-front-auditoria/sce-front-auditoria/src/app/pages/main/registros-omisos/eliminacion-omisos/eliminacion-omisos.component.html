@@ -1,0 +1,61 @@
+<app-autorizacion-wrapper>
+<section class="secciones">
+    <h1 class="titulo1">Eliminación de omisos</h1>
+    <div class="seccion-unidos ">
+        <article class="w-20 cuadro-blanco-2 flex-col-omiso">
+            <div class="formulario section-flex ">
+                <div class="w-100">
+                    <div class="mt-1">
+                  <label for="numeroMesa">Mesa:</label>
+                  <mat-form-field appearance="outline" class="input-filtro">
+                    <input matInput placeholder="Ingrese mesa" [formControl]="mesaControl" name="numeroMesa" maxlength="6" sceSoloNumerosFormReact>
+                  </mat-form-field>
+                </div>
+                </div>
+                <button class="estilo2 w-full" (click)="buscarMesa()"> AGREGAR</button>
+            </div>
+        </article>
+        <article class="w-80 eleminacion-omisos">
+             <!-- el personaje solo sale cuando no as ingresado ninguna mesa -->
+            <div class=" contenido-scroll cont-anuncio" *ngIf="listData.length == 0">
+                <div class="personaje-anuncio">
+                    <p>
+                        <span class="text-tooltip text-left">Eliminación de omisos</span>
+                        <span class="text-tooltip2 text-center">Digite la mesa que desea eliminar de omisos</span>
+                    </p>
+                    <img src="../assets/img/personaje1.svg" alt="">
+                </div>
+            </div>
+            <!-- FIN el personaje solo sale cuando no as ingresado ninguna mesa -->
+
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="listData.length > 0">
+
+                <ng-container matColumnDef="position">
+                    <th mat-header-cell *matHeaderCellDef class="header-numero centrando-celda"> Nº </th>
+                    <td mat-cell *matCellDef="let element; let i= index" class="header-numero centrando-celda">  {{i+1}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="mesa">
+                    <th mat-header-cell *matHeaderCellDef> Mesa </th>
+                    <td mat-cell *matCellDef="let element"> {{element.mesa}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="accion">
+                    <th mat-header-cell *matHeaderCellDef class="centrando-celda"> Acciones </th>
+                    <td mat-cell *matCellDef="let element" class="centrando-celda"> <button title="Eliminar" class="btn_eliminar" (click)="eliminar(element)"></button> </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+
+
+        </article>
+    </div>
+
+    <div class="cont-btn">
+        <button class=" estilo1"  *ngIf="listData.length > 0" (click)="guardarInformacion()">GRABAR</button>
+    </div>
+</section>
+</app-autorizacion-wrapper>

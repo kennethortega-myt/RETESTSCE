@@ -1,0 +1,43 @@
+<section class="login ">
+  <div> 
+  <img id="loginFondo" [src]="imagenActual" alt="Fondo login">
+
+</div>
+  <form name="login" class="cuadro-blanco-2 " [formGroup]="formGroupParent">
+    <img alt="logo onpe" src="../assets/img/logo-onpe.svg">
+    <h1 class="titulo1">{{tituloComponente}}</h1>
+
+    <label for="usuarioInput">Usuario</label>
+    <mat-form-field appearance="outline">
+      <input matInput id="usuarioInput" name="usuario" type="text" maxlength="50" class="input"
+        formControlName="usuario" />
+    </mat-form-field>
+    <label for="passwordInput" class="mt-1">Contraseña</label>
+    <mat-form-field appearance="outline">
+      <input matInput
+             id="passwordInput"
+             name="password"
+             [type]="hide() ? 'password' : 'text'"
+             class="input"
+             formControlName="clave"
+             maxlength="20"
+             (keydown.enter)="ingresar()"
+      />
+      <button mat-icon-button matSuffix
+              type="button"
+              (click)="clickEvent($event)"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide()">
+        <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <h1 style="color: red;text-align: center;">{{ errorMessage }}</h1>
+    <input value="Entrar" target="_parent" (click)="ingresar()" [disabled]="isLoading" type="button" class="estilo1" />
+    <div class="navegador-recomendado">
+      <img alt="logo brave" src="../assets/img/brave.svg">
+      <span>Navegador recomendado</span>
+      <p>SCE V. 1.3</p>
+    </div>
+  </form>
+</section>

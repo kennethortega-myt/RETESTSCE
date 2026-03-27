@@ -1,0 +1,132 @@
+<section class="secciones">
+  <div>
+    <h1 class="titulo1">Parámetros</h1>
+    <section class="section-flex ">
+
+      <article class="w-20 cuadro-blanco-2 ">
+        <div class="w-100" *ngIf="isNacion">
+          <label for="procesoFormControl">Proceso:</label>
+          <mat-form-field appearance="outline">
+            <mat-select (selectionChange)="seleccionarProceso()" [formControl]="procesoFormControl"
+                        placeholder="SELECCIONE">
+              <mat-option *ngFor="let proc of listProceso" [value]="proc">{{proc.nombre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="formulario section-flex ">
+          <div class="w-100">
+            <label for="buscar">Buscar:</label>
+            <mat-form-field appearance="outline" class="w-100 paddT6">
+              <input matInput placeholder="Buscar" name="buscar" [(ngModel)]="search">
+            </mat-form-field>
+          </div>
+
+        </div>
+        <div class="w-100">
+          <button class="estilo1 w-full mx-0" (click)="buscar()" *ngIf="!clearSearch"> BUSCAR</button>
+          <button class="estilo2 w-full mx-0" (click)="clear()" *ngIf="clearSearch"> LIMPIAR</button>
+        </div>
+
+
+      </article>
+
+
+      <section class="w-80 pb-0 cont-info pl-2 pr-0 ">
+
+        <article class=" section-flex p-r">
+
+
+          <div class="w-100  contenido-scrosll px-0 ">
+            <div class="scrolltablamonitoreo">
+
+              <div class="cabecera-tablaacordeon">
+                <div class="tabla_grid">
+                  <div class="titulo-tablaacordeon">Id</div>
+                  <div class="titulo-tablaacordeon">Parámetro</div>
+                  <div class="titulo-tablaacordeon">Usuario Creación/Valor</div>
+                  <div class="titulo-tablaacordeon">Fecha Creación</div>
+                  <div class="titulo-tablaacordeon">Acciones</div>
+                </div>
+              </div>
+
+              <mat-accordion class="example-headers-align" multi>
+                <mat-expansion-panel
+                *ngFor="let parametro of listParametros" (opened)="cargarDetalle(parametro)" >
+                  <mat-expansion-panel-header>
+                    <div class="tabla_grid">
+                      <div class="centrar-celda"><span>{{parametro.id}}</span></div>
+                      <div class="centrar-horizontal"><span>{{parametro.parametro}}</span></div>
+                      <div class="centrar-horizontal centrar-celda"><span>{{parametro.usuarioCreacion}}</span></div>
+                      <div class="centrar-horizontal centrar-celda">
+                        <span>{{parametro.fechaCreacion | date:'dd/MM/yyyy HH:mm:ss'}}</span></div>
+                    </div>
+                  </mat-expansion-panel-header>
+                  <div *ngFor="let detalle of parametro.detalles" class="desplegando">
+                    <div  class="tabla_grid desplegable-padding" *ngIf="detalle.isEditar">
+                      <div>
+                      </div>
+                      <div>
+                        <mat-form-field appearance="outline" class="w-100 p-0">
+                          <input matInput [(ngModel)]="detalle.nombre" name="nombre" disabled>
+                        </mat-form-field>
+                      </div>
+                      <div>
+                        <mat-form-field appearance="outline" class="w-100 p-0">
+                          <mat-select [(ngModel)]="detalle.tipoDato" (selectionChange)="validarValor(detalle)" [disabled]="true">
+                            <mat-option value="">Seleccione</mat-option>
+                            <mat-option *ngFor="let tipo of listTipoDato" [value]="tipo.id">{{tipo.name}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div *ngIf="detalle.tipoDato === 3">
+                        <mat-form-field appearance="outline" class="w-100 p-0">
+                          <mat-select [(ngModel)]="detalle.valor">
+                            <mat-option  value="true">TRUE</mat-option>
+                            <mat-option  value="false">FALSE</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div *ngIf="detalle.tipoDato !== 3">
+                        <mat-form-field appearance="outline" class="w-100 p-0">
+                          <input matInput  [(ngModel)]="detalle.valor" name="valor" maxlength="50" appSceSoloNumerosExcepto *ngIf="detalle.nombre === 'p_frecuencia_respaldo'">
+                          <input matInput  [(ngModel)]="detalle.valor" name="valor" maxlength="50" sceSoloNumerosFormReact *ngIf="detalle.tipoDato === 1 && detalle.nombre !== 'p_frecuencia_respaldo'">
+                          <input matInput  [(ngModel)]="detalle.valor" name="valor" maxlength="50" *ngIf="detalle.tipoDato !== 1 ">
+                        </mat-form-field>
+                      </div>
+                      <div class="centrar-celda">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="cancelarDetalle(detalle)" onkeypress="" title="Cancelar" class="clickable">cancel</mat-icon>
+                        <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="guardarDetalle(detalle)" onkeypress="" title="Guardar" class="clickable">save</mat-icon>
+                      </div>
+                      <div></div>
+                    </div>
+                    <div class="tabla_grid" *ngIf="!detalle.isEditar">
+                      <div class="centrar-celda"><span>{{detalle.id}}</span></div>
+                      <div class="centrar-horizontal"><span>{{detalle.nombre}}</span></div>
+                      <div class="centrar-horizontal centrar-celda"><span>{{detalle.valor}}</span></div>
+                      <div class="centrar-horizontal centrar-celda">
+                        <span>{{detalle.fechaCreacion | date:'dd/MM/yyyy HH:mm:ss'}}</span></div>
+                      <div class="centrar-celda">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="editarDetalle(detalle)" onkeypress="" title="Editar" class="clickable" >edit</mat-icon>
+                      </div>
+                    </div>
+                    <span class="sin-flecha_despliegue"></span>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+
+            </div>
+            <mat-paginator
+              (page)="eventosPaginador($event)"
+              [length]="totalRegistro"
+              [pageSize]="pageSize"
+              [pageSizeOptions]="[50, 100]"
+              showFirstLastButtons
+            ></mat-paginator>
+          </div>
+
+        </article>
+
+      </section>
+    </section>
+  </div>
+</section>

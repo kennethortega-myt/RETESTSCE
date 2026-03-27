@@ -1,0 +1,40 @@
+<section>
+  <form [formGroup]="formulario" class="cuadro-blanco-2">
+    <h1 class="titulo1">Cambiar Contraseña</h1>
+
+    <label for="actualContrasenaInput">Contraseña Actual</label>
+    <mat-form-field appearance="outline" class="pb-10">
+      <input matInput id="actualContrasenaInput" #actualContrasena [type]="hideActual() ? 'password' : 'text'" class="input"
+             formControlName="actualContrasena" maxlength="20" />
+      <button mat-icon-button matSuffix (click)="toggleCampo('actual')" [attr.aria-pressed]="hideActual()">
+        <mat-icon>{{ hideActual() ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <label for="nuevaContrasenaInput">Nueva Contraseña</label>
+    <mat-form-field appearance="outline">
+      <input matInput id="nuevaContrasenaInput" [type]="hideNueva() ? 'password' : 'text'" class="input"
+             formControlName="nuevaContrasena" maxlength="20" />
+      <button mat-icon-button matSuffix (click)="toggleCampo('nueva')" [attr.aria-pressed]="hideNueva()">
+        <mat-icon>{{ hideNueva() ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <app-validacion-contrasenia [contrasenia]="formulario.get('nuevaContrasena')?.value || ''"></app-validacion-contrasenia>
+
+    <label for="confirmarContrasenaInput">Confirmar Nueva Contraseña</label>
+    <mat-form-field appearance="outline">
+      <input matInput id="confirmarContrasenaInput" [type]="hideConfirmar() ? 'password' : 'text'" class="input"
+             formControlName="confirmarContrasena" maxlength="20" />
+      <button mat-icon-button matSuffix (click)="toggleCampo('confirmar')" [attr.aria-pressed]="hideConfirmar()">
+        <mat-icon>{{ hideConfirmar() ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+    </mat-form-field>
+    @if(mensajeError){<h1 style="color: red;text-align: center;">{{ mensajeError }}</h1>}
+    <div class="actions">
+      <input value="Cambiar Contraseña" target="_parent" type="button" (click)="cambiarContrasena()" [disabled]="isLoading" class="estilo1" />
+    </div>
+  </form>
+</section>
+
+

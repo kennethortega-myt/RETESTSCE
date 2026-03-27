@@ -1,0 +1,33 @@
+<ng-container>
+  <div class="titleModel">
+    <h2 class="titulo3">{{ titulo }}</h2>
+    <p class="texto">{{ subTitulo }}</p>
+  </div>
+  <ul class="opciones-seleccion">
+    <li *ngFor="let menu of data">
+      <a
+        [ngClass]="{ active: idMenuSeleccionado === menu.id }"
+        (click)="seleccionarMenu(menu)"
+        >{{ menu.nombre }}</a
+      >
+    </li>
+    <li class="" *ngIf="mostrarInput">
+      <form [formGroup]="formGroupParent">
+        <div style="display: flex;
+        align-items: center;
+        gap: 10px;padding: 10px;">
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              type="text"
+              [placeholder]="placeholderInput"
+              formControlName="newData"
+              sceSoloAlfaNumerico
+            />
+          </mat-form-field>
+          <button class="btn_guardar" (click)="enviarData()"></button>
+        </div>
+      </form>
+    </li>
+  </ul>
+</ng-container>

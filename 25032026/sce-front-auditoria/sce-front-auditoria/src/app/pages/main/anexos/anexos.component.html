@@ -1,0 +1,156 @@
+ <section class="secciones veri-resolucion">
+  <div>
+    <h1 class="titulo1">Anexos</h1>
+    <section>
+      <div class="seccion-unidos veri-resolucion">
+        <article class="w-20 w-40 p-r">
+          <div class="w-100 verificacion-resolucion">
+            <div class="w-full mr-1 anexos-content-select">
+              <label for="procesoFormControl">PROCESO ELECTORAL</label>
+
+              <mat-form-field appearance="outline" class="mt-8">
+                <mat-select (selectionChange)="obtenerCentro()" [formControl]="procesoFormControl" placeholder="SELECCIONE">
+                  <mat-option *ngFor="let proc of listProceso" [value]="proc">{{proc.nombre}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="w-full mr-1 anexos-content-select mt-1">
+              <label for="centroComputoFormControl">CENTRO DE CÓMPUTO</label>
+
+              <mat-form-field appearance="outline" class="mt-8">
+                <mat-select name="idCentroComputo" [formControl]="centroComputoFormControl"  placeholder="SELECCIONE">
+                  <mat-option *ngFor="let centroComputo of listCentrosComputo" [value]="centroComputo">
+                    {{centroComputo.nombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </article>
+        <article class="w-80 d-flex flex-column">
+          <div class="w-full d-flex">
+            <div class="" class="w-40 content-descarga-anexos">
+              <h2>DESCARGA DE ANEXOS</h2>
+              <div
+                class="flex-content-anexos scroll-anexos"
+
+              >
+                <div class="bg-content-anexos">
+                  <h3>ANEXOS 1</h3>
+                  <p>Haga clic para descargar</p>
+                  <div class="content-button-anexos">
+                    <button (click)="downloandAnexo1()">Tabla actas enviadas al JEE</button>
+                  </div>
+                </div>
+                <div class="bg-content-anexos">
+                  <h3>ANEXOS 2</h3>
+                  <p>Haga clic para descargar</p>
+                  <div class="content-button-anexos">
+                    <button (click)="downloandVotos()">Tablas votos</button>
+                    <button (click)="downloandVotosCifras()">Tablas votos cifras</button>
+                    <button (click)="downloandTablaActas()">Tabla actas</button>
+                    <button (click)="downloandMesasNoInstaladas()">Tabla mesas no instaladas</button>
+                    <button (click)="downloandMaestraOrganiPoli()">Tablas maestra de organizaciones políticas</button>
+                    <button (click)="downloandUbigeo()">Tablas maestra de Ubigeo</button>
+                    <button (click)="downloandODPE()">Tabla de ODPE</button>
+                  </div>
+
+                  <div class="content-button-anexos-descarga">
+                    <button class="estilo2" (click)="downloandAnexo2()">DESCARGA ANEXOS 2</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="w-60 d-flex j-end items-end">
+              <div class="personaje-anuncioanexos mt-150">
+                <div class="nube">
+                  <p>
+                    Haga clic sobre cada botón para descargar algo específico,
+                    sobre el botón al final de la lista para todo el anexo, o
+                    sobre el botón inferior derecho al pie de la página para
+                    descargar todos los anexos
+                  </p>
+                </div>
+
+                <img src="../assets/img/personaje1.svg" alt=""/>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <div class="d-flex j-end mt-18 cont-btn">
+    <button class="estilo2 mx-0" type="button" (click)="downloandTotal()">DESCARGAR TODOS</button>
+  </div>
+</section>
+
+
+
+
+<section class="secciones veri-resolucion" *ngIf="false">
+  <div>
+    <h1 class="titulo1">Personero</h1>
+    <section>
+      <div class="seccion-unidos veri-resolucion">
+        <article class="w-20 w-40 p-r">
+          <div class="w-100 verificacion-resolucion">
+            <div class="w-full mr-1 anexos-content-select">
+              <label for="idProceso">PROCESO ELECTORAL</label>
+
+              <mat-form-field appearance="outline" class="mt-8">
+                <mat-select type="" #txtProceso required name="idProceso">
+                  <mat-option value="0">SELECCIONE</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+          </div>
+        </article>
+        <article class="w-80 d-flex flex-column">
+          <div class="w-full d-flex">
+            <div class="" class="w-40 content-descarga-anexos">
+
+              <div class="w-full d-flex">
+                <div class="" class="content-descarga-anexos">
+                  <h2>DESCARGA</h2>
+                  <div
+                    class="flex-content-anexos scroll-anexos"
+
+                  >
+                    <div class="bg-content-anexos w-410">
+
+                      <p>Haga clic para descargar</p>
+                      <div class="content-button-anexos">
+                        <button (click)="openModal()">Avance de Acta Distrital</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="w-60 d-flex j-end items-end">
+              <div class="personaje-anuncioanexos mt-150">
+                <div class="nube">
+                  <p>
+                    Haga clic para descargar los archivos
+                  </p>
+                </div>
+
+                <img src="../assets/img/personaje1.svg" alt=""/>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <div class="d-flex j-end mt-18 cont-btn">
+    <button class="estilo2 mx-0" (click)="openModal()" type="button" >DESCARGAR TODOS</button>
+  </div>
+</section>

@@ -1,0 +1,26 @@
+# Step 1: Build the angular application in a node environment
+FROM node:22 AS build
+
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+
+RUN npm install
+
+COPY . .
+RUN npm run build --configuration=production
+
+# Step 2: Serve the application from an http-server environment
+FROM node:22-alpine
+
+WORKDIR /app
+
+RUN npm install -g http-server
+
+COPY --from=build /app/dist/sce-front/browser /app
+
+RUN cp index.html 404.html
+
+EXPOSE 8080
+
+CMD [ "http-server", "-p", "8080", "-c3600", "." ]

@@ -1,0 +1,59 @@
+<section class="secciones veri-resolucion">
+  <article class="w-100">
+    <h1 class="titulo1">{{tituloComponente}}</h1>
+  </article>
+  <section class="seccion-unidos">
+    <article class="w-20 responsiactas cuadro-blanco-2">
+      <form class="formulario" [formGroup]="formGroupUbigeo">
+        <label for="cmbProceso">Proceso:</label>
+        <mat-form-field appearance="outline">
+          <mat-select id="cmbProceso" name="idProceso" formControlName="procesoFormControl">
+            <mat-option [value]="0">SELECCIONE</mat-option>
+            <mat-option *ngFor="let proceso of listProceso" [value]="proceso.id">
+              {{ proceso.cnombre }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="mt-10">
+          <label for="cmbEleccion">Tipo de elección:</label>
+          <mat-form-field appearance="outline">
+            <mat-select id="cmbEleccion" name="idEleccion" formControlName="eleccionFormControl">
+              <mat-option [value]="0">SELECCIONE</mat-option>
+              <mat-option *ngFor="let eleccion of listEleccion" [value]="eleccion.ccodigo">
+                {{ eleccion.cnombre }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+
+        <div *ngIf="isConsulta" class="boton-full p-0">
+          <button #btnBuscar class="estilo2 full noMarginLR " type="button" (click)="buscarActa()"
+            [disabled]="isLoadingBtn.buscar">
+            BUSCAR
+          </button>
+        </div>
+        <div *ngIf="!isConsulta">
+          <app-ubigeo-display
+            [departamento]="formGroupUbigeo.get('departamentoFormControl')?.value"
+            [provincia]="formGroupUbigeo.get('provinciaFormControl')?.value"
+            [distrito]="formGroupUbigeo.get('distritoFormControl')?.value"
+            [localVotacion]="formGroupUbigeo.get('localVotacionFormControl')?.value"
+            [numMesa]="numMesa"
+            [mostrarVerActa]="true"
+            (verActaClick)="verImagenActa()"
+          ></app-ubigeo-display>
+        </div>
+      </form>
+    </article>
+    <article class="w-80 d-flex flex-column">
+
+      <router-outlet></router-outlet>
+
+    </article>
+  </section>
+  <div *ngIf="!isConsulta" class="d-flex j-end mt-18 cont-btn">
+    <button class="estilo2" (click)="confirmarRechazarActa()" type="button" > RECHAZAR </button>
+    <button class="estilo1" (click)="validarActasParaProcesamientoManual()" type="button">GUARDAR </button>
+  </div>
+</section>

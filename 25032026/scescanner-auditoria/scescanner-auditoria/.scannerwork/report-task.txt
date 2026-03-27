@@ -1,0 +1,6 @@
+projectKey=sce_scaner
+serverUrl=http://10.220.80.60:9000
+serverVersion=25.3.0.104237
+dashboardUrl=http://10.220.80.60:9000/dashboard?id=sce_scaner
+ceTaskId=671700b8-f225-4378-9774-739ba79f70a9
+ceTaskUrl=http://10.220.80.60:9000/api/ce/task?id=671700b8-f225-4378-9774-739ba79f70a9

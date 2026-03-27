@@ -1,0 +1,140 @@
+<section class="secciones">
+    <div>
+      <h1 class="titulo1">Parámetros de Conexión</h1>
+      <section class="section-flex ">
+  
+        <article class="w-20 cuadro-blanco-2 ">
+          <div class="w-100" *ngIf="isNacion">
+            <label for="procesoFormControl">Proceso:</label>
+            <mat-form-field appearance="outline">
+              <mat-select (selectionChange)="seleccionarProceso()" [formControl]="procesoFormControl"
+                          placeholder="SELECCIONE">
+                <mat-option *ngFor="let proc of listProceso" [value]="proc">{{proc.nombre}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="w-100" *ngIf="isNacion">
+            <label for="centroComputoFormControl">Centro de Cómputo:</label>
+            <mat-form-field appearance="outline">
+                <mat-select id="centroComputo" (selectionChange)="seleccionarCentroComputo()" [formControl]="centroComputoFormControl"
+                            placeholder="SELECCIONE">
+                    <mat-option *ngFor="let centroComputo of listCentrosComputo" [value]="centroComputo">
+                        {{centroComputo.codigo}} {{centroComputo.nombre}}
+                      </mat-option>
+                </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="w-100">
+            <button class="estilo1 w-full mx-0" (click)="buscar()">BUSCAR</button>
+          </div>
+        </article>
+  
+  
+        <section class="w-80 pb-0 cont-info pl-2 pr-0 ">
+          <article class=" section-flex p-r">
+            <div class="w-100  contenido-scrosll px-0 ">
+              <div class="scrolltablamonitoreo">
+                <div class="cabecera-tablaacordeon">
+                  <div class="tabla_grid">
+                    <div class="titulo-tablaacordeon">No.</div>
+                    <div class="titulo-tablaacordeon">Código de C.C</div>
+                    <div class="titulo-tablaacordeon">Centro de cómputo</div>
+                    <div class="titulo-tablaacordeon">Estado</div>
+                    <div class="titulo-tablaacordeon">Protocolo</div>
+                    <div class="titulo-tablaacordeon">IP/Dominio</div>
+                    <div class="titulo-tablaacordeon">Puerto</div>
+                    <div class="titulo-tablaacordeon">Acciones</div>
+                  </div>
+                </div>
+                <mat-accordion class="example-headers-align" multi>
+                  <mat-expansion-panel *ngFor="let parametro of pagedParametros " (opened)="cargarDetalle(parametro)" >
+                    <mat-expansion-panel-header>
+                      <div class="tabla_grid">
+                        <div class="centrar-celda"><span>{{parametro.idCentroComputo}}</span></div>
+                        <div class="centrar-celda"><span>{{parametro.codigoCc}}</span></div>
+                        <div class="centrar-celda"><span>{{parametro.nombre}}</span></div>
+                        <div class="centrar-celda"><span>{{parametro.esActivo ? 'Activo' : 'Inactivo' }}</span></div>
+                        <div class="centrar-celda"><span>{{parametro.protocolo || 'Sin protocolo'}}</span></div>
+                        <div class="centrar-celda"><span>{{parametro.ip || 'Sin IP/Dominio'}}</span></div>
+                        <div class="centrar-celda"><span>{{parametro.puerto || 'Sin puerto'}}</span></div>
+                      </div>
+                    </mat-expansion-panel-header>
+                    <div *ngFor="let detalle of parametro.detalle" class="desplegando">
+                      <div  class="tabla_grid desplegable-padding" *ngIf="detalle.isEditar">
+                        <div>
+                        </div>
+                        <div>
+                          <mat-form-field appearance="outline" class="w-100 p-0">
+                            <input matInput [(ngModel)]="detalle.codigoCc" name="codigoCc" disabled>
+                          </mat-form-field>
+                        </div>
+                        <div>
+                          <mat-form-field appearance="outline" class="w-100 p-0">
+                            <input matInput [(ngModel)]="detalle.nombre" name="nombre" disabled>
+                          </mat-form-field>
+                        </div>
+                        <div class="centrar-celda">{{detalle.esActivo ? 'Activo' : 'Inactivo'}}</div>
+                        <div>
+                          <mat-form-field appearance="outline" class="w-100 p-0">
+                            <mat-select [(ngModel)]="detalle.protocolo">
+                              <mat-option  value="http">HTTP</mat-option>
+                              <mat-option  value="https">HTTPS</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                        <div>
+                          <mat-form-field appearance="outline" class="w-100 p-0">
+                            <input matInput [(ngModel)]="detalle.ip" name="ip" >
+                          </mat-form-field>
+                        </div>
+                        <div>
+                          <mat-form-field appearance="outline" class="w-100 p-0">
+                            <input matInput [(ngModel)]="detalle.puerto" name="puerto" >
+                          </mat-form-field>
+                        </div>
+                        <div class="centrar-celda">
+                          <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="cancelarDetalle(detalle)" onkeypress="" title="Cancelar" class="clickable" >cancel</mat-icon>
+                          <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="guardarDetalle(detalle)" onkeypress="" title="Guardar" class="clickable" >save</mat-icon>
+                          <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="ping(detalle)" onkeypress="" title="Ping" class="clickable" >bolt</mat-icon>
+                        </div>
+                        <div></div>
+                      </div>
+                      <div class="tabla_grid" *ngIf="!detalle.isEditar">
+                        <div class="centrar-celda"><span>{{detalle.idCentroComputo}}</span></div>
+                        <div class="centrar-celda"><span>{{detalle.codigoCc}}</span></div>
+                        <div class="centrar-celda"><span>{{detalle.nombre}}</span></div>
+                        <div class="centrar-celda">
+                          <mat-slide-toggle [(ngModel)]="detalle.esActivo"
+                                            class="example-margin" 
+                                            [checked]="detalle.esActivo"
+                                            (change)="actualizarEstado(detalle)">
+                          </mat-slide-toggle>
+                        </div>
+                        <div class="centrar-celda"><span>{{detalle.protocolo || 'Sin protocolo'}}</span></div>
+                        <div class="centrar-celda"><span>{{detalle.ip || 'Sin IP/Dominio'}}</span></div>
+                        <div class="centrar-celda"><span>{{detalle.puerto || 'Sin puerto'}}</span></div>
+                        <div class="centrar-celda">
+                          <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="editarDetalle(detalle)" onkeypress="" title="Editar" class="clickable" >edit</mat-icon>
+                          <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="ping(detalle)" onkeypress="" title="Ping" class="clickable" >bolt</mat-icon>
+                        </div>
+                      </div>
+                      <span class="sin-flecha_despliegue"></span>
+                    </div>
+                  </mat-expansion-panel>
+                </mat-accordion>
+              </div>
+              <mat-paginator
+                [length]="listParametros.length"
+                [pageIndex]="pageIndex"
+                [pageSize]="pageSize"
+                [pageSizeOptions]="[5,10,20]"
+                (page)="onPage($event)"
+                showFirstLastButtons>
+              </mat-paginator>
+            </div>
+          </article>
+        </section>
+      </section>
+    </div>
+  </section>
+  

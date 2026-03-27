@@ -1,0 +1,25 @@
+<header>
+  <div fxLayout="row" class="row">
+    <div fxFlex="50" class="w-50">
+      <div class="w-100">
+        <img alt="" src="../assets/img/onpe logo.svg" class="logo-principal">
+      </div>
+    </div>
+    <div fxFlex="50" class="w-50 place-content-end items-center" fxLayoutAlign="end center" style="gap: 10px;">
+      <img class="infoUsrImg" src="/assets/img/icons/ico-usr.svg" alt="usuario">
+      <div class="row infoUsr txtLeft" fxLayout="row" fxLayoutAlign="start center">
+        <div>
+          <p class="m-0">
+            {{this.usuario.nombre}}<br>
+            <span>{{centroComputoLabel}}</span>
+          </p>
+          <div class="close-sesion">
+            <span (click)="cerrar()" onkeypress=""> Cerrar Sesión</span>
+            <span class="separator">|</span>
+            <span (click)="actualizarContrasenia()" onkeypress=""> Cambiar contraseña</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

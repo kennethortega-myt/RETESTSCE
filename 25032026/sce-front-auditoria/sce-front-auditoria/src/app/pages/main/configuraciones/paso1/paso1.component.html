@@ -1,0 +1,60 @@
+<div>
+  <h1 class="titulo1">Documentos Electorales por Elección</h1>
+  <section class="seccion-unidos">
+    <article class="w-20">
+      <app-menu-lateral titulo="Configuración" subTitulo="Seleccione elección" [data]="listTipoEleccion"
+                        (newDataEvent)="guardarTipoEleccion($event)"
+                        (menuSeleccionado)="tipoEleccionSeleccionado($event)" [idMenuSeleccionado]="tipoEleccion.id"
+                        class="lateralMenuW"></app-menu-lateral>
+    </article>
+    <article class="w-80 paddTRBL20">
+      <div class="">
+        <div class="">
+          <button class="estilo1 noMargin" (click)="openDialogInfoElect()">SUB ELECCIONES</button>
+        </div>
+        <h2 class="titulo3">Documentos para la elección {{tipoEleccion.nombre}}</h2>
+        <p class="texto">Seleccione los documentos</p>
+        <div class="cuadro-blanco-1">
+          <ul class="ul-opciones" [formGroup]="formGroupParent">
+            <li *ngFor="let documento of listDocumentoElectoral">
+              <mat-slide-toggle
+                class="example-margin" [formControlName]="documento.documentoElectoral.id+'-radio'">
+              </mat-slide-toggle>
+              {{documento.documentoElectoral.nombre}}
+            </li>
+
+          </ul>
+        </div>
+        <h2 class="titulo3">Documentos adicionales</h2>
+        <p class="texto">Agregue documentos adicionales</p>
+        <div class="cuadro-blanco-1">
+          <div class="">
+            <button class="estilo1 noMargin" (click)="openDialogNewDoc()">AÑADIR DOCUMENTO</button>
+          </div>
+          <ul class="ul-opciones" *ngIf="false">
+            <li *ngFor="let newdocu of listDocumentoElectoralTmp" class="lstAdicionales">
+              <button class="btn_editar" (click)="editarDocu(newdocu)" [disabled]="controlBotonesIndex"></button>
+              <button class="btn_eliminar" (click)="eliminarDocu(newdocu)"></button>
+              <span>
+                                {{newdocu.documentoElectoral.nombre}}
+                            </span>
+            </li>
+            <li class="seccion-i-b" *ngIf="false">
+
+              <button class="btn_guardar" (click)="guardarDocu()"></button>
+              <button class="btn_cancelar" (click)="cancelarDocu()" *ngIf="controlBotonesIndex"></button>
+              <mat-form-field appearance="outline">
+                <input matInput type="text" [formControl]="documentoDataControl" placeholder="Nuevo tipo de Elección">
+              </mat-form-field>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+    </article>
+  </section>
+  <div class="cont-btn">
+    <button class=" estilo2" (click)="guardar()"> Guardar</button>
+    <button class="estilo1" (click)="continuar()"> CONTINUAR</button>
+  </div>
+</div>

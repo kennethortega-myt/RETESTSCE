@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sce-batch-cm
+data:
+  APPLICATION_ROOT: "sce-batch-pr"
+  DB_HOST: "192.168.44.64"
+  DB_PORT: "5433"
+  DB_NAME: "sce"
+  DB_DEFAULT_SCHEMA_JOB: "sce_nacion_eg2026"
+  CRON_TRANSMISION_PR: "0 0/1 * * * ?"
+  FILE_SERVER_PATH: "/data"
+  RABBITMQ_HOST: "10.220.80.85"
+  RABBITMQ_PORT: "5672"
+  FLAG_ENVIAR_FIRMADOS: "false"
+  FIRMA_ACTIVADO: "false"
+  FIRMA_URL: "http://192.168.48.106:8080/firmaperuagente/api/signature"
+  CRON_FIRMAR_INTALACION_SUFRAGIO: "0 0/1 * * * ?"
+  CRON_FIRMAR_INTALACION_ESCRUTINIO: "0 0/1 * * * ?"
+  PR_URL: "http://localhost:8099/pr-admin-backend/"
+  CRON_PUESTA_CERO_PR: "0 0/1 * * * ?"

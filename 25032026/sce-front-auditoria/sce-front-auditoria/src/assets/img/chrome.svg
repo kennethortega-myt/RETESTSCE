@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="35" height="35" viewBox="0 0 35 35">
+  <defs>
+    <linearGradient id="linear-gradient" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#d93025"/>
+      <stop offset="1" stop-color="#ea4335"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="-0.136" y1="0.991" x2="0.729" y2="-0.009" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fcc934"/>
+      <stop offset="1" stop-color="#fbbc04"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="0.773" y1="0.958" x2="0.169" y2="-0.042" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#1e8e3e"/>
+      <stop offset="1" stop-color="#34a853"/>
+    </linearGradient>
+  </defs>
+  <g id="chrome-logo" transform="translate(0.004 0.004)">
+    <circle id="Elipse_276" data-name="Elipse 276" cx="8.749" cy="8.749" r="8.749" transform="translate(8.747 8.744)" fill="#fff"/>
+    <path id="Trazado_4421" data-name="Trazado 4421" d="M2.343,26.245a17.5,17.5,0,1,0,6.4-23.9,17.5,17.5,0,0,0-6.4,23.9ZM25.072,13.122a8.749,8.749,0,1,1-11.951-3.2A8.749,8.749,0,0,1,25.072,13.122Z" transform="translate(0 0)" fill="none"/>
+    <path id="Trazado_4422" data-name="Trazado 4422" d="M18.369,8.749h15.15a17.493,17.493,0,0,0-30.3,0l7.575,13.122.007,0a8.738,8.738,0,0,1,7.57-13.121Z" transform="translate(-0.873 -0.001)" fill="url(#linear-gradient)"/>
+    <circle id="Elipse_277" data-name="Elipse 277" cx="6.926" cy="6.926" r="6.926" transform="translate(10.57 10.57)" fill="#1a73e8"/>
+    <path id="Trazado_4423" data-name="Trazado 4423" d="M31.575,25.126,24,38.246A17.493,17.493,0,0,0,39.149,12H24l0,.007a8.738,8.738,0,0,1,7.578,13.116Z" transform="translate(-6.503 -3.253)" fill="url(#linear-gradient-2)"/>
+    <path id="Trazado_4424" data-name="Trazado 4424" d="M9.922,25.127,2.347,12.006A17.493,17.493,0,0,0,17.5,38.247l7.575-13.121,0,0a8.738,8.738,0,0,1-15.148.005Z" transform="translate(-0.002 -3.254)" fill="url(#linear-gradient-3)"/>
+  </g>
+</svg>

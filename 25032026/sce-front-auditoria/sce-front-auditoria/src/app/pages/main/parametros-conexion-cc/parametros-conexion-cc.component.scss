@@ -1,0 +1,19 @@
+
+
+.tabla_grid { 
+    display: grid; 
+    grid-template-columns: 
+        5% /* No */ 
+        10% /* Código */ 
+        20% /* Centro de cómputo */
+        10% /* Estado */ 
+        10% /* Protocolo */ 
+        20% /* IP */ 
+        10% /* Puerto */ 
+        15%; /* Acciones */ 
+}
+
+.clickable {
+    cursor: pointer;
+}
+

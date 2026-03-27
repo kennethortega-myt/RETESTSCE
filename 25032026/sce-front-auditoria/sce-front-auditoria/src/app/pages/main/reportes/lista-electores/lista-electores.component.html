@@ -1,0 +1,16 @@
+<section class="secciones">
+    <h1 class="titulo1">Reportes - Lista Electores</h1>
+        <div class="conte_sombra p-20">
+            <div class="botonera_header">
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/lista-electores/avance'}" (click)="navegar('/main/reportes/lista-electores/avance')">AVANCE</button>
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/lista-electores/asistencia'}" (click)="navegar('/main/reportes/lista-electores/asistencia')">ASISTENCIA</button>
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/lista-electores/observaciones'}" (click)="navegar('/main/reportes/lista-electores/observaciones')">OBSERVACIONES</button>
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/lista-electores/omisos-ausentismo'}" (click)="navegar('/main/reportes/lista-electores/omisos-ausentismo')">OMISOS VS AUSENTISMO</button>
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/lista-electores/detalle-avance-registros-ubigeo'}" (click)="navegar('/main/reportes/lista-electores/detalle-avance-registros-ubigeo')">DETALLE DE AVANCE DE REGISTROS POR UBIGEO</button>
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/lista-electores/mesas-sin-omisos'}" (click)="navegar('/main/reportes/lista-electores/mesas-sin-omisos')">MESAS SIN OMISOS</button>
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/lista-electores/avance-digitalizacion'}" (click)="navegar('/main/reportes/lista-electores/avance-digitalizacion')">AVANCE DE DIGITALIZACION LISTA ELECTORES</button>
+              <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/lista-electores/avance-digitalizacion-denuncias'}" (click)="navegar('/main/reportes/lista-electores/avance-digitalizacion-denuncias')">AVANCE DE DIGITALIZACION DE DENUNCIAS</button>
+            </div>
+            <router-outlet></router-outlet>
+        </div>
+</section>

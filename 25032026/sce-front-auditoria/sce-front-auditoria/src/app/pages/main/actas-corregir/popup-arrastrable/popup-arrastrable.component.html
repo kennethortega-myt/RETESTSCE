@@ -1,0 +1,54 @@
+<div class="popup" cdkDrag>
+    <div class="popup-content">
+      <div  class="d-flex-pop-actas">
+        <div class="w-50 p-20">
+          <div class="cont-img-acta-control container-scroll-bg" style="    min-height: 70vh;
+    overflow: auto;
+">
+            <div class="viewerBox pop-actas ">
+              <img alt="" id="actaLadoEscrutinio" class="pop-img-acta" [src]="imgPngBase64Escrutinio" style="scale: 100%" class="scaler" />
+            </div>
+          </div>
+        </div>
+        <div class="w-50 p-20">
+          <div class="cont-img-acta-control container-scroll-bg" style="    min-height: 70vh;
+    overflow: auto;
+">
+            <div class="viewerBox pop-actas">
+              <img alt="" id="actaLadoInstalacion" class="pop-img-acta" [src]="imgPngBase64Instalacion" style="scale: 100%" class="scaler" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex-pop-actas ">
+
+        <div class="w-50 px-20">
+          <div class="d-flex">
+            <div>
+              <button class="btn-ico-control mr-05" (click)="zoomInActa('actaLadoEscrutinio')"><img src="../../assets/img/icons/ico-zoom-in.svg" alt="icono zoom in"></button>
+              <button class="btn-ico-control" (click)="zoomOutActa('actaLadoEscrutinio')"><img src="../../assets/img/icons/ico-zoom-out.svg" alt="icono zoom out"></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-50 ">
+          <div class="bottom-actas-verificar-pop justify-content-between">
+            <div class="d-flex">
+              <div>
+                <button class="btn-ico-control mr-05" (click)="zoomInActa('actaLadoInstalacion')"><img src="../../assets/img/icons/ico-zoom-in.svg" alt="icono zoom in"></button>
+                <button class="btn-ico-control" (click)="zoomOutActa('actaLadoInstalacion')"><img src="../../assets/img/icons/ico-zoom-out.svg" alt="icono zoom out"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="content-end-button">
+
+
+        <button class="estilo2" (click)="closePopup()" >Cerrar</button>
+      </div>
+    </div>
+</div>

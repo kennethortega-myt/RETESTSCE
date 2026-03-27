@@ -1,0 +1,18 @@
+<div class="footer-table">
+  <table class="w-full tablefooter">
+    <caption class="d-none"></caption>
+    <thead>
+    <tr>
+      <th><h3>TOTAL DE CIUDADANOS QUE VOTARON</h3></th>
+      <th>
+        <mat-form-field class="total-ciudadanos" appearance="outline">
+          <input matInput type="text" [maxLength]="3"
+                 (change)="cvasChange.emit()"
+                 style="text-align: right;"
+                 placeholder="" [formControl]="cvasFC" sceNumerosHashN />
+        </mat-form-field>
+      </th>
+    </tr>
+    </thead>
+  </table>
+</div>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<AnchorPane id="AnchorPane" fx:id="anchorPane" stylesheets="@../styles/styles.css"
+            focusTraversable="true" styleClass="ap_message_box"
+            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.gob.onpe.scescanner.controller.EditarResolucionController">
+    <children>
+        
+        <AnchorPane id="back_modal_boxdal_box" styleClass="back_modal_box" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" >
+            <children>
+            </children>
+        </AnchorPane>
+                
+        <GridPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" />
+                <ColumnConstraints hgrow="NEVER" minWidth="0.0" />
+                <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="0.0" vgrow="ALWAYS" />
+                <RowConstraints minHeight="0.0" vgrow="NEVER" />
+                <RowConstraints minHeight="0.0" vgrow="ALWAYS" />
+            </rowConstraints>
+            <children>
+                <!--prefHeight="215.0"-->
+                <AnchorPane  prefWidth="1060.0" prefHeight="975.0" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="ventana_selec_doc">
+                    <children>
+                        <AnchorPane AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.bottomAnchor="0.0"  styleClass="ventana_selec_doc_content">
+                            <children>
+
+                                <Label fx:id="tituloImagen" focusTraversable="false" text="" alignment="CENTER_LEFT" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="25.0" AnchorPane.rightAnchor="25.0" styleClass="lbl_tit_ventana_selec_doc"/>
+                                
+                                <ScrollPane fx:id="scrollPane" prefWidth="800" prefHeight="600" 
+                                    AnchorPane.leftAnchor="25.0" 
+                                    AnchorPane.topAnchor="67.0" 
+                                    AnchorPane.rightAnchor="25.0"
+                                    AnchorPane.bottomAnchor="80.0"
+                                    fitToHeight="true"
+                                    fitToWidth="true" 
+                                    >
+                                    <content>
+                                        <StackPane>
+                                            <ImageView fx:id="imageView"/>
+                                        </StackPane>
+                                        <!--styleClass="img_tmp_acta"-->
+                                    </content>
+                                </ScrollPane>
+                                                                
+                                <!--onAction="#onRefreshButton"-->
+                                
+                                <HBox spacing="25" alignment="CENTER_LEFT"
+                                    AnchorPane.leftAnchor="25.0" 
+                                    AnchorPane.bottomAnchor="25.0" fx:id="hboxBotonesTools">
+                                    
+                                    <!--<HBox spacing="10" alignment="CENTER_LEFT">
+                                        <Button alignment="CENTER" mnemonicParsing="false" prefWidth="37.0" prefHeight="36.0" styleClass="buttons_tools,button_doc_rename" onAction="#onRenombrarDoc" >
+                                            <tooltip><Tooltip text="Renombrar Documento"/></tooltip>
+                                        </Button>
+                                    </HBox>-->
+                                    
+                                    <HBox spacing="10" alignment="CENTER_LEFT">
+                                        <Button alignment="CENTER" mnemonicParsing="false" prefWidth="37.0" prefHeight="36.0" styleClass="buttons_tools,button_zoom_in" onAction="#zoomIn" >
+                                            <tooltip><Tooltip text="Agrandar Vista"/></tooltip>
+                                        </Button>
+                                        <Button alignment="CENTER" mnemonicParsing="false" prefWidth="37.0" prefHeight="36.0" styleClass="buttons_tools,button_zoom_out"  onAction="#zoomOut" >
+                                            <tooltip><Tooltip text="Reducir Vista"/></tooltip>
+                                        </Button>
+                                        <Button alignment="CENTER" mnemonicParsing="false" prefWidth="37.0" prefHeight="36.0" styleClass="buttons_tools,button_fit_width"  onAction="#onFitWidth" >
+                                            <tooltip><Tooltip text="Ajustar Vista al Ancho del Recuadro"/></tooltip>
+                                        </Button>
+                                        <Button alignment="CENTER" mnemonicParsing="false" prefWidth="37.0" prefHeight="36.0" styleClass="buttons_tools,button_fit_height"  onAction="#onFitHeight" >
+                                            <tooltip><Tooltip text="Ajustar Vista al Alto del Recuadro"/></tooltip>
+                                        </Button>
+                                    </HBox>
+                                    <HBox spacing="10" alignment="CENTER_LEFT">
+                                        <Button alignment="CENTER" mnemonicParsing="false" prefWidth="37.0" prefHeight="36.0" styleClass="buttons_tools,button_page_prev" onAction="#onPagAnterior">
+                                            <tooltip><Tooltip text="Página Anterior"/></tooltip>
+                                        </Button>
+                                        <Button alignment="CENTER" mnemonicParsing="false" prefWidth="37.0" prefHeight="36.0" styleClass="buttons_tools,button_page_next" onAction="#onPagSiguiente" >
+                                            <tooltip><Tooltip text="Página Siguiente"/></tooltip>
+                                        </Button>
+                                        <Label fx:id="pagesImagen" focusTraversable="false" text="Página 1 de 3" alignment="CENTER_LEFT" styleClass="lbl_tit_ventana_selec_doc"/>
+                                    </HBox>
+                                    
+                                    <HBox spacing="10" alignment="CENTER_LEFT">
+                                        <Button alignment="CENTER" mnemonicParsing="false" prefWidth="37.0" prefHeight="36.0" styleClass="buttons_tools,button_page_add" onAction="#onAgregarPagina">
+                                            <tooltip><Tooltip text="Agregar Página"/></tooltip>
+                                        </Button>
+                                        <Button alignment="CENTER" mnemonicParsing="false" prefWidth="37.0" prefHeight="36.0" styleClass="buttons_tools,button_page_insert" onAction="#onInsertarPagina" >
+                                            <tooltip><Tooltip text="Insertar Página"/></tooltip>
+                                        </Button>
+                                        <Button alignment="CENTER" mnemonicParsing="false" prefWidth="37.0" prefHeight="36.0" styleClass="buttons_tools,button_page_delete" onAction="#onEliminarPagina" >
+                                            <tooltip><Tooltip text="Eliminar Página"/></tooltip>
+                                        </Button>
+                                    </HBox>
+                                </HBox>
+                                
+                                <HBox spacing="10"
+                                      AnchorPane.rightAnchor="25.0" AnchorPane.bottomAnchor="28.0"
+                                      fx:id="hboxBotonesBasicos">
+                                    
+                                    <Button alignment="CENTER" mnemonicParsing="false"
+                                            prefHeight="32.0" prefWidth="102.0" text="GUARDAR" 
+                                            onAction="#onGuardar"/>
+                                    
+                                    <Button alignment="CENTER" mnemonicParsing="false"
+                                        prefHeight="32.0" prefWidth="102.0" text="CANCELAR" 
+                                        onAction="#onCerrar"/>
+                                </HBox>
+                                
+                                <!--<Button alignment="CENTER" mnemonicParsing="false"
+                                        AnchorPane.rightAnchor="25.0" AnchorPane.bottomAnchor="28.0" 
+                                        prefHeight="32.0" prefWidth="102.0" text="CERRAR" 
+                                        onAction="#onCerrar"/>-->
+                                
+                            </children>
+                        </AnchorPane>
+
+                    </children>
+                </AnchorPane>
+                
+            </children>
+        </GridPane>
+        
+    </children>
+</AnchorPane>
+
+                                        

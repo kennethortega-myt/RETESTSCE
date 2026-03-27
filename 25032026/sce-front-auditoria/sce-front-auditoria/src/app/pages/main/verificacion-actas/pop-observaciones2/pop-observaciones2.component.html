@@ -1,0 +1,14 @@
+<mat-dialog-content class="mat-typography mt-12">
+    <h3 class="titulo3">Observaciones (Acta de escrutinio) </h3>
+    <img class="img-observaciones" [src]="pngImageUrlObservacionEscrutinio" alt="Observación escrutinio"/>
+     <mat-checkbox class="example-margin"
+                   [checked]="solicitudNulidad"
+                   (click)="changeSolicitudNulidad()"
+                   (keydown)="onKeyDownSolNulidad($event)"
+     >Solicitud de Nulidad</mat-checkbox>
+</mat-dialog-content>
+<mat-dialog-actions class="mb-1" align="end">
+
+    <button class="btn-azul mr-1"  (click)="aceptarPop2()">ACEPTAR</button>
+
+</mat-dialog-actions>

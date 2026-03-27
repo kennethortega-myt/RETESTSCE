@@ -1,0 +1,54 @@
+<section class="secciones puestacero">
+  <div>
+    <h1 class="titulo1">Puesta a Cero</h1>
+    <section class="seccion-unidos puestacero">
+      <article class="w-20 w-40 altura-flex">
+        <div class="w-100">
+          <label for="procesoFormControl">Proceso:</label>
+          <mat-form-field appearance="outline">
+            <mat-select (selectionChange)="seleccionarProceso()" [formControl]="procesoFormControl"
+                        placeholder="SELECCIONE">
+              <mat-option *ngFor="let proc of listProceso" [value]="proc">{{proc.nombre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="w-100 h-full p-r flex_abajo">
+
+          <div class="personaje-anuncio gris">
+            <div>
+              <h3>Advertencia</h3>
+              <p>
+                El siguiente proceso ELIMINARÁ INFORMACIÓN que no podrá ser
+                recuperada. Para confirmar la acción, ingrese su clave.
+              </p>
+            </div>
+
+            <img alt="" src="../assets/img/personaje1.svg" />
+          </div>
+        </div>
+      </article>
+      <article class="w-80 d-flex center-flex items-center">
+        <div style="display: none;">
+          <img alt="" src="../assets/img/ico-limpieza.svg" />
+        </div>
+
+        <div class="content-resultados-puestacero">
+          <ul *ngIf="!isVerAnuncio" class="lista-elementos">
+            <li>{{puestaCeroDigitacionInicio}}
+            </li>
+            <li>{{puestaCeroDigitacionFin}}</li>
+            <li>{{puestaCeroDigitalizacionInicio}}</li>
+            <li> {{puestaCeroDigitalizacionFin}} </li>
+
+          </ul>
+
+
+        </div>
+      </article>
+    </section>
+    <div class="cont-btn">
+      <button class="estilo1" (click)="verificarAutorizacion()">PROCESAR</button>
+    </div>
+  </div>
+</section>
+

@@ -1,0 +1,189 @@
+<section class="secciones">
+    <h1 class="titulo1">Registro miembro de mesa escrutinio</h1>
+    <div *ngIf="isConsulta" class="seccion-unidos ">
+      <article class="w-20 cuadro-blanco-2 flex-col-omiso">
+          <div class="formulario section-flex ">
+            <div class="w-100">
+              <label for="cmbTipoFiltro">Tipo Filtro:</label>
+              <mat-form-field appearance="outline">
+                <mat-select id="cmbTipoFiltro" [formControl]="tipoFiltroControl" name="tipoFiltro" >
+                  <mat-option *ngFor="let tipoFiltro of listTipoFiltro" [value]="tipoFiltro.id">
+                    {{tipoFiltro.descripcion}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            </div>
+              <div class="w-100">
+                  <label for="cmbProceso">Proceso:</label>
+                <mat-form-field appearance="outline">
+                  <mat-select id="cmbProceso" [formControl]="procesoControl" name="idProceso" >
+                    <mat-option [value]="0">SELECCIONE</mat-option>
+                    <mat-option *ngFor="let proceso of listProceso" [value]="proceso">
+                      {{proceso.cnombre}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+              </div>
+            <div class="w-100">
+                <mat-checkbox [formControl]="reprocesamientoControl">Reprocesamiento</mat-checkbox>
+            </div>
+              <button class="estilo2 w-full" (click)="buscarMME()"> BUSCAR</button>
+          </div>
+      </article>
+      <article class="w-80">
+              <div class=" contenido-scroll cont-anuncio">
+                <div class="personaje-anuncio">
+                  <p>
+                      <span class="text-tooltip text-left">Registro de miembros de mesa
+                        según acta de escrutinio</span>
+                      <span class="text-tooltip2 text-center">Para Iniciar el Registro de miembros de mesa
+                        según acta de escrutinio seleccione un proceso</span>
+                  </p>
+                  <img src="../assets/img/personaje1.svg" alt="">
+              </div>
+              </div>
+      </article>
+    </div>
+    <section *ngIf="!isConsulta" class="seccion-unidos omisos-nosorteados">
+      <article class="w-20 cuadro-blanco-2 flex-col-omiso">
+        <form class="formulario section-flex " [formGroup]="formGroupParent">
+          <h3 class="titulocontrol titulo1 mt-10">Información de Mesa {{mesaInfo.mesa}}</h3>
+          <div class="content-grid-two">
+            <div class="grid-two">
+              <div class="mt-10" >
+                <label for="nroElectores">Nº Electores</label>
+                <mat-form-field appearance="outline">
+                  <input id="nroElectores" matInput type="text" formControlName="electoresHabiles">
+                </mat-form-field>
+              </div>
+              <div  class="mt-10" >
+                <label for="elecAusentes">Nº Electores Ausentes</label>
+                <mat-form-field appearance="outline">
+                  <input id="elecAusentes" matInput type="text" placeholder="" formControlName="electoresAusentes">
+                </mat-form-field>
+              </div>
+            </div>
+        </div>
+
+          <div class="w-full mt-10">
+            <label for="cmbDepartamento">Departamento</label>
+            <mat-form-field appearance="outline">
+              <input id="cmbDepartamento" matInput type="text" placeholder="" formControlName="departamento">
+            </mat-form-field>
+          </div>
+          <div class="w-full mt-10">
+            <label for="cmbProvincia">Provincia</label>
+            <mat-form-field appearance="outline">
+              <input id="cmbProvincia" matInput type="text" placeholder="" formControlName="provincia">
+            </mat-form-field>
+          </div>
+          <div class="w-full mt-10">
+            <label for="cmbDistrito">Distrito</label>
+            <mat-form-field appearance="outline">
+              <input id="cmbDistrito" matInput type="text" placeholder="" formControlName="distrito">
+            </mat-form-field>
+          </div>
+          <div class="w-full mt-10">
+            <label for="localInput">Local</label>
+            <mat-form-field appearance="outline">
+              <input id="localInput" matInput type="text" placeholder=""  formControlName="localVotacion">
+            </mat-form-field>
+          </div>
+        </form>
+
+      </article>
+      <article class="w-80">
+        <div class="contenedor-documento-muestra" style="display: none;">
+          <div class=" contenido-scroll cont-anuncio">
+            <div class="personaje-anuncio">
+              <p>
+                <span>
+                    No hay registro de miembros de mesa segun acta de escrutinio pendientes</span><br>
+                Para iniciar el registro de Omisos de Click en iniciar
+              </p>
+              <img src="../assets/img/personaje1.svg" alt="">
+            </div>
+          </div>
+        </div>
+        <div class=" center-flex cont-acta-esc" >
+          <div class="t-c content-acta-escrutinio" >
+            <h2>Registro de Relación de Miembro  de Mesa {{mesaInfo.mesa}}  <br>
+              según acta de escrutinio </h2>
+            <form  autocomplete="off" [formGroup]="formGroupMiembros">
+
+              <div class=" blue cont-firma" >
+                <img id="idImgFirmaEscruPresi" [src]="filePngUrlPresidente" alt="">
+                <h3>PRESIDENTE</h3>
+                <div class="datos_dni segun_acta">
+                  <div class="label_dni">
+                    DNI:
+                  </div>
+                  <mat-form-field appearance="outline">
+                    <input matInput type="text" placeholder="DIGITE EL N° DNI" formControlName="documentoIdentidadPresidente" maxlength="8" sceSoloNumeros >
+                  </mat-form-field>
+                  <div>
+                    <div>{{padronPresidente.nombres}}</div>
+                    <div>{{padronPresidente.apellidoPaterno}}</div>
+                    <div>{{padronPresidente.apellidoMaterno}}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class=" blue cont-firma">
+                <img id="idImgFirmaEscruSecre" [src]="filePngUrlSecretario" alt="">
+                <h3>SECRETARIO</h3>
+                <div class="datos_dni segun_acta">
+                  <div class="label_dni">
+                    DNI:
+                  </div>
+                  <mat-form-field appearance="outline">
+                    <input matInput type="text" placeholder="DIGITE EL N° DNI" formControlName="documentoIdentidadSecretario" maxlength="8" sceSoloNumeros>
+                  </mat-form-field>
+                  <div>
+                    <div>{{padronSecretario.nombres}}</div>
+                    <div>{{padronSecretario.apellidoPaterno}}</div>
+                    <div>{{padronSecretario.apellidoMaterno}}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class=" blue cont-firma">
+                <img id="idImgFirmaEscruTercer" [src]="filePngUrlTercerMiembro" alt="">
+
+                <h3>TERCER MIEMBRO</h3>
+                <div class="datos_dni segun_acta">
+                  <div class="label_dni">
+                    DNI:
+                  </div>
+                  <mat-form-field appearance="outline">
+                    <input matInput type="text" placeholder="DIGITE EL N° DNI" formControlName="documentoIdentidadMiembro" maxlength="8" sceSoloNumeros>
+                  </mat-form-field>
+                  <div>
+                    <div>{{padronTercerMiembro.nombres}}</div>
+                    <div>{{padronTercerMiembro.apellidoPaterno}}</div>
+                    <div>{{padronTercerMiembro.apellidoMaterno}}</div>
+                  </div>
+                </div>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+
+      </article>
+    </section>
+
+    <div *ngIf="!isConsulta" class="cont-btn">
+      <button class=" estilo2" (click)="resetComponent(true)"> SALTAR </button>
+      <button class=" estilo2" (click)="guardarInformacion()"> REGISTRAR</button>
+      <button class="estilo2 " (click)="verImagenActa()" *ngIf="this.mesaInfo.archivoEscrutinioId">VER ACTA</button>
+    </div>
+  </section>
+<style>
+  .img-voto2{
+    display: none;
+  }
+</style>

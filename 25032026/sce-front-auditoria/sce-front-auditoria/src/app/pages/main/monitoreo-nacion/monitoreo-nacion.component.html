@@ -1,0 +1,283 @@
+<section class="secciones">
+  <div>
+    <h1 class="titulo1">{{tituloComponente}}</h1>
+    <section class="section-flex ">
+
+      <article class="w-20 cuadro-blanco-2 ">
+        <!-- cambiado form por div -->
+        <div class="formulario section-flex ">
+          <div class="w-100">
+            <label for="procesoFormControl">Proceso:</label>
+            <mat-form-field appearance="outline">
+              <mat-select (selectionChange)="obtenerEleccion()" [formControl]="procesoFormControl"
+                placeholder="SELECCIONE">
+                <mat-option *ngFor="let proc of listProceso" [value]="proc">{{proc.nombre}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="w-100">
+            <label for="eleccionFormControl">Tipo de elección:</label>
+            <mat-form-field appearance="outline">
+              <mat-select (selectionChange)="cargarDepartamentos()" [formControl]="eleccionFormControl"
+                placeholder="SELECCIONE">
+                <mat-option *ngFor="let elec of listEleccion" [value]="elec.id">{{elec.nombre}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <form class="formubigeo formulario ">
+          <div class="w-100">
+            <label for="departamentoFormControl">{{labelNivelUbigeoUno}}</label>
+
+            <mat-form-field appearance="outline">
+              <mat-select (selectionChange)="cargarProvincias()" [formControl]="departamentoFormControl"
+                placeholder="SELECCIONE">
+                <mat-option *ngFor="let dep of listDepartamentos" [value]="dep.id">{{dep.nombre}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="w-100">
+            <label for="provinciaFormControl">{{labelNivelUbigeoDos}}</label>
+            <mat-form-field appearance="outline">
+              <mat-select (selectionChange)="cargarDistritos()" [formControl]="provinciaFormControl"
+                placeholder="SELECCIONE">
+                <mat-option *ngFor="let provi of listProvincias" [value]="provi.id">{{provi.nombre}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="w-100">
+            <label for="distritoFormControl">{{labelNivelUbigeoTres}}</label>
+            <mat-form-field appearance="outline">
+              <mat-select (selectionChange)="cargarLocales()" [formControl]="distritoFormControl"
+                placeholder="SELECCIONE">
+                <mat-option *ngFor="let distri of listDistritos" [value]="distri.id">{{distri.nombre}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="w-100">
+            <label for="localFormControl">Local de votación</label>
+            <mat-form-field appearance="outline">
+              <mat-select [formControl]="localFormControl"
+                placeholder="SELECCIONE">
+                <mat-option *ngFor="let local of listLocales" [value]="local.id">{{local.nombre}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+        </form>
+
+        <div class="formulario section-flex ">
+          <div class="w-100">
+            <label for="estadoFormControl">Estado:</label>
+            <mat-form-field appearance="outline">
+              <mat-select [formControl]="estadoFormControl"
+                placeholder="SELECCIONE">
+                <mat-option value="TODOS">TODOS</mat-option>
+                <mat-option value="CONTABILIZADAS">CONTABILIZADAS</mat-option>
+                <mat-option value="OBSERVADAS">OBSERVADAS</mat-option>
+                <mat-option value="ENVIADAS_JNE">ENVIADAS AL JEE/JNE</mat-option>
+                <mat-option value="DEVUELTAS_JNE">DEVUELTAS DEL JEE/JNE</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="w-100">
+            <label for="mesaFormControl">Mesa:</label>
+            <mat-form-field appearance="outline">
+              <input
+                maxlength="6"
+                minlength="6"
+                matInput
+                type="text"
+                placeholder=""
+                [formControl]="mesaFormControl"
+                sceSoloNumerosConPegar
+              />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="w-100">
+          <button class="estilo1 w-full mx-0" (click)="cargarListadoActasBtn()"> BUSCAR</button>
+        </div>
+
+      </article>
+
+
+      <section class="w-80 pb-0 cont-info pl-2 pr-0 ">
+
+        <div class="d-flex between-flex cards-monitoreo">
+          <div class="cuadro-blanco-2 cantidad">
+            <img alt="" src="../assets/img/estado01.svg">
+            <span class="validados">Actas contabilizadas
+              <b>{{this.totalActasNormales}}</b>
+            </span>
+          </div>
+          <div class="cuadro-blanco-2 cantidad">
+            <img alt="" src="../assets/img/estadoObservado.svg">
+            <span class="observados">Actas observadas
+              <b>{{this.totalActasObservadas}}</b>
+            </span>
+          </div>
+          <div class="cuadro-blanco-2 cantidad">
+            <img alt="" src="../assets/img/estado03.svg">
+            <span class="verificar">Actas enviadas al JEE / JNE
+              <b>{{this.totalActasEnviadasJne}}</b>
+            </span>
+          </div>
+          <div class="cuadro-blanco-2 cantidad">
+            <img alt="" src="../assets/img/estado04.svg">
+            <span class="verificar">Actas devueltas del JEE / JNE
+              <b>{{this.totalActasDevueltasJne}}</b>
+            </span>
+          </div>
+          <div class="cuadro-blanco-2 cantidad">
+            <img alt="" src="../assets/img/estadoActas.svg">
+            <span>Total de actas
+              <b>{{this.totalActas}}</b>
+            </span>
+          </div>
+
+        </div>
+
+        <article class=" section-flex p-r">
+
+
+          <div class="w-60  contenido-scrosll px-0 ">
+            <div class="scrolltablamonitoreo">
+              <mat-table [dataSource]="dataSource" class="mat-elevation-z8 scrollheadermon">
+                <ng-container matColumnDef="position">
+                  <mat-header-cell *matHeaderCellDef class="w-n"> No.</mat-header-cell>
+                  <mat-cell *matCellDef="let element" class="w-n"> {{element.position}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="acta">
+                  <mat-header-cell *matHeaderCellDef> Acta</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.acta}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="mesa">
+                  <mat-header-cell *matHeaderCellDef> Mesa</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.mesa}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="registro">
+                  <mat-header-cell *matHeaderCellDef> Fecha de Registro</mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <span *ngIf="element.grupoActa!='OTROS'">
+                      {{ element.registro }}
+                    </span>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="estado">
+                  <mat-header-cell *matHeaderCellDef> Estado</mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <div [ngClass]="'estado ' + element.estado"></div>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="acciones">
+                  <mat-header-cell *matHeaderCellDef class="w-acciones"> Acciones</mat-header-cell>
+                  <mat-cell *matCellDef="let element" class="w-acciones">
+
+                    <button class="btn_pdf"
+                      *ngIf="element.grupoActa!='OTROS' && element.verActa==1 && (element.imagenEscrutinio!=='' && element.imagenEscrutinio!==null)"
+                      (click)="mostrarPdf(element.imagenEscrutinio,'escrutinio')"
+                      title="Ver PDF de escrutinio">
+                    </button>
+                    <button class="btn_pdf"
+                      *ngIf="element.grupoActa!='OTROS' && element.verActa==1 && (element.imagenInstalacion!=='' && element.imagenInstalacion!==null)"
+                      (click)="mostrarPdf(element.imagenInstalacion,'instalacion')"
+                      title="Ver PDF de instalación">
+                    </button>
+                    <button class="btn_pdf"
+                      *ngIf="element.grupoActa!='OTROS' && element.verActa==1 && (element.imagenSufragio!=='' && element.imagenSufragio!==null)"
+                      (click)="mostrarPdf(element.imagenSufragio,'sufragio')"
+                      title="Ver PDF de sufragio">
+                    </button>
+                    <button class="btn_pdf"
+                      *ngIf="element.grupoActa!='OTROS' && element.verActa==1 && (element.imagenInstalacionSufragio!=='' && element.imagenInstalacionSufragio!==null)"
+                      (click)="mostrarPdf(element.imagenInstalacionSufragio,'instalacion_sufragio')"
+                      title="Ver PDF de instalación y sufragio">
+                    </button>
+                  </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+            </div>
+            <mat-paginator
+            showFirstLastButtons
+            [length]="totalRegistro"
+            [pageSize]="pageSize"
+            [pageIndex]="pageIndex"
+            [pageSizeOptions]="[500,1000]"
+            (page)="handlePageEvent($event)"
+            aria-label="Select page">
+            </mat-paginator>
+          </div>
+
+          <div class="w-40  p-l-30 px-0">
+
+            <div *ngIf="showToogleActa" class="cuadro-blanco-2  contenido-scrolls scrolltablamonitoreo"  >
+                <h2 class="titulo2">Acta {{numeroActaVerActaEscrutinioInstalacion}}</h2>
+
+                <h3 class="titulo3" *ngIf="showLadoToogleActa">Acta de escrutinio</h3>
+                <h3 class="titulo3" *ngIf="!showLadoToogleActa">Acta de instalación</h3>
+                    <div class="cont-imagen-gramde">
+                            <img *ngIf="showLadoToogleActa"  [src]="pngImageUrlEscrutinio" alt="Acta escrutinio">
+                            <img *ngIf="!showLadoToogleActa" [src]="pngImageUrlInstalacion" alt="Acta instalación">
+                    </div>
+                    <div class="boton-full">
+                            <button (click)="mostrarActa(false)" [ngClass]="{estilo2: showLadoToogleActa , estilodesactivado: !showLadoToogleActa }">IZQUIERDA</button>
+                            <button (click)="mostrarActa(true)" [ngClass]="{estilo2: !showLadoToogleActa , estilodesactivado: showLadoToogleActa}">DERECHA</button>
+
+                            <button  class="estilo2" (click)="cerrarToogleActa()">cerrar</button>
+
+                    </div>
+            </div>
+
+
+
+              <div class="cuadro-blanco-2  h-full" *ngIf="showToogleActa" style="display: none;">
+                <h2 class="titulo2">Acta {{numeroActaVerActaEscrutinioInstalacion}}</h2>
+
+                <h3 class="titulo3" *ngIf="showLadoToogleActa">Verificación de Firmas (Acta de escrutinio)</h3>
+                <h3 class="titulo3" *ngIf="!showLadoToogleActa">Verificación de Firmas (Acta de instalacion)</h3>
+
+                <div class="cont-imagen-gramde">
+                  <img alt="" *ngIf="showLadoToogleActa" [src]="pngImageUrlEscrutinio">
+                  <img alt="" *ngIf="!showLadoToogleActa" [src]="pngImageUrlInstalacion">
+                </div>
+                <div class="boton-full">
+                  <div class="boton-full">
+                    <button (click)="mostrarActa(false)"
+                      [ngClass]="{estilo2: showLadoToogleActa, estilodesactivado: !showLadoToogleActa }">IZQUIERDA</button>
+                    <button (click)="mostrarActa(true)"
+                      [ngClass]="{estilo2:!showLadoToogleActa, estilodesactivado:  showLadoToogleActa }">DERECHA</button>
+                  </div>
+                  <div class="boton-full">
+                    <button class="estilo2" (click)="cerrarToogleActa()">cerrar</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="cuadro-azulado-2 contenido-scroll cont-anuncio  d-none-1300" *ngIf="estadoContenidoAnuncio"  style="height: calc(100vh - 306px) !important;">
+                <div class="personaje-anuncio">
+                    <p>
+                      Seleccione los filtros y haga clic en Buscar para listar las actas correspondientes.
+                    </p>
+                        <img src="../assets/img/personaje1.svg" alt="">
+                </div>
+              </div>
+
+            <div class="personaje-anuncio p-o d-none-min-1300" style="bottom: 0;right: 0;">
+              <p>
+                Seleccione los filtros y haga clic en Buscar para listar las actas correspondientes.
+              </p>
+              <img src="../assets/img/personaje1.svg" alt="">
+            </div>
+
+          </div>
+        </article>
+
+      </section>
+    </section>
+  </div>
+</section>

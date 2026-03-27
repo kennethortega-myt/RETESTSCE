@@ -1,0 +1,75 @@
+<div class="bg-white p-20">
+
+  <div class="d-flex center-flex">
+    <img alt="" class="img-pop" src="assets/img/icons/ico-llave.svg">
+  </div>
+  <h1 class="pop-cierre">Reanudación de Actividades</h1>
+  <div class="mt-20">
+    <p class="texto-pop-observacion">El proceso de Reanudación de actividades de centro de cómputo permite continuar trabajando con la aplicación luego de haber sido cerrado. Es necesario que sea el mismo usuario que cerró el centro de computo el que lo reanude</p>
+  </div>
+    <form [formGroup]="reaperturaForm">
+      <div class="datos-actas mt-20">
+        <div class="filtro15">
+          <label for="txtUsuario">Usuario</label>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-form-field class="example-full-width " appearance="outline">
+              <input id="txtUsuario"
+                     matInput
+                     placeholder="Ingrese el usuario"
+                     formControlName="usuario"
+                     autocomplete="off"
+                     maxlength="50"
+                     (keydown)="onEnterKey($event)"
+                     [class.is-invalid]="isFieldInvalid('usuario')">
+              <mat-error *ngIf="hasFieldError('usuario')">
+                {{ getErrorMessage('usuario') }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="filtro15">
+          <label for="textClave">Contraseña</label>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-form-field class="example-full-width " appearance="outline">
+              <input id="textClave"
+                     matInput
+                     placeholder="Ingrese la contraseña"
+                     formControlName="clave"
+                     maxlength="20"
+                     autocomplete="off"
+                     (keydown)="onEnterKey($event)"
+                     [type]="hide() ? 'password' : 'text'"
+                     [class.is-invalid]="isFieldInvalid('clave')">
+              <button mat-icon-button matSuffix
+                      type="button"
+                      (click)="clickEvent($event)"
+                      [attr.aria-label]="'Hide password'"
+                      [attr.aria-pressed]="hide()">
+                <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <mat-error *ngIf="hasFieldError('clave')">
+                {{ getErrorMessage('clave') }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </form>
+    <h1 style="color: red;text-align: center;">{{ errorMessage }}</h1>
+    <div class="mt-20">
+        <p class="texto-pop-observacion">El SCE del centro de cómputo fue cerrado por el usuario <strong>{{usuarioCierre}}</strong> el día <strong>{{fechaCierre}}</strong></p>
+    </div>
+  <div class="d-flex justify-content-flex-end mt-20 gap-10" >
+    <button class="estilo3 m-0"
+            (click)="salirModal()"
+            [disabled]="isSubmitting">
+      SALIR
+    </button>
+    <button class="estilo1 m-0"
+            (click)="authentica()"
+            [disabled]="isSubmitting || reaperturaForm.invalid">
+      <span *ngIf="isSubmitting">Procesando...</span>
+      <span *ngIf="!isSubmitting">ABRIR C.C.</span>
+    </button>
+  </div>
+</div>

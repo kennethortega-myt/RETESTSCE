@@ -1,0 +1,112 @@
+<!-- shared-backup-restore.component.html -->
+<section class="secciones">
+  <div>
+    <h1 class="titulo1" *ngIf="accion == 'backup'">Respaldo</h1>
+    <h1 class="titulo1" *ngIf="accion == 'restore'">Restaurar</h1>
+
+    <!-- Sección CON selector de proceso (para backup-restauracion-nacion) -->
+    <section class="section-flex section-monitoreo" *ngIf="showProcessSelector">
+      <article class="w-20 cuadro-blanco-2">
+        <div class="formulario section-flex">
+          <div class="w-100">
+            <label for="tipoProceso">Proceso:</label>
+            <mat-form-field appearance="outline">
+              <mat-select id="tipoProceso" (selectionChange)="seleccionarProceso()"
+                          [formControl]="procesoFormControl">
+                <mat-option [value]="0">SELECCIONE</mat-option>
+                <mat-option *ngFor="let proc of listProceso"
+                            [value]="proc.id">{{proc.nombre}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </article>
+
+      <section class="w-80 cont-info pl-2 pr-0" *ngIf="accion == 'backup'">
+        <section class="seccion-unidos section-version">
+          <article class="w-100 content-backup">
+            <div class="animacion-respaldo" *ngIf="!finalizado">
+              <img src="../assets/img/img_restaurar.svg" alt="" *ngIf="!enProceso">
+              <iframe title="Cargando" class="animacion-iframe"
+                      src="../../../../assets/animacion/animacion restaurar.html" *ngIf="enProceso"></iframe>
+            </div>
+            <button (click)="confirmacionBackup()" class="m-0 estilo1" *ngIf="!finalizado && !enProceso">
+              REALIZAR BACKUP
+            </button>
+            <button class="m-0 estilo1" *ngIf="!finalizado && enProceso" disabled>
+              REALIZANDO BACKUP
+            </button>
+            <div class="respaldo-realizado" *ngIf="finalizado">
+              <img class="realizado mb-20" src="../assets/img/completado.svg" alt="">
+              <h3>¡Backup realizado con éxito!</h3>
+            </div>
+          </article>
+        </section>
+      </section>
+
+      <section class="w-80 cont-info pl-2 pr-0" *ngIf="accion == 'restore'">
+        <section class="seccion-unidos section-version">
+          <article class="w-100 content-backup">
+            <div class="animacion-respaldo" *ngIf="!finalizado">
+              <img src="../assets/img/img_backup.svg" alt="" *ngIf="!enProceso">
+              <iframe title="Restaurando" class="animacion-iframe"
+                      src="../../../../assets/animacion/animacion respaldo.html" *ngIf="enProceso"></iframe>
+            </div>
+            <form class="t-c" (submit)="confirmacionRestore($event)">
+              <input type="file" class="custom-file-input mb-20" (change)="onFileSelected($event)" *ngIf="!finalizado && !enProceso"/>
+              <br>
+              <button type="submit" class="m-0 estilo1" *ngIf="!finalizado && !enProceso">REALIZAR RESTAURACIÓN</button>
+              <button class="m-0 estilo1" *ngIf="!finalizado && enProceso" disabled>REALIZANDO RESTAURACIÓN</button>
+            </form>
+            <div class="respaldo-realizado" *ngIf="finalizado">
+              <img class="realizado mb-20" src="../assets/img/completado.svg" alt="">
+              <h3>¡Restauración realizada con éxito¡</h3>
+            </div>
+          </article>
+        </section>
+      </section>
+    </section>
+
+    <!-- Sección SIN selector de proceso (para backup-restauracion) -->
+    <section class="seccion-unidos section-version" *ngIf="!showProcessSelector">
+      <article class="w-100 content-backup">
+        <div class="animacion-respaldo" *ngIf="!finalizado">
+          <img src="../assets/img/img_restaurar.svg" alt="" *ngIf="!enProceso && accion == 'backup'">
+          <img src="../assets/img/img_backup.svg" alt="" *ngIf="!enProceso && accion == 'restore'">
+          <iframe title="Cargando" class="animacion-iframe"
+                  src="../../../../assets/animacion/animacion restaurar.html" *ngIf="enProceso && accion == 'backup'"></iframe>
+          <iframe title="Restaurando" class="animacion-iframe"
+                  src="../../../../assets/animacion/animacion respaldo.html" *ngIf="enProceso && accion == 'restore'"></iframe>
+        </div>
+
+        <!-- Contenido para BACKUP -->
+        <div *ngIf="accion == 'backup'">
+          <button (click)="confirmacionBackup()" class="m-0 estilo1" *ngIf="!finalizado && !enProceso">
+            REALIZAR BACKUP
+          </button>
+          <button class="m-0 estilo1" *ngIf="!finalizado && enProceso" disabled>
+            REALIZANDO BACKUP
+          </button>
+          <div class="respaldo-realizado" *ngIf="finalizado">
+            <img class="realizado mb-20" src="../assets/img/completado.svg" alt="">
+            <h3>¡Backup realizado con éxito!</h3>
+          </div>
+        </div>
+
+        <!-- Contenido para RESTORE -->
+        <div *ngIf="accion == 'restore'">
+          <form class="t-c" (submit)="confirmacionRestore($event)">
+            <input type="file" class="custom-file-input mb-20" (change)="onFileSelected($event)" *ngIf="!finalizado && !enProceso"/>
+            <br>
+            <button type="submit" class="m-0 estilo1" *ngIf="!finalizado && !enProceso">REALIZAR RESTAURACIÓN</button>
+            <button class="m-0 estilo1" *ngIf="!finalizado && enProceso" disabled>REALIZANDO RESTAURACIÓN</button>
+          </form>
+          <div class="respaldo-realizado" *ngIf="finalizado">
+            <img class="realizado mb-20" src="../assets/img/completado.svg" alt="">
+            <h3>¡Restauración realizada con éxito¡</h3>
+          </div>
+        </div>
+      </article>
+    </section>
+  </div>
+</section>

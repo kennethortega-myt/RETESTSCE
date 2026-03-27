@@ -1,0 +1,123 @@
+<section class="secciones">
+  <h1 class="titulo1">Envío de Actas al JEE/JNE</h1>
+  <article class="w-100">
+    <div class="smallTabs">
+
+      <div class="section-flex" *ngIf="false">
+        <article class="w-20 cuadro-blanco-2 p-r">
+
+          <form class="formulario section-flex ">
+            <div class="w-100">
+              <label for="cmbProceso">Proceso:</label>
+              <mat-form-field appearance="outline">
+                <mat-select id="cmbProceso" (selectionChange)="obtenerEleccion()" [formControl]="procesoFormControl">
+                  <mat-option value="0">SELECCIONE</mat-option>
+                  <mat-option *ngFor="let proc of listProceso" [value]="proc.id">{{proc.cnombre}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="w-100">
+              <label for="cmbEleccion">Tipo de elección:</label>
+              <mat-form-field appearance="outline">
+                <mat-select id="cmbEleccion" (selectionChange)="listarResumenActasEnviadasAlJurado()"
+                            [formControl]="eleccionFormControl">
+                  <mat-option value="0">SELECCIONE</mat-option>
+                  <mat-option *ngFor="let elec of listEleccion" [value]="elec.id">{{elec.cnombre}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </form>
+
+          <div class="p-o b-0 width-estado">
+            <div class="pr-30 w-100 estados">
+              <div class="cuadro-blanco-2 cantidad">
+                <img src="../assets/img/estado02.svg" alt=""/>
+                <span class="validados">Total de actas observadas<b>{{totalActasObservadas}}</b></span>
+              </div>
+            </div>
+
+            <div class="pr-30 w-100 estados">
+              <div class="cuadro-blanco-2 cantidad">
+                <img src="../assets/img/icono-actas.svg" alt=""/>
+                <span class="validados">Total de actas normales <b>{{totalActasNormales}}</b></span>
+              </div>
+            </div>
+          </div>
+
+        </article>
+
+
+        <section class="w-80 cont-info pr-0 pl-2"  *ngIf="!isVisible">
+          <article class="w-full">
+            <div class="seccion-acta pt-12p">
+              <div class=" contenido-scroll cont-anuncio">
+                <div class="personaje-anuncio">
+                  <p>
+                    Seleccione un proceso y elección para la clasificación de actas para envío al JEE/JNE
+                  </p>
+                  <img src="../assets/img/personaje1.svg" alt="" />
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
+
+      </div>
+      <div class="section-flex">
+        <section class="w-100 cont-info pr-0 pl-2">
+          <article class=" section-flex pr-0">
+            <div class="w-full flex-bottom d-flex between-flex">
+              <div class="d-flex items-end">
+                <div>
+                  <label for="numActaInput">Acta</label>
+                  <div class="d-flex">
+                    <input id="numActaInput" name="numeActa" #refNumeActa maxlength="6" (keydown)="onKeyNumeActa($event)"
+                           [formControl]="actaFormControl" type="text" class="input_buscar" autocomplete="off" sceSoloNumeros/>
+                  </div>
+                </div>
+                <div class="ml-2">
+                  <label for="numeCopia">Copia</label>
+                  <div class="d-flex">
+                    <input id="numeCopia" name="numeCopia" #refNumeCopia maxlength="3" (keydown)="agregarActaOn($event)"
+                           [formControl]="copiaFormControl" type="text" class="input_buscar" autocomplete="off"
+                           sceUppercaseFormReact sceSoloAlfabeticosNumeros />
+                  </div>
+                </div>
+                <div class="">
+                  <div class="d-flex">
+                    <button class="estilo2 ml-2" [disabled]="isLoadingBtn.btnBuscar" (click)="agregarActa()">BUSCAR</button>
+                  </div>
+                </div>
+              </div>
+              <button class="mr-0 estilo1" [disabled]="isLoadingBtn.btnGenerar" (click)="generarCargoEntregaManual();">Generar Cargo de Entrega</button>
+            </div>
+          </article>
+          <div class="contenido-scroll px-0">
+            <app-tabla-actas
+              [dataSource]="dataSource"
+              [displayedColumns]="displayedColumns"
+              [accionesVisibles]="[
+                ACCIONES_TABLA.VER_PLOMO, 
+                ACCIONES_TABLA.VER_CELESTE,
+                ACCIONES_TABLA.CARGO, 
+                ACCIONES_TABLA.OFICIO, 
+                ACCIONES_TABLA.TRANSMITIR,
+                ACCIONES_TABLA.ELIMINAR
+              ]"
+              (verActa)="verSobreActa($event)"
+              (generarCargo)="generarCargoEntrega($event)"
+              (generarOficio)="generarOficio($event)"
+              (transmitirOficio)="transmitirOficio($event)"
+              (eliminar)="eliminarActaParaEnvio($event)">
+            </app-tabla-actas>
+          </div>
+          <div class="cont-btn">
+          </div>
+        </section>
+      </div>
+    </div>
+  </article>
+</section>
+
+
+

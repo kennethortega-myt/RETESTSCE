@@ -1,0 +1,32 @@
+.validacion-contrasenia-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 1.3rem;
+    padding-bottom: 15px;
+    padding-top: 5px;
+}
+
+.validacion-contrasenia-item-list {
+    max-height: 150px;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+}
+
+.validacion-contrasenia-item-list.collapsed {
+    max-height: 0;
+}
+
+.validacion-contrasenia-item {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.icon-green {
+    color: #009b00;
+}
+
+.icon-red {
+    color: #de0a16;
+}

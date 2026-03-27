@@ -1,0 +1,115 @@
+<div class="conte_resumen_actas">
+    <div class="columnas">
+        <div class="conte_sombra p-20 px-15por">
+            <div class="mb-20">
+                <div class="datos_actas titulo_datos">
+                    <div class="concepto">Actas Procesadas ({{resumenActas.actasProcesadasPorcentaje | number: '.3'}}%)</div>
+                    <div class="dato">{{resumenActas.actasProcesadas}}</div>
+                </div>
+                <div class="datos_actas">
+                    <div class="concepto">A. Contabilizadas Normales</div>
+                    <div class="dato">{{resumenActas.contabilizadasNormal}}</div>
+                </div>
+            </div>
+            <div class="mb-20">
+                <div class="datos_actas titulo_datos">
+                    <div class="concepto">Actas a resolver por el JEE </div>
+                    <div class="dato"></div>
+                </div>
+                <div class="datos_actas">
+                    <div class="concepto">B. Con Votos Impugnados</div>
+                    <div class="dato">{{resumenActas.impugnados}}</div>
+                </div>
+                <div class="datos_actas">
+                    <div class="concepto">C. Con Error Aritmético</div>
+                    <div class="dato">{{resumenActas.errorMaterial}}</div>
+                </div>
+                <div class="datos_actas">
+                    <div class="concepto">D. Con Ilegibilidad</div>
+                    <div class="dato">{{resumenActas.ilegible}}</div>
+                </div>
+                <div class="datos_actas">
+                    <div class="concepto">E. Incompleta</div>
+                    <div class="dato">{{resumenActas.incompleta}}</div>
+                </div>
+                <div class="datos_actas">
+                    <div class="concepto">F. Con solicitud de nulidad</div>
+                    <div class="dato">{{resumenActas.nulidad}}</div>
+                </div>
+                <div class="datos_actas">
+                    <div class="concepto">G. Acta sin datos</div>
+                    <div class="dato">{{resumenActas.sinDatos}}</div>
+                </div>
+                <div class="datos_actas">
+                    <div class="concepto">H. Acta Extraviada</div>
+                    <div class="dato">{{resumenActas.extraviada}}</div>
+                </div>
+                <div class="datos_actas">
+                    <div class="concepto">I. Acta Siniestrada</div>
+                    <div class="dato">{{resumenActas.siniestrada}}</div>
+                </div>
+                <div class="datos_actas">
+                    <div class="concepto">J. Acta Sin Firmas</div>
+                    <div class="dato">{{resumenActas.sinFirma}}</div>
+                </div>
+                <div class="datos_actas">
+                    <div class="concepto">K. Con más de un tipo de Observación</div>
+                    <div class="dato">{{resumenActas.otrasObservaciones}}</div>
+                </div>
+            </div>
+            <div class="mb-20">
+                <div class="datos_actas titulo_datos">
+                    <div class="concepto">Anuladas por Resolución</div>
+                    <div class="dato"></div>
+                </div>
+                <div class="datos_actas">
+                    <div class="concepto">L. Contabilizadas Anuladas</div>
+                    <div class="dato">{{resumenActas.anulada}}</div>
+                </div>
+                <div class="datos_actas">
+                    <div class="concepto">M. Actas de Mesas no instaladas</div>
+                    <div class="dato">{{resumenActas.actasNoInstalada}}</div>
+                </div>
+            </div>
+            <div class="">
+                <div class="datos_actas titulo_datos">
+                    <div class="concepto">Actas por Procesar ({{resumenActas.actasPorProcesarPorcentaje | number: '.3'}}%)</div>
+                    <div class="dato">{{resumenActas.mesasPorProcesar}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="columnas">
+        <div class="conte_sombra p-20 px-15por mb-20">
+            <div class="">
+                <div class="datos_actas titulo_datos">
+                    <div class="concepto">Mesas a Instalar</div>
+                    <div class="dato">{{resumenActas.mesasAinstalar}}</div>
+                </div>
+                <div class="datos_actas">
+                    <div class="concepto">N. Mesas Instaladas</div>
+                    <div class="dato">{{resumenActas.mesasInstaladas}}</div>
+                </div>
+                <div class="datos_actas">
+                    <div class="concepto">O. Mesas no instaladas</div>
+                    <div class="dato">{{resumenActas.mesasNoInstaladas}}</div>
+                </div>
+                <div class="datos_actas">
+                    <div class="concepto">P. Mesas por informar</div>
+                    <div class="dato">{{resumenActas.pendiente}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="conte_sombra p-20 px-15por">
+
+            <div class="w-100 t-c">
+                <div class="formula flex-vertical">
+                    <span>(%) de Actas <br> Contabilizadas</span>
+
+                    <span>=</span>
+                    <span>A + L + M <div class="divi"></div>N + O + P</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

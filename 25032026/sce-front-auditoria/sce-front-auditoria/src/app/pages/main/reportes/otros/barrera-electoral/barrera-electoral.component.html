@@ -1,0 +1,58 @@
+<form [formGroup]="form">
+    <div class="filtros">
+        <div class="filtro">
+            <label for="tipoProceso">Proceso:</label>
+
+            <mat-form-field appearance="outline">
+                <mat-select id="proceso" formControlName="proceso">
+                    <mat-option *ngFor="let proceso of listProceso" [value]="proceso">{{proceso.nombre}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="filtro">
+            <label for="eleccion">Elección:</label>
+            <mat-form-field appearance="outline">
+                <mat-select id="eleccion" formControlName="eleccion">
+                    <mat-option *ngFor="let eleccion of listEleccion" [value]="eleccion">
+                        {{eleccion.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>        
+        <div class="filtro">
+            <label for="estado">Agrupación Política:</label>
+            <mat-form-field appearance="outline">
+                <mat-select id="estado" formControlName="agrupol">
+                    <mat-option value="0">TODOS</mat-option>
+                    <mat-option *ngFor="let agrupol of listAgrupol" [value]="agrupol"> {{agrupol.codigoAgrupol}} {{agrupol.agrupacionPolitica}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="filtro_boton">
+            <button class="estilo1 full noMarginLR" type="button" (click)="consultarBarreraElectoral()">
+            Consultar
+            </button>
+        </div>
+    </div>
+    
+</form>
+
+<h2 class="subtitulo_reportes">Barrera Electoral</h2>
+<div class="cont-anuncio" *ngIf="!isShowReporte">
+    <div class="personaje-anuncio">
+        <p>
+            Por favor, seleccione los filtros para realizar la búsqueda.
+        </p>
+        <img alt="" src="../assets/img/personaje1.svg" />
+    </div>
+
+</div>
+<article class="pdf_incrustado">
+    <div class="contenedor-documento-muestra">
+        <div #idDivImagen *ngIf="isShowReporte">
+        </div>
+    </div>
+
+</article>

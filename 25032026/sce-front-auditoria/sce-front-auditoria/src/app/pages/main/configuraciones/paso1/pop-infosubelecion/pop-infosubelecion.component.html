@@ -1,0 +1,19 @@
+<h2 class="modalHead titulo2">ELECCIÓN {{data.nombre}} (Sub Elecciones)</h2>
+<mat-dialog-content class="mat-typography">
+  <ul class="arrowli" *ngIf="listTipoEleccion.length > 0">
+    <li *ngFor="let tip of listTipoEleccion">
+      <div class="section-flex">
+        <div>
+          <mat-icon svgIcon="arrow_list2" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
+        </div>
+        <div>
+          <span>{{tip.nombre}}</span>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <span *ngIf="listTipoEleccion.length === 0" style="color: red">No existe resultados</span>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="estilo2" mat-dialog-close>Cerrar</button>
+</mat-dialog-actions>

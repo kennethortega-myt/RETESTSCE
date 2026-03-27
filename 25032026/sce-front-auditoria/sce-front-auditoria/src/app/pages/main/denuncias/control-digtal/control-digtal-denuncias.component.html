@@ -1,0 +1,82 @@
+<section class="secciones resoluciones">
+  <div>
+    <h1 class="titulo1">{{tituloComponente}}</h1>
+    <section class="seccion-unidos resoluciones">
+
+      <article class="control width-40 w-40 z-index1">
+
+        <div class="d-flex gap-10 items-center" *ngIf="false">
+          <div class="t-l flex1 "><p class="font-14">Cantidad de Mesas Con Lista de Electores Digitalizadas</p></div>
+          <div class="t-r"><p class="font-14"><b>1 de 4</b></p></div>
+        </div>
+        <div class="mt-10">
+          <button  class="m-0 estilo2 cargar-doc w-full" type="button"
+                  (click)="listarDocumentos()">
+            CARGAR DOCUMENTOS
+          </button>
+        </div>
+
+        <div class="w-100 p-0 mt-40">
+          <div class="scrolltablaCtrlResolucion">
+            <mat-table class="head-flotante-ctrl-resolucion mitad table-resoluciones" [dataSource]="dataSourceDocumentos">
+              <ng-container matColumnDef="numero">
+                <mat-header-cell *matHeaderCellDef> Nº</mat-header-cell>
+                <mat-cell *matCellDef="let element; let i = index"> {{i+1+paginatorRes.pageIndex * paginatorRes.pageSize}}  </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="numeroDocumento">
+                <mat-header-cell *matHeaderCellDef> Número de Documento</mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  {{element.numeroDocumento}}
+                </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="numeroPaginas">
+                <mat-header-cell *matHeaderCellDef > Páginas</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.numeroPaginas}}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="fechaRegistro">
+                <mat-header-cell *matHeaderCellDef> Fecha de digitalización</mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  {{element.fechaSceScanner | date: 'dd/MM/yyyy HH:mm:ss' }}
+                </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"
+                       [ngClass]="{active: row.numeroDocumento===selectedRow.numeroDocumento}"
+                       (click)="verPdf(row)" onkeypress="">
+              </mat-row>
+            </mat-table>
+          </div>
+          <mat-paginator #paginatorRes [pageSize]="10" [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+      </article>
+
+
+
+      <article class="w-75 p-r">
+        <div id="contenedor-documento" class="contenedor-documento-muestra2 w-100 text-center" >
+          <div *ngIf="!isShowDocumentos" class=" contenido-scroll cont-anuncio">
+            <div class="personaje-anuncio p-o b-25">
+              <p>
+                Haga clic sobre la Denuncia para ver su contenido.
+              </p>
+              <img src="../assets/img/personaje1.svg" alt="">
+            </div>
+          </div>
+          <app-pdf-viewer *ngIf="isShowDocumentos"
+                          [pdfBlob]="selectedPDFBlob"
+                          [actualizarPaginas]="actualizarPaginasRevisadas"
+                          [paginasLabels]="selectedRow.listaPaginas">
+            ></app-pdf-viewer>
+        </div>
+      </article>
+    </section>
+
+    <div class="cont-btn">
+      <button *ngIf="isShowDocumentos" class="estilo2" (click)="updateEstadoDocumento('redigitalizar', Constantes.DENUNCIA_ESTADO_DIGTAL_RECHAZADO)"> Rechazar</button>
+      <button *ngIf="isShowDocumentos" class=" estilo1" (click)="updateEstadoDocumento('aprobar', Constantes.DENUNCIA_ESTADO_DIGTAL_APROBADO)"> Aprobar</button>
+    </div>
+  </div>
+</section>

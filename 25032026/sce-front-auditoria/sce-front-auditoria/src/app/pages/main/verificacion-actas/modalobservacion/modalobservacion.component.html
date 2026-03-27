@@ -1,0 +1,36 @@
+<div class="p-25">
+    <div class="modal observaciones text-center">
+
+       <div class="mt-18">
+        <p class="text-left ">Observaciones (Acta de escrutinio)</p>
+        <img class="w-100 p-0 mt-18" [ngClass] = "imgObservacionesEscrutinio=='' ? 'd_none':'30%'"  [src]="imgObservacionesEscrutinio" alt="" />
+       </div>
+       <div class="mt-18">
+        <p class="text-left mt-36">Observaciones (Acta de instalación)</p>
+        <canvas [ngClass] = "imgObservacionesInstalacion=='' ? 'd_none':'30%'" #imageCanvas1></canvas>
+    </div>
+       <div class="mt-18">
+        <p class="text-left mt-36">Observaciones (Acta de sufragio)</p>
+        <canvas  #imageCanvas2></canvas>
+       </div>
+      </div>
+
+    <div class="content-botones text-center mt-18 d-flex j-end">
+      <div class="check-actas-pop">
+      <mat-checkbox
+        #checkSolicitudNulidadPop
+        id="checkSolicitudNulidadPop"
+        [checked]="solicitudNulidad"
+        (change)="changeSolicitudNulidad($event)"
+        > Solicitud de Nulidad</mat-checkbox>
+      </div>
+      <button *ngIf="!autorizado" #botonSolicitar class="estilo2 mb-40" (click)="confirmarSolicitarAutorizacionCC()">
+        SOLICITAR VER ORG. POLÍTICAS
+      </button>
+      <button #botonAceptar class="estilo1 mb-40" (click)="onCloseClick()">
+        CERRAR
+      </button>
+    </div>
+  </div>
+
+
