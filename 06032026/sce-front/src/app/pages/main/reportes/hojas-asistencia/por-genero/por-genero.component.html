@@ -1,0 +1,44 @@
+<div class="filtros">
+    <div class="filtro">
+        <label for="tipoProceso">Proceso:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="tipoProceso">
+                <mat-option [value]="0">SELECCIONE</mat-option>
+                <mat-option> opcion 1</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="filtro">
+        <label for="centroComputo">Centro de Cómputo</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="centroComputo">
+                <mat-option [value]="0">SELECCIONE</mat-option>
+                <mat-option>Presidente y Vicepresidente</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="filtro">
+        <label for="genero">Genero:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="genero">
+                <mat-option [value]="0">TODOS</mat-option>
+                <mat-option>Varones</mat-option>
+                <mat-option>Mujeres</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="filtro_boton">
+        <button class="estilo1">CONSULTAR</button>
+    </div>
+
+</div>
+<h2 class="subtitulo_reportes">Detalle de registro por género y ausentismo</h2>
+<div class="cont-anuncio">
+    <div class="personaje-anuncio">
+        <p>
+            Por favor, ingrese el número de acta para realizar la búsqueda.
+        </p>
+        <img alt="" src="../assets/img/personaje1.svg" />
+    </div>
+</div>
+<iframe title="pdf" class="pdf_incrustado" src="../../../../../assets/pdfs/cargo.pdf"></iframe>

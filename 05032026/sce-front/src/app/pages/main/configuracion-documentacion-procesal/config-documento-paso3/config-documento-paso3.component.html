@@ -1,0 +1,56 @@
+<div class="">
+  <h1 class="titulo1">Definir secciones de los documentos por proceso </h1>
+  <section class="seccion-unidos">
+    <article class="w-20">
+      <h2 class="titulo2">Secciones de Documentos</h2>
+      <p class="texto"> Seleccione documento</p>
+      <div class="w-100 px-0">
+        <label for="documento">Tipo de documento</label>
+        <mat-form-field appearance="outline">
+          <mat-select [formControl]="tipoDocumentoElectoralControl" (selectionChange)="tipoDocumentoSeleccionado()">
+            <mat-option *ngFor="let documento of listDocumentoElectoral" [value]="documento">
+              {{documento.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="content-flex-input">
+        <div class="container-input" *ngIf="detalleTipoEleccion.id != 0">
+          <input type="file" name="file-1" id="file-1" class="inputfile inputfile-1" #fileUploader accept=".jpg,.png"
+                 (change)="upload($event.target)" />
+          <label for="file-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="iborrainputfile" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"></path></svg>
+            <span class="iborrainputfile">Seleccionar archivo</span>
+          </label>
+        </div>
+
+
+      </div>
+
+
+
+
+      <h3 class="titulo3" *ngIf="detalleTipoEleccion.id != 0">Secciones</h3>
+      <ul class="opciones-seleccion seleccionadores mr-0 " style="    height: calc(100vh - 482px);
+      overflow: auto;">
+        <li *ngFor="let config of listDetalleConfig" (click)="seleccionarSeccion(config)"   (keydown)="onKeyDown($event, config)" ><a [ngClass]="{'active': config.id === seccionSeleccionado.id }"  >{{config.seccion.nombre}} <img alt="img_seleccionado"
+          [src]="'../assets/img/seleccionador-'+config.idColor+'.svg'" *ngIf="config.selected"></a></li>
+
+      </ul>
+    </article>
+    <article class="w-80 cont-img">
+      <div class="seleccionando csFlex">
+        <div class="contenedo-doc">
+
+          <app-map-imagen class="paso3-confi" [imageFile]="imagenSeleccionado" [dataConfig]="dataConfig" [rectangulos]="responseCoordenates"   (coordenadas)="obtenerCoordenadas($event)"></app-map-imagen>
+        </div>
+      </div>
+    </article>
+  </section>
+  <div class="cont-btn">
+    <button class="estilo3" routerLink="/main/configuracionDocumentacionProcesal2">Regresar</button>
+    <button class=" estilo2" (click)="guardarArchivo(false)">Guardar</button>
+    <button class="estilo1" (click)="guardarArchivo(true)">validar</button>
+  </div>
+</div>

@@ -1,0 +1,111 @@
+<section class="secciones">
+  <div class="d-flex-wrap">
+    <div class="w-100">
+      <form class="formulario" [formGroup]="formGroupReporte">
+        <h1 class="titulo1">Reportes</h1>
+        <div class="d-flex">
+          <div class="w-50" >
+            <div class="w-25"><h3 class="titulo3">Tipo de Proceso:</h3></div>
+            <div class="w-75" >
+              <mat-form-field appearance="outline">
+                <mat-select name="idProceso" formControlName="procesoFormControl">
+                  <mat-option value="0">SELECCIONE</mat-option>
+                  <mat-option *ngFor="let proceso of listProceso" [value]="proceso.id">
+                    {{proceso.cnombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="w-25"><h3 class="titulo3">Elección:</h3></div>
+            <div class="w-75" >
+              <mat-form-field appearance="outline">
+                <mat-select name="idEleccion" formControlName="eleccionFormControl">
+                  <mat-option value="0">SELECCIONE</mat-option>
+                  <mat-option *ngFor="let eleccion of listEleccion" [value]="eleccion.id">
+                    {{eleccion.cnombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="w-25"><h3 class="titulo3">{{ambito.nombreTipoAmbito}}</h3></div>
+            <div class="w-75" >
+              <mat-form-field appearance="outline">
+                <mat-select name="idAmbito" formControlName="ambitoFormControl">
+                  <mat-option value="0">SELECCIONE</mat-option>
+                  <mat-option *ngFor="let ambito of listAmbitos" [value]="ambito.id">
+                    {{ambito.nombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="w-25"><h3 class="titulo3">Centro de Cómputo:</h3></div>
+            <div class="w-75" >
+              <mat-form-field appearance="outline">
+                <mat-select name="idCentroComputo" formControlName="centroComputoFormControl">
+                  <mat-option value="0">SELECCIONE</mat-option>
+                  <mat-option *ngFor="let centroComputo of listCentrosComputo" [value]="centroComputo.id">
+                    {{centroComputo.nombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex">
+          <div class="w-40" >
+            <div class="w-30"><h3 class="titulo3">Departamento:</h3></div>
+            <div class="w-70" >
+              <mat-form-field appearance="outline">
+                <mat-select name="idEleccion" formControlName="departamentoFormControl">
+                  <mat-option value="0">SELECCIONE</mat-option>
+                  <mat-option *ngFor="let departamento of listDepartamento" [value]="departamento.idUbigeo">
+                    {{departamento.ubigeo}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="w-30" >
+            <div class="w-30"><h3 class="titulo3">Provincia:</h3></div>
+            <div class="w-70" >
+              <mat-form-field appearance="outline">
+                <mat-select name="idEleccion" formControlName="provinciaFormControl">
+                  <mat-option value="0">SELECCIONE</mat-option>
+                  <mat-option *ngFor="let provincia of listProvincia" [value]="provincia.idUbigeo">
+                    {{provincia.ubigeo}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="w-30" >
+            <div class="w-30"><h3 class="titulo3">Distrito:</h3></div>
+            <div class="w-70" >
+              <mat-form-field appearance="outline">
+                <mat-select name="idEleccion" formControlName="distritoFormControl">
+                  <mat-option value="0">SELECCIONE</mat-option>
+                  <mat-option *ngFor="let distrito of listDistrito" [value]="distrito.idUbigeo">
+                    {{distrito.ubigeo}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex">
+          <div class="w-50" >
+            <div class="w-25"><h3 class="titulo3">Número Mesa:</h3></div>
+            <div class="w-75" >
+              <mat-form-field appearance="outline">
+                <input matInput placeholder="Digite numero de mesa"  formControlName="numeroMesaFormControl"/>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex">
+          <button class="btn-azul">IMPRIMIR</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

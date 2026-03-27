@@ -1,0 +1,43 @@
+.mat-mdc-slide-toggle.slide-firma {
+  &.mat-accent {
+     --mdc-switch-selected-handle-color: #75BD43 !important;
+     --mdc-switch-selected-hover-state-layer-color: #4E951E !important;
+     --mdc-switch-selected-pressed-state-layer-color: #4E951E !important;
+     --mdc-switch-selected-focus-handle-color: #75BD43 !important;
+     --mdc-switch-selected-hover-handle-color: #75BD43 !important;
+     --mdc-switch-selected-track-color: #4E951E !important;
+     --mdc-switch-selected-focus-track-color: #4E951E !important;
+     --mdc-switch-selected-hover-track-color: #4E951E !important;
+     --mdc-switch-selected-pressed-track-color: #4E951E !important;
+     --mdc-switch-selected-pressed-handle-color: #75BD43 !important;
+     --mdc-switch-selected-focus-state-layer-color:#75BD43 !important;
+     --mdc-switch-unselected-handle-color: #ef0000;
+     --mdc-switch-unselected-pressed-track-color: #d5afaf;
+     --mdc-switch-unselected-track-color: #f99494;
+     --mdc-switch-disabled-label-text-color: rgba(0, 0, 0, 0.8);
+     --mdc-switch-unselected-hover-handle-color: #ef0000;
+     --mdc-switch-unselected-hover-state-layer-color: #ef0000;
+     --mdc-switch-unselected-hover-track-color: #f99494;
+     --mat-switch-track-outline-color: transparent;
+     --mdc-switch-disabled-selected-handle-color: #75BD43;
+     --mdc-switch-unselected-focus-handle-color: #ef0000;
+     --mdc-switch-handle-surface-color: #ef0000;
+     --mdc-switch-unselected-focus-track-color: #f99494;
+     --mdc-switch-unselected-pressed-handle-color: #f99494;
+     --mdc-switch-track-width: 45px ;
+     --mdc-switch-track-height: 18px;
+     --mdc-switch-state-layer-size: 42px;
+     --mat-switch-selected-with-icon-handle-horizontal-margin: 0 19px;
+     --mat-switch-selected-pressed-handle-horizontal-margin: 0 18px;
+     --mat-switch-unselected-with-icon-handle-horizontal-margin: 0px 2px;
+     --mdc-switch-selected-hover-state-layer-opacity: 0.8;
+     --mdc-switch-selected-pressed-state-layer-opacity: 0.3;
+
+
+     --mdc-switch-selected-focus-state-layer-opacity: 0.8;
+
+
+
+      --mdc-switch-unselected-pressed-state-layer-opacity: 0.3;
+  }
+}

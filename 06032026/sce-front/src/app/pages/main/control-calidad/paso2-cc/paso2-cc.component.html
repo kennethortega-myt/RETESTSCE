@@ -1,0 +1,103 @@
+<div class="d-flex j-end mt-25 mr-2">                
+        <div class="toogle d-flex between-flex gap-10">
+            <span>Sin Firma</span>
+            <mat-slide-toggle
+                id="isActaConFirma"
+                name="isActaConFirma"
+                [checked]="isActaConFirma"
+                [disabled]="true"
+                class="slide-firma"
+                #toggleFirma
+            ></mat-slide-toggle>
+            <span>Con Firma</span>
+        </div>        
+    </div>
+
+<div style="height: calc(100vh - 550px); overflow: auto;" (scroll)="onScroll($event)">
+    <div class="content-cantidad border-radio-0 mt-25">
+        <div class="d-flex gap-10 between-flex items-center">
+            <div>
+                <h4>Verificación de Firmas <br> (Acta de escrutinio)</h4>                
+            </div>
+            <div class=" wdt-80">
+                <div class="d-flex items-center center-flex gap-36">
+                    <div class="p-r" style="width: 33%">
+                        <label class="header-firmas color1 p-o" for="idImgFirmaEscruPresi">FIRMA PRESIDENTE</label>
+                        <img style="margin-top: 15px;" class="w-full heightactas" id="idImgFirmaEscruPresi"
+                            #idImgFirmaEscruPresi [src]="srcImagesPaso2?.srcImgFirmaPresidenteEsc" alt="">
+                    </div>
+                    <div class="p-r" style="width: 33%">
+                        <label class="header-firmas color1 p-o" for="idImgFirmaEscruSecre">FIRMA SECRETARIO</label>
+                        <img style="margin-top: 15px;" class="w-full heightactas" id="idImgFirmaEscruSecre"
+                            #idImgFirmaEscruPresi [src]="srcImagesPaso2?.srcImgFirmaSecretarioEsc" alt="">
+                    </div>
+                    <div class="p-r" style="width: 33%">
+                        <label class="header-firmas color1 p-o" for="idImgFirmaEscruTercerMiembro">FIRMA TERCER
+                            MIEMBRO</label>
+                        <img style="margin-top: 15px;" class="w-full heightactas" id="idImgFirmaEscruTercerMiembro"
+                            #idImgFirmaEscruPresi [src]="srcImagesPaso2?.srcImgFirmaTercerMiembroEsc" alt="">
+                    </div>
+                </div>
+                <div style="width: 100%;">
+                    <img class="img-100max mt-10" [src]="srcImagesPaso2?.srcImgObsEscrutinio" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-cantidad border-radio-0 mt-25">
+        <div class="d-flex gap-10 between-flex items-center">
+            <div>
+                <h4>Verificación de Firmas <br> (Acta de instalación)</h4>                
+            </div>
+            <div class=" wdt-80">
+                <div class="d-flex items-center center-flex gap-36">
+                    <div class="p-r" style="width: 33%">
+                        <label class="header-firmas color1 p-o" for="idImgFirmaEscruPresi">FIRMA PRESIDENTE</label>
+                            <canvas style="margin-top: 15px;" class="w-full heightactas" #canvasFirmaPresInst></canvas>
+                    </div>
+                    <div class="p-r" style="width: 33%">
+                        <label class="header-firmas color1 p-o" for="idImgFirmaEscruSecre">FIRMA SECRETARIO</label>
+                        <canvas style="margin-top: 15px;" class="w-full heightactas" #canvasFirmaSecreInst></canvas>
+                    </div>
+                    <div class="p-r" style="width: 33%">
+                        <label class="header-firmas color1 p-o" for="idImgFirmaEscruTercer">FIRMA TERCER
+                            MIEMBRO</label>
+                        <canvas style="margin-top: 15px;" class="w-full heightactas" #canvasFirmaTercerInst></canvas>
+                    </div>
+                </div>
+                <div style="width: 100%;">
+                    <canvas class="img-100max mt-10" #canvasObsInst></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-cantidad border-radio-0 mt-25">
+        <div class="d-flex gap-10 between-flex items-center">
+            <div>
+                <h4>Verificación de Firmas <br> (Acta de sufragio)</h4>                
+            </div>
+            <div class=" wdt-80">
+                <div class="d-flex items-center center-flex gap-36">
+                    <div class="p-r" style="width: 33%">
+                        <label class="header-firmas color1 p-o" for="idImgFirmaEscruPresi">FIRMA PRESIDENTE</label>
+                        <canvas style="margin-top: 15px;" class="w-full heightactas" #canvasFirmaPresSuf></canvas>
+                    </div>
+                    <div class="p-r" style="width: 33%">
+                        <label class="header-firmas color1 p-o" for="idImgFirmaEscruSecre">FIRMA SECRETARIO</label>
+                        <canvas style="margin-top: 15px;" class="w-full heightactas" #canvasFirmaSecreSuf></canvas>
+                    </div>
+                    <div class="p-r" style="width: 33%">
+                        <label class="header-firmas color1 p-o" for="idImgFirmaEscruTercer">FIRMA TERCER
+                            MIEMBRO</label>
+                        <canvas style="margin-top: 15px;" class="w-full heightactas" #canvasFirmaTercerSuf></canvas>
+                    </div>
+                </div>
+                <div style="width: 100%;">
+                    <canvas class="img-100max mt-10" #canvasObsSuf></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

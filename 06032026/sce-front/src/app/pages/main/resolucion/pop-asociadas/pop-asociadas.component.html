@@ -1,0 +1,254 @@
+<h2 class="modalHead titulo2">Resolución JEE / JNE</h2>
+<mat-dialog-content class="mat-typography" *ngIf="isMostrarModal">
+  <div class="pl-10px">
+    <form class="section-flex ">
+      <div class="w-70">
+        <label for="cmbProcedencia">Procedencia</label>
+        <mat-form-field appearance="outline">
+          <mat-select id="cmbProcedencia" [formControl]="procedenciaFormControl" placeholder="Seleccione la procedencia" >
+            <mat-option [value]="0">SELECCIONE</mat-option>
+            <mat-option *ngFor="let catalogo of listProcedencias"
+                        [value]="catalogo.codigoI">{{catalogo.nombre}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="w-30">
+        <label for="fechaInput">Fecha</label>
+        <mat-form-field appearance="outline">
+          <input matInput
+                 id="fechaInput"
+                 [matDatepicker]="dp3"
+                 [formControl]="fechaResolucionFormControl"
+                 [min]="minDate" [max]="maxDate"
+                 readonly>
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="dp3"></mat-datepicker-toggle>
+          <mat-datepicker #dp3 [startAt]="fechaResolucionFormControl.value" ></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="w-50">
+        <label for="resoInput" *ngIf="procedenciaFormControl.value===Constantes.CATALOGO_PROCEDENCIA_ONPE_COD">Memo</label>
+        <label for="resoInput" *ngIf="procedenciaFormControl.value!==Constantes.CATALOGO_PROCEDENCIA_ONPE_COD">Nro. Resolución</label>
+        <mat-form-field appearance="outline">
+          <input id="resoInput" matInput type="text" placeholder="Ingrese el nro de resolución" [maxLength]="50"
+                 [formControl]="nroResolucionFormControl"
+                 sceNoEspacioInicio
+                 sceUppercaseFormReact
+                 sceValidacionInputCustomReact
+                 inputPattern="0-9a-zA-Z /_-">
+        </mat-form-field>
+      </div>
+      <div class="w-50" *ngIf="procedenciaFormControl.value!==Constantes.CATALOGO_PROCEDENCIA_ONPE_COD && procedenciaFormControl.value!==Constantes.CATALOGO_PROCEDENCIA_ONPE_COD">
+        <label for="expeInput">Nro. Expediente</label>
+        <mat-form-field appearance="outline">
+          <input id="expeInput" matInput type="text" placeholder="Ingrese el nro de expediente"
+                 [formControl]="nroExpedienteFormControl"
+                 [maxLength]="50"
+                 sceNoEspacioInicio
+                 sceUppercaseFormReact
+                 sceValidacionInputCustomReact
+                 inputPattern="0-9a-zA-Z /_-"
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="w-100">
+        <label for="cmbTipoRes">Tipo de Resolución</label>
+        <mat-form-field appearance="outline">
+          <mat-select id="cmbTipoRes" [formControl]="tipoResolucionFormControl"
+                      placeholder="Seleccione el tipo de resolución" (selectionChange)="changeTipoResolucion()">
+            <mat-option [value]="0">SELECCIONE</mat-option>
+            <mat-option *ngFor="let catalogo of listTiposResoluciones"
+                        [value]="catalogo.codigoI">{{catalogo.nombre}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="w-100" *ngIf="tipoResolucionFormControl.value==Constantes.CATALOGO_TIPO_RESOL_INFUNDADAS_XUBIGEO ||
+      tipoResolucionFormControl.value==Constantes.CATALOGO_TIPO_RESOL_ANULACION_ACTAS_X_UBIGEO">
+        <div class="w-25" >
+          <label for="idDepartamento">Departamento</label>
+          <mat-form-field appearance="outline">
+            <mat-select id="idDepartamento" [formControl]="departamentoFormControl"
+                        placeholder="SELECCIONE" (selectionChange)="changeDepartamento()">
+              <mat-option [value]="0">SELECCIONE</mat-option>
+              <mat-option *ngFor="let ubigeo of listDepartamentos"
+                          [value]="ubigeo.id">{{ubigeo.nombre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="w-25" >
+          <label for="idProvincia">Provincia</label>
+          <mat-form-field appearance="outline">
+            <mat-select id="idProvincia" [formControl]="provinciaFormControl"
+                        placeholder="SELECCIONE" (selectionChange)="changeProvincia()">
+              <mat-option [value]="0">SELECCIONE</mat-option>
+              <mat-option *ngFor="let ubigeo of listProvincias"
+                          [value]="ubigeo.id">{{ubigeo.nombre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="w-25" >
+          <label for="idDistrito">Distrito</label>
+          <mat-form-field appearance="outline">
+            <mat-select id="idDistrito" [formControl]="distritoFormControl"
+                        placeholder="SELECCIONE" (selectionChange)="changeDistrito()">
+              <mat-option [value]="0">SELECCIONE</mat-option>
+              <mat-option *ngFor="let ubigeo of listDistritos"
+                          [value]="ubigeo.id">{{ubigeo.nombre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="w-25" >
+          <label for="idLocalVotacion">Local de Votación</label>
+          <mat-form-field appearance="outline">
+            <mat-select id="idLocalVotacion" [formControl]="localVotacionFormControl"
+                        placeholder="SELECCIONE" (selectionChange)="changeLocalVotacion()">
+              <mat-option [value]="0">TODOS</mat-option>
+              <mat-option *ngFor="let local of listLocalVotacion"
+                          [value]="local.id">{{local.nombre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="w-100" *ngIf="tipoResolucionFormControl.value==Constantes.CATALOGO_TIPO_RESOL_INFUNDADAS_XUBIGEO ||
+      tipoResolucionFormControl.value==Constantes.CATALOGO_TIPO_RESOL_ANULACION_ACTAS_X_UBIGEO">
+        <div class="w-25" >
+          <label for="idElecciones">Elecciones</label>
+          <mat-form-field appearance="outline">
+            <mat-select id="idElecciones" [formControl]="eleccionesFormControl"
+                        placeholder="SELECCIONE" (selectionChange)="changeEleccion()">
+              <mat-option [value]="0">TODOS</mat-option>
+              <mat-option *ngFor="let eleccion of listElecciones"
+                          [value]="eleccion.id">{{eleccion.nombre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="w-25" >
+          <button class="btn-azul" (click)="buscarActasContabilizadasPorUbigeo()">BUSCAR</button>
+        </div>
+
+        <div class="w-25" *ngIf="tipoResolucionFormControl.value==Constantes.CATALOGO_TIPO_RESOL_ANULACION_ACTAS_X_UBIGEO">
+          <label for="idPasarNulos">Cantidad a pasar a nulos</label>
+          <mat-form-field appearance="outline">
+            <mat-select id="idPasarNulos" [formControl]="tipoNulosFC">
+              <mat-option value="0">SELECCIONE</mat-option>
+              <mat-option value="1">Electores hábiles</mat-option>
+              <mat-option value="2">Ciudadanos que votaron</mat-option>
+              <mat-option value="3">Suma de votos</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="w-100" >
+        <h3 *ngIf="tipoResolucionFormControl.value==Constantes.CATALOGO_TIPO_RESOL_ACTAS_ENVIADAS_A_JEE ||
+                   tipoResolucionFormControl.value==Constantes.CATALOGO_TIPO_RESOL_REPROCESADAS_JNE ||
+                   tipoResolucionFormControl.value==Constantes.CATALOGO_TIPO_RESOL_REPROCESADAS_ONPE" style="margin: 0" >Lista de Actas
+          Asociadas a la Resolución
+        </h3>
+
+        <h3 *ngIf="tipoResolucionFormControl.value==Constantes.CATALOGO_TIPO_RESOL_MESAS_NO_INSTALADAS" style="margin: 0">Lista de Mesas
+          Asociadas a la Resolución
+        </h3>
+
+        <h3 *ngIf="tipoResolucionFormControl.value==Constantes.CATALOGO_TIPO_RESOL_ACTAS_EXTRAVIADAS" style="margin: 0">Lista de Actas
+          Extraviadas asociadas a la Resolución
+        </h3>
+        <h3 *ngIf="tipoResolucionFormControl.value==Constantes.CATALOGO_TIPO_RESOL_ACTAS_SINIESTRADAS" style="margin: 0">Lista de Actas
+          Siniestradas asociadas a la Resolución
+        </h3>
+      </div>
+      <div class="w-100" >
+        <mat-form-field *ngIf="tipoResolucionFormControl.value !==0 " class="w-100 chipBox">
+          <mat-chip-grid *ngIf="
+          tipoResolucionFormControl.value==Constantes.CATALOGO_TIPO_RESOL_ACTAS_ENVIADAS_A_JEE ||
+          tipoResolucionFormControl.value==Constantes.CATALOGO_TIPO_RESOL_REPROCESADAS_ONPE ||
+          tipoResolucionFormControl.value==Constantes.CATALOGO_TIPO_RESOL_REPROCESADAS_JNE ||
+          tipoResolucionFormControl.value==Constantes.CATALOGO_TIPO_RESOL_INFUNDADAS ||
+          tipoResolucionFormControl.value==Constantes.CATALOGO_TIPO_RESOL_INFUNDADAS_XUBIGEO ||
+          tipoResolucionFormControl.value==Constantes.CATALOGO_TIPO_RESOL_ANULACION_ACTAS_X_UBIGEO"
+                         #chipGrid aria-label="Enter fruits">
+            <mat-chip-row *ngFor="let acta of actas"
+                          (removed)="remove(acta)"
+                          [editable]="false">
+
+              {{
+                acta.estadoActa==Constantes.ESTADO_ACTA_EXTRAVIADA || acta.estadoActa==Constantes.ESTADO_ACTA_SINIESTRADA
+                ?
+                acta.mesa + '-' + acta.descripcionEstadoActa + '-' + acta.eleccion
+                :
+                acta.mesa + '-' + acta.copia + '-' + acta.eleccion
+              }}
+
+              <button matChipRemove [title]="'Quitar acta ' + acta.mesa+'-'+acta.copia" *ngIf="tipoResolucionFormControl.value!=Constantes.CATALOGO_TIPO_RESOL_INFUNDADAS_XUBIGEO &&
+                                                                                               tipoResolucionFormControl.value!=Constantes.CATALOGO_TIPO_RESOL_ANULACION_ACTAS_X_UBIGEO">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip-row>
+            <input class="ml-2 mt-1" placeholder="Ingrese un acta ..." [disabled]="tipoResolucionFormControl.value==Constantes.CATALOGO_TIPO_RESOL_INFUNDADAS_XUBIGEO ||
+                                                                                   tipoResolucionFormControl.value==Constantes.CATALOGO_TIPO_RESOL_ANULACION_ACTAS_X_UBIGEO"
+                   [matChipInputFor]="chipGrid" maxlength="9"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   [matChipInputAddOnBlur]="addOnBlur"
+                   (matChipInputTokenEnd)="add($event)"
+                   (input)="restringirAlfanumerico($event)"/>
+
+          </mat-chip-grid>
+
+          <mat-chip-grid *ngIf="tipoResolucionFormControl.value==Constantes.CATALOGO_TIPO_RESOL_MESAS_NO_INSTALADAS" #chipGrid aria-label="Enter fruits">
+            <mat-chip-row *ngFor="let acta of actas"
+                          (removed)="remove(acta)"
+                          [editable]="false">
+              {{acta.mesa}}
+              <button matChipRemove [title]="'Quitar mesa ' + acta.mesa">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip-row>
+
+            <input class="ml-2" placeholder="Ingrese una mesa ..."
+                   [matChipInputFor]="chipGrid" maxlength="6"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   [matChipInputAddOnBlur]="addOnBlur"
+                   (matChipInputTokenEnd)="add($event)"
+                   (input)="restringirNumeros($event)"/>
+
+          </mat-chip-grid>
+
+          <mat-chip-grid *ngIf="tipoResolucionFormControl.value==Constantes.CATALOGO_TIPO_RESOL_ACTAS_EXTRAVIADAS||
+                                tipoResolucionFormControl.value==Constantes.CATALOGO_TIPO_RESOL_ACTAS_SINIESTRADAS" #chipGrid aria-label="Enter mesa">
+            <mat-chip-row *ngFor="let acta of actas"
+                          (removed)="remove(acta)"
+                          [editable]="false">
+              {{acta.mesa + '-' + acta.eleccion}}
+              <button matChipRemove [title]="'Quitar acta ' + acta.mesa+'-'+acta.eleccion">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip-row>
+
+            <input class="ml-2" placeholder="Ingrese una mesa ..."
+                   [matChipInputFor]="chipGrid" maxlength="6"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   [matChipInputAddOnBlur]="addOnBlur"
+                   (matChipInputTokenEnd)="add($event)"
+                   (input)="restringirNumeros($event)"/>
+
+          </mat-chip-grid>
+
+        </mat-form-field>
+      </div>
+
+    </form>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions class="mr-1" align="end" *ngIf="isMostrarModal">
+
+  <button class="btn-azul mr-1" (click)="cerrarDialogo()">CANCELAR</button>
+  <button class="estilo1" (click)="registrarAsociacion()">REGISTRAR</button>
+
+</mat-dialog-actions>

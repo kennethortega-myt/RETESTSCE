@@ -1,0 +1,13 @@
+<svg id="Componente_72_7" data-name="Componente 72 – 7" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18.565" height="18.565" viewBox="0 0 18.565 18.565">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectángulo_1016" data-name="Rectángulo 1016" width="18.565" height="18.565" fill="#2a71b9"/>
+    </clipPath>
+  </defs>
+  <path id="Trazado_1726" data-name="Trazado 1726" d="M0,14.4v4.372H4.372L15.034,8.115,10.662,3.744Z" transform="translate(0 -0.211)" fill="#2a71b9"/>
+  <g id="Grupo_1488" data-name="Grupo 1488">
+    <g id="Grupo_1487" data-name="Grupo 1487" clip-path="url(#clip-path)">
+      <path id="Trazado_1727" data-name="Trazado 1727" d="M18.689,2.067,17.224.6a2.055,2.055,0,0,0-2.908,0L12.852,2.067l4.372,4.372,1.464-1.464a2.056,2.056,0,0,0,0-2.908" transform="translate(-0.726 0)" fill="#2a71b9"/>
+    </g>
+  </g>
+</svg>

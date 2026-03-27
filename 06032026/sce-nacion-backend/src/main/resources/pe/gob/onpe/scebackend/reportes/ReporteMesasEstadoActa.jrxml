@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" columnCount="9" printOrder="Horizontal" pageWidth="595" pageHeight="842" columnWidth="61" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="6e84e350-665f-4547-9254-c20c561bdc2f">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Dataset1" uuid="4c3c7fc7-210e-49d5-9ff3-e4e3bc913af7">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="mesa_1" class="java.lang.String">
+			<fieldDescription><![CDATA[@mesa]]></fieldDescription>
+		</field>
+	</subDataset>
+	<parameter name="url_imagen" class="java.io.InputStream"/>
+	<parameter name="tituloPrincipal" class="java.lang.String"/>
+	<parameter name="tituloEleccionCompleto" class="java.lang.String"/>
+	<parameter name="tituloReporte" class="java.lang.String"/>
+	<parameter name="descOdpe" class="java.lang.String"/>
+	<parameter name="descCompu" class="java.lang.String"/>
+	<parameter name="estadoMesa" class="java.lang.String"/>
+	<parameter name="usuario" class="java.lang.String"/>
+	<parameter name="reporte" class="java.lang.String"/>
+	<parameter name="version" class="java.lang.String"/>
+	<parameter name="p_mesa" class="java.lang.String"/>
+	<parameter name="rutaSubreporte" class="net.sf.jasperreports.engine.JasperReport" evaluationTime="Late"/>
+	<parameter name="MesasList" class="java.util.Collection"/>
+	<parameter name="sinValorOficial" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="nombreUbigeoNivelUno" class="java.lang.String"/>
+	<field name="totalMesasUbigeoNivelUno" class="java.lang.Long"/>
+	<field name="totalElectoresUbigeoNivelUno" class="java.lang.Long"/>
+	<field name="nombreUbigeoNivelDos" class="java.lang.String"/>
+	<field name="totalMesasUbigeoNivelDos" class="java.lang.Long"/>
+	<field name="totalElectoresUbigeoNivelDos" class="java.lang.Long"/>
+	<field name="nombreUbigeoNivelTres" class="java.lang.String"/>
+	<field name="totalMesasUbigeoNivelTres" class="java.lang.Long"/>
+	<field name="totalElectoresUbigeoNivelTres" class="java.lang.Long"/>
+	<field name="codigoLocal" class="java.lang.String"/>
+	<field name="nombreLocal" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="totalMesasLocal" class="java.lang.Long"/>
+	<field name="totalElectoresLocal" class="java.lang.Long"/>
+	<field name="nombreEstadoActa" class="java.lang.String"/>
+	<field name="mesa" class="java.lang.String"/>
+	<field name="electoresHabiles" class="java.lang.Long"/>
+	<field name="idActa" class="java.lang.Long"/>
+	<field name="idEstadoActa" class="java.lang.Integer"/>
+	<variable name="CURRENT_PAGE_NUMBER" class="java.lang.Integer" resetType="None">
+		<variableExpression><![CDATA[$V{PAGE_NUMBER} == 1 && $V{REPORT_COUNT} == 0 ? 1 : ($V{PAGE_NUMBER} == 1 ? 2 : $V{PAGE_NUMBER} + 1)]]></variableExpression>
+	</variable>
+	<variable name="mesasDep1" class="java.lang.Integer" resetType="None" calculation="First">
+		<variableExpression><![CDATA[$F{totalMesasUbigeoNivelUno}]]></variableExpression>
+	</variable>
+	<variable name="electoresDep1" class="java.lang.Integer" resetType="None" calculation="First">
+		<variableExpression><![CDATA[$F{totalElectoresUbigeoNivelUno}]]></variableExpression>
+	</variable>
+	<variable name="mesasPro1" class="java.lang.Integer" resetType="None" calculation="First">
+		<variableExpression><![CDATA[$F{totalMesasUbigeoNivelDos}]]></variableExpression>
+	</variable>
+	<variable name="electoresPro1" class="java.lang.Integer" resetType="None" calculation="First">
+		<variableExpression><![CDATA[$F{totalElectoresUbigeoNivelDos}]]></variableExpression>
+	</variable>
+	<variable name="nombreDistrito1" class="java.lang.Integer" resetType="Group" resetGroup="groupUbigeoNivelTres" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{nombreUbigeoNivelTres}]]></variableExpression>
+	</variable>
+	<variable name="mesasDis1" class="java.lang.Integer" resetType="None" calculation="First">
+		<variableExpression><![CDATA[$F{totalMesasUbigeoNivelTres}]]></variableExpression>
+	</variable>
+	<variable name="electoresDis1" class="java.lang.Integer" resetType="None" calculation="First">
+		<variableExpression><![CDATA[$F{totalElectoresUbigeoNivelTres}]]></variableExpression>
+	</variable>
+	<variable name="codigoLocal1" class="java.lang.String">
+		<variableExpression><![CDATA[$F{codigoLocal}.equals("") || $F{codigoLocal} == null ? "": $F{codigoLocal}]]></variableExpression>
+	</variable>
+	<variable name="cuentaEstadoMesa" class="java.lang.Integer" resetType="Group" resetGroup="groupEstadoMesa" calculation="Count">
+		<variableExpression><![CDATA[$F{idEstadoActa}]]></variableExpression>
+	</variable>
+	<variable name="mesa_1" class="java.lang.String" resetType="None" incrementType="Group" incrementGroup="groupEstadoMesa">
+		<variableExpression><![CDATA[$F{mesa}]]></variableExpression>
+	</variable>
+	<variable name="mesasLocal1" class="java.lang.Integer" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{mesa} !=null ?  $F{mesa}  : null]]></variableExpression>
+	</variable>
+	<variable name="electoresLocal1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{electoresHabiles} != null ? $F{electoresHabiles} : null]]></variableExpression>
+	</variable>
+	<variable name="v_electores_habiles_dep" class="java.lang.Integer" resetType="Group" resetGroup="groupUbigeoNivelUno" calculation="Sum">
+		<variableExpression><![CDATA[$F{electoresHabiles}]]></variableExpression>
+	</variable>
+	<variable name="v_electores_habiles_pro" class="java.lang.Integer" resetType="Group" resetGroup="groupUbigeoNivelDos" calculation="Sum">
+		<variableExpression><![CDATA[$F{electoresHabiles}]]></variableExpression>
+	</variable>
+	<variable name="v_electores_habiles_dis" class="java.lang.Integer" resetType="Group" resetGroup="groupUbigeoNivelTres" calculation="Sum">
+		<variableExpression><![CDATA[$F{electoresHabiles}]]></variableExpression>
+	</variable>
+	<variable name="v_cantidad_acta_dep" class="java.lang.Long" resetType="Group" resetGroup="groupUbigeoNivelUno" calculation="Count">
+		<variableExpression><![CDATA[$F{idActa}]]></variableExpression>
+	</variable>
+	<variable name="v_cantidad_acta_pro" class="java.lang.Long" resetType="Group" resetGroup="groupUbigeoNivelDos" calculation="Count">
+		<variableExpression><![CDATA[$F{idActa}]]></variableExpression>
+	</variable>
+	<variable name="v_cantidad_acta_dis" class="java.lang.Long" resetType="Group" resetGroup="groupUbigeoNivelTres" calculation="Count">
+		<variableExpression><![CDATA[$F{idActa}]]></variableExpression>
+	</variable>
+	<variable name="v_electores_habiles_local" class="java.lang.Integer" resetType="Group" resetGroup="groupTablaLocalVotación" calculation="Sum">
+		<variableExpression><![CDATA[$F{electoresHabiles}]]></variableExpression>
+	</variable>
+	<variable name="v_cantidad_acta_local" class="java.lang.Long" resetType="Group" resetGroup="groupTablaLocalVotación" calculation="Count">
+		<variableExpression><![CDATA[$F{idActa}]]></variableExpression>
+	</variable>
+	<group name="groupUbigeoNivelUno" minHeightToStartNewPage="50">
+		<groupExpression><![CDATA[$F{nombreUbigeoNivelUno}]]></groupExpression>
+		<groupHeader>
+			<band height="27" splitType="Stretch">
+				<rectangle>
+					<reportElement stretchType="ElementGroupHeight" x="2" y="5" width="550" height="22" isPrintWhenDetailOverflows="true" forecolor="#050000" backcolor="rgba(112, 97, 96, 0.39215687)" uuid="b11eebe9-ef4f-4719-acf1-000962ab2660">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+				</rectangle>
+				<textField>
+					<reportElement x="2" y="5" width="330" height="22" printWhenGroupChanges="groupUbigeoNivelUno" uuid="f39cd18c-db2f-412f-8077-87012a3f843f"/>
+					<box padding="5"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nombreUbigeoNivelUno}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="342" y="5" width="40" height="22" uuid="a982e7a9-ab7c-48d5-b63d-4de0e18fdaf9">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Mesas:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="452" y="5" width="50" height="22" uuid="1b7840df-088d-4370-88f9-9a8a6dcbab8d">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Electores:]]></text>
+				</staticText>
+				<textField evaluationTime="Group" evaluationGroup="groupUbigeoNivelUno" pattern="#,##0.###;#,##0.###-">
+					<reportElement x="507" y="5" width="40" height="21" printWhenGroupChanges="groupUbigeoNivelUno" uuid="f6d608df-69dc-442b-9f64-6f856378f96d"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{v_electores_habiles_dep}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="groupUbigeoNivelUno" pattern="#,##0.###;#,##0.###-">
+					<reportElement x="382" y="5" width="59" height="21" uuid="a765aca3-0dd1-4e3d-bfef-c282870258c9"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{v_cantidad_acta_dep}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="groupUbigeoNivelDos">
+		<groupExpression><![CDATA[$F{nombreUbigeoNivelDos}]]></groupExpression>
+		<groupHeader>
+			<band height="24">
+				<rectangle>
+					<reportElement x="2" y="0" width="550" height="24" isPrintWhenDetailOverflows="true" forecolor="#050000" backcolor="rgba(112, 97, 96, 0.39215687)" uuid="c2c24c56-e4ba-4834-b3ac-fc8dd6456570"/>
+				</rectangle>
+				<textField>
+					<reportElement x="2" y="0" width="330" height="24" printWhenGroupChanges="groupUbigeoNivelDos" uuid="b5c9a148-5ab0-4c53-9976-b44057919be4">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<box topPadding="3" leftPadding="13" bottomPadding="3" rightPadding="3"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{nombreUbigeoNivelDos}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="342" y="0" width="40" height="24" uuid="9a9eab32-5e5d-4d5d-86a5-1db6f279455d">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Mesas:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="452" y="0" width="50" height="24" uuid="596775a0-ee1e-4c37-815f-ad5cebb4285d">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Electores:]]></text>
+				</staticText>
+				<textField evaluationTime="Group" evaluationGroup="groupUbigeoNivelDos" pattern="#,##0.###;#,##0.###-">
+					<reportElement x="382" y="0" width="60" height="24" uuid="337c4789-dd19-4508-8880-e8f5e5f40b71"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{v_cantidad_acta_pro}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="groupUbigeoNivelDos" pattern="#,##0.###;#,##0.###-">
+					<reportElement x="507" y="0" width="40" height="24" printWhenGroupChanges="groupUbigeoNivelDos" uuid="f1c362e4-9356-4f82-a283-e6fba333ef2c"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{v_electores_habiles_pro}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="groupUbigeoNivelTres">
+		<groupExpression><![CDATA[$F{nombreUbigeoNivelTres}]]></groupExpression>
+		<groupHeader>
+			<band height="25">
+				<rectangle>
+					<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="2" y="0" width="550" height="25" isPrintWhenDetailOverflows="true" printWhenGroupChanges="groupUbigeoNivelTres" forecolor="#050000" backcolor="rgba(112, 97, 96, 0.39215687)" uuid="d71c6ac7-1c4a-41bd-8ef0-f08baa3bc64e"/>
+				</rectangle>
+				<textField>
+					<reportElement x="2" y="0" width="330" height="24" printWhenGroupChanges="groupUbigeoNivelTres" uuid="26c9fb76-df61-47ef-8901-06281ca6b39b"/>
+					<box topPadding="5" leftPadding="25" bottomPadding="5" rightPadding="5"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{nombreUbigeoNivelTres}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="342" y="0" width="40" height="24" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" printWhenGroupChanges="groupUbigeoNivelTres" uuid="e25cb22a-293e-4e1d-a470-85d65d763dde">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Mesas:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="452" y="0" width="50" height="25" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" printWhenGroupChanges="groupUbigeoNivelTres" uuid="8caefa7b-8d65-4987-8f21-32c867f7c53a">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Electores:]]></text>
+				</staticText>
+				<textField evaluationTime="Group" evaluationGroup="groupUbigeoNivelTres" pattern="#,##0.###;#,##0.###-">
+					<reportElement mode="Transparent" x="382" y="0" width="60" height="24" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" printWhenGroupChanges="groupUbigeoNivelTres" uuid="223b44c6-7ab7-4c36-a198-6233137b7e72"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{v_cantidad_acta_dis}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="groupUbigeoNivelTres" pattern="#,##0.###;#,##0.###-">
+					<reportElement mode="Transparent" x="507" y="0" width="40" height="25" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" printWhenGroupChanges="groupUbigeoNivelTres" uuid="e33402eb-71b6-482b-8ec5-7d112831a87c"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{v_electores_habiles_dis}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="groupTablaLocalVotación">
+		<groupExpression><![CDATA[$F{codigoLocal}]]></groupExpression>
+		<groupHeader>
+			<band height="56">
+				<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+				<rectangle>
+					<reportElement x="2" y="0" width="550" height="25" isPrintWhenDetailOverflows="true" printWhenGroupChanges="groupTablaLocalVotación" forecolor="#050000" backcolor="rgba(112, 97, 96, 0.39215687)" uuid="2069d8e8-e25b-449c-a654-c30d1175e7fb"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="2" y="0" width="78" height="24" printWhenGroupChanges="groupTablaLocalVotación" uuid="b349339c-82d9-4576-909e-159432c603aa"/>
+					<box>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Código]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="81" y="0" width="200" height="24" printWhenGroupChanges="groupTablaLocalVotación" uuid="a0f454c3-a89a-4eab-a5d9-56265669339f"/>
+					<box>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Local de Votación]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="281" y="0" width="140" height="25" printWhenGroupChanges="groupTablaLocalVotación" uuid="517c0044-2d8f-4256-b840-0ee258a6ee5f">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Dirección]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="421" y="0" width="69" height="25" printWhenGroupChanges="groupTablaLocalVotación" uuid="568a5356-b52f-4939-9d21-b7279ee6596d">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Mesas]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="490" y="1" width="62" height="24" printWhenGroupChanges="groupTablaLocalVotación" uuid="b6dccb61-cf28-461f-a150-efd4e6e4a73a"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Electores Hábiles]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement x="2" y="25" width="550" height="25" isPrintWhenDetailOverflows="true" printWhenGroupChanges="groupTablaLocalVotación" backcolor="rgba(255, 255, 255, 0.0)" uuid="5d54e02e-c572-42ac-8d81-2eed3548362f"/>
+				</rectangle>
+				<textField>
+					<reportElement x="2" y="25" width="78" height="25" printWhenGroupChanges="groupTablaLocalVotación" uuid="4f32c9c6-0274-4870-8bb2-d1dd6d12b7e0">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{codigoLocal}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="ScaleFont">
+					<reportElement x="81" y="25" width="200" height="25" printWhenGroupChanges="groupTablaLocalVotación" uuid="acf8713a-6643-4b0d-adbf-5423c18a7f60"/>
+					<box padding="5">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nombreLocal}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="ScaleFont">
+					<reportElement x="281" y="25" width="140" height="24" printWhenGroupChanges="groupTablaLocalVotación" uuid="24397a0d-b685-439d-974e-d165e85e0de2"/>
+					<box padding="5">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="groupTablaLocalVotación" pattern="#,##0.###;#,##0.###-">
+					<reportElement x="420" y="25" width="70" height="24" printWhenGroupChanges="groupTablaLocalVotación" uuid="c5053ecc-a963-4d1b-94e8-9c307f6f2541"/>
+					<box>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{v_cantidad_acta_local}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="groupTablaLocalVotación" pattern="#,##0.###;#,##0.###-">
+					<reportElement x="490" y="25" width="62" height="24" printWhenGroupChanges="groupTablaLocalVotación" uuid="a1e51025-f4d2-406a-9a7d-bf85e7b813c2"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{v_electores_habiles_local}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="groupEstadoMesa" minHeightToStartNewPage="5">
+		<groupExpression><![CDATA[$F{idEstadoActa}]]></groupExpression>
+		<groupHeader>
+			<band height="26">
+				<textField evaluationTime="Group" evaluationGroup="groupEstadoMesa" isBlankWhenNull="false">
+					<reportElement mode="Opaque" x="2" y="0" width="550" height="20" backcolor="rgba(255, 255, 255, 0.0)" uuid="c668b586-fc8f-436f-9757-0d52d25dd146"/>
+					<textElement>
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{idEstadoActa}==1  ? "Normal" : (
+   $F{idEstadoActa}==2 ? "Resuelta" : (
+   $F{idEstadoActa}==3 ? "Para envío al JEE" : (
+   $F{idEstadoActa}==4 ? "No Instalada" :
+     "Pendiente" )))
+     + ": " + $V{cuentaEstadoMesa}.toString()]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band height="802" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="802" forecolor="#C0C0C0" uuid="2476e749-6747-451d-abdc-18a85c65704a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="72"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sinValorOficial}]]></textFieldExpression>
+			</textField>
+		</band>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+
+	<pageHeader>
+		<band height="140" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="80" height="80" uuid="0ad83f03-0b11-4120-a7d9-4f4833cf931f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{url_imagen}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="100" y="7" width="350" height="20" forecolor="#7F7F7F" uuid="32c654a3-cd27-4383-a7e7-4fbbcbd4fb81"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tituloPrincipal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="50" width="282" height="20" forecolor="#7F7F7F" uuid="3a35682a-8acd-4ac6-a987-34abbefba61a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tituloEleccionCompleto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="30" width="350" height="20" uuid="f8ac7864-8e4e-4f18-a443-5f60eb6cdbde"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tituloReporte}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="90" width="90" height="13" uuid="c30fc8f4-2586-43a4-92cd-2e32e4830ec4">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ODPE:]]></text>
+			</staticText>
+
+			<staticText>
+				<reportElement x="454" y="10" width="45" height="13" uuid="ccf748f4-db54-42ca-b565-57aa1831ce2c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha   :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="454" y="23" width="45" height="13" uuid="b3d30de1-8a6c-4e8d-8147-b4202dd0e2f8">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora     :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="453" y="36" width="46" height="13" uuid="0ba9d2be-00e5-43f2-b5ab-6cad15d91294">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Página  :]]></text>
+			</staticText>
+
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="500" y="10" width="50" height="13" uuid="4c8721d7-e31a-4ad9-a4e7-4f96df3d9872">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm:ss">
+				<reportElement x="500" y="23" width="50" height="13" uuid="18fb1f4e-c1e5-40e3-8d83-7c7ef7e51718">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Auto">
+				<reportElement x="500" y="36" width="50" height="13" uuid="a6521502-bd94-49f3-b16d-efe5c522f89c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{CURRENT_PAGE_NUMBER} + " de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="105" width="90" height="13" uuid="ee7f5015-4d67-46f7-a64b-201edc0e2151">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Centro de computo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="121" width="90" height="13" uuid="f965db6d-6ac3-48e0-b4d0-63bf7b8ea0c1">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado de Mesa:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="90" y="90" width="340" height="14" uuid="3b9775d0-4b71-47ac-b941-76c0847c4dd8"/>
+				<textFieldExpression><![CDATA[$P{descOdpe}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="90" y="104" width="340" height="14" uuid="7a5b42ba-d8a5-42e1-9e3d-31b32ac2b308"/>
+				<textFieldExpression><![CDATA[$P{descCompu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="90" y="120" width="340" height="14" uuid="1e40926c-ef82-4bc6-8e83-eff20f728fea">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{estadoMesa}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<textField>
+				<reportElement x="0" y="0" width="60" height="20" uuid="1bb4a1c2-818a-4614-b9a9-c55206f4755a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{mesa}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="5" width="40" height="13" uuid="617fbfda-e999-47ba-86ce-e22bce72f76c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Usuario:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="373" y="5" width="40" height="13" uuid="bc980c02-63bf-46b1-ab8c-bd6a3ef9c8c1">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="373" y="20" width="40" height="13" uuid="4d891dac-1e28-4785-8ec2-32a06cbc0898">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Versión:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="45" y="5" width="200" height="13" uuid="b5a3856a-7517-40fe-ab17-769aa5be6d11"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="415" y="4" width="138" height="14" uuid="a9a48722-df95-403d-aa0e-41efc19fa2c2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{reporte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="416" y="18" width="51" height="15" uuid="3b60d594-e336-4619-91d0-4de655a05e2c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{version}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="56">
+			<staticText>
+				<reportElement x="371" y="27" width="40" height="13" uuid="195d328a-18f7-46fb-873f-bb1b9dbb0cd8">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="372" y="41" width="40" height="13" uuid="e43bf4e3-3912-4705-8a18-08554fbd6a1d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Versión:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="34" width="40" height="13" uuid="598f30c2-8ad3-4bb7-a29a-d49ba4226275">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Usuario:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="2" width="551" height="1" uuid="6781d8c8-5ec5-43d1-94ac-d8095139226a"/>
+			</line>
+			<line>
+				<reportElement x="0" y="23" width="551" height="1" uuid="349963b6-5282-4147-9d6f-9c67a21da596"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="6" width="90" height="13" uuid="ce40fd08-345e-45fc-8a89-b5bd42923802">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total General:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="6" width="40" height="13" uuid="94eef072-77b8-45d8-870e-7247ef2a5056">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mesas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="6" width="45" height="13" uuid="04c8ea6d-6636-42ca-b8fe-66f1509ab6d1">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Electores:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="411" y="26" width="138" height="14" uuid="831b98f5-a9cb-41fc-994c-b47d08617d05"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{reporte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="45" y="34" width="200" height="13" uuid="029d127a-78c7-4897-ada5-f0cc326ade5b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="415" y="39" width="51" height="15" uuid="71a3f5be-1890-48e2-bda1-a1f6ad461e07"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{version}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.###;#,##0.###-" isBlankWhenNull="true">
+				<reportElement x="316" y="6" width="64" height="15" uuid="44484eb2-68d9-4444-a4ad-2503177fd55f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{mesasLocal1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.###;#,##0.###-" isBlankWhenNull="true">
+				<reportElement x="501" y="6" width="50" height="15" uuid="66994d39-af02-48ca-81cc-a49c6d8e98ec"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{electoresLocal1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+</jasperReport>

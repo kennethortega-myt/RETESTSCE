@@ -1,0 +1,88 @@
+<section class="section-flex  ">
+    <article class="w-50">
+        <div class="cuadro-blanco-2">
+            <div class="lista-num uno">
+                <div class="w-80">
+
+                <h3 class="titulo3">{{resumenActasProcesadas.titulo}} </h3>
+                <ol class="sin-number t-l">
+                    <li *ngFor="let acta of resumenActasProcesadas.detalle"> {{acta.descripcion}}</li>
+
+                </ol>
+            </div>
+            <div class="w-20">
+                <h3 class="titulo3 t-r">42</h3>
+                <ol class="sin-number t-r">
+                  <li *ngFor="let acta of resumenActasProcesadas.detalle"> {{acta.cantidad}}</li>
+                </ol>
+            </div>
+            <div class="w-100">
+                <h3 class="titulo3">{{resumenActasPorResolverJEE.titulo}} </h3>
+            </div>
+                <div class="w-80">
+
+                <ol class="sin-number t-l">
+                    <li *ngFor="let acta of resumenActasPorResolverJEE.detalle"> {{acta.descripcion}}</li>
+
+                </ol>
+            </div>
+            <div class="w-20">
+                <ol class="sin-number t-r">
+                    <li *ngFor="let acta of resumenActasPorResolverJEE.detalle"> {{acta.cantidad}}</li>
+                </ol>
+            </div>
+            <div class="w-100">
+                <h3 class="titulo3">{{resumenActasAnuladasPorResolucion.titulo}}</h3>
+            </div>
+            <div class="w-80">
+                <ol class="sin-number t-l">
+                  <li *ngFor="let acta of resumenActasAnuladasPorResolucion.detalle"> {{acta.descripcion}}</li>
+                </ol>
+
+                <h3 class="titulo3">{{resumenActasPorProcesar.descripcion}} (0,00%)</h3>
+            </div>
+            <div class="w-20">
+                <ol class="sin-number t-r">
+                    <li *ngFor="let acta of resumenActasAnuladasPorResolucion.detalle"> {{acta.cantidad}}</li>
+                    </ol>
+                    <h3 class="titulo3 t-r">{{resumenActasPorProcesar.cantidad}}</h3>
+            </div>
+            </div>
+        </div>
+    </article>
+
+
+    <article class="w-50">
+        <div class="cuadro-blanco-2">
+
+            <div class="lista-num uno">
+
+            <div class="w-100">
+                <h3 class="titulo3">Mesas Instaladas</h3>
+            </div>
+                <div class="w-80">
+
+                <ol class="sin-number t-l">
+                    <li *ngFor="let acta of resumenMesaAInstalar.detalle"> {{acta.descripcion}}</li>
+
+                </ol>
+            </div>
+            <div class="w-20">
+                <ol class="sin-number t-r">
+                    <li *ngFor="let acta of resumenMesaAInstalar.detalle"> {{acta.cantidad}}</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+
+        <div class="cuadro-blanco-2">
+            <div class="formula t-c">
+                <span>(%) de Actas <br> Contabilizadas</span>
+                <span>=</span>
+                <span>A + L - M <div class="divi"></div>N + O + P</span>
+            </div>
+        </div>
+
+    </article>
+</section>

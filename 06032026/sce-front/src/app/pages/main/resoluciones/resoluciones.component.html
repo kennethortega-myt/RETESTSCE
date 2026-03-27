@@ -1,0 +1,108 @@
+<section class="secciones resoluciones">
+  <div>
+    <h1 class="titulo1">{{tituloComponente}}</h1>
+    <section class="seccion-unidos resoluciones">
+
+      <article class="control width-40 w-40 z-index1">
+
+        <div class="mt-10">
+          <button  class="m-0 estilo2 cargar-doc w-full" type="button"
+                  (click)="cargarDocumentos()">
+            CARGAR DOCUMENTOS
+          </button>
+        </div>
+
+        <div class="w-100 p-0 mt-40">
+          <div class="scrolltablaCtrlResolucion">
+            <mat-table class="head-flotante-ctrl-resolucion mitad table-resoluciones" [dataSource]="dataSourceResoluciones">
+              <ng-container matColumnDef="numero">
+                <mat-header-cell *matHeaderCellDef> Nº</mat-header-cell>
+                <mat-cell *matCellDef="let element; let i = index"> {{i+1+paginatorRes.pageIndex * paginatorRes.pageSize}}  </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="numeroResolucion">
+                <mat-header-cell *matHeaderCellDef> Número de  Resolución</mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  {{element.numeroResolucion}}
+                </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="paginas">
+                <mat-header-cell *matHeaderCellDef > Páginas</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.numeroPaginas}}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="fecha">
+                <mat-header-cell *matHeaderCellDef> Fecha de digitalización</mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  {{element.fechaRegistro | date: 'dd/MM/yyyy HH:mm:ss' }}
+                </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"
+                       [ngClass]="{active: row.numeroResolucion===selectedRow.numeroResolucion}"
+                       (click)="verPdf(row)" onkeypress="">
+              </mat-row>
+            </mat-table>
+          </div>
+          <mat-paginator #paginatorRes [pageSize]="10" [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+        <div class="w-100 " *ngIf="false">
+          <div>
+            <div class="estado pendiente" style="cursor: pointer" ></div> Pendiente
+          </div>
+          <div>
+            <div class="estado digitalizada" style="cursor: pointer" ></div>Digitalizada
+          </div>
+
+          <div>
+            <div class="estado aprobada" style="cursor: pointer" ></div>Aprobada
+          </div>
+
+          <div>
+            <div class="estado redigitalizar" style="cursor: pointer" ></div>Redigitalizar
+          </div>
+
+
+        </div>
+      </article>
+
+
+
+      <article class="w-75 p-r">
+        <div *ngIf="false" class="w-100 text-center pdf table-resoluciones " >
+
+
+             <div class="p-0 w-80 " style="background-color: red;">
+                <embed
+                src="data:application/pdf;base64,JVBERi0xLjcKCjEgMCBvYmogICUgZW50cnkgcG9pbnQKPDwKICAvVHlwZSAvQ2F0YWxvZwogIC9QYWdlcyAyIDAgUgo+PgplbmRvYmoKCjIgMCBvYmoKPDwKICAvVHlwZSAvUGFnZXMKICAvTWVkaWFCb3ggWyAwIDAgMjAwIDIwMCBdCiAgL0NvdW50IDEKICAvS2lkcyBbIDMgMCBSIF0KPj4KZW5kb2JqCgozIDAgb2JqCjw8CiAgL1R5cGUgL1BhZ2UKICAvUGFyZW50IDIgMCBSCiAgL1Jlc291cmNlcyA8PAogICAgL0ZvbnQgPDwKICAgICAgL0YxIDQgMCBSIAogICAgPj4KICA+PgogIC9Db250ZW50cyA1IDAgUgo+PgplbmRvYmoKCjQgMCBvYmoKPDwKICAvVHlwZSAvRm9udAogIC9TdWJ0eXBlIC9UeXBlMQogIC9CYXNlRm9udCAvVGltZXMtUm9tYW4KPj4KZW5kb2JqCgo1IDAgb2JqICAlIHBhZ2UgY29udGVudAo8PAogIC9MZW5ndGggNDQKPj4Kc3RyZWFtCkJUCjcwIDUwIFRECi9GMSAxMiBUZgooSGVsbG8sIHdvcmxkISkgVGoKRVQKZW5kc3RyZWFtCmVuZG9iagoKeHJlZgowIDYKMDAwMDAwMDAwMCA2NTUzNSBmIAowMDAwMDAwMDEwIDAwMDAwIG4gCjAwMDAwMDAwNzkgMDAwMDAgbiAKMDAwMDAwMDE3MyAwMDAwMCBuIAowMDAwMDAwMzAxIDAwMDAwIG4gCjAwMDAwMDAzODAgMDAwMDAgbiAKdHJhaWxlcgo8PAogIC9TaXplIDYKICAvUm9vdCAxIDAgUgo+PgpzdGFydHhyZWYKNDkyCiUlRU9G"
+                type="application/pdf" width="100%" height="600px"/>
+              </div>
+        </div>
+        <div id="contenedor-documento" class="contenedor-documento-muestra2 w-100 text-center" >
+          <div *ngIf="!isShowResolucion"  class=" contenido-scroll cont-anuncio">
+            <div class="personaje-anuncio p-o b-25">
+              <p>
+                Haga clic sobre la Resolución para ver su contenido.
+              </p>
+              <img src="../assets/img/personaje1.svg" alt="">
+            </div>
+          </div>
+          <app-pdf-viewer *ngIf="isShowResolucion"
+                          [pdfBlob]="selectedPDFBlob"
+                          [actualizarPaginas]="actualizarPaginasRevisadas"
+                          [paginasLabels]="selectedRow.listaPaginas"
+          >
+            ></app-pdf-viewer>
+        </div>
+      </article>
+    </section>
+
+
+    <div class="cont-btn">
+      <button *ngIf="isShowResolucion" class="estilo2" (click)="updateResolucion('redigitalizar',  Constantes.ESTADO_RESOLUCION_DIGTAL_RECHAZADA_1ER_CC)"> Redigitalizar</button>
+      <button *ngIf="isShowResolucion" class=" estilo1" (click)="updateResolucion('aprobar', Constantes.ESTADO_RESOLUCION_DIGTAL_PRIMER_CC_ACEPTADA)"> Aprobar</button>
+    </div>
+  </div>
+
+</section>

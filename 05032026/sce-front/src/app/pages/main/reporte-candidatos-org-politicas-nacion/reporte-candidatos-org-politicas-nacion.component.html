@@ -1,0 +1,55 @@
+<section class="secciones">
+    <div>
+      <form class="formulario" [formGroup]="formGroupReporte">
+        <h1 class="titulo1">Listado de Candidatos por Organizaciones Politicas</h1>
+        <section class="seccion-unidos">
+
+          <article class="w-20">
+
+            <div class="formulario section-flex ">
+              <div class="w-100">
+                <label for="idProceso">Proceso:</label>
+
+                <mat-form-field appearance="outline">
+                  <mat-select name="idProceso" formControlName="procesoFormControl">
+                    <mat-option value="0">SELECCIONE</mat-option>
+                    <mat-option *ngFor="let proceso of listProceso" [value]="proceso">
+                      {{proceso.nombre}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="w-100">
+                <label for="idEleccion">Tipo de elección:</label>
+
+                <mat-form-field appearance="outline">
+                  <mat-select name="idEleccion" formControlName="eleccionFormControl">
+                    <mat-option value="0">SELECCIONE</mat-option>
+                    <mat-option *ngFor="let eleccion of listEleccion" [value]="eleccion.id">
+                      {{eleccion.nombre}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="boton-full">
+                <button class="estilo1 full noMarginLR" type="button" (click)="buscarReporte()">
+                  BUSCAR
+                </button>
+              </div>
+
+            </div>
+          </article>
+
+          <article class="w-80">
+            <div class="contenedor-documento-muestra">
+              <div #idDivImagen *ngIf="isShowReporte">
+              </div>
+            </div>
+
+          </article>
+        </section>
+      </form>  
+    </div>
+</section>

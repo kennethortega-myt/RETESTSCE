@@ -1,0 +1,46 @@
+@let v = validaciones();
+@let p = porcentaje();
+
+<div class="validacion-contrasenia-container" [ngClass]="p < 100 ? 'error' : ''">
+
+  <mat-progress-bar class="progress-password" mode="determinate" [value]="p"></mat-progress-bar>
+
+  <div class="validacion-contrasenia-item-list" [ngClass]="p === 100 ? 'collapsed' : ''">
+    <div class="validacion-contrasenia-item">
+      @if (v.longitud) {
+      <mat-icon class="icon-green">check_circle_outlined</mat-icon>
+      } @else {
+      <mat-icon class="icon-red">error_outlined</mat-icon>
+      }
+      <span [ngClass]="v.longitud ? '' : 'icon-red'">La contraseña debe tener entre 8 y 20 caracteres.</span>
+    </div>
+
+    <div class="validacion-contrasenia-item">
+      @if (v.mayusMinux) {
+      <mat-icon class="icon-green">check_circle_outlined</mat-icon>
+      } @else {
+      <mat-icon class="icon-red">error_outlined</mat-icon>
+      }
+      <span [ngClass]="v.mayusMinux ? '' : 'icon-red'">Al menos una letra mayúscula y minúscula.</span>
+    </div>
+
+    <div class="validacion-contrasenia-item">
+      @if (v.numero) {
+      <mat-icon class="icon-green">check_circle_outlined</mat-icon>
+      } @else {
+      <mat-icon class="icon-red">error_outlined</mat-icon>
+      }
+      <span [ngClass]="v.numero ? '' : 'icon-red'">Al menos un número.</span>
+    </div>
+
+    <div class="validacion-contrasenia-item">
+      @if (v.especial) {
+      <mat-icon class="icon-green">check_circle_outlined</mat-icon>
+      } @else {
+      <mat-icon class="icon-red">error_outlined</mat-icon>
+      }
+      <span [ngClass]="v.especial ? '' : 'icon-red'">Al menos un carácter especial.</span>
+    </div>
+  </div>
+
+</div>

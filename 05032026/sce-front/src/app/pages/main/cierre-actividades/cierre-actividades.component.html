@@ -1,0 +1,49 @@
+<section class="secciones veri-resolucion">
+  <div>
+    <h1 class="titulo1">{{tituloComponent}}</h1>
+    <section>
+      <div class="seccion-unidos scroll-actas" >
+        <article  class="w-20 w-40 p-r">
+            <div class="seccion-lista-control contenido-scroll-control w-full">
+                <div class="boton-full p-0">
+                    <button #btnVerificar class="estilo1 full noMarginLR " type="button" (click)="openDialogCerrarCC()">
+                        CERRAR Centro de cómputo
+                    </button>
+                </div>
+                <div class="boton-full p-0">
+                    <button #btnVerificar class="estilo2 full noMarginLR " type="button" (click)="mostrarReporteHistoricoCierreReapertura()">
+                        histórico de cierre
+                    </button>
+                </div>                
+            </div>
+        </article>
+
+        <article class="w-80 d-flex flex-column items-center">
+            <div class="personaje-cierre-actividades">
+                <div class="nube">
+                    <h3>¡Advertencia!</h3>
+                    <div class="d-flex gap-50">
+                        <p>El proceso de Cierre de Actividades del Centro de Cómputo permite bloquear temporalmente la aplicación de tal manera que no sea posible realizar ninguna actividad en la misma, hasta que la persona responsable del cierre realice su reanudación.
+Asegúrese de que todos los usuarios hayan salido de la aplicación.</p>
+                        <img src="assets/img/alerta-grande.svg" alt="">
+                    </div>
+                </div>
+
+                <img src="assets/img/personaje1.svg" alt="">
+            </div>
+            <div class="content-resultados-puestacero">
+                <ul class="lista-elementos">
+                    <li>{{cierreActividadesInicio}}</li>
+                </ul>
+
+            </div>
+        </article>
+
+
+
+      </div>
+    </section>
+
+  </div>
+
+</section>

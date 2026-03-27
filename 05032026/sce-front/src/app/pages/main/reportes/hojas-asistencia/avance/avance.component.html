@@ -1,0 +1,143 @@
+<div class="filtros">
+    <div class="filtro">
+        <label for="tipoProceso">Proceso:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="tipoProceso">
+                <mat-option [value]="0">SELECCIONE</mat-option>
+                <mat-option> opcion 1</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="conte-radio-3boton">
+        <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="1">Detalle</mat-radio-button>
+            <mat-radio-button value="2">Resumen</mat-radio-button>
+        </mat-radio-group>
+        <div class="filtro_boton ml-1">
+            <button class="estilo1 noMarginLR" type="button">
+            Consultar
+            </button>
+        </div>
+    </div>
+
+</div>
+<h2 class="subtitulo_reportes">Avance de registro de omisos por centro de cómputo (Sólo Miembros)</h2>
+<div class="cont-anuncio">
+    <div class="personaje-anuncio">
+      <p>
+        Por favor, seleccione el ámbito para realizar la búsqueda.
+      </p>
+      <img alt="" src="../assets/img/personaje1.svg" />
+    </div>
+</div>
+<div class="conte-reporte">
+    <div class="barras-reportes">
+        <div class="conte_barra_dashboard">
+            <div class="cabeceras_barras">
+                <h3>Total mesas</h3>
+                <span>208</span>
+            </div>
+            <div class="barra_dashboard">
+                <div class="barra_avance" style="width: 70%;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="barras-reportes">
+        <div class="conte_barra_dashboard">
+            <div class="cabeceras_barras">
+                <h3>Mesas registradas</h3>
+                <span>16</span>
+            </div>
+            <div class="barra_dashboard">
+                <div class="barra_avance" style="width: 70%;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="barras-reportes">
+        <div class="conte_barra_dashboard">
+            <div class="cabeceras_barras">
+                <h3>Total electores</h3>
+                <span>5,806 / 84.54%</span>
+            </div>
+            <div class="barra_dashboard">
+                <div class="barra_avance" style="width: 70%;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="barras-reportes">
+        <div class="conte_barra_dashboard">
+            <div class="cabeceras_barras">
+                <h3>Total omisos</h3>
+                <span>806 / 14.56%</span>
+            </div>
+            <div class="barra_dashboard">
+                <div class="barra_avance" style="width: 70%;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<mat-table [dataSource]="dataSource1" class="tabla-header-doble mb-25">
+    <ng-container matColumnDef="ubigeo">
+        <mat-header-cell *matHeaderCellDef class="header-ubigeo centrar-celda">Ubigeo</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="header-ubigeo centrar-celda">
+            {{ element.ubigeo }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="departamento">
+        <mat-header-cell *matHeaderCellDef>Departamento</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.departamento }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="provincia">
+        <mat-header-cell *matHeaderCellDef>Provincia</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.provincia}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="distrito">
+        <mat-header-cell *matHeaderCellDef>Distrito</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.distrito}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="TotalMesas">
+        <mat-header-cell *matHeaderCellDef>Total Mesas</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="centrar-celda">
+            {{ element.TotalMesas}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="MesasRegistradas">
+        <mat-header-cell *matHeaderCellDef>Mesas Registradas</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="centrar-celda">
+            {{ element.MesasRegistradas}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="TotalElectores">
+        <mat-header-cell *matHeaderCellDef>Total electores</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="centrar-celda">
+            {{ element.TotalElectores}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="TotalOmisos">
+        <mat-header-cell *matHeaderCellDef>Total omisos</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="centrar-celda">
+            {{ element.TotalOmisos}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="porAvanceMesas">
+        <mat-header-cell *matHeaderCellDef>% Avance mesas</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="centrar-celda">
+            {{ element.porAvanceMesas}}
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns1"></mat-row>
+</mat-table>
+

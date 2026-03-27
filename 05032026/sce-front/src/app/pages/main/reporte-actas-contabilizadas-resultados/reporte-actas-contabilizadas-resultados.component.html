@@ -1,0 +1,48 @@
+<mat-table   [dataSource]="ELEMENT_DATA" class="mat-elevation-z8">
+    <ng-container matColumnDef="OPolitica">
+        <mat-header-cell *matHeaderCellDef> Organización Politica </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.descripcion}}  </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Cantidad">
+        <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.cantidad}}  </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="VValidados">
+        <mat-header-cell *matHeaderCellDef> % de Votos Validados </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.porcentajeValidos | porcentajeFormat}}  </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Vemitidos">
+        <mat-header-cell *matHeaderCellDef> % de Votos Emitidos </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.porcentajeEmitidos | porcentajeFormat}}  </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row  *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+
+<br>
+<mat-table   [dataSource]="ELEMENT_DATA2" class="mat-elevation-z8" class="especial">
+    <ng-container matColumnDef="OPolitica">
+        <mat-header-cell *matHeaderCellDef> Organización Politica </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.descripcion}}  </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Cantidad">
+        <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.cantidad}}  </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="VValidados">
+        <mat-header-cell *matHeaderCellDef> % de Votos Validados </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.porcentajeValidos | porcentajeFormat}}  </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Vemitidos">
+        <mat-header-cell *matHeaderCellDef> % de Votos Emitidos </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.porcentajeEmitidos | porcentajeFormat}}  </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row  *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

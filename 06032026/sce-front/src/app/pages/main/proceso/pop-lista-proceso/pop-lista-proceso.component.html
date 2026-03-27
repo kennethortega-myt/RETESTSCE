@@ -1,0 +1,48 @@
+<div class="" style="padding: 18px;">
+    <h2 style="color: #2A71B9;font-size: 18px;">Proceso {{data.nombreProceso}}</h2>
+    <h4 style="text-align: center;font-size: 17px;color: #003874; margin-top: 24px;margin-bottom: 8px;">
+        Lista de distritos electorales
+    </h4>
+<div style="height: 50vh;overflow: auto;" [formGroup]="formGroupParent" >
+    <table mat-table [dataSource]="dataSource" matSort class="table-lista-proceso">
+      <caption class="d-none"></caption>
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Código </th>
+          <td mat-cell *matCellDef="let element"> {{element.codigoDistritoElectoral}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="distrito">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Distrito </th>
+          <td mat-cell *matCellDef="let element"> {{element.nombreDistritoElectoral}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Documento Electoral </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-radio-group aria-label="Select an option" [formControlName]="element.codigoDistritoElectoral+'-radio'">
+              <mat-radio-button [value]="2">AE</mat-radio-button>
+              <mat-radio-button [value]="4">AE HORIZONTAL</mat-radio-button>
+            </mat-radio-group>
+
+          </td>
+        </ng-container>
+
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+
+</div>
+
+
+      <div class="content-button-pop" >
+        <button class="estilo3" [mat-dialog-close]="false">Cancelar</button>
+        <button class="estilo1" (click)="guardar()"   >Guardar</button>
+      </div>
+
+</div>

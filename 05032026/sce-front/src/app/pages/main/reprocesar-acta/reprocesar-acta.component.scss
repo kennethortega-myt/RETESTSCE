@@ -1,0 +1,11 @@
+.content-table-reprocesar-acta .mat-mdc-header-row{
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    height: 48px;
+}
+
+.content-table-reprocesar-acta{
+    height: calc(100vh - 270px);
+    overflow: auto;
+}

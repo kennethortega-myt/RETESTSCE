@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17" height="17" viewBox="0 0 17 17">
+  <defs>
+    <filter id="Elipse_453">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161" result="color"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur"/>
+      <feComposite operator="in" in="color"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Grupo_2493" data-name="Grupo 2493" transform="translate(-1068.355 -988)">
+    <g data-type="innerShadowGroup">
+      <circle id="Elipse_453-2" data-name="Elipse 453" cx="8.5" cy="8.5" r="8.5" transform="translate(1068.355 988)" fill="#d31732"/>
+      <g transform="matrix(1, 0, 0, 1, 1068.36, 988)" filter="url(#Elipse_453)">
+        <circle id="Elipse_453-3" data-name="Elipse 453" cx="8.5" cy="8.5" r="8.5" fill="#fff"/>
+      </g>
+    </g>
+    <path id="exclamation-triangle-fill_1_" data-name="exclamation-triangle-fill (1)" d="M6.746,1.425a.849.849,0,0,0-1.472,0L.124,10.188A.876.876,0,0,0,.86,11.515h10.3a.876.876,0,0,0,.736-1.327ZM6.009,4a.679.679,0,0,1,.676.747L6.422,7.385a.415.415,0,0,1-.826,0L5.333,4.751A.68.68,0,0,1,6.009,4Zm0,4.506a.751.751,0,1,1-.751.751A.751.751,0,0,1,6.01,8.51Z" transform="translate(1070.926 989.001)" fill="#fff"/>
+  </g>
+</svg>

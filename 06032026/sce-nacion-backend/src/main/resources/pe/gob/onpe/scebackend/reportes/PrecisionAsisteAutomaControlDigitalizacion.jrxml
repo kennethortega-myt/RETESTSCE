@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrecisionAsisteAutomaControlDigitalizacion" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="30655a34-b9c4-4ab4-8295-495e58333c3c">
+	<property name="ireport.zoom" value="1.239669421487605"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="20"/>
+	<parameter name="tituloPrincipal" class="java.lang.String"/>
+	<parameter name="centroComputo" class="java.lang.String"/>
+	<parameter name="eleccion" class="java.lang.String"/>
+	<parameter name="url_imagen" class="java.io.InputStream"/>
+	<parameter name="version" class="java.lang.String"/>
+	<parameter name="usuario" class="java.lang.String"/>
+	<parameter name="enCifras" class="java.lang.Boolean"/>
+	<parameter name="pixeltransparente" class="java.io.InputStream"/>
+	<parameter name="sinvaloroficial" class="java.lang.String"/>
+	<field name="codigoCentroComputo" class="java.lang.String"/>
+	<field name="nombreCentroComputo" class="java.lang.String"/>
+	<field name="actasAprobadasAutomatica" class="java.lang.Integer"/>
+	<field name="actasAprobadasManual" class="java.lang.Integer"/>
+	<field name="actasNoReconocidas" class="java.lang.Integer"/>
+	<field name="actasPendientes" class="java.lang.Integer"/>
+	<field name="actasExtraviadas" class="java.lang.Integer"/>
+	<field name="totalActas" class="java.lang.Integer"/>
+	<field name="porcentajeAprobadasAutomatica" class="java.lang.Double"/>
+	<field name="porcentajeAprobadasManual" class="java.lang.Double"/>
+	<field name="porcentajeNoReconocidas" class="java.lang.Double"/>
+	<field name="porcentajePendientes" class="java.lang.Double"/>
+	<field name="porcentajeExtraviadas" class="java.lang.Double"/>
+	<variable name="actasAprobadasAutomatica_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{actasAprobadasAutomatica}]]></variableExpression>
+	</variable>
+	<variable name="porcentajeAprobadasAutomatica_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{porcentajeAprobadasAutomatica}]]></variableExpression>
+	</variable>
+	<variable name="actasAprobadasManual_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{actasAprobadasManual}]]></variableExpression>
+	</variable>
+	<variable name="actasNoReconocidas_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{actasNoReconocidas}]]></variableExpression>
+	</variable>
+	<variable name="actasPendientes_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{actasPendientes}]]></variableExpression>
+	</variable>
+	<variable name="actasExtraviadas_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{actasExtraviadas}]]></variableExpression>
+	</variable>
+	<variable name="porcentajeAprobadasManual_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{porcentajeAprobadasManual}]]></variableExpression>
+	</variable>
+	<variable name="porcentajeNoReconocidas_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{porcentajeNoReconocidas}]]></variableExpression>
+	</variable>
+	<variable name="porcentajePendientes_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{porcentajePendientes}]]></variableExpression>
+	</variable>
+	<variable name="porcentajeExtraviadas_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{porcentajeExtraviadas}]]></variableExpression>
+	</variable>
+	<variable name="totalActas_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalActas}]]></variableExpression>
+	</variable>
+	<background>
+		<band height="545" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{sinvaloroficial}!=""]]></printWhenExpression>
+			<textField>
+				<reportElement mode="Transparent" x="11" y="8" width="774" height="535" forecolor="#C0C0C0" backcolor="#9999FF" uuid="e021492b-17e5-4957-b87f-a1cd737aef3b">
+					<property name="ireport.layer" value="2"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="72"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sinvaloroficial}]]></textFieldExpression>
+			</textField>
+		</band>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="140" splitType="Stretch">
+			<textField>
+				<reportElement x="143" y="0" width="506" height="30" forecolor="#7F7F7F" uuid="d98252ee-97f4-49d9-88d1-0cbb668ca03e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tituloPrincipal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="115" width="60" height="15" uuid="4e1fbbd7-1897-4dcf-97f7-875da5d221ae"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[C. Cómputo]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="585" y="90" width="200" height="20" forecolor="#7F7F7F" uuid="c4870094-dc3a-42de-a613-2850c13b48aa"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+					<paragraph rightIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{eleccion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="670" y="15" width="45" height="15" uuid="67a21faa-868b-43c9-b0cc-b473fa07edc1"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora     :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="219" y="44" width="355" height="36" forecolor="#000000" uuid="35437162-0682-4489-9ad2-79c0a7ef9fb4"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["PRECISIÓN DEL ASISTENTE AUTOMATIZADO EN EL CONTROL DE DIGITALIZACIÓN"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="71" y="115" width="4" height="15" uuid="b2ec38a6-ce11-4fa7-9c80-c1cfcb452b43"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="670" y="30" width="46" height="15" uuid="b1d29829-f999-43e0-9567-3f0126100230"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Página  :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="79" y="115" width="324" height="15" uuid="518e8177-cc94-443e-996b-2428289a9a7f"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{centroComputo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="670" y="0" width="45" height="15" uuid="a97535d4-8318-4b92-a8b8-d855b0978b3c"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha   :]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="718" y="0" width="61" height="15" uuid="16d5d9fc-1ee1-440c-bf22-33864af84b32"/>
+				<textElement>
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="718" y="30" width="25" height="15" uuid="44330e05-85b3-4ca5-ae92-df4341aef6bd"/>
+				<textElement>
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER} + " de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="743" y="30" width="36" height="15" uuid="58281e6f-006c-4856-8fce-c36b7e87b457"/>
+				<textElement>
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm:ss">
+				<reportElement x="718" y="15" width="61" height="15" uuid="d684bfe9-9d53-4f1a-9512-e13de78c91b2"/>
+				<textElement>
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image isUsingCache="true" onErrorType="Blank">
+				<reportElement x="0" y="0" width="80" height="80" uuid="e550051d-0170-4d06-afd9-e805906b9822"/>
+				<imageExpression><![CDATA[$P{url_imagen}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="58" splitType="Stretch">
+			<image scaleImage="FillFrame" isUsingCache="true">
+				<reportElement mode="Transparent" x="0" y="0" width="802" height="58" uuid="415b0564-2bfd-4d77-9cae-adec8743141a"/>
+				<imageExpression><![CDATA[$P{pixeltransparente}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement mode="Transparent" x="710" y="0" width="92" height="58" backcolor="#FFFFFF" uuid="f3daa791-4bb2-4521-a4c3-95716e102cf5"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Total de actas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="92" y="0" width="158" height="58" backcolor="#FFFFFF" uuid="7365fc1e-6299-4f8e-b75b-43c8f79ffbf1"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Centro de cómputo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="0" width="92" height="58" backcolor="#FFFFFF" uuid="8cdc6f6f-a80a-4395-afc4-056b5ff2a4b9"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="250" y="0" width="92" height="58" uuid="27caea3f-f231-4203-aa43-ff02d8305903"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{enCifras} ?
+"Actas aprobadas automáticamente" :
+"%\nActas aprobadas automáticamente"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="342" y="0" width="92" height="58" uuid="89531531-89f5-4f80-8c51-c73831bfff3d"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{enCifras} ?
+"Actas aprobadas manualmente" :
+"%\nActas aprobadas manualmente"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="434" y="0" width="92" height="58" uuid="f09b23d1-e67c-4671-93d0-d897ce68ddd3"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{enCifras} ?
+"Actas no reconocidas" :
+"%\nActas no reconocidas"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="526" y="0" width="92" height="58" uuid="f143e9be-9adf-48f6-a47b-76c3512f0a9a"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{enCifras} ?
+"Actas pendientes" :
+"%\nActas pendientes"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="618" y="0" width="92" height="58" uuid="4dbb5e0a-c05d-41b7-855c-71191c296b87"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{enCifras} ?
+"Actas extraviadas, siniestradas y no instaladas" :
+"%\nActas extraviadas, siniestradas y no instaladas"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="250" y="0" width="92" height="20" uuid="c33c1b91-7768-4653-ba30-92b9695e2b7c"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{enCifras} ? $F{actasAprobadasAutomatica}.toString() : $F{porcentajeAprobadasAutomatica}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="342" y="0" width="92" height="20" uuid="a64dde6f-aa45-4357-8611-b3d47d2cebac"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{enCifras} ? $F{actasAprobadasManual}.toString() : $F{porcentajeAprobadasManual}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="526" y="0" width="92" height="20" uuid="208c5420-9add-436c-b79a-8a26ecd53908"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{enCifras} ? $F{actasPendientes}.toString() : $F{porcentajePendientes}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="434" y="0" width="92" height="20" uuid="11957a73-b923-4334-89a5-cb7a7693b589"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{enCifras} ? $F{actasNoReconocidas}.toString() : $F{porcentajeNoReconocidas}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="710" y="0" width="92" height="20" uuid="6624fcf8-79e6-42bf-916b-d63cde7556d6"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{totalActas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="618" y="0" width="92" height="20" uuid="90a2b65d-75cf-4713-bbdd-be9fc814c3b6"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{enCifras} ? $F{actasExtraviadas}.toString() : $F{porcentajeExtraviadas}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="92" y="0" width="158" height="20" uuid="112a8792-dc21-49ff-bd59-24b55858b3d6"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nombreCentroComputo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="92" height="20" uuid="189a73a7-37b0-4170-bcf8-d0299f090ee3"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{codigoCentroComputo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="45" splitType="Stretch">
+			<textField>
+				<reportElement x="690" y="24" width="70" height="15" uuid="2d3acfcb-dc16-4347-afec-40f16122f91b"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{version}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="639" y="24" width="47" height="15" uuid="5b5e5dea-48cd-4a15-a093-5dff057abb51"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Versión    :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="9" width="47" height="15" uuid="2ded815d-2534-466c-a5f4-f7395e65d0e2"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Usuario    :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="639" y="9" width="47" height="15" uuid="a3c43fb0-f91e-4e93-b1e4-d15a10aade15"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte    :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="55" y="9" width="180" height="30" uuid="4c7f7f69-138d-4a1a-ab73-c906be5446d9"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="690" y="9" width="110" height="15" uuid="061ccc78-166b-477c-b183-73a8728e2711"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $P{enCifras} ? "PrecisiónControlCifras" : "PrecisiónControlPorcentajes" )]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="22" splitType="Stretch">
+			<image scaleImage="FillFrame" isUsingCache="true">
+				<reportElement mode="Transparent" x="0" y="0" width="802" height="22" uuid="e6183d64-a95f-4497-a77d-5e9a97c89f67"/>
+				<imageExpression><![CDATA[$P{pixeltransparente}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement mode="Transparent" x="710" y="0" width="92" height="22" backcolor="#FFFFFF" uuid="705a8821-ed3f-4cbe-a4aa-520ab4e884f0"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{totalActas_1}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Transparent" x="618" y="0" width="92" height="22" backcolor="#FFFFFF" uuid="eea099a3-8dd8-40cf-8311-edc6f1b73c0b"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{enCifras} ? $V{actasExtraviadas_1}.toString() : new java.math.BigDecimal($V{porcentajeExtraviadas_1}/$V{REPORT_COUNT}).setScale(3, java.math.BigDecimal.ROUND_HALF_UP)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Transparent" x="526" y="0" width="92" height="22" backcolor="#FFFFFF" uuid="fca5e78a-7c19-45d8-82fa-28f6be8ff649"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{enCifras} ? $V{actasPendientes_1}.toString() : new java.math.BigDecimal($V{porcentajePendientes_1}/$V{REPORT_COUNT}).setScale(3, java.math.BigDecimal.ROUND_HALF_UP)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Transparent" x="434" y="0" width="92" height="22" backcolor="#FFFFFF" uuid="1418a98f-b259-4804-bbb2-e082a60a3800"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{enCifras} ? $V{actasNoReconocidas_1}.toString() : new java.math.BigDecimal($V{porcentajeNoReconocidas_1}/$V{REPORT_COUNT}).setScale(3, java.math.BigDecimal.ROUND_HALF_UP)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Transparent" x="342" y="0" width="92" height="22" backcolor="#FFFFFF" uuid="662add03-50be-4d6d-bb9c-cfb6cc161fc7"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{enCifras} ? $V{actasAprobadasManual_1}.toString() : new java.math.BigDecimal($V{porcentajeAprobadasManual_1}/$V{REPORT_COUNT}).setScale(3, java.math.BigDecimal.ROUND_HALF_UP)]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Page">
+				<reportElement mode="Transparent" x="250" y="0" width="92" height="22" backcolor="#FFFFFF" uuid="e6cfebee-d98f-48b3-b4c7-aed04542eadc"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{enCifras} ? $V{actasAprobadasAutomatica_1}.toString() : new java.math.BigDecimal($V{porcentajeAprobadasAutomatica_1}/$V{REPORT_COUNT}).setScale(3, java.math.BigDecimal.ROUND_HALF_UP)]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="0" width="250" height="22" backcolor="#FFFFFF" uuid="8e66aebb-5a04-4998-9c17-5708a137d8a9"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

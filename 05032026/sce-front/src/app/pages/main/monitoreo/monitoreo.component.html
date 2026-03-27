@@ -1,0 +1,199 @@
+<section class="secciones">
+    <div>
+    <h1 class="titulo1">{{tituloComponente}}</h1>
+    <section class="section-flex section-monitoreo" >
+
+        <article class="w-20 cuadro-blanco-2 ">
+            <div class="formulario section-flex ">
+                <div class="w-100">
+                <label for="tipoProceso">Proceso:</label>
+
+
+                <mat-form-field appearance="outline">
+                    <mat-select id="tipoProceso" (selectionChange)="obtenerEleccion()" [formControl]="procesoFormControl">
+                        <mat-option [value]="0">SELECCIONE</mat-option>
+                        <mat-option *ngFor="let proc of listProceso" [value]="proc.id">{{proc.cnombre}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                </div>
+
+                <div class="w-100">
+                    <label for="tipoEleccion">Tipo de elección:</label>
+                    <mat-form-field appearance="outline">
+                        <mat-select id="tipoEleccion" [formControl]="eleccionFormControl">
+                            <mat-option [value]="0">SELECCIONE</mat-option>
+                            <mat-option *ngFor="let elec of listEleccion" [value]="elec.ccodigo">{{elec.cnombre}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </div>
+
+                <div class="w-100">
+                    <label for="estadoFormControl">Estado:</label>
+                    <mat-form-field appearance="outline">
+                      <mat-select [formControl]="estadoFormControl"
+                        placeholder="SELECCIONE">
+                        <mat-option value="TODOS">TODOS</mat-option>
+                        <mat-option value="CONTABILIZADAS">CONTABILIZADAS</mat-option>
+                        <mat-option value="OBSERVADAS">OBSERVADAS</mat-option>
+                        <mat-option value="ENVIADAS_JNE">ENVIADAS AL JEE/JNE</mat-option>
+                        <mat-option value="DEVUELTAS_JNE">DEVUELTAS DEL JEE/JNE</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="w-100">
+                    <label for="mesaFormControl">Mesa:</label>
+                    <mat-form-field appearance="outline">
+                      <input
+                        matInput
+                        maxlength="6"
+                        minlength="6"
+                        type="text"
+                        placeholder=""
+                        [formControl]="mesaFormControl"
+                        sceSoloNumerosConPegar
+                      />
+                    </mat-form-field>
+                  </div>
+                <button class="estilo1 w-full" (click)="cargarListadoActas()" > BUSCAR</button>
+            </div>
+        </article>
+
+        <section class="w-80 cont-info pl-2 pr-0 ">
+            <div class="d-flex between-flex cards-monitoreo">
+                <div class="cuadro-blanco-2 cantidad">
+                    <img src="../assets/img/estado01.svg" alt="Estado actas normales">
+                    <span class="validados">Actas contabilizadas
+                        <b>{{this.totalActasNormales}}</b>
+                    </span>
+                </div>
+                <div class="cuadro-blanco-2 cantidad">
+                    <img src="../assets/img/estadoObservado.svg" alt="Estado actas observadas">
+                    <span class="observados">Actas observadas
+                        <b>{{this.totalActasObservadas}}</b>
+                    </span>
+                </div>
+                <div class="cuadro-blanco-2 cantidad">
+                    <img src="../assets/img/estado03.svg" alt="">
+                    <span class="verificar">Actas enviadas al JEE / JNE
+                        <b>{{this.totalActasEnviadasJne}}</b>
+                    </span>
+                </div>
+                <div class="cuadro-blanco-2 cantidad">
+                    <img src="../assets/img/estado04.svg" alt="">
+                    <span class="verificar">Actas devueltas del JEE / JNE
+                        <b>{{this.totalActasDevueltasJne}}</b>
+                    </span>
+                </div>
+                <div class="cuadro-blanco-2 cantidad">
+                    <img src="../assets/img/estadoActas.svg" alt="">
+                    <span>Total de actas
+                        <b>{{this.totalActas}}</b>
+                    </span>
+                </div>
+
+            </div>
+
+            <article class=" section-flex p-r" >
+                <div class="w-60  contenido-scrosll px-0 " >
+                    <div class="scrolltablamonitoreo">
+                      <mat-table   [dataSource]="dataSource" class="mat-elevation-z8 scrollheadermon" matSort>
+                        <ng-container matColumnDef="position"  >
+                          <mat-header-cell *matHeaderCellDef class="w-n"> Nº. </mat-header-cell>
+                          <mat-cell *matCellDef="let element"class="w-n"> {{element.position}}  </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="acta">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header> Acta </mat-header-cell>
+                          <mat-cell *matCellDef="let element"> {{element.acta}}</mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="mesa">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header> Mesa </mat-header-cell>
+                          <mat-cell *matCellDef="let element"> {{element.mesa}}  </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="registro">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Registro </mat-header-cell>
+                          <mat-cell *matCellDef="let element">
+                            <span *ngIf="element.grupoActa!='OTROS'">
+                              {{ element.registro }}
+                            </span>
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="estado">
+                          <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
+                          <mat-cell *matCellDef="let element">
+                            <div class="estado {{element.estado}}"></div>
+                          </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="acciones">
+                          <mat-header-cell *matHeaderCellDef class="w-acciones"> Acciones </mat-header-cell>
+                          <mat-cell *matCellDef="let element" class="w-acciones d-flex gap-10">
+                            <button class="btn_imagen"
+                                    *ngIf="element.grupoActa!='OTROS' && element.verActa==1"
+                                    (click)="mostraPanelAcataEscrutinioActaInstalacionSufragio(element.actaId)"
+                                    matTooltip="Ver">
+                            </button>
+                            <button class="btn_transmitir"
+                                    *ngIf="element.grupoActa!='OTROS' && Constantes.CB_PERFIL_USER_ADM_CC==usuario.perfil.descripcion"
+                                    (click)="transmitirActa(element.actaId)"
+                                    matTooltip="Transmitir">
+                            </button>
+                          </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row  *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                      </mat-table>
+                      <div *ngIf="dataSource.data.length === 0" class="no-data-message">
+                        No se han encontrado registros.
+                      </div>
+                    </div>
+                  <mat-paginator [pageSize] = "10" [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons >
+                  </mat-paginator>
+                </div>
+
+                <div class="w-40  p-l-30 px-0">
+                    <div *ngIf="showToogleActa" class="cuadro-blanco-2  contenido-scrolls scrolltablamonitoreo"  >
+                        <h2 class="titulo2">Acta {{numeroActaVerActaEscrutinioInstalacion}}</h2>
+
+                        <h3 class="titulo3" *ngIf="showLadoToogleActa">Acta de escrutinio</h3>
+                        <h3 class="titulo3" *ngIf="!showLadoToogleActa">Acta de instalación</h3>
+                            <div class="cont-imagen-gramde">
+                                    <img *ngIf="showLadoToogleActa"  [src]="pngImageUrlEscrutinio" alt="Acta escrutinio">
+                                    <img *ngIf="!showLadoToogleActa" [src]="pngImageUrlInstalacion" alt="Acta instalación">
+                            </div>
+                            <div class="boton-full">
+                                    <button (click)="mostrarActa(false)" [ngClass]="{estilo2: showLadoToogleActa , estilodesactivado: !showLadoToogleActa }">IZQUIERDA</button>
+                                    <button (click)="mostrarActa(true)" [ngClass]="{estilo2: !showLadoToogleActa , estilodesactivado: showLadoToogleActa}">DERECHA</button>
+
+                                    <button  class="estilo2" (click)="cerrarToogleActa()">cerrar</button>
+
+                            </div>
+                    </div>
+                    <div class="cuadro-azulado-2 contenido-scroll cont-anuncio  d-none-1300" *ngIf="estadoContenidoAnuncio"  style="height: calc(100vh - 306px) !important;">
+                        <div class="personaje-anuncio">
+                            <p>
+                              Seleccione los filtros y haga clic en Buscar para listar las actas correspondientes.
+                            </p>
+                            <img src="../assets/img/personaje1.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="cont-anuncio">
+                    <div class="personaje-anuncio d-none-min-1300" style="bottom: 0;right: 0;">
+                        <p>
+                            Seleccione los filtros y haga clic en Buscar para listar las actas correspondientes.
+                        </p>
+                        <img src="../assets/img/personaje1.svg" alt="">
+                    </div>
+                </div>
+
+
+            </article>
+
+        </section>
+        </section>
+    </div>
+</section>

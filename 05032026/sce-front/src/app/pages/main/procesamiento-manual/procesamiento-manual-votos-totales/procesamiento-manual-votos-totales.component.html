@@ -1,0 +1,217 @@
+
+<div class="w-full d-flex">
+  <div class="w-70">
+    <!-- tabla para votos totales -->
+      <h3 class="titulo3 m-0">
+      Listado de organizaciones políticas y votos
+    </h3>
+    <div class="mt-10" >
+      <div class="content-table-preferencial">
+        <div class="table-preferencial-grid w-full">
+          <div class="header-table-preferencial2">
+            <div class="celda-preferencial">N°</div>
+            <div class="celda-preferencial">Organizaciones Políticas</div>
+            <div class="group-celda-preferencial">
+              <div class="group-celda-preferencial-item">
+                <div>Total de votos</div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="scroll-vertical"
+            style="overflow-y: scroll; height: 534px"
+            id="left-container"
+            (scroll)="onScroll('left')"
+          >
+            <form [formGroup]="formGroupSeccionVoto" autocomplete="off">
+              <div formGroupName="params" class="focus">
+                <div *ngFor = "let votoItem of actaParaProcesamientoManualBean.voteSection.items; index as i" class="item-content-preferencial2 item-focus">
+                  <div class="item-table-preferencial">{{votoItem.position}}</div>
+                  <div class="item-table-preferencial">
+                    {{votoItem.nombreAgrupacionPolitica}}
+                  </div>
+                  <div class="item-table-preferencial tres item-focus-input">
+                    <mat-form-field *ngIf="votoItem.estado !== Constantes.CODIGO_ESTADO_ACHURADO;else achuradoTemplate" class="acta-corregir-pref cant-input" appearance="outline" (dblclick)="onDoubleClick($event)">
+                      <input [id]="'mat-input-total-'+ i"
+                              matInput
+                              [formControlName]="votoItem.fileId+'-'+i"
+                              sceFocusProcesamientoManualEnterTotal
+                              sceFocusVeriResolucionFlecha
+                              [rowIndex]="i"
+                              [colIndex]="0"
+                              [flagPresi]=true
+                              (focus)="onFocus($event)"
+                              (blur)="onBlur()"
+                              (input)="onInputVoto(votoItem.fileId, false, $event, i)"
+                              [readonly] = "votoItem.estado === Constantes.CODIGO_ESTADO_ACHURADO"
+                              maxlength="3"
+                              [ngClass]="{'no-caret': !isEditingMode(i)}"
+
+                      />
+                    </mat-form-field>
+                    <ng-template #achuradoTemplate>
+                      <ng-container *ngTemplateOutlet="achurado; context: { i: i, flagPresi: true }"></ng-container>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-table">
+      <table class="w-full tablefooter">
+        <caption class="d-none"></caption>
+        <thead>
+        <tr  >
+          <th> <h3>TOTAL DE CIUDADANOS QUE VOTARON</h3></th>
+          <th>
+            <mat-form-field class="total-ciudadanos" appearance="outline">
+              <input matInput type="text" [maxLength]="3"
+                      (change)="changeCvas()"
+                      style="text-align: right;"
+                      placeholder="" [formControl]="cvasFC" sceNumerosHashN />
+            </mat-form-field>
+          </th>
+        </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+  <div class="w-30">
+    <div class="card-procesamiento-manual mt-18">
+      <h3 class="titulo3 m-0">Motivo de envío de Acta a observada </h3>
+      <div class="d-flex flex-column mt-10  gap-10">
+        <div class="check-actas">
+          <input type="checkbox" [formControl]="checkSinDatosFC" (change)="changeCheckSinDatos($event)" > <label for="" >Acta Sin Datos</label>
+        </div>
+        <div class="check-actas">
+          <input type="checkbox" [formControl]="checkSinFirmasFC" (change)="changeCheckSinFirmas($event)"> <label for="">Acta Sin Firmas</label>
+        </div>
+        <div class="check-actas">
+          <input type="checkbox" [formControl]="checkSolNulidadFC" (change)="changeCheckSolNulidad($event)" > <label for="">Solicitud de Nulidad</label>
+        </div>
+      </div>
+    </div>
+    <div class="card-procesamiento-manual mt-18">
+      <form [formGroup]="formGroupIntalacion" autocomplete="off">
+      <h3 class="titulo3 m-0">Fecha y hora de instalación</h3>
+      <div class="d-flex flex-column mt-10  gap-10">
+        <div>
+          <mat-form-field appearance="outline">
+            <input matInput
+                  #fechaInstalacion
+                  id="fechaInstalacion"
+                  name="indFechaInstalacion"
+                  formControlName="fechaInstalacion"
+                  (dateChange)="changeHoraInicio()"
+                  [matDatepicker]="dp1"
+                  [min]="minFechaInstalacion"
+                  [max]="maxFechaInstalacion"
+                  readonly>
+            <mat-hint>DD/MM/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="dp1"></mat-datepicker-toggle>
+            <mat-datepicker #dp1 ></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div>
+            <!-- Timepicker -->
+            <mat-form-field appearance="outline" class="form-field">
+                <input
+                #textHoraInicio
+                id="TexthoraInicio"
+                name="indTextHoraInicio"
+                matInput
+                type="text"
+                placeholder="HH:MM"
+                formControlName="horaInicioFormControl"
+                (change)="changeHoraInicio()"
+                maxlength="5"
+                sceUppercaseFormReact
+                sceNoEspacioInicio
+                sceNumerosDosPuntoN
+                />
+                <button mat-icon-button matSuffix>
+                <mat-icon>access_time</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+      </div>
+      </form>
+    </div>
+    <div class="card-procesamiento-manual mt-18">
+      <form [formGroup]="formGroupEscrutinio" autocomplete="off">
+        <h3 class="titulo3 m-0">Fecha y hora de finalización del escrutinio</h3>
+      <div class="d-flex flex-column mt-10  gap-10">
+        <div>
+          <mat-form-field appearance="outline" [style.display]="isHoraEscrutinioN ? 'block' : 'none'">
+            <input matInput
+                  value="N"
+                  readonly
+                  disabled>
+            <mat-hint>DD/MM/YYYY</mat-hint>
+          </mat-form-field>
+          <mat-form-field appearance="outline" [style.display]="!isHoraEscrutinioN ? 'block' : 'none'">
+            <input matInput
+                  #fechaEscrutinio
+                  id="fechaEscrutinio"
+                  name="indFechaEscrutinio"
+                  formControlName="fechaEscrutinio"
+                  (dateChange)="changeHoraFin()"
+                  [matDatepicker]="dp2"
+                  [min]="minFechaEscrutinio"
+                  [max]="maxFechaEscrutinio"
+                  readonly>
+            <mat-hint>DD/MM/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="dp2"></mat-datepicker-toggle>
+            <mat-datepicker #dp2 ></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="outline" class="form-field">
+            <input
+              #texthoraFinalizacion
+              matInput
+              id="TexthoraFinalizacion"
+              name="indTextHoraFinalizacion"
+              placeholder="HH:MM"
+              type="text"
+              formControlName="horaFinFormControl"
+              (change)="changeHoraFin()"
+              maxlength="5"
+              sceUppercaseFormReact
+              sceNoEspacioInicio
+              sceNumerosDosPuntoN
+            />
+            <button mat-icon-button matSuffix>
+              <mat-icon>access_time</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<ng-template #achurado let-i="i" let-flagPresi="flagPresi">
+  <mat-form-field
+    class="acta-corregir-pref black cant-input"
+    appearance="outline"
+  >
+    <input
+      matInput
+      sceFocusVeriResolucionEnter
+      sceFocusVeriResolucionFlecha
+      [rowIndex]="i"
+      [colIndex]="0"
+      [flagPresi]="flagPresi"
+      type="text"
+      placeholder=""
+      value=""
+      readonly = true
+    />
+  </mat-form-field>
+</ng-template>
+

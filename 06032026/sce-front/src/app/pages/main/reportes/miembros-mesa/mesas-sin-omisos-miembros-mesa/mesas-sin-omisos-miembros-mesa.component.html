@@ -1,0 +1,46 @@
+<div class="filtros" [formGroup]="form">
+    <div class="filtro">
+        <label for="tipoProceso">Proceso:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="proceso" formControlName="proceso">
+                <mat-option *ngFor="let proceso of listProceso" [value]="proceso">{{proceso.nombre}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="filtro" style="display: none">
+        <label for="eleccion">Elección:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="eleccion" formControlName="eleccion">
+                <mat-option *ngFor="let eleccion of listEleccion" [value]="eleccion">
+                    {{eleccion.nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="filtro">
+        <label for="centroComputo">Centro de Cómputo:</label>
+        <mat-form-field appearance="outline">            <mat-select id="centroComputo" formControlName="centroComputo">
+                <mat-option *ngFor="let centroComputo of listCentrosComputo" [value]="centroComputo">
+                    {{centroComputo.codigo}} {{centroComputo.nombre}}
+                  </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="filtro_boton">
+        <button class="estilo1 full noMarginLR" type="button" (click)="buscarReporte()">
+          Consultar
+        </button>
+      </div>
+
+</div>
+
+<h2 class="subtitulo_reportes">Mesas sin omisos de miembros de mesa por centro de cómputo</h2>
+
+<article class="pdf_incrustado">
+  <div class="contenedor-documento-muestra">
+    <div #idDivImagen *ngIf="isShowReporte">
+    </div>
+  </div>
+</article>

@@ -1,0 +1,22 @@
+<section class="secciones">
+  <div>
+    <mat-tab-group class="tabs-iz" (selectedTabChange)="onTabChange($event)">
+      <!-- Pestaña 1: Siempre se muestra -->
+      <mat-tab label="Acta de Escrutinio"></mat-tab>
+
+      <!-- Vista Combinada: Mostrar solo si tipoVista === 'combinada' -->
+      <mat-tab *ngIf="tipoVista === 'combinada'" label="Acta de Instalación y Sufragio"></mat-tab>
+
+      <!-- Vista Separada: Mostrar solo si tipoVista === 'separada' -->
+      <mat-tab *ngIf="tipoVista === 'separada'" label="Acta de Instalación"></mat-tab>
+      <mat-tab *ngIf="tipoVista === 'separada'" label="Acta de Sufragio"></mat-tab>
+    </mat-tab-group>
+
+    <!-- Un solo contenedor para todos los PDFs -->
+    <div class="cont-img-acta-control acta-doble">
+      <mat-dialog-content class="mat-typography p-0">
+        <div #idDivImagen></div>
+      </mat-dialog-content>
+    </div>
+  </div>
+</section>

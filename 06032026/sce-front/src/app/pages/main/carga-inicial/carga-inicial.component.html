@@ -1,0 +1,58 @@
+
+<section class="section-flex secciones ">
+
+
+    <section class="seccion-unidos w-full mt-32" style="height: calc(100vh - 137px);">
+
+
+<div id="contenedor-documento " class="w-full p-20">
+    <div class="p5-p10">
+        <h3 class="contenedor-documento-titulo mb-10">Carga de configuración inicial</h3>
+        <div class="contenedor-documento-descripcion d-flex between-flex">
+            <p>Obtenga las configuraciones generales y actualizaciones referidas a su Centro de Cómputo para un Proceso Electoral</p>
+             <button class="m-0 estilo1 " (click)="alertImportar()" [disabled]="!puedeImportar">
+                CARGAR CONFIGURACIÓN
+             </button>
+        </div>
+
+        <div class="carga-progreso">
+            <h4>Barra de progreso</h4>
+            <mat-progress-bar mode="determinate" [value]="progresoImport"></mat-progress-bar>
+
+        </div>
+    </div>
+
+    <!-- contenido-scroll  -->
+    <div class="ng-star-inserted mt-40">
+        <div style="display: flex;">
+           <div class="w-60" style="height: calc(100vh - 368px); overflow: auto;">
+                <table *ngIf="!isConsulta" style="max-width: 100%;" class="tableactas">
+                  <caption class="d-none"></caption>
+                  <thead>
+                  <tr>
+                    <th>Mensajes</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let mensaje of mensajes">
+                    <td>{{ mensaje }}</td>
+                  </tr>
+                  </tbody>
+                </table>
+            </div>
+           <div class="w-40 p-r d-flex center-flex">
+              <div *ngIf="isConsulta" class="p-o personaje-anuncio  b-0">
+                <p>Haz click en el botón “Cargar configuración” para comenzar</p>
+                <img src="../assets/img/personaje1.svg" alt=""/>
+              </div>
+           </div>
+        </div>
+
+
+  </div>
+
+</div>
+
+
+</section>
+</section>

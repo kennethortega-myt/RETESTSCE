@@ -1,0 +1,85 @@
+<div class="filtros" [formGroup]="form">
+  <div class="filtro">
+    <label for="tipoProceso">Proceso:</label>
+
+    <mat-form-field appearance="outline">
+      <mat-select id="proceso" formControlName="proceso">
+        <mat-option *ngFor="let proceso of listProceso" [value]="proceso">{{
+          proceso.nombre
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="filtro">
+    <label for="eleccion">Elección:</label>
+    <mat-form-field appearance="outline">
+      <mat-select id="eleccion" formControlName="eleccion">
+        <mat-option *ngFor="let eleccion of listEleccion" [value]="eleccion">
+          {{ eleccion.nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="filtro">
+    <label for="centroComputo">Centro de Cómputo:</label>
+    <mat-form-field appearance="outline">
+      <mat-select id="centroComputo" formControlName="centroComputo">
+        <mat-option
+          *ngFor="let centroComputo of listCentrosComputo"
+          [value]="centroComputo"
+        >
+          {{ centroComputo.codigo }} - {{ centroComputo.nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="filtro">
+    <label for="ambitoElectoral">ODPE:</label>
+    <mat-form-field appearance="outline">
+      <mat-select id="ambitoElectoral" formControlName="ambitoElectoral">
+        <mat-option
+          *ngFor="let ambitoElectoral of listAmbitoElectoral"
+          [value]="ambitoElectoral"
+        >
+          {{ ambitoElectoral.codigo }} - {{ ambitoElectoral.nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="filtro"  style="display: none">
+    <label for="tipoConsulta">Tipo de Consulta:</label>
+    <mat-form-field appearance="outline">
+      <mat-select id="tipoConsulta" formControlName="tipoConsulta">
+        <mat-option
+          *ngFor="let tipoConsulta of listTipoConsulta"
+          [value]="tipoConsulta"
+        >
+          {{ tipoConsulta.nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="filtro" style="display: none">
+    <label for="tipoAgrupado">Agrupado por:</label>
+    <mat-form-field appearance="outline">
+      <mat-select id="tipoAgrupado" formControlName="tipoAgrupado">
+        <mat-option
+          *ngFor="let agrupado of listAgrupado"
+          [value]="agrupado"
+        >
+          {{ agrupado.nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="filtro_boton">
+    <button class="estilo1 full noMarginLR" type="button" (click)="consultar()">
+      {{ textoBoton }}
+    </button>
+  </div>
+</div>

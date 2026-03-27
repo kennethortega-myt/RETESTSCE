@@ -1,0 +1,180 @@
+<form class="filtros" [formGroup]="form">
+    <div class="filtro">
+        <label for="tipoProceso">Proceso:</label>
+
+        <mat-form-field appearance="outline">
+            <mat-select id="proceso" formControlName="proceso">
+                <mat-option *ngFor="let proceso of listProceso" [value]="proceso">{{proceso.nombre}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="filtro">
+        <label for="eleccion">Elección:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="eleccion" formControlName="eleccion">
+                <mat-option *ngFor="let eleccion of listEleccion" [value]="eleccion">
+                    {{eleccion.nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="filtro">
+        <label for="centroComputo">ODPE:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="odpe" formControlName="odpe">
+                <mat-option *ngFor="let odpe of listOdpe" [value]="odpe">
+                    {{odpe.codigo}} {{odpe.nombre}}
+                  </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="filtro">
+        <label for="centroComputo">Centro de Cómputo:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="centroComputo" formControlName="centroComputo">
+                <mat-option *ngFor="let centroComputo of listCentrosComputo" [value]="centroComputo">
+                    {{centroComputo.codigo}} {{centroComputo.nombre}}
+                  </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="filtro_boton">
+        <button class="estilo1 full noMarginLR" type="button" (click)="buscarReporte()">
+          Consultar
+        </button>
+      </div>
+
+</form>
+
+<div class="filtros">
+    <div class="filtro-hora">
+        <div class="conte_actualizar">
+          <label for="departamento">Actualizar cada</label>
+          <mat-form-field appearance="outline" >
+            <input matInput [(ngModel)]="timeUpdate" maxlength="2"
+            type="text"
+            sceSoloNumerosFormReact
+            (change)="timeUpdateOnchange()"/>
+              <span matTextSuffix class="span-sufijo"> minutos</span>
+            </mat-form-field>
+        </div>
+        <button (click)="buscarReporte()" class=" estilo1" ><img alt="" src="../assets/img/icons/ico-actualizacion-blanco.svg"></button>
+    </div>
+</div>
+
+
+<h2 class="subtitulo_reportes">Detalle del estado de actas por ODPE</h2>
+<div class="cont-anuncio" *ngIf="!isShowReporte">
+    <div class="personaje-anuncio">
+      <p>
+        Por favor, seleccione los filtros para realizar la búsqueda.
+      </p>
+      <img alt="" src="../assets/img/personaje1.svg" />
+    </div>
+</div>
+
+
+<mat-table [dataSource]="estadoActasOdpeBean.detalleEstadoActasOdpe" class="tabla-header-doble mb-25" *ngIf="isShowReporte">
+    <ng-container matColumnDef="num">
+        <mat-header-cell *matHeaderCellDef class="header-ubigeo centrar-celda">Id</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="header-ubigeo centrar-celda">
+            {{ element.num }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="descOdpe">
+        <mat-header-cell *matHeaderCellDef>ODPE</mat-header-cell>
+        <mat-cell *matCellDef="let element" >
+            {{ element.descOdpe }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="descCentroCompu">
+        <mat-header-cell *matHeaderCellDef>Centro Cómputo</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.descCentroCompu}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="ahProcesar">
+        <mat-header-cell *matHeaderCellDef>Actas a Procesar</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.ahProcesar}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="porProcesar">
+        <mat-header-cell *matHeaderCellDef>Actas Pendientes Procesar</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.porProcesar}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="procesadas">
+        <mat-header-cell *matHeaderCellDef>Actas Procesadas</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.procesadas}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="observadas">
+        <mat-header-cell *matHeaderCellDef>Actas para Envío al JEE por Resolver</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.observadas}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="resueltas">
+        <mat-header-cell *matHeaderCellDef>Actas para Envío al JEE Resueltas</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.resueltas}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="pendienteResol">
+        <mat-header-cell *matHeaderCellDef>Actas por Resolver y Resueltas</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.pendienteResol}}
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
+
+<mat-table   [dataSource]="estadoActasOdpeBean.totalEstadoActasOdpe" class="mat-elevation-z8 centrar-cabecera mt-10" *ngIf="isShowReporte">
+    <ng-container matColumnDef="num">
+        <mat-cell *matCellDef="let element" ngClass="bg_total header-ubigeo">{{ element.num }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="descOdpe">
+        <mat-cell *matCellDef="let element" ngClass="bg_total">{{ element.descOdpe }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="descCentroCompu">
+      <mat-cell *matCellDef="let element" ngClass="bg_total"> {{element.descCentroCompu}}  </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="ahProcesar">
+      <mat-cell *matCellDef="let element" ngClass="bg_total"> {{element.ahProcesar}}  </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="porProcesar">
+      <mat-cell *matCellDef="let element" ngClass="bg_total"> {{element.porProcesar}}  </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="procesadas">
+      <mat-cell *matCellDef="let element" ngClass="bg_total"> {{element.procesadas}}  </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="observadas">
+      <mat-cell *matCellDef="let element" ngClass="bg_total"> {{element.observadas}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="resueltas">
+      <mat-cell *matCellDef="let element" ngClass="bg_total"> {{element.resueltas}}  </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="pendienteResol">
+      <mat-cell *matCellDef="let element" ngClass="bg_total"> {{element.pendienteResol}} </mat-cell>
+    </ng-container>
+
+    <mat-row  *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+
+<div class="cont-btn" *ngIf="isShowReporte">
+    <button class="estilo1" (click)="imprimir()">IMPRIMIR</button>
+</div>

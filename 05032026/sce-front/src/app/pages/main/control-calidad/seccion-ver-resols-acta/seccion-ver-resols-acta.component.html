@@ -1,0 +1,14 @@
+<h3 class="titulos-article">{{tituloPaso}}</h3>
+<div class="content-cantidad border-radio-0 mt-25">
+    <div [ngClass]="pasoActual === pasosControlCalidad.paso3 ? 'botonera-control-calidad-p3' : 'botonera-control-calidad'">
+        <button
+            *ngFor="let resol of listaResoluciones" 
+            class="estilo2" 
+            type="button" 
+            (click)="verResolucion(resol)"
+        >
+        VER {{resol.nombreResolucion.toUpperCase()}}
+        </button>                            
+        <button class="estilo2" type="button" (click)="verActa()">VER ACTA</button>
+    </div>
+</div>

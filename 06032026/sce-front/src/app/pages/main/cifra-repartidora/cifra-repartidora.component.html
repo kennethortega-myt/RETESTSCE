@@ -1,0 +1,190 @@
+<section class="secciones veri-resolucion">
+  <div>
+    <h1 class="titulo1">Consulta de cifra repartidora</h1>
+    <section>
+      <div class="seccion-unidos scroll-actas" >
+        <article  class="w-20 w-40 p-r">
+          <form class="formulario" [formGroup]="formGroupFiltro" >
+            <div class="filtro">
+                <label for="procesoFormControl">Proceso:</label>
+                <mat-form-field appearance="outline">
+                    <mat-select id="procesoFormControl" name="procesoFormControl" formControlName="procesoFormControl">
+                      <mat-option value="0">SELECCIONE</mat-option>
+                      <mat-option *ngFor="let proceso of listProceso" [value]="proceso.id">{{proceso.nombre}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="filtro mt-10">
+                <label for="eleccionFormControl">Tipo de elección:</label>
+                <mat-form-field appearance="outline">
+                    <mat-select id="eleccionFormControl" name="eleccionFormControl" formControlName="eleccionFormControl">
+                        <mat-option value="0">SELECCIONE</mat-option>
+                        <mat-option *ngFor="let eleccion of listEleccion" [value]="eleccion.codigo">{{eleccion.nombre}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="filtro mt-10">
+                <label for="distritoElectoralFormControl">Distrito electoral</label>
+                <mat-form-field appearance="outline">
+                    <mat-select id="distritoElectoralFormControl" name="distritoElectoralFormControl" formControlName="distritoElectoralFormControl">
+                        <mat-option value="0">SELECCIONE</mat-option>
+                        <mat-option *ngFor="let distritoElectoral of listDistritoElectoral"
+                        [value]="distritoElectoral.codigo">{{distritoElectoral.codigo}} {{distritoElectoral.nombre}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+
+
+            <button class="estilo2 w-full mx-0" (click)="consolidarCR()">CONSOLIDAR CR</button>
+            <button class="estilo2 w-full mx-0" [disabled]="!flagConsolidado" (click)="procesarCR()">PROCESAR CR</button>
+            <div class="filtro mt-10" style="display: none">
+                <label for="estadoFormControl">Estado</label>
+                <mat-form-field appearance="outline">
+                    <mat-select id="estadoFormControl" name="estadoFormControl" formControlName="estadoFormControl">
+                      <mat-option *ngFor="let estado of listEstado"
+                        [value]="estado.id">{{estado.descEstado}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <mat-radio-group aria-label="Seleccione una opción" class="radio-grupo-columna" formControlName="crFormControl">
+              <mat-radio-button
+                [value]="CifraRepartidoraType.INICIAL"
+                [disabled]="disableCrInicial">
+                CR Inicial
+              </mat-radio-button>
+              <mat-radio-button
+                [value]="CifraRepartidoraType.FINAL">
+                CR Final
+              </mat-radio-button>
+            </mat-radio-group>
+
+
+            <div class="seccion-lista-control cifra-repartidora-total w-full">
+                <div class="cuadro-blanco-3 cuadro-gris cantidad">
+                    <img src="../assets/img/doc-azul.svg" alt="">
+                    <span class="">Total de votos válidos<b>{{totalVotosValidosTxt}}</b></span>
+                </div>
+            </div>
+          </form>
+        </article>
+
+        <article class="w-80 d-flex flex-column">
+            <div class="conte_sombra p-20">
+              <form [formGroup]="formGroupResumen" >
+                <div class="filtros m-0">
+                  <div class="filtro">
+                        <label for="cifraRepartidoraControl">Cifra repartidora</label>
+                        <mat-form-field class="max-100" appearance="outline">
+                            <input id="cifraRepartidoraControl" name="cifraRepartidoraControl" formControlName="cifraRepartidoraControl" matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="filtro2">
+                        <label for="totalEscaniosControl">Total de escaños</label>
+                        <mat-form-field class="max-100" appearance="outline">
+                            <input id="totalEscaniosControl" name="totalEscaniosControl" formControlName="totalEscaniosControl" matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="filtro2">
+                        <label for="avanceControl">Avance</label>
+                        <mat-form-field class="max-100" appearance="outline">
+                            <input id="avanceControl" name="avanceControl" formControlName="avanceControl" matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="filtro">
+                        <label for="horaProcesoControl">Fecha y Hora proceso</label>
+                        <mat-form-field class="max-100" appearance="outline">
+                            <input id="horaProcesoControl" name="horaProcesoControl" formControlName="horaProcesoControl" matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="filtro">
+                        <label for="estadoControl">Estado</label>
+                        <mat-form-field class="max-100" appearance="outline">
+                            <input id="estadoControl" name="estadoControl" formControlName="estadoControl" matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="filtro2">
+                      <label for="vallaVotosControl">Valla de votos</label>
+                      <mat-form-field class="max-100" appearance="outline">
+                        <input id="vallaVotosControl" name="vallaVotosControl" formControlName="vallaVotosControl" matInput>
+                      </mat-form-field>
+                    </div>
+                    <div class="filtro2">
+                      <label for="vallaMiembrosControl">Valla de miembros</label>
+                      <mat-form-field class="max-100" appearance="outline">
+                        <input id="vallaMiembrosControl" name="vallaMiembrosControl" formControlName="vallaMiembrosControl" matInput>
+                      </mat-form-field>
+                    </div>
+                </div>
+
+              </form>
+
+            </div>
+            <div class="scrolltablCifraRepartidora  mt-18 mb-1 px-0">
+              <mat-table [dataSource]="dataSource" class="tabla-header-doble tabla-cifrarepartidora mb-25">
+                  <ng-container matColumnDef="descripcionAgrupacionPolitica">
+                      <mat-header-cell *matHeaderCellDef>Organizaciones Políticas</mat-header-cell>
+                      <mat-cell *matCellDef="let element">
+                          {{ element.descripcionAgrupacionPolitica}}
+                      </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="votosValidos">
+                      <mat-header-cell *matHeaderCellDef class="max-20por">Votos Válidos</mat-header-cell>
+                      <mat-cell *matCellDef="let element" class="max-20por centrar-celda">
+                          {{ element.votosValidos }}
+                      </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="division">
+                      <mat-header-cell *matHeaderCellDef class="max-20por">Votos/Cifra Rep.</mat-header-cell>
+                      <mat-cell *matCellDef="let element" class="max-20por centrar-celda">
+                          {{ element.division }}
+                      </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="cocienteObtenido">
+                      <mat-header-cell *matHeaderCellDef class="max-20por">Cociente</mat-header-cell>
+                      <mat-cell *matCellDef="let element" class="max-20por centrar-celda">
+                          {{ element.cocienteObtenido }}
+                      </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="nroRepresentantes">
+                      <mat-header-cell *matHeaderCellDef class="max-20por">Nro. Representantes</mat-header-cell>
+                      <mat-cell *matCellDef="let element" class="max-20por centrar-celda">
+                          {{ element.escanioObtenidos }}
+                      </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="observaciones">
+                      <mat-header-cell *matHeaderCellDef class="max-20por">Obs.</mat-header-cell>
+                      <mat-cell *matCellDef="let element" class="max-20por centrar-celda">
+                          {{ element.observacionCifra }}
+                      </mat-cell>
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns1; sticky:true"></mat-header-row>
+
+                  <mat-row *matRowDef="let row; columns: displayedColumns1"></mat-row>
+              </mat-table>
+              <div *ngIf="dataSource.data.length === 0" class="no-data-message">
+                No se han encontrado registros.
+              </div>
+            </div>
+            <mat-paginator #paginator [pageSizeOptions]="[10, 20, 40]" showFirstLastButtons></mat-paginator>
+
+            <p class="mt-1">B: Bonificado   E: Empate</p>
+        </article>
+
+      </div>
+    </section>
+  </div>
+    <div class="d-flex j-end mt-18 cont-btn">
+      <button class="estilo3 my-0" type="button" [disabled]="!flagEmpate"  (click)="obtenerListaEmpate()">EMPATE</button>
+      <button class="estilo2 my-0" type="button" [disabled]="!flagImprimir" (click)="imprimirCR()">IMPRIMIR</button>
+      <button class="estilo1 my-0" type="button" (click)="consultarCR()">CONSULTAR</button>
+    </div>
+</section>

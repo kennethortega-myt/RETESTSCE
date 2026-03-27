@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="SubReporteActasAnuladasPorResolucion" pageWidth="216" pageHeight="216" columnWidth="216"
+              leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="55f13ec0-d63d-4696-bf74-02f7e6bea4c3">
+    <property name="ireport.zoom" value="1.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <parameter name="TITULO_ANULADAS_POR_RESOLUCION" class="java.lang.String"/>
+    <parameter name="CANTIDAD_ANULADAS_POR_RESOLUCION" class="java.lang.Long"/>
+    <field name="descripcion" class="java.lang.String"/>
+    <field name="cantidad" class="java.lang.Long"/>
+    <columnHeader>
+        <band height="15" splitType="Stretch">
+            <textField>
+                <reportElement x="0" y="0" width="172" height="15" uuid="501ab186-b216-4740-a17d-fdfb8ebe15be"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Arial" size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{TITULO_ANULADAS_POR_RESOLUCION}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="172" y="0" width="44" height="15" uuid="ba84c771-5f1f-43fb-b2ad-b50c98117cc6"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Arial" size="7"/>
+                </textElement>
+                <textFieldExpression>
+                    <![CDATA[$P{CANTIDAD_ANULADAS_POR_RESOLUCION}==null ? "":$P{CANTIDAD_ANULADAS_POR_RESOLUCION}]]></textFieldExpression>
+            </textField>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="10" splitType="Stretch">
+            <textField>
+                <reportElement x="0" y="0" width="172" height="10" uuid="e8c26bef-fc92-486c-92e1-5fcefc36f77d"/>
+                <textElement>
+                    <font fontName="Arial" size="7"/>
+                    <paragraph leftIndent="5"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="172" y="0" width="44" height="10" uuid="c53bb633-22ab-4026-9181-e309bc503714"/>
+                <textElement textAlignment="Right">
+                    <font fontName="Arial" size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+</jasperReport>

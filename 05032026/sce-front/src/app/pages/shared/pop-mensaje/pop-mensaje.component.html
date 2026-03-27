@@ -1,0 +1,15 @@
+<div class="pop-content">
+  <div class="d-flex center-flex">
+    <img alt="" *ngIf="icon==IconPopType.ALERT" class="img-pop" src="../assets/img/icon-pop/alerta.svg">
+    <img alt="" *ngIf="icon==IconPopType.CONFIRM" class="img-pop" src="../assets/img/icon-pop/confirmacion.svg">
+    <img alt="" *ngIf="icon==IconPopType.ERROR" class="img-pop" src="../assets/img/icon-pop/error.svg">
+  </div>
+    <h1 class="pop-title" >{{title}}</h1>
+    <div class="pop-description" >
+      <p>{{mensaje}}</p>
+    </div>
+    <div class="d-flex center-flex gap-10" >
+       <button class="estilo3 m-0"  cdkFocusInitial mat-dialog-close *ngIf="questions">CANCELAR</button>
+        <button class="estilo1 m-0"  cdkFocusInitial (click)="aceptar()">ACEPTAR</button>
+    </div>
+  </div>

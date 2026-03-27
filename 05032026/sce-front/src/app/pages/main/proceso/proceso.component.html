@@ -1,0 +1,54 @@
+<section class="secciones">
+  <h1 class="titulo1">Proceso electoral </h1>
+  <div class="d-flex j-end">
+    <button class="estilo1 "  (click)="crearProceso()">crear proceso</button>
+  </div>
+  <section class="section-flex help-puppet" *ngIf="listaProcesoElectoral.length == 0">
+    <div class="w-60 d-flex j-end items-end">
+      <div class="personaje-anuncioanexos mt-150">
+        <div class="nube">
+          <p>
+            Haga clic en crear proceso, para configurar su primer proceso electoral.
+          </p>
+        </div>
+
+        <img src="../assets/img/personaje1.svg" alt=""/>
+      </div>
+    </div>
+  </section>
+  <section class="section-flex">
+    <article class="w-80 cont-cards">
+
+      <div class="proceso-e cuadro-blanco-2" *ngFor="let proceso of listaProcesoElectoral">
+        <img [src]="'data:image/png;base64,'+proceso.logo" alt="">
+        <form>
+          <div class="w-100">
+            <label for="nombre">Proceso:</label>
+            <h3 class="nombre-proceso">{{proceso.nombre}} </h3>
+          </div>
+          <div class="w-50">
+            <label for="acronimo">Acrónimo:</label>
+            <input class="input" type="" [value]="proceso.acronimo" name="" disabled="disabled">
+          </div>
+          <div class="w-50">
+            <label for="fechaConvocatoria">Fecha de Elección:</label>
+            <input class="input" type="text" [value]="proceso.fechaConvocatoria | date:'dd/MM/yyyy'" name="" disabled="disabled">
+          </div>
+          <div class="w-100">
+
+          </div>
+          <div class="boton-full">
+            <button class="estilo3" (click)="eliminarProceso(proceso.id)" *ngIf="proceso.vigente === 1 && proceso.isEditar ">Eliminar</button>
+            <button class="estilo2" (click)="update(true,proceso)">Ver Detalle</button>
+          </div>
+          <div class="boton-full fixProcFullBtn">
+            <button class="estilo2 full" (click)="update(false,proceso)" *ngIf="proceso.vigente === 1 && proceso.isEditar">Editar Proceso</button>
+          </div>
+        </form>
+      </div>
+
+
+    </article>
+  </section>
+
+</section>

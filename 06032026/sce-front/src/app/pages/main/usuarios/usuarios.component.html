@@ -1,0 +1,193 @@
+<section class="secciones">
+  <div>
+    <h1 class="titulo1">{{ titulo }}</h1>
+    <section class="section-flex">
+
+      <!-- Filtros -->
+      <article class="w-20 cuadro-blanco-2">
+        <div class="formulario section-flex" [formGroup]="searchForm">
+          <!-- Proceso -->
+          <div class="w-100 px-0">
+            <label for="tipoProceso">Proceso:</label>
+            <mat-form-field appearance="outline">
+              <mat-select id="tipoProceso" formControlName="proceso">
+                @for (proc of listProceso; track proc.cacronimo) {
+                <mat-option [value]="proc.acronimo">{{proc.nombre}}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- Elecciones (Oculto) -->
+          <div class="w-100 px-0" style="display: none;">
+            <label for="eleccion">Elecciones:</label>
+            <mat-form-field appearance="outline" class="w-100 paddT6">
+              <mat-select id="eleccion" formControlName="eleccion">
+                @for (eleccion of listElecciones; track eleccion.codigo) {
+                <mat-option [value]="eleccion.codigo">{{eleccion.nombre}}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- Centro de cómputo -->
+          <div class="w-100 px-0">
+            <label for="centroComputo">Centro de cómputo:</label>
+            <mat-form-field appearance="outline" class="w-100 paddT6">
+              <mat-select id="centroComputo" formControlName="centroComputo">
+                @for (centroComputo of listCentroComputo; track centroComputo.codigo) {
+                <mat-option [value]="centroComputo.codigo">{{centroComputo.codigo}} - {{centroComputo.nombre}}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- Usuario -->
+          <div class="w-100 px-0">
+            <label for="usuario">Usuario:</label>
+            <mat-form-field appearance="outline" class="w-100 paddT6">
+              <input id="usuario" matInput formControlName="usuario" maxlength="50">
+            </mat-form-field>
+          </div>
+          <!-- Número Documento -->
+          <div class="w-100 px-0">
+            <label for="documento">Nro Documento:</label>
+            <mat-form-field appearance="outline" class="w-100 paddT6">
+              <input id="documento" matInput formControlName="documento" maxlength="20">
+            </mat-form-field>
+          </div>
+          <!-- Apellidos Paterno -->
+          <div class="w-100 px-0">
+            <label for="apellidoPaterno">Apellido Paterno:</label>
+            <mat-form-field appearance="outline" class="w-100 paddT6">
+              <input id="apellidoPaterno" matInput formControlName="apellidoPaterno" maxlength="100">
+            </mat-form-field>
+          </div>
+          <!-- Apellido Materno -->
+          <div class="w-100 px-0">
+            <label for="apellidoMaterno">Apellido Materno:</label>
+            <mat-form-field appearance="outline" class="w-100 paddT6">
+              <input id="apellidoMaterno" matInput formControlName="apellidoMaterno" maxlength="100">
+            </mat-form-field>
+          </div>
+          <!-- Nombres -->
+          <div class="w-100 px-0">
+            <label for="nombres">Nombres:</label>
+            <mat-form-field appearance="outline" class="w-100 paddT6">
+              <input id="nombres" matInput formControlName="nombres" maxlength="100">
+            </mat-form-field>
+          </div>
+          <!-- Perfil -->
+          <div class="w-100 px-0">
+            <label for="perfil">Perfil:</label>
+            <mat-form-field appearance="outline">
+              <mat-select id="perfil" formControlName="perfil">
+                <mat-option value="0">TODOS</mat-option>
+                @for (perfil of listPerfiles; track perfil.id) {
+                <mat-option [value]="perfil.codigoS">{{perfil.nombre}}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- Persona Asignada -->
+          <div class="w-100 px-0">
+            <label for="personaAsignada">Asignado:</label>
+            <mat-form-field appearance="outline" class="w-100 paddT6">
+              <mat-select id="personaAsignada" formControlName="personaAsignada">
+                <mat-option [value]="-1">TODOS</mat-option>
+                <mat-option [value]="1">Si</mat-option>
+                <mat-option [value]="0">No</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- Desincronizado SASA -->
+           <div class="w-100 px-0">
+              <label for="desincronizadoSasa">Desincronizado SASA:</label>
+              <mat-form-field appearance="outline" class="w-100 paddT6">
+                <mat-select id="desincronizado" formControlName="desincronizado">
+                  <mat-option [value]="-1">TODOS</mat-option>
+                  <mat-option [value]="1">Si</mat-option>
+                  <mat-option [value]="0">No</mat-option>
+                </mat-select>
+              </mat-form-field>
+           </div>
+          <button class="estilo1 w-full mx-0" (click)="onSearch()">BUSCAR</button>
+          <button class="estilo2 w-full mx-0" (click)="clearForm()">LIMPIAR</button>
+        </div>
+      </article>
+
+      <!-- Tabla -->
+      <section class="w-80 pb-0 cont-info pl-2 pr-0">
+
+        <article class=" section-flex p-r">
+          <div class="w-100  contenido-scrosll px-0 ">
+            <div class="scrolltablamonitoreo over-flow-y">
+              <mat-table [dataSource]="dataSource" class="mat-mdc-table-sticky mat-elevation-z8 scrollheadermon" style="width: 1500px;">
+                <!-- # -->
+                <ng-container matColumnDef="#">
+                  <mat-header-cell *matHeaderCellDef class="w-n">No.</mat-header-cell>
+                  <mat-cell *matCellDef="let row; let i = index" class="w-n">{{ getRowIndex(i) }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="proceso">
+                  <mat-header-cell *matHeaderCellDef style="max-width: 70px;">Proceso</mat-header-cell>
+                  <mat-cell *matCellDef="let row;" style="max-width: 70px;">{{ row.acronimoProceso }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="centroComputo">
+                  <mat-header-cell *matHeaderCellDef style="min-width: 100px; max-width: 100px !important;">Centro
+                    Cómputo</mat-header-cell>
+                  <mat-cell *matCellDef="let row;" style="min-width: 100px; max-width: 100px !important;">
+                    {{ row.centroComputo }} - {{ row.nombreCentroComputo }}
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="usuario">
+                  <mat-header-cell *matHeaderCellDef style="min-width: 235px;">Usuario</mat-header-cell>
+                  <mat-cell *matCellDef="let row;" style="min-width: 235px;">{{ row.usuario }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="documento">
+                  <mat-header-cell *matHeaderCellDef style="max-width: 110px;">N° Documento</mat-header-cell>
+                  <mat-cell *matCellDef="let row;" style="max-width: 110px;">{{ row.documento || '' }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="apellidoPaterno">
+                  <mat-header-cell *matHeaderCellDef>Apellido Paterno</mat-header-cell>
+                  <mat-cell *matCellDef="let row;">{{ row.apellidoPaterno }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="apellidoMaterno">
+                  <mat-header-cell *matHeaderCellDef>Apellido Materno</mat-header-cell>
+                  <mat-cell *matCellDef="let row;">{{ row.apellidoMaterno }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="nombres">
+                  <mat-header-cell *matHeaderCellDef>Nombres</mat-header-cell>
+                  <mat-cell *matCellDef="let row;">{{ row.nombres }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="perfil">
+                  <mat-header-cell *matHeaderCellDef>Perfil</mat-header-cell>
+                  <mat-cell *matCellDef="let row;">{{ row.nombrePerfil }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="acciones">
+                  <mat-header-cell *matHeaderCellDef style="max-width: 85px !important;">Acciones</mat-header-cell>
+                  <mat-cell *matCellDef="let row;" style="max-width: 85px !important;">
+                    <button class="btn_editar" matTooltip="Editar" (click)="modalEditarUsuario(row)"></button>
+                    @if(row.desincronizadoSasa) {
+                    <button class="btn_transmitir" matTooltip="Sincronizar" (click)="sincronizarUsuario(row)"></button>
+                    }
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+              <div *ngIf="dataSource.data.length === 0" class="no-data-message">
+                No se han encontrado registros.
+              </div>
+            </div>
+            <mat-paginator [length]="totalRegistro" [pageSize]="pageSize" [pageSizeOptions]="[10, 50, 100]"
+              showFirstLastButtons></mat-paginator>
+            <div class="cont-btn" *ngIf="dataSource.data.length > 0">
+              <button class="estilo1" (click)="imprimir()">IMPRIMIR</button>
+            </div>
+          </div>
+        </article>
+
+      </section>
+
+    </section>
+  </div>
+</section>
+

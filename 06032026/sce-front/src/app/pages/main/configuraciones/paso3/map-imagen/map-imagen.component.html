@@ -1,0 +1,12 @@
+<div class="row">
+  <div  style="    width: 100%;
+  height: calc(100vh - 300px);"> 
+    <div class="canvas-container">
+      <canvas #canvas
+              (mousedown)="handleMouseDown($event)"
+              (mouseup)="handleMouseUp($event)"
+              (mousemove)="handleMouseMove($event)">
+      </canvas>
+    </div>
+  </div>
+</div>

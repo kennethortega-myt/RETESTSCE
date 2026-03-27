@@ -1,0 +1,114 @@
+<div class="filtros">
+    <div class="filtro">
+        <label for="tipoProceso">Proceso:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="tipoProceso">
+                <mat-option [value]="0">SELECCIONE</mat-option>
+                <mat-option> opcion 1</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="filtro">
+        <label for="centroComputo">Centro de Cómputo:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="centroComputo">
+                <mat-option [value]="0">SELECCIONE</mat-option>
+                <mat-option>Presidente y Vicepresidente</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="filtro">
+        <label for="odpe">ODPE:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="odpe">
+                <mat-option [value]="0">SELECCIONE</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="filtro">
+        <label for="tipo">Tipo de Resolución:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="tipo">
+                <mat-option [value]="0">SELECCIONE</mat-option>
+                <mat-option>Presidente y Vicepresidente</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="filtro">
+        <label for="estado">Estado de resolución:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="estado">
+                <mat-option [value]="0">SELECCIONE</mat-option>
+                <mat-option>Presidente y Vicepresidente</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="filtro_boton">
+        <button class="estilo1 full noMarginLR" type="button">
+          Consultar
+        </button>
+    </div>
+</div>
+<h2 class="subtitulo_reportes">Consulta de resoluciones</h2>
+<div class="cont-anuncio">
+    <div class="personaje-anuncio">
+      <p>
+        Por favor, seleccione el ámbito para realizar la búsqueda.
+      </p>
+      <img alt="" src="../assets/img/personaje1.svg" />
+    </div>
+</div>
+
+
+<mat-table [dataSource]="dataSource1" class="tabla-header-doble mb-25">
+    <ng-container matColumnDef="codigo">
+        <mat-header-cell *matHeaderCellDef>Código Resolución</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.codigo }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="resolucion">
+        <mat-header-cell *matHeaderCellDef>Resolución</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.resolucion }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="tipo">
+        <mat-header-cell *matHeaderCellDef>Tipo Resolución</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.tipo}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="estado">
+        <mat-header-cell *matHeaderCellDef>Estado Resolución</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.estado}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="acta">
+        <mat-header-cell *matHeaderCellDef>Acta</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.acta}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="eleccion">
+        <mat-header-cell *matHeaderCellDef>Elección</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.eleccion}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="fecha">
+        <mat-header-cell *matHeaderCellDef>Fecha Resolución</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.fecha}}
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns1"></mat-row>
+</mat-table>
+

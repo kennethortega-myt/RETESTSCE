@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="SubReporteResumenActasProcesadas" pageWidth="216" pageHeight="360" columnWidth="216" leftMargin="0"
+              rightMargin="0" topMargin="0" bottomMargin="0" uuid="817a5ad7-7e67-4607-b1c8-a7d74c659a22">
+    <property name="ireport.zoom" value="1.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <parameter name="TITULO_ACTAS_PROCESADAS" class="java.lang.String"/>
+    <parameter name="CANTIDAD_ACTAS_PROCESADAS" class="java.lang.String"/>
+    <field name="descripcion" class="java.lang.String"/>
+    <field name="cantidad" class="java.lang.Long"/>
+    <columnHeader>
+        <band height="15" splitType="Stretch">
+            <textField>
+                <reportElement x="0" y="0" width="140" height="15" uuid="b81f548c-a844-4d66-8cb3-443440c914b2"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Arial" size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{TITULO_ACTAS_PROCESADAS}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="140" y="0" width="76" height="15" uuid="9a73402e-7353-4515-9132-390ccbffc6da"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Arial" size="7"/>
+                </textElement>
+                <textFieldExpression>
+                    <![CDATA[$P{CANTIDAD_ACTAS_PROCESADAS}==null ? "":$P{CANTIDAD_ACTAS_PROCESADAS}]]></textFieldExpression>
+            </textField>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="10" splitType="Stretch">
+            <textField>
+                <reportElement x="0" y="0" width="140" height="10" uuid="0e698e21-5a78-4ab5-b226-2c64b2207e8c"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Arial" size="7"/>
+                    <paragraph leftIndent="5"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="140" y="0" width="76" height="10" uuid="ee5ef62a-304a-49a1-8fa1-31f811753368"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Arial" size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+</jasperReport>

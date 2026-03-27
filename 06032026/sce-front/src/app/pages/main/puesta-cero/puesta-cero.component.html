@@ -1,0 +1,43 @@
+<section class="secciones puestacero">
+  <div>
+    <h1 class="titulo1">{{tituloComponent}}</h1>
+    <section class="seccion-unidos puestacero">
+      <article class="w-20 w-40 altura-flex">
+        <div class="w-100 h-full p-r flex_abajo">
+
+          <div class="personaje-anuncio gris" >
+            <div>
+              <h3>Advertencia</h3>
+              <p>
+                El siguiente proceso ELIMINARÁ INFORMACIÓN que no podrá ser
+                recuperada.
+              </p>
+            </div>
+
+            <img src="../assets/img/personaje1.svg" alt=""/>
+          </div>
+        </div>
+      </article>
+      <article class="w-80 d-flex center-flex items-center">
+        <div style="display: none;">
+          <img src="../assets/img/ico-limpieza.svg" alt=""/>
+        </div>
+
+        <div class="content-resultados-puestacero">
+          <ul class="lista-elementos">
+              <li>{{puestaCeroGeneralInicio}}</li>
+              <li> {{puestaCeroGeneralFin}} </li>
+              <li>{{puestaCeroTransmisionInicio}}</li>
+              <li>{{puestaCeroTransmisionFin}}</li>
+          </ul>
+
+
+        </div>
+      </article>
+    </section>
+    <div class="cont-btn">
+      <button class="estilo1" [disabled]="!habilitarBtn" (click)="iniciarPuestaCero()">PROCESAR</button>
+    </div>
+  </div>
+</section>
+

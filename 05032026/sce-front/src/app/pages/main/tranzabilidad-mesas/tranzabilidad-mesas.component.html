@@ -1,0 +1,116 @@
+<section class="secciones puestacero">
+    <div>
+      <h1 class="titulo1 ">{{tituloComponente}}</h1>
+      <section class="seccion-unidos tranzabilidad">
+        <article class="w-20 w-40 tranzabilidad-orientacion-end">
+
+                <form class="formulario-tranzabilidad section-flex" [formGroup]="formTrazabilidad" autocomplete="off">
+                    <h2 class="title-tranzabilidad pb-12">Buscar</h2>
+                    <div class="w-100 px-0">
+                    <label for="numMesaInput" class="mt-14">Ingrese número de mesa:</label>
+                      <div class="d-flex gap-10">
+                        <mat-form-field appearance="outline" class="w-100 mx-0 mb-0 paddT6">
+                          <input id="numMesaInput" #inputRefs matInput placeholder="Número de mesa" (keydown)="onKeyNumeActa($event)"
+                                 name="numActa" formControlName="numMesaFormControl" maxlength="6" sceSoloNumerosFormReact>
+                        </mat-form-field>
+                      </div>
+
+                    </div>
+                    <button class="estilo1 w-full  mx-0" (click)="buscarMesa()"> BUSCAR MESA</button>
+                </form>
+
+        </article>
+        <article class="w-80 ">
+            <div *ngIf="isConsulta" class="d-flex gap-10">
+              <div class=" contenido-scroll cont-anuncio">
+                <div class="personaje-anuncio">
+                  <p>
+                    Por favor, ingrese el número de acta para realizar la búsqueda.
+                  </p>
+                  <img alt="" src="../assets/img/personaje1.svg" />
+                </div>
+              </div>
+            </div>
+            <div *ngIf="!isConsulta" class="d-flex gap-10" >
+               <div class="width-20 width-30 bg-white content-actas-tranzabilidad">
+                  <h3>Acta {{currentTrazabilidadBean?.infoActa.mesa}}{{currentTrazabilidadBean?.infoActa.copia}}{{currentTrazabilidadBean?.infoActa.digitoChequeo}}</h3>
+                  <div class="ul-actas">
+                    <ul class="mt-18">
+                        <li>
+                            Electores hábiles: <br>
+                            <span>{{trazabilidadBeanList[0]?.infoActa.electoresHabiles}}</span>
+                        </li>
+                        <li>
+                            Total de votantes: <br>
+                            <span>{{currentTrazabilidadBean?.infoActa.totalVotantes}}</span>
+                        </li>
+
+                        <li>
+                            Departamento:<br>
+                            <span>{{trazabilidadBeanList[0]?.infoActa.departamento}}</span>
+
+                        </li>
+                        <li>
+                            Provincia:<br>
+                            <span>{{trazabilidadBeanList[0]?.infoActa.provincia}}</span>
+
+                        </li>
+
+                        <li>
+                            Distrito:<br>
+                            <span>{{trazabilidadBeanList[0]?.infoActa.distrito}}</span>
+
+                        </li>
+
+                        <li>
+                            Local de votación:<br>
+                            <span>{{trazabilidadBeanList[0]?.infoActa.localVotacion}}</span>
+
+                        </li>
+
+                        <li *ngIf="trazabilidadBeanList[0]?.infoActa.centroPoblado!== null">
+                            Centro poblado:<br>
+                            <span>{{trazabilidadBeanList[0]?.infoActa.centroPoblado}}</span>
+
+                        </li>
+
+                        <li>
+                          Tipo de elección:<br>
+                          <span>{{currentTrazabilidadBean?.infoActa.eleccion}}</span>
+
+                        </li>
+                    </ul>
+                  </div>
+               </div>
+               <div class="width-80 bg-white content-actas-steep">
+
+                <mat-accordion>
+                  <mat-expansion-panel
+                    *ngFor="let actaBeanList of trazabilidadBeanList"
+                    [expanded]="currentTrazabilidadBean === actaBeanList"
+                    (opened)="onOpened(actaBeanList)"
+                    (closed)="onClosed(actaBeanList)"
+                    >
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        <h2 class="title-linea title-tranzabilidad py-2 m-0">
+                          Línea de Tiempo de Acta {{actaBeanList.infoActa.mesa}} - {{actaBeanList.infoActa.eleccion}}</h2>
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <ul class="timeline">
+                      <ng-template ngFor let-item [ngForOf]="actaBeanList.history" let-i="index">
+                        <li [ngClass]="getClass(i,item,actaBeanList.history.length)">
+                          <app-trazabilidad-icon [item]="item"></app-trazabilidad-icon>
+                        </li>
+                      </ng-template>
+
+                     </ul>
+                  </mat-expansion-panel>
+                </mat-accordion>
+               </div>
+              </div>
+        </article>
+      </section>
+
+    </div>
+  </section>

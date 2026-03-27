@@ -1,0 +1,88 @@
+<section class="secciones">
+  <div>
+      <h1 class="titulo1">Resumen Total de C.C</h1>
+      <section class="seccion-unidos">
+          <article class="w-20">
+            <form class="formulario" [formGroup]="formGroupRepoAvanEstActFiltro">
+              <div class="formulario section-flex ">
+                <div class="w-100">
+                  <label for="procesoFormControl">Proceso:</label>
+
+                  <mat-form-field appearance="outline">
+                    <mat-select name="idProceso" formControlName="procesoFormControl">
+                      <mat-option value="0">SELECCIONE</mat-option>
+                      <mat-option *ngFor="let proceso of listProceso" [value]="proceso.id">
+                        {{proceso.cnombre}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="w-100">
+                  <label for="eleccionFormControl">Tipo de elección:</label>
+
+                  <mat-form-field appearance="outline">
+                    <mat-select name="idEleccion" formControlName="eleccionFormControl">
+                      <mat-option value="0">SELECCIONE</mat-option>
+                      <mat-option *ngFor="let eleccion of listEleccion" [value]="eleccion.id">
+                        {{eleccion.cnombre}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="w-100">
+                  <label for="ambitoFormControl">{{ambito.nombreTipoAmbito}}:</label>
+
+                  <mat-form-field appearance="outline">
+                    <mat-select name="idAmbito" formControlName="ambitoFormControl">
+                      <mat-option value="0">SELECCIONE</mat-option>
+                      <mat-option *ngFor="let ambito of listAmbitos" [value]="ambito.id">
+                        {{ambito.nombre}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="w-100">
+                  <label for="centroComputoFormControl">Centro de cómputo:</label>
+
+                  <mat-form-field appearance="outline">
+                    <mat-select name="idCentroComputo" formControlName="centroComputoFormControl">
+                      <mat-option value="0">SELECCIONE</mat-option>
+                      <mat-option *ngFor="let centroComputo of listCentrosComputo" [value]="centroComputo.id">
+                        {{centroComputo.nombre}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+
+
+                <div class="boton-full">
+                  <button class="estilo1 full noMarginLR" type="button" (click)="buscarReporteAvanceEstActas()">
+                    BUSCAR
+                  </button>
+                </div>
+
+              </div>
+            </form>
+          </article>
+          <article class="w-80">
+
+              <div *ngIf="!isShowReporte" class="contenedor-documento-muestra">
+                  <div class=" contenido-scroll cont-anuncio">
+                      <div class="personaje-anuncio">
+                          <p>Llene los campos del reporte para poder descargar el archivo a imprimir</p>
+                          <img alt="" src="../assets/img/personaje1.svg">
+                      </div>
+                  </div>
+              </div>
+
+          </article>
+      </section>
+    <div class="cont-btn">
+      <button *ngIf="isShowReporte" class=" estilo1" (click)="descargarReporte()"> DESCARGAR </button>
+    </div>
+  </div>
+</section>

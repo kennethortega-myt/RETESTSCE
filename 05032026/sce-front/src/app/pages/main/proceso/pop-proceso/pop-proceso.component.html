@@ -1,0 +1,133 @@
+<h2 class="modalHead titulo2">Proceso {{data.nombre}}</h2>
+<mat-dialog-content class="mat-typography proForms">
+  <form class="formulario section-flex " [formGroup]="formGroupParent">
+    <div class="w-75">
+      <label for="nombre">Proceso</label>
+      <mat-form-field appearance="outline">
+        <input matInput placeholder="Ingrese nombre de proceso electoral" type="text" name="nombre"
+               formControlName="nombre" minlength="6">
+      </mat-form-field>
+    </div>
+    <div class="w-25">
+      <label for="acronimo">Acrónimo:</label>
+      <mat-form-field appearance="outline">
+        <input matInput placeholder="Ingrese nombre corto" type="text" name="acronimo" maxlength="15" minlength="6" formControlName="acronimo">
+      </mat-form-field>
+    </div>
+
+    <div class="w-25">
+      <label for="fechaConvocatoria">Fecha Elección:</label>
+      <mat-form-field appearance="outline">
+        <input matInput [matDatepicker]="fechaConvocatoria" name="fechaConvocatoria"
+               formControlName="fechaConvocatoria">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="fechaConvocatoria" [disabled]="btnFecha" ></mat-datepicker-toggle>
+        <mat-datepicker #fechaConvocatoria disabled="false"></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="w-25" *ngIf="false">
+      <label for="fechaCreacion">Fecha de Ensayo:</label>
+      <mat-form-field appearance="outline">
+        <input matInput [matDatepicker]="Creacion" name="fechaCreacion" formControlName="fechaCreacion">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="Creacion"  ></mat-datepicker-toggle>
+        <mat-datepicker #Creacion disabled="false"></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <!-- Cambios (Fin) -->
+    <div class="w-75">
+      <label for="nombreDbLink" class="">Nombre de DbLink</label>
+      <mat-form-field appearance="outline" class="w-100 paddT0">
+        <input matInput placeholder="Ingrese nombre de dblink" name="nombreDbLink" formControlName="nombreDbLink" minlength="6">
+      </mat-form-field>
+    </div>
+    <div class="w-50">
+      <label for="nombreEsquemaPrincipal">Nombre de esquema principal</label>
+      <mat-form-field appearance="outline" class="w-100 paddT0">
+        <input matInput placeholder="Ingrese nombre esquema principal" name="nombreEsquemaPrincipal" minlength="6"
+               formControlName="nombreEsquemaPrincipal">
+      </mat-form-field>
+    </div>
+    <div class="w-50">
+      <label for="nombreEsquemaBdOnpe">Nombre de esquema BDONPE</label>
+      <mat-form-field appearance="outline" class="w-100 paddT0">
+        <input matInput placeholder="Ingrese esquema BDONPE" name="nombreEsquemaBdOnpe" minlength="6"
+               formControlName="nombreEsquemaBdOnpe">
+      </mat-form-field>
+    </div>
+    <div class="w-50">
+      <div class="section-flex" id="archivoLogo">
+        <label for="">Logo de proceso electoral:</label>
+        <mat-form-field appearance="outline">
+          <button mat-icon-button matPrefix (click)="f_input.click()">
+            <mat-icon>attach_file</mat-icon>
+          </button>
+          <input type="text" readonly matInput/>
+          <input type="file" accept=".jpg,.png" hidden #f_input (change)="upload($event.target)"/>
+        </mat-form-field>
+
+      </div>
+      <div>
+        <div class="logoBox">
+          <img [src]="getImageSource()" alt="">
+        </div>
+      </div>
+    </div>
+
+    <div class="pl-10px w-50 d-flex gap-10">
+      <div [formGroup]="tipoEleccionForm" class="w-full">
+        <div class="minimalSpace">
+          <h5 class="w-55">Asignar tipos de elección:</h5>
+          <h5 class="text-right">Principal</h5>
+          <h5 class="text-right" *ngIf="false">Detalle</h5>
+
+        </div>
+        <div *ngFor="let tipoEleccion of listTipoEleccion" class="minimalSpace">
+          <div class="w-55">
+            <mat-checkbox [formControlName]="tipoEleccion.codigo">{{tipoEleccion.nombre}}</mat-checkbox>
+          </div>
+          <div class="mr-12">
+            <mat-slide-toggle [formControlName]="'p'+tipoEleccion.codigo"
+                              *ngIf="this.tipoEleccionForm.get(''+tipoEleccion.codigo)?.value"
+                              (change)="updatePrincipal(tipoEleccion, $event)"></mat-slide-toggle>
+          </div>
+          <div class="mr-12" *ngIf="false">
+
+
+            <mat-icon class="color-azul" (click)="openModalDetEscrutinio(tipoEleccion)" onkeypress=""
+                      *ngIf="this.tipoEleccionForm.get(''+tipoEleccion.codigo)?.value">open_in_new
+            </mat-icon>
+          </div>
+        </div>
+      </div>
+      <div [formGroup]="principalEleccionForm" *ngIf="false">
+        <div class="paddB6">
+          <h5>Principal:</h5>
+        </div>
+        <div class="minimalSpace" *ngFor="let tipoEleccion of listTipoEleccion">
+          <mat-slide-toggle [formControlName]="tipoEleccion.id"></mat-slide-toggle>
+        </div>
+      </div>
+    </div>
+    <div class="section-flex">
+
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions style="display: flex;justify-content:space-between ;">
+  <button class="estilo2 " (click)="verificarAutorizacionCarga()" *ngIf="!data.isDetalle">Cargar Datos
+  </button>
+  <button class="estilo1 " (click)="verificarAutorizacion()" [disabled]="botonCargar">Cargar Usuarios
+  </button>
+
+
+  <div class="d-flex j-end">
+    <button class="estilo3" [mat-dialog-close]="false">Cancelar</button>
+    <button class="estilo1" (click)="update()" [disabled]="botonGuardarDeshabilitado">Guardar</button>
+  </div>
+
+</mat-dialog-actions>
+

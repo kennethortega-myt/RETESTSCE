@@ -1,0 +1,47 @@
+.titulo-control-actas{
+
+    p{
+        color: #2A71B9;
+        font-size: 18px;
+        font-weight: 600;
+    }
+ 
+}
+
+.seccion-unidos > .hojas-asistencia {
+    background-color: #ffffff;
+    border-radius: 19px;
+    box-shadow: 1px 1px 5px -1px rgba(0, 0, 0, 0.44);
+    padding: 20px;
+    line-height: 0;
+    min-width: 275px;
+}
+
+.content-lista {
+    h3{
+
+        color: #707070;
+        font-size: 14px;
+    }
+}
+
+.contendeor-lista-electores{
+
+    height: calc(100vh - 310px); overflow: auto;
+}
+
+.contendeor-lista-electores-view{
+    max-height: calc(100vh - 219px); 
+       
+                overflow-y: auto;
+}
+
+.seccion-unidos.lista-electoral{
+    height: calc(100vh - 219px);
+}
+.secciones.lista-electoral{
+    max-height: calc(100vh - 85px);
+}
+.width-40{
+    width: 40%;
+}

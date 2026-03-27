@@ -1,0 +1,82 @@
+<div class="filtros">
+    <div class="filtro">
+        <label for="tipoProceso">Proceso:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="tipoProceso">
+                <mat-option [value]="0">SELECCIONE</mat-option>
+                <mat-option> opcion 1</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="conte-radio-3boton">
+        <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="1">Avance detalle</mat-radio-button>
+            <mat-radio-button value="2">Avance resumen</mat-radio-button>
+            <mat-radio-button value="3">Lista</mat-radio-button>
+        </mat-radio-group>
+        <div class="filtro_boton ml-1">
+            <button class="estilo1 noMarginLR" type="button">
+            Consultar
+            </button>
+        </div>
+    </div>
+
+</div>
+<h2 class="subtitulo_reportes">Avance de registro de omisos por centro de cómputo (PersonerosComponent)</h2>
+<div class="cont-anuncio">
+    <div class="personaje-anuncio">
+      <p>
+        Por favor, seleccione el ámbito para realizar la búsqueda.
+      </p>
+      <img alt="" src="../assets/img/personaje1.svg" />
+    </div>
+</div>
+<div class="conte-reporte">
+    <div class="barras-reportes">
+        <div class="conte_barra_dashboard">
+            <div class="cabeceras_barras">
+                <h3>Total mesas</h3>
+                <span>208</span>
+            </div>
+            <div class="barra_dashboard">
+                <div class="barra_avance" style="width: 70%;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="barras-reportes">
+        <div class="conte_barra_dashboard">
+            <div class="cabeceras_barras">
+                <h3>Mesas registradas</h3>
+                <span>16</span>
+            </div>
+            <div class="barra_dashboard">
+                <div class="barra_avance" style="width: 70%;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="barras-reportes">
+        <div class="conte_barra_dashboard">
+            <div class="cabeceras_barras">
+                <h3>Total electores</h3>
+                <span>5,806 / 84.54%</span>
+            </div>
+            <div class="barra_dashboard">
+                <div class="barra_avance" style="width: 70%;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="barras-reportes">
+        <div class="conte_barra_dashboard">
+            <div class="cabeceras_barras">
+                <h3>Total omisos</h3>
+                <span>806 / 14.56%</span>
+            </div>
+            <div class="barra_dashboard">
+                <div class="barra_avance" style="width: 70%;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<iframe title="pdf" class="pdf_incrustado" src="../../../../../assets/pdfs/cargo.pdf"></iframe>
+
+

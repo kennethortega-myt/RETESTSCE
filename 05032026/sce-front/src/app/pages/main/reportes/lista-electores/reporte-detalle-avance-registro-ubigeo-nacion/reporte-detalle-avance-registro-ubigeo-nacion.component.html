@@ -1,0 +1,21 @@
+<section class="secciones">
+    <h1 class="titulo1">Detalle de Avance de Registros por Ubigeo</h1>
+    <div class="conte_sombra p-20">
+        <app-filtro-reporte-modelo-uno 
+            [textoBoton]="'Consultar'" 
+            [nombreReporte]="tituloAlert"
+            [showEleccion]=false (eventBuscar)="buscarReporte($event)">
+        </app-filtro-reporte-modelo-uno>
+        <h2 class="subtitulo_reportes">Avance de registros por Ubigeo</h2>
+        <div class="cont-anuncio">
+            <app-mensaje-personaje [mensaje]="mensaje"></app-mensaje-personaje>
+        </div>
+        <article class="pdf_incrustado">
+            <div class="contenedor-documento-muestra">
+                <div #idDivImagen *ngIf="isShowReporte">
+                </div>
+            </div>
+
+        </article>
+    </div>
+</section>

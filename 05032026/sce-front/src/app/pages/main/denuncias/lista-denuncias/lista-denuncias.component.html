@@ -1,0 +1,157 @@
+<section class="secciones">
+  <h1 class="titulo1">{{ tituloComponente }}</h1>
+  <article class="w-100">
+    <div class="smallTabs">
+      <div class="section-flex">
+        <article class="w-20 cuadro-blanco-2 p-r">
+          <form class="formulario section-flex ">
+            <div class="w-100">
+              <label for="cmbProceso">Proceso:</label>
+              <mat-form-field appearance="outline">
+                <mat-select id="cmbProceso" (selectionChange)="onSelectedProceso()" [formControl]="procesoFormControl">
+                  <mat-option value="0">SELECCIONE</mat-option>
+                  <mat-option *ngFor="let proc of listProceso" [value]="proc.id">{{proc.cnombre}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="w-100">
+            </div>
+          </form>
+
+          <div class="p-o b-0 width-estado">
+            <div class="pr-30 w-100 estados">
+              <div class="cuadro-blanco-2 cantidad">
+                <img src="../assets/img/icono-alert-gris.svg" alt="">
+                <span class="">Denuncias pendientes de asociar<b>{{totalDocumentosSinAsociar}}</b></span>
+              </div>
+            </div>
+
+            <div class="pr-30 w-100 estados">
+              <div class="cuadro-blanco-2 cantidad">
+                <img src="../assets/img/icono-edit.svg" alt="">
+                <span class="">Denuncias procesadas<b>{{totalDocumentosAsociadas}}</b></span>
+              </div>
+            </div>
+
+            <div class="pr-30 w-100 estados">
+              <div class="cuadro-blanco-2 cantidad">
+                <img src="../assets/img/ico-anular.svg" alt="">
+                <span class="">Denuncias anuladas<b>{{totalDocumentosAnulados}}</b></span>
+              </div>
+            </div>
+
+            <div class="pr-30 w-100 estados">
+              <div class="cuadro-blanco-2 cantidad">
+                <img src="../assets/img/icono-actas-azul.svg" alt="">
+                <span class="">Total<b>{{totalDocumentos}}</b></span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <section class="w-80 cont-info pr-0 pl-2" *ngIf="!isVisible">
+          <article class="w-full" >
+            <div class="seccion-acta pt-12p">
+              <div class=" contenido-scroll cont-anuncio">
+                <div class="personaje-anuncio">
+                  <p>
+                    Aquí se visualizarán las denuncias aprobadas en control de digitalización y las que están en estado de asociación.
+                  </p>
+                  <img src="../assets/img/personaje1.svg" alt=""/>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </section>
+
+
+        <section class="w-80 cont-info pr-0 pl-2" *ngIf="isVisible">
+          <form class="formulario" [formGroup]="formGroupAcciones" autocomplete="off" (ngSubmit)="buscarDocumentosByNumero()">
+            <article class=" section-flex tab_buscador">
+              <div class="w-40 flex-bottom">
+                <div class="">
+                  <label for="resInput">Nro Denuncia</label>
+                  <div class="d-flex">
+                    <input id="resInput" name="nroResolucion" type="text" class="input_buscar"
+                           formControlName="nroDocumentoFormControl" maxlength="30"
+                           sceNoEspacioInicio sceUppercaseFormReact/>
+                    <button class="estilo2"  type="submit">BUSCAR</button>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </form>
+
+          <div class="contenido-scroll pr-0">
+            <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+              <ng-container matColumnDef="documento">
+                <mat-header-cell *matHeaderCellDef fxFlex = "15%" fxLayoutAlign = "center center"> Denuncia</mat-header-cell>
+                <mat-cell *matCellDef="let element;" fxFlex = "15%" fxLayoutAlign = "left center"> {{element.numeroDocumento}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="fecha">
+                <mat-header-cell *matHeaderCellDef fxFlex = "15%" fxLayoutAlign = "center center"> Fecha de registro</mat-header-cell>
+                <mat-cell *matCellDef="let element" fxFlex = "15%" fxLayoutAlign = "center center"> {{element.fechaRegistro}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="mesas">
+                <mat-header-cell *matHeaderCellDef fxFlex = "25%" fxLayoutAlign = "center center"> Mesas asociadas</mat-header-cell>
+                <mat-cell *matCellDef="let element" fxFlex = "25%" >
+                  <ul style="padding: 6px">
+                    <li *ngFor="let actaBean of element.detOtroDocumentoDtoList">
+                      <span>
+                        {{actaBean.numeroMesa + ' - ' + actaBean.descTipoDocumento + ' - ' + actaBean.descTipoPerdida}}
+                      </span>
+                    </li>
+                  </ul>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="estado">
+                <mat-header-cell *matHeaderCellDef fxFlex = "10%" fxLayoutAlign = "center center"> Estado </mat-header-cell>
+                <mat-cell *matCellDef="let element" fxFlex = "10%" fxLayoutAlign = "center center">
+                  <div class="estado-otro-doc estado-otro-doc-{{element.estadoDocumento}}" style="cursor: pointer"
+                       [title]="'documento '+ element.descEstadoDocumento"></div>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="acciones">
+                <mat-header-cell *matHeaderCellDef fxFlex = "10%" fxLayoutAlign = "center center"> Acciones</mat-header-cell>
+                <mat-cell *matCellDef="let element" fxFlex = "10%" fxLayoutAlign = "center center">
+                  <span class="material-symbols-outlined color-blue cursor-pointer"  title="Ver archivo"
+                        (click)="verArchivoModal(element)"
+                        (keydown.enter)="verArchivoModal(element)"
+                        (keydown.space)="verArchivoModal(element)"
+                        [title]="'ver documento '+element.nombreArchivo">visibility</span>
+
+                  <span *ngIf="element.estadoDocumento==Constantes.DENUNCIA_ESTADO_DOC_SIN_PROCESAR ||
+                                element.estadoDocumento==Constantes.DENUNCIA_ESTADO_DOC_EN_PROCESO"
+                        title="Asociar mesas" (click)="openDialogAsociadas(element)"
+                        (keydown.enter)="openDialogAsociadas(element)"
+                        (keydown.space)="openDialogAsociadas(element)"
+                        class="material-symbols-outlined color-celeste cursor-pointer ml-1">conversion_path</span>
+
+                  <span class="material-symbols-outlined color-blue cursor-pointer ml-1"
+                        (click)="onProcesarAsociacion(element)"
+                        (keydown.enter)="onProcesarAsociacion(element)"
+                        (keydown.space)="onProcesarAsociacion(element)"
+                        title="Procesar asociación"
+                        *ngIf="element.estadoDocumento==Constantes.DENUNCIA_ESTADO_DOC_EN_PROCESO">list_alt_check</span>
+
+                  <span class="material-symbols-outlined color-rojo cursor-pointer ml-1"  title="Anular documento"
+                        *ngIf="element.estadoDocumento==Constantes.DENUNCIA_ESTADO_DOC_SIN_PROCESAR ||
+                                element.estadoDocumento==Constantes.DENUNCIA_ESTADO_DOC_EN_PROCESO"
+                        (click)="onAnularOtroDocumento(element)"
+                        (keydown.enter)="onAnularOtroDocumento(element)"
+                        (keydown.space)="onAnularOtroDocumento(element)"
+                  >block</span>
+
+                </mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="columns; sticky: true"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: columns;"></mat-row>
+            </mat-table>
+          </div>
+          <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </section>
+      </div>
+    </div>
+  </article>
+</section>

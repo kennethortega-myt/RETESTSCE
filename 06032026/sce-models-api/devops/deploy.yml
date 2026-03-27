@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sce-modelo-api
+spec:
+  replicas: 1 #MIN_REPLICAS
+  selector:
+    matchLabels:
+      app: sce-modelo-api
+  strategy:
+    type: RollingUpdate 
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: sce-modelo-api
+        tier: backend
+        tierType: business
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: node-role
+                    operator: In
+                    values:
+                      - worker   #pruebas-carga
+      imagePullSecrets:
+        - name: harbor-regcred
+      containers:
+        - name: sce-modelo-api
+          image: harbor-ws.onpe.gob.pe/sce/sce-models-api:dev
+          imagePullPolicy: Always
+          ports:
+            - name: app-port
+              containerPort: 8080
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: "250m"
+            limits:
+              memory: "6Gi"
+          env:
+            - name: FLASK_APPLICATION_ROOT
+              value: "/api/modelos"
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            runAsGroup: 1100
+            runAsNonRoot: true
+            runAsUser: 1100
+            seccompProfile:
+              type: RuntimeDefault
+  

@@ -1,0 +1,121 @@
+<section class="secciones veri-resolucion" *ngIf="autorizado">
+    <div>
+      <h1 class="titulo1">{{tituloAlert}}</h1>
+      <section>
+        <div class="seccion-unidos" style="height: calc(100vh - 227px);">
+          <article class="w-20 w-40 p-r d-flex between-flex flex-column">
+            <form class="formulario section-flex" [formGroup]="formReprocesar" autocomplete="off">
+                <div class="w-100 px-0">
+                  <label for="inputRefsNuemer" class="mt-14">Ingrese número de acta:</label>
+                  <div class="d-flex gap-10">
+                    <mat-form-field appearance="outline" class="w-70 mx-0 mb-0 paddT6">
+                      <input #inputRefs id="inputRefsNuemer" matInput placeholder="mesa" (keydown)="onKeyNumeActa($event)"
+                             name="numActa" formControlName="numActaFormControl" maxlength="6" sceSoloNumerosFormReact>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="w-30 mx-0 mb-0 paddT6">
+                      <input #inputRefs matInput placeholder="copia" matTooltip="copia"
+                             name="numCopia" formControlName="numCopiaFormControl" maxlength="3" sceSoloAlfabeticosNumeros sceUppercaseFormReact>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <button class="estilo1 w-full m-0" type="button" (click)="agregarActa()" [disabled]="bloquearAgregar">AGREGAR</button>
+
+
+            </form>
+          </article>
+          <article *ngIf="isConsulta" class="w-80 d-flex flex-column">
+            <div class="contenedor-documento-muestra2 w-100 text-center" >
+              <div class=" contenido-scroll cont-anuncio">
+                <div class="personaje-anuncio">
+                  <p>
+                    Ingrese el número del acta.
+                  </p>
+                  <img alt="" src="../assets/img/personaje1.svg">
+                </div>
+              </div>
+            </div>
+          </article>
+          <article *ngIf="!isConsulta" class="w-80 d-flex flex-column">
+            <div class="w-full">
+              <div class="w-full content-table-reprocesar-acta" >
+                <table
+                    mat-table
+                    [dataSource]="dataSource"
+                    class="table-reprocesar-acta"
+                  >
+                  <caption class="d-none"></caption>
+
+                    <ng-container matColumnDef="numero">
+                      <th mat-header-cell *matHeaderCellDef>Nº</th>
+                      <td mat-cell *matCellDef="let element; index as i" class="">{{i+1}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="mesa">
+                      <th mat-header-cell *matHeaderCellDef>
+                        Acta
+                      </th>
+                      <td mat-cell *matCellDef="let element" class="">
+                        {{element.mesa}} - {{element.copia}}{{element.digitoChequeo}}
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="eleccion">
+                      <th mat-header-cell *matHeaderCellDef>Tipo de elección</th>
+
+                      <td mat-cell *matCellDef="let element">
+                        {{element.eleccion}}
+
+                      </td>
+                    </ng-container>
+
+                      <ng-container matColumnDef="acciones">
+                        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                        <td mat-cell *matCellDef="let element; index as i">
+                            <span class="material-icons color-blue cursor-pointer"
+                                  (click)="quitaActa(i)" onkeypress=""
+                            >
+                                delete
+                                </span>
+                        </td>
+                      </ng-container>
+
+                    <tr
+                      mat-header-row
+                      *matHeaderRowDef="displayedColumns2"
+                    ></tr>
+
+                    <tr
+                      mat-row
+                      *matRowDef="let row; columns: displayedColumns2"
+                    ></tr>
+                  </table>
+              </div>
+
+            </div>
+
+
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <div class="d-flex j-end mt-18 cont-btn">
+      <button *ngIf="!isConsulta" class="estilo1 m-0" (click)="confirmarGrabarSinAuth()" type="button">GUARDAR </button>
+
+    </div>
+  </section>
+
+  <section *ngIf="!autorizado" class="secciones version">
+    <div>
+      <h1 class="titulo1">Autorización pendiente</h1>
+      <section class="seccion-unidos section-version ">
+        <article class="w-100 content-version">
+          <div class="personaje-anuncio">
+            <p>{{mensajeAcceso}}</p>
+            <img alt="" src="../assets/img/personaje1.svg" />
+          </div>
+        </article>
+      </section>
+    </div>
+  </section>

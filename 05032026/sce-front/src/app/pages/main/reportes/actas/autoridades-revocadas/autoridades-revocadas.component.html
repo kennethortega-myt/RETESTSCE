@@ -1,0 +1,79 @@
+<div [formGroup]="form">
+    <div class="filtros fila-filtro">
+        <div class="filtro">
+            <label for="tipoProceso">Proceso:</label>
+
+            <mat-form-field appearance="outline">
+                <mat-select id="proceso" formControlName="proceso">
+                    <mat-option *ngFor="let proceso of listProceso" [value]="proceso">{{proceso.nombre}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="filtro">
+            <label for="eleccion">Elección:</label>
+            <mat-form-field appearance="outline">
+                <mat-select id="eleccion" formControlName="eleccion">
+                    <mat-option *ngFor="let eleccion of listEleccion" [value]="eleccion">
+                        {{eleccion.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="filtro">
+            <label for="centroComputo">Centro de Cómputo:</label>
+            <mat-form-field appearance="outline">
+                <mat-select id="centroComputo" formControlName="centroComputo">
+                    <mat-option *ngFor="let centroComputo of listCentrosComputo" [value]="centroComputo">
+                        {{centroComputo.codigo}} {{centroComputo.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="filtro">
+            <label for="centroComputo">ODPE:</label>
+            <mat-form-field appearance="outline">
+                <mat-select id="odpe" formControlName="odpe">
+                    <mat-option *ngFor="let odpe of listOdpe" [value]="odpe">
+                        {{odpe.codigo}} {{odpe.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="filtro">
+            <label for="centroComputo">AUTORIDAD:</label>
+            <mat-form-field appearance="outline">
+                <mat-select id="odpe" formControlName="autoridad">
+                    <mat-option *ngFor="let autoridad of listAutoridad" [value]="autoridad">
+                        {{autoridad.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="filtros">                
+        <div class="filtro_boton">
+            <button class="estilo1 full noMarginLR" type="button" (click)="buscarReporte()">
+                buscar
+            </button>
+        </div>        
+    </div>
+</div>
+<h2 class="subtitulo_reportes">Reporte de autoridades revocadas</h2>
+<div class="cont-anuncio" *ngIf="!isShowReporte">
+    <div class="personaje-anuncio">
+      <p>
+        Por favor, seleccione los filtros para realizar la búsqueda.
+      </p>
+      <img alt="" src="../assets/img/personaje1.svg" />
+    </div>
+</div>
+
+<article class="pdf_incrustado">
+    <div class="contenedor-documento-muestra">
+      <div #idDivImagen *ngIf="isShowReporte">
+      </div>
+    </div>
+</article>

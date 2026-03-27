@@ -1,0 +1,42 @@
+<div class="d-flex">
+  <div  class="w-100 text-center " style="  max-height: calc(100vh - 240px); margin-bottom: 70px;
+
+                      overflow-y: hidden;">
+    <div class="p-0 w-100 ">
+      <ngx-extended-pdf-viewer
+        [src]="pdfUrl"
+        [rotation]="0"
+        [showPrintButton]=false
+        [showDownloadButton]="false"
+        [showOpenFileButton]="false"
+        [showPropertiesButton]="false"
+        [showHandToolButton]="false"
+        [showPresentationModeButton]="false"
+        [showSpreadButton]="false"
+        [showFindButton]="false"
+        [showPagingButtons]="false"
+        [showRotateButton]="false"
+        [showHighlightEditor]="false"
+        [showStampEditor]="false"
+        [showScrollingButtons]="false"
+        [showSidebarButton]="true"
+        [showSecondaryToolbarButton]="false"
+        [showZoomButtons]="true"
+        [showTextEditor]="false"
+        [showDrawEditor]="false"
+        [showToolbar]="true"
+        [page]="currentPage"
+        [scrollMode]="scrollMode"
+        language="es-ES"
+        [showPageLabel]="false"
+        [sidebarVisible]="true"
+        [handTool]="false"
+        (pdfLoaded)="onDocumentLoaded()"
+        (pagesLoaded)="onPagesLoaded($event)"
+        (pageChange)="onPageChange($event)"
+
+      >
+      </ngx-extended-pdf-viewer>
+    </div>
+  </div>
+</div>

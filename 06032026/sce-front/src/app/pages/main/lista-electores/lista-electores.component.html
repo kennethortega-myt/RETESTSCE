@@ -1,0 +1,118 @@
+<section class="secciones lista-electoral" >
+<div >
+    <h1 class="titulo1">{{tituloComponente}} </h1>
+    <section class="seccion-unidos lista-electoral ">
+        <article class="control width-40 w-40  z-index1">
+            <div>
+              <div class="mt-10 mb-10">
+                <button  class="m-0 estilo2 cargar-doc w-full" type="button"
+                         [disabled]="isLoading"
+                         (click)="cargarDocumentos()">
+                  CARGAR DOCUMENTOS
+                </button>
+              </div>
+
+
+            <div class="csFxBox paddLR posRel p-0">
+                <div class="csCenteredV ">
+                    <h3 class="titulo3">Digitalizadas completas y con pérdida parcial</h3>
+                </div>
+
+            </div>
+            <div class="w-100 p-0">
+              <div class="scrolltablaLE">
+                <mat-table   [dataSource]="dataSourceCompleto" class="head-flotante-LE mitad tabla_lista_electores">
+                  <ng-container matColumnDef="numero">
+                    <mat-header-cell *matHeaderCellDef> Nº</mat-header-cell>
+                    <mat-cell *matCellDef="let element; let i = index"> {{i+1+paginatorCompleto.pageIndex * paginatorCompleto.pageSize}}  </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="mesa">
+                    <mat-header-cell *matHeaderCellDef> Mesa </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.mesa}}  </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="estado">
+                    <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.descEstado}}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="paginas">
+                    <mat-header-cell *matHeaderCellDef> Páginas </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.paginas}}</mat-cell>
+                  </ng-container>
+                  <mat-header-row *matHeaderRowDef="columnas; sticky: true"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: columnas;"
+                           [ngClass]="{active: row.mesa === mesaSeleccionada.mesa}"
+                           (click)="verMesa(row)"
+                           (keydown)="onKeyDown($event, row)"
+                           tabindex="0">
+                  </mat-row>
+                </mat-table>
+              </div>
+                <mat-paginator #paginatorCompleto [pageSize]="5" [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
+            </div>
+            <div class="csFxBox paddLR posRel p-0 ">
+                <div class="csCenteredV ">
+                    <h3 class="titulo3">Digitalizadas Parcialmente</h3>
+                </div>
+            </div>
+            <div class="w-100 p-0" >
+              <div class="scrolltablaLE">
+                <mat-table [dataSource]="dataSourceParcial" class="head-flotante-LE mitad tabla_lista_electores">
+                  <ng-container matColumnDef="numero">
+                    <mat-header-cell *matHeaderCellDef> Nº</mat-header-cell>
+                    <mat-cell *matCellDef="let element; let i = index"> {{i+1+paginatorParcial.pageIndex * paginatorParcial.pageSize}}   </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="mesa">
+                    <mat-header-cell *matHeaderCellDef> Mesa </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.mesa}}  </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="estado">
+                    <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.descEstado}}  </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="paginas">
+                    <mat-header-cell *matHeaderCellDef> Páginas </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.paginas}}  </mat-cell>
+                  </ng-container>
+                  <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: columnas;"
+                           [ngClass]="{active: row.mesa === mesaSeleccionada.mesa}"
+                           (click)="verMesa(row)"
+                           (keydown)="onKeyDown($event, row)"
+                           tabindex="0">
+                  </mat-row>
+                </mat-table>
+              </div>
+                <mat-paginator #paginatorParcial [pageSize]="5" [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
+            </div>
+           </div>
+
+        </article>
+        <article class="w-80 p-0" >
+            <div *ngIf="!isMostrarArchivo" class="contenedor-documento-muestra" >
+              <div class=" contenido-scroll cont-anuncio" >
+                <div  class="personaje-anuncio">
+                  <p>
+                    Seleccione una lista para ver su contenido.
+                  </p>
+                  <img alt="" src="../assets/img/personaje1.svg" alt="">
+                </div>
+              </div>
+            </div>
+            <app-pdf-viewer *ngIf="isMostrarArchivo"
+                            [pdfBlob]="selectedPDFBlob"
+                            [actualizarPaginas]="actualizarPaginasRevisadas"
+                            [paginasLabels]=" mesaSeleccionada.listaPaginas?? []"
+            >
+            ></app-pdf-viewer>
+
+        </article>
+    </section>
+    <div *ngIf="isMostrarArchivo" class="cont-btn d-flex j-end">
+        <button class=" estilo2" (click)="confirRechazarLE()"> REDIGITALIZAR</button>
+        <button *ngIf="mesaSeleccionada.estado===Constantes.CE_ESTADO_MESA_DIGITALIZADO||mesaSeleccionada.estado===Constantes.CE_ESTADO_MESA_DIGTAL_DIGITALIZADA_CON_PERDIDA_PARCIAL" class="estilo1" (click)="confirAprobarLE()"> APROBAR</button>
+    </div>
+
+</div>
+
+</section>
+

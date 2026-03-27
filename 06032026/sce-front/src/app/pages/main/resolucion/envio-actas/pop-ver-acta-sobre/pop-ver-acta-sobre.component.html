@@ -1,0 +1,25 @@
+<section class="secciones">
+  <div>
+    <mat-tab-group class="tabs-iz" (selectedTabChange)="onTabChange($event)">
+      <mat-tab label="Acta de Escrutinio">
+        <mat-dialog-content class="mat-typography p-0">
+          <div id="divEscrutinio" #divEscrutinio style="min-height: 620px;"></div>
+        </mat-dialog-content>
+      </mat-tab>
+
+      <mat-tab label="Acta de Instalación y Sufragio">
+        <mat-dialog-content class="mat-typography p-0">
+          <div id="divInstalacion" #divInstalacion style="min-height: 620px;"></div>
+        </mat-dialog-content>
+      </mat-tab>
+    </mat-tab-group>
+    <ng-template #noPdf>
+      <div class="p-20 text-center">
+        <p class="text-danger">El archivo no está en formato PDF y no puede visualizarse.</p>
+      </div>
+    </ng-template>
+    <div class="content-end-button mt-20 text-center">
+      <button class="estilo2" cdkFocusInitial (click)="onCerrarModal()">CERRAR</button>
+    </div>
+  </div>
+</section>

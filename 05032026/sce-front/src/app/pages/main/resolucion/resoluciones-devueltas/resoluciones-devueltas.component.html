@@ -1,0 +1,97 @@
+<section class="secciones veri-resolucion">
+    <div>
+        <h1 class="titulo1">Seguimiento JEE/JNE</h1>
+        <section>
+            <div class="contenido-scroll px-0">
+                <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                    <!-- Nº Oficio -->
+                    <ng-container matColumnDef="position">
+                        <mat-header-cell *matHeaderCellDef class="header-noficio"> Nº Oficio</mat-header-cell>
+                        <mat-cell *matCellDef="let element" class="header-noficio">
+                            {{ element.numeroficio }}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Acta -->
+                    <ng-container matColumnDef="Acta">
+                        <mat-header-cell *matHeaderCellDef class="header-acta2"> Acta </mat-header-cell>
+                        <mat-cell *matCellDef="let element" class="header-acta2">
+                            <div>
+                                <div class="w-full"><strong>SOBRE PLOMO</strong>: {{ element.numeroActaPloma || '—' }}
+                                </div>
+                                <div class="w-full"><strong>SOBRE CELESTE</strong>: {{ element.numeroActaCeleste || '—'
+                                    }}</div>
+                            </div>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Fecha Envío -->
+                    <ng-container matColumnDef="FechaEnvio">
+                        <mat-header-cell *matHeaderCellDef> Fecha de envío </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            {{ element.fechaEnvio | date: 'dd/MM/yyyy hh:mm a' }}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Fecha Respuesta -->
+                    <ng-container matColumnDef="FechaRespuesta">
+                        <mat-header-cell *matHeaderCellDef> Fecha de respuesta </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            {{ element.fechaRespuesta | date: 'dd/MM/yyyy hh:mm a':'UTC' }}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Nro. Resolución -->
+                    <ng-container matColumnDef="nResolucion">
+                        <mat-header-cell *matHeaderCellDef> Nro. Resolución </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{ element.numeroResolucion || '—' }} </mat-cell>
+                    </ng-container>
+
+                    <!-- Expediente -->
+                    <ng-container matColumnDef="Expediente">
+                        <mat-header-cell *matHeaderCellDef> Expediente </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{ element.numeroExpediente || '—' }} </mat-cell>
+                    </ng-container>
+
+                    <!-- Estado -->
+                    <ng-container matColumnDef="Estado">
+                        <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            {{ traducirEstado(element.estadoOficio) }}
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Acciones">
+                        <mat-header-cell *matHeaderCellDef class="header-acciones justify-content-center"> Acciones
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element" class="w-acciones header-acciones">
+                            <button title="Ver Sobre Plomo" class="btn_sobre_gris"
+                                (click)="verSobreActa(element, 'PLOMO')"></button>
+                            <button title="Ver Sobre Celeste" class="btn_sobre_azul"
+                                (click)="verSobreActa(element, 'CELESTE')"></button>
+                            <button title="Ver Cargo" class="btn_sobre_blanco"
+                                (click)="verDocumentoGenerado(element, 'CARGO')"></button>
+                            <button title="Ver Oficio" class="btn_enlazar"
+                                (click)="verDocumentoGenerado(element, 'OFICIO')"></button>
+                            <button title="Transmitir Oficio" title="enviar" class="btn_veracta"></button>
+                            <button title="Transmitir Oficio" title="enviar" class="btn_aprobar" disabled></button>
+                            <button title="Transmitir Oficio" title="enviar" class="btn_rechazar" disabled></button>
+                        </mat-cell>
+                    </ng-container>
+
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    <mat-row *matNoDataRow>
+                        <mat-cell colspan="8" class="text-center"> No se encontraron registros. </mat-cell>
+                    </mat-row>
+
+                </mat-table>
+
+                <mat-paginator [pageSize]="10" showFirstLastButtons></mat-paginator>
+            </div>
+
+        </section>
+    </div>
+</section>

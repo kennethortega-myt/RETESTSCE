@@ -1,0 +1,189 @@
+<section class="secciones">
+  <div>
+    <h1 class="titulo1">Total Centro de Cómputo </h1>
+    <section class="seccion-unidos">
+      <article class="w-20">
+        <form class="formulario" [formGroup]="formGroupRepoAvanEstActFiltro">
+          <div class="formulario section-flex ">
+            <div class="w-100">
+              <label for="procesoFormControl">Proceso:</label>
+
+              <mat-form-field appearance="outline">
+                <mat-select name="idProceso" formControlName="procesoFormControl">
+                  <mat-option value="0">SELECCIONE</mat-option>
+                  <mat-option *ngFor="let proceso of listProceso" [value]="proceso">
+                    {{proceso.nombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="w-100">
+              <label for="eleccionFormControl">Tipo de elección:</label>
+
+              <mat-form-field appearance="outline">
+                <mat-select name="idEleccion" formControlName="eleccionFormControl">
+                  <mat-option value="0">SELECCIONE</mat-option>
+                  <mat-option *ngFor="let eleccion of listEleccion" [value]="eleccion.id">
+                    {{eleccion.nombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            </div>
+
+            <div class="w-100">
+              <label for="ambitoFormControl">{{ambito.nombreTipoAmbito}}</label>
+
+              <mat-form-field appearance="outline">
+                <mat-select name="idAmbito" formControlName="ambitoFormControl">
+                  <mat-option value="0">SELECCIONE</mat-option>
+                  <mat-option *ngFor="let ambito of listAmbitos" [value]="ambito.id">
+                    {{ambito.nombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            </div>
+
+            <div class="w-100">
+              <label for="centroComputoFormControl">Centro de Cómputo:</label>
+
+              <mat-form-field appearance="outline">
+                <mat-select name="idCentroComputo" formControlName="centroComputoFormControl">
+                  <mat-option value="0">SELECCIONE</mat-option>
+                  <mat-option *ngFor="let centroComputo of listCentrosComputo" [value]="centroComputo.id">
+                    {{centroComputo.nombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="w-100">
+              <label for="estadoFormControl">Estado:</label>
+
+              <mat-form-field appearance="outline">
+                <mat-select name="idEstado" formControlName="estadoFormControl">
+                  <mat-option value="0">TODOS</mat-option>
+                  <mat-option value="1">PENDIENTE</mat-option>
+                  <mat-option value="2">TERMINADO</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="w-100">
+              <label for="tipoReporte">Tipo Reporte:</label>
+
+              <mat-form-field appearance="outline">
+                <mat-select name="idEstado" formControlName="tipoReporte">
+                  <mat-option value="0">En Porcentaje</mat-option>
+                  <mat-option value="1">En Cifras</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="boton-full px-0">
+              <button class="estilo2 full noMarginLR" type="button" (click)="descargarReporte()">
+                Descargar reporte
+              </button>
+            </div>
+
+          </div>
+        </form>
+      </article>
+      <article class="w-80" *ngIf="false">
+        <div *ngIf="isShowReporte">
+          <div class="d-flex-wrap">
+
+            <div class="w-100  ">
+              <h3 class="titulo3">Configuración de Actualización de Datos</h3>
+            </div>
+          </div>
+
+          <mat-table   [dataSource]="[]" class="mat-elevation-z8">
+            <ng-container matColumnDef="codigo">
+              <mat-header-cell *matHeaderCellDef> Código</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.codigoCc}}  </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="ccomputo">
+              <mat-header-cell *matHeaderCellDef> Centro de Cómputo </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.nombreCc}}  </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="hablitadoCierre">
+              <mat-header-cell *matHeaderCellDef> Hbilitado para Cierre </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.fechaUltModificacion}}  </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="totalMesasInstalar">
+              <mat-header-cell *matHeaderCellDef> Total Mesas a Instalar</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.totalActas}}  </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="digitalizacion">
+              <mat-header-cell *matHeaderCellDef> Digitalización</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.actasIngresadas}}  </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="totalMesasInstaladas">
+              <mat-header-cell *matHeaderCellDef>Total Mesas Instaladas</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.actasProcesadas}}  </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="totalMesasNoInstaladas">
+              <mat-header-cell *matHeaderCellDef>Total Mesas No Instaladas</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.actasProcesadasPorcen}}  </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="actasSiniestradasAnuladas">
+              <mat-header-cell *matHeaderCellDef>Actas Siniestradas Anuladas</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.actasContabilizadas}}  </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="actasExtravAnuladas">
+              <mat-header-cell *matHeaderCellDef>Actas Extrav. Anuladas</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.actasContabilizadasPorcen}}  </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="actasProcesadasRecibidas">
+              <mat-header-cell *matHeaderCellDef>Actas Procesadas Recibidas</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.actasPendientesResolverJEE}}  </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="actasContabilizadas">
+              <mat-header-cell *matHeaderCellDef>Actas Contabilizadas</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.actasPendientesResolverJEE}}  </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="controlCalidad">
+              <mat-header-cell *matHeaderCellDef>Control de Calidad</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.actasPendientesResolverJEE}}  </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="transmisionImagenes">
+              <mat-header-cell *matHeaderCellDef>Transmisión de Imagenes</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.actasPendientesResolverJEE}}  </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="registroOmisos">
+              <mat-header-cell *matHeaderCellDef>Registro de Omisos</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.actasPendientesResolverJEE}}  </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row  *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+        </div>
+
+
+        <div *ngIf="!isShowReporte" class="contenedor-documento-muestra">
+          <div class=" contenido-scroll cont-anuncio">
+            <div class="personaje-anuncio">
+              <p>Llene los campos del reporte para poder descargar el archivo a imprimir</p>
+              <img alt="" src="../assets/img/personaje1.svg">
+            </div>
+          </div>
+        </div>
+
+      </article>
+    </section>
+    <div class="cont-btn">
+      <button *ngIf="isShowReporte" class=" estilo1" (click)="descargarReporte()"> IMPRIMIR </button>
+    </div>
+  </div>
+</section>

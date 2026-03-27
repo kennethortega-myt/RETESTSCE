@@ -1,0 +1,244 @@
+<form [formGroup]="formGroupSeccionHora" autocomplete="off">
+  <h3 class="titulos-article">Paso 3 de 3</h3>
+  <div style="height: calc(100vh - 320px);
+overflow: auto;">
+    <div class="content-cantidad mt-25">
+      <div class="d-flex between-flex">
+        <h4>Total de ciudadanos que votaron (Acta de Sufragio)</h4>
+        <div class="d-flex gap-10 items-center alert-success">
+        </div>
+      </div>
+      <div class=" mt-25">
+        <div class="d-flex gap-10 between-flex items-center">
+          <div class=" d-flex items-center center-flex gap-10 wdt-80" style="width: 80%;">
+            <div class="content-total text-center flex1">
+              <div class=" w-100">
+                <canvas class="heightactas80" [ngClass] = "imgCantidadCiudadanosTexto == '' ? 'd_none':'30%'"
+                        #imageCanvas1></canvas>
+              </div>
+            </div>
+            <div class="content-total text-center" style="width: 12%;">
+              <div class="w-100">
+                <canvas class="heightactas80" [ngClass] = "imgCantidadCiudadanosNumero == '' ? 'd_none':'30%'"
+                        #imageCanvas11></canvas>
+
+              </div>
+            </div>
+          </div>
+          <div  class="wdt-136px">
+            <label for="TextCantidadCiudadanosVotaron">Número</label>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <mat-form-field appearance="outline">
+                <input
+                  #textCantidadCiudadanosVotaron
+                  id="TextCantidadCiudadanosVotaron"
+                  name="indTextCantidadCiudadanosVotaron"
+                  matInput
+                  placeholder=""
+                  formControlName="cantidadCiudadanosNumeroFormControl"
+                  sceNumerosHashN
+                  (change)="changeCantidadCiudadanos()"
+                  (focus)="onFocusChange(FocusElementVeri.CANTIDAD_CIUDADANOS)"
+                  (keydown.enter)="handleCiudadanosKeydown($event)"
+                  (keydown.tab)="handleCiudadanosKeydown($event)"
+                  maxlength="3"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div>
+        </div>
+      </div>
+    </div>
+
+    <!--
+      CATALINA
+    -->
+    <div class="mt-25">
+      <mat-accordion>
+        <mat-expansion-panel (opened)="limpiarTitulo(0)"
+                             (closed)="restaurarTitulo(0)">
+          <mat-expansion-panel-header>
+            <mat-panel-title style="color:#003770; font-size: 14px;font-weight: 600;">
+              {{ tituloAcordeonTemp }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="content-cantidad">
+            <div class="d-flex between-flex">
+              <h4>{{ tituloAcordeon }}</h4>
+              <div class="d-flex gap-10 items-center alert-success">
+              </div>
+            </div>
+            <div class="mt-25">
+              <div class="d-flex gap-10 between-flex items-center">
+                <div class=" d-flex items-center center-flex gap-10 wdt-80" style="width: 80%;">
+                  <div class="content-total text-center flex1">
+
+                  </div>
+                  <div class="content-total text-center" style="width: 12%;">
+                    <div class="w-100">
+                      <img class="heightactas80 w-80 p-0 rotar-derecha" [src]="imgCantidadCiudadanosNumeroEscrutinio" alt="" />
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+    </div>
+
+
+
+
+    <div class="content-cantidad mt-25">
+      <div class="d-flex between-flex">
+        <h4>Fecha y hora de instalación</h4>
+      </div>
+      <div class="mt-25">
+        <div class="d-flex gap-10 between-flex items-center">
+          <div class="d-flex items-center center-flex gap-10 wdt-80">
+            <div class="content-total  flex1 text-center">
+              <div class=" w-100">
+                <canvas class="heightactas80" [ngClass] = "imgHoraInicio == '' ? 'd_none':'30%'" #imageCanvas2></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="wdt-136px">
+            <label for="">Fecha y hora de instalación</label>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <div>
+                <mat-form-field appearance="outline">
+                  <input matInput
+                        #fechaInstalacion
+                        id="fechaInstalacion"
+                        name="indFechaInstalacion"
+                        formControlName="fechaInstalacion"
+                        (dateChange)="changeHoraInicio()"
+                        (focus)="onFocusChange(FocusElementVeri.FECHA_INSTALACION)"
+                        (keydown.enter)="handleFechaInstalacionKeydown($event)"
+                        (keydown.tab)="handleFechaInstalacionKeydown($event)"
+                        [matDatepicker]="dp1"
+                        [min]="minFechaInstalacion"
+                        [max]="maxFechaInstalacion"
+                        readonly>
+                  <mat-hint>DD/MM/YYYY</mat-hint>
+                  <mat-datepicker-toggle matIconSuffix [for]="dp1"></mat-datepicker-toggle>
+                  <mat-datepicker #dp1 ></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div>
+                  <!-- Timepicker -->
+                  <mat-form-field appearance="outline" class="form-field">
+                      <input
+                      #textHoraInicio
+                      id="TexthoraInicio"
+                      name="indTextHoraInicio"
+                      matInput
+                      type="text"
+                      placeholder="HH:MM"
+                      formControlName="horaInicioFormControl"
+                      (change)="changeHoraInicio()"
+                      (focus)="onFocusChange(FocusElementVeri.HORA_INSTALACION)"
+                      (keydown.enter)="handleHoraInicioKeydown($event)"
+                      (keydown.tab)="handleHoraInicioKeydown($event)"
+                      maxlength="5"
+                      sceUppercaseFormReact
+                      sceNoEspacioInicio
+                      sceNumerosDosPuntoN
+                      />
+                      <button mat-icon-button matSuffix>
+                      <mat-icon>access_time</mat-icon>
+                      </button>
+                  </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+        </div>
+      </div>
+    </div>
+    <div class="content-cantidad mt-25">
+      <div class="d-flex between-flex">
+        <h4>Fecha y hora de finalización del escrutinio</h4>
+      </div>
+      <div class=" mt-25">
+        <div class="d-flex gap-10 between-flex items-center">
+          <div class="d-flex items-center center-flex gap-10 wdt-80">
+            <div class="content-total flex1 text-center">
+              <div class="w-100">
+                <img class="heightactas80" class="w-80 p-0" [src]="imgHoraFin" alt="" />
+              </div>
+            </div>
+          </div>
+          <div class="wdt-136px">
+            <label for="">Fecha y hora de finalización del escrutinio</label>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <div>
+                <mat-form-field appearance="outline" [style.display]="isHoraEscrutinioN ? 'block' : 'none'">
+                  <input matInput
+                        value="N"
+                        readonly
+                        disabled>
+                  <mat-hint>DD/MM/YYYY</mat-hint>
+                </mat-form-field>
+                <mat-form-field appearance="outline" [style.display]="!isHoraEscrutinioN ? 'block' : 'none'">
+                  <input matInput
+                        #fechaEscrutinio
+                        id="fechaEscrutinio"
+                        name="indFechaEscrutinio"
+                        formControlName="fechaEscrutinio"
+                        (dateChange)="changeHoraFin()"
+                        (focus)="onFocusChange(FocusElementVeri.FECHA_ESCRUTINIO)"
+                        (keydown.enter)="handleFechaEscrutinioKeydown($event)"
+                        (keydown.tab)="handleFechaEscrutinioKeydown($event)"
+                        [matDatepicker]="dp2"
+                        [min]="minFechaEscrutinio"
+                        [max]="maxFechaEscrutinio"
+                        readonly>
+                  <mat-hint>DD/MM/YYYY</mat-hint>
+                  <mat-datepicker-toggle matIconSuffix [for]="dp2"></mat-datepicker-toggle>
+                  <mat-datepicker #dp2 ></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div>
+                <mat-form-field appearance="outline" class="form-field">
+                  <input
+                    #texthoraFinalizacion
+                    matInput
+                    id="TexthoraFinalizacion"
+                    name="indTextHoraFinalizacion"
+                    placeholder="HH:MM"
+                    type="text"
+                    formControlName="horaFinFormControl"
+                    (change)="changeHoraFin()"
+                    (focus)="onFocusChange(FocusElementVeri.HORA_ESCRUTINIO)"
+                    (keydown.enter)="handleHoraFinalizacionKeydownEnter($event)"
+                    (keydown.tab)="handleHoraFinalizacionKeydownTab($event)"
+                    maxlength="5"
+                    sceUppercaseFormReact
+                    sceNoEspacioInicio
+                    sceNumerosDosPuntoN
+                  />
+                  <button mat-icon-button matSuffix>
+                    <mat-icon>access_time</mat-icon>
+                  </button>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+

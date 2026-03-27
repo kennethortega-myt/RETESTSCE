@@ -1,0 +1,33 @@
+<h2 class="modalHead titulo2">Acta 000005</h2>
+<mat-dialog-content class="mat-typography">
+    <div class="contenido-scroll pl-10px">
+    <ngx-extended-pdf-viewer [src]="'../../assets/pdfs/cargo.pdf'">
+    </ngx-extended-pdf-viewer>
+</div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <div class="bottom-actas-verificar justify-content-between">
+        <div class="d-flex">
+          <div class="conte-btn-zoom">
+            <button class="btn-ico-control mr-05" >
+              <img src="../assets/img/icons/ico-rotar.svg" alt="icono rotar">
+            </button>
+            <button class="btn-ico-control mr-05" >
+              <img src="../assets/img/icons/ico-zoom-in.svg" alt="icono zoom in">
+            </button>
+            <button class="btn-ico-control">
+              <img src="../assets/img/icons/ico-zoom-out.svg" alt="icono zoom out">
+            </button>
+          </div>
+          <div class="centrar-leyenda-verificacion mr-0">
+            <img class="img-voto" src="../assets/img/ico_check.svg" alt="icono check">  <span class="leyenda-verificacion">10 Cargos de entrega generados</span>
+          </div>
+        </div>
+        <div>
+            <button id="btn-observacion-escrutinio" class="btn-azul mr-1" mat-dialog-close>DESCARGAR PDF</button>
+            <button id="btn-observacion-escrutinio" class="btn-azul" mat-dialog-close>CERRRAR</button>
+        </div>
+      </div>
+</mat-dialog-actions>
+
+

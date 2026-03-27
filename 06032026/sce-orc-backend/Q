@@ -1,0 +1,25 @@
+[1mdiff --git a/src/main/java/pe/gob/onpe/sceorcbackend/model/bd/service/impl/CabActaServiceImpl.java b/src/main/java/pe/gob/onpe/sceorcbackend/model/bd/service/impl/CabActaServiceImpl.java[m
+[1mindex 0654020..ed2fda9 100644[m
+[1m--- a/src/main/java/pe/gob/onpe/sceorcbackend/model/bd/service/impl/CabActaServiceImpl.java[m
+[1m+++ b/src/main/java/pe/gob/onpe/sceorcbackend/model/bd/service/impl/CabActaServiceImpl.java[m
+[36m@@ -149,6 +149,7 @@[m [mpublic class CabActaServiceImpl implements CabActaService {[m
+ 				queueMessage.setActaId(acta.getId());[m
+ 				queueMessage.setFileId(archivo.getId());[m
+ 				queueMessage.setType(type);[m
+[32m+[m				[32m///invocar[m[41m [m
+ 				this.cabActaRepository.save(acta);[m
+ [m
+ 				rabbitMqSender.sendNewActa(queueMessage);[m
+[1mdiff --git a/src/main/resources/application.properties b/src/main/resources/application.properties[m
+[1mindex d5d8e6f..0bbb65a 100644[m
+[1m--- a/src/main/resources/application.properties[m
+[1m+++ b/src/main/resources/application.properties[m
+[36m@@ -5,7 +5,7 @@[m [mserver.servlet.context-path=/sce-orc-backend[m
+ spring.servlet.multipart.max-file-size=-1[m
+ spring.servlet.multipart.max-request-size=-1[m
+ [m
+[31m-spring.data.mongodb.uri = mongodb://root:hola123@192.168.48.111:27017/orcdb[m
+[32m+[m[32mspring.data.mongodb.uri = mongodb://root:hola123@192.168.48.111:27017/orcdb2018[m
+ #spring.data.mongodb.uri = mongodb://localhost:27017/orcdb[m
+ #spring.data.mongodb.host=127.0.0.1[m
+ #spring.data.mongodb.port=27017[m

@@ -1,0 +1,105 @@
+<div class="filtros">
+    <div class="filtro">
+        <label for="tipoProceso">Proceso:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="tipoProceso">
+                <mat-option [value]="0">SELECCIONE</mat-option>
+                <mat-option> opcion 1</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="conte-radio-3boton">
+        <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="1">Detalle</mat-radio-button>
+            <mat-radio-button value="2">Resumen</mat-radio-button>
+        </mat-radio-group>
+        <div class="filtro_boton ml-1">
+            <button class="estilo1 noMarginLR" type="button">
+            Consultar
+            </button>
+        </div>
+    </div>
+
+</div>
+<h2 class="subtitulo_reportes">Lista de participantes</h2>
+<div class="cont-anuncio">
+    <div class="personaje-anuncio">
+      <p>
+        Por favor, seleccione el ámbito para realizar la búsqueda.
+      </p>
+      <img alt="" src="../assets/img/personaje1.svg" />
+    </div>
+</div>
+<div class="datos-reporte">
+    <div class="col-dato-reporte">
+        <div class="dato">
+            <h3>ODPE</h3>
+            <span>J44002 bongara</span>
+        </div>
+        <div class="dato">
+            <h3>Centro de Cómputo</h3>
+            <span>C44002 bongara</span>
+        </div>
+    </div>
+    <div class="col-dato-reporte">
+        <div class="dato">
+            <h3>Departamento:</h3>
+            <span>LIMA</span>
+        </div>
+        <div class="dato">
+            <h3>Provincia:</h3>
+            <span>LIMA</span>
+        </div>
+    </div>
+    <div class="col-dato-reporte">
+        <div class="dato">
+            <h3>Distrito:</h3>
+            <span>SAN MARTIN DE PORRES</span>
+        </div>
+        <div class="dato">
+            <h3>Mesa de sufragio:</h3>
+            <span>000395</span>
+        </div>
+    </div>
+    <div class="col-dato-reporte">
+        <div class="dato">
+            <h3>Electores hábiles:</h3>
+            <span>300</span>
+        </div>
+    </div>
+</div>
+
+<mat-table [dataSource]="dataSource1" class="tabla-header-doble mb-25">
+    <ng-container matColumnDef="numero">
+        <mat-header-cell *matHeaderCellDef class="header-numero">Nº</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="header-numero centrar-celda">
+            {{ element.numero }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="dni">
+        <mat-header-cell *matHeaderCellDef class="header-dni">DNI</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="header-dni centrar-celda">
+            {{ element.dni }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="ApellidosNombres">
+        <mat-header-cell *matHeaderCellDef>Apellidos y Nombres</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.ApellidosNombres}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="asistencia">
+        <mat-header-cell *matHeaderCellDef class="header-asistencia">Asistencia</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="header-asistencia centrar-celda">
+            {{ element.asistencia}}
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns1"></mat-row>
+</mat-table>
+

@@ -1,0 +1,243 @@
+<section class="secciones">
+  <h1 class="titulo1">Lista de Resoluciones JEE/JNE</h1>
+  <article class="w-100">
+    <div class="smallTabs">
+      <div class="section-flex">
+        <article class="w-20 cuadro-blanco-2 p-r">
+          <form class="formulario section-flex ">
+            <div class="w-100">
+              <label for="cmbProceso">Proceso:</label>
+              <mat-form-field appearance="outline">
+                <mat-select id="cmbProceso" (selectionChange)="obtenerEleccionTab2()" [formControl]="procesoFormControlTab2">
+                  <mat-option value="0">SELECCIONE</mat-option>
+                  <mat-option *ngFor="let proc of listProcesoTab2" [value]="proc.id">{{proc.cnombre}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </form>
+
+          <div class="p-o b-0 width-estado">
+            <div class="pr-30 w-100 estados">
+              <div class="cuadro-blanco-3 cantidad">
+                <img src="../assets/img/icono-alert-gris.svg" alt="">
+                <span class="">Resoluciones sin procesar<b>{{totalResolucionesSinProcesar}}</b></span>
+              </div>
+            </div>
+            <div class="pr-30 w-100 estados">
+              <div class="cuadro-blanco-3 cantidad">
+                <img src="../assets/img/estado02.svg" alt="">
+                <span class="">Resoluciones en proceso<b>{{totalResolucionesEnProceso}}</b></span>
+              </div>
+            </div>
+            <div class="pr-30 w-100 estados">
+              <div class="cuadro-blanco-3 cantidad">
+                <img src="../assets/img/icono-edit.svg" alt="">
+                <span class="">Resoluciones procesadas<b>{{totalResolucionesProcesadas}}</b></span>
+              </div>
+            </div>
+            <div class="pr-30 w-100 estados">
+              <div class="cuadro-blanco-3 cantidad">
+                <img src="../assets/img/ico-anular.svg" alt="">
+                <span class="">Resoluciones anuladas<b>{{totalResolucionesAnuladas}}</b></span>
+              </div>
+            </div>
+            <div class="pr-30 w-100 estados">
+              <div class="cuadro-blanco-3 cantidad">
+                <img src="../assets/img/icono-actas-azul.svg" alt="">
+                <span class="">Total<b>{{totalResoluciones}}</b></span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <section class="w-80 cont-info pr-0 pl-2" *ngIf="!isVisible">
+          <article class="w-full" >
+            <div class="seccion-acta pt-12p">
+              <div class=" contenido-scroll cont-anuncio">
+                <div class="personaje-anuncio">
+                  <p>
+                    Aquí se visualizarán las resoluciones aprobadas en control de digitalización y las que están en estado de asociación con actas observadas.
+                  </p>
+                  <img src="../assets/img/personaje1.svg" alt=""/>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </section>
+
+
+        <section class="w-80 cont-info pr-0 pl-2" *ngIf="isVisible">
+          <form class="formulario" [formGroup]="formGroupAcciones" autocomplete="off" (ngSubmit)="buscarResolucionByNumero()">
+            <article class=" section-flex tab_buscador">
+              <div class="w-40 flex-bottom">
+                <div class="">
+                  <label for="resInput">Resolución</label>
+                  <div class="d-flex">
+                    <input id="resInput" name="nroResolucion" type="text" class="input_buscar"
+                           formControlName="nroResolucionFormControl" maxlength="30"
+                           sceNoEspacioInicio sceUppercaseFormReact/>
+                    <button class="estilo2" type="submit">BUSCAR</button>
+                  </div>
+                </div>
+              </div>
+
+            </article>
+          </form>
+
+
+          <div class="w-100  contenido-scrosll px-0 ">
+            <div class="scrolltablamonitoreo over-flow-y">
+              <mat-table [dataSource]="dataSourceResoluciones" class="mat-mdc-table-sticky mat-elevation-z8 scrollheadermon" style="width: 1500px;">
+              <ng-container matColumnDef="resolucion">
+                <mat-header-cell *matHeaderCellDef> Resolución</mat-header-cell>
+                <mat-cell *matCellDef="let element" > {{element.numeroResolucion}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="tiporesolucion">
+                <mat-header-cell *matHeaderCellDef > Tipo</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.descripcionTipoResolucion}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="actas">
+                <mat-header-cell *matHeaderCellDef class="header-actas-asociadas"> Actas asociadas</mat-header-cell>
+                <mat-cell *matCellDef="let element" class="header-actas-asociadas">
+                  <div>
+                    <span [innerHTML]="getActasAsociadasHtml(element, expanded[element.id])"></span>
+
+                    <button *ngIf="getActasAsociadasArray(element).length > 5"
+                            mat-button color="primary"
+                            (click)="toggleExpand(element.id)">
+                      {{ expanded[element.id] ? 'Ver menos' : 'Ver más' }}
+                    </button>
+                  </div>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="estado">
+                <mat-header-cell *matHeaderCellDef class="header-estado-resol"> Estado </mat-header-cell>
+                <mat-cell *matCellDef="let element"  class="header-estado-resol">
+                  <div class="estado-resolucion estado-{{element.estadoResolucion}}" style="cursor: pointer"
+                       [title]="element.descripcionEstadoResolucion"></div>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="usuarioAsociado">
+                <mat-header-cell *matHeaderCellDef > Asociado a</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.usuarioAsociado || '-'}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="fecha">
+                <mat-header-cell *matHeaderCellDef > Fecha de registro</mat-header-cell>
+                <mat-cell *matCellDef="let element" > {{element.fechaRegistro}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="acciones">
+                <mat-header-cell *matHeaderCellDef > Acciones</mat-header-cell>
+                <mat-cell *matCellDef="let element" >
+
+                  <span class="material-symbols-outlined color-blue cursor-pointer"
+                        (click)="descargar(element)"
+                        (keydown.enter)="descargar(element)"
+                        (keydown.space)="descargar(element)"
+                        [title]="'ver resolución '+element.nombreArchivo">visibility</span>
+
+                  <span *ngIf="element.estadoResolucion==Constantes.ESTADO_RESOLUCION_REGISTRADA_SIN_PROCESAR &&
+                  element.tipoResolucion==null" class="material-symbols-outlined color-celeste cursor-pointer ml-1"
+                          title="Asociar actas"
+                        (click)="openDialogAsociadasConBloqueo(element)"
+                        (keydown.enter)="openDialogAsociadasConBloqueo(element)"
+                        (keydown.space)="openDialogAsociadasConBloqueo(element)"
+                  >conversion_path</span>
+
+                  <button *ngIf="element.estadoResolucion==Constantes.ESTADO_RESOLUCION_REGISTRADA_SIN_PROCESAR &&
+                  element.tipoResolucion==null" class="btn_anular ml-1"
+                          title="Anular resolución" (click)="openDialogEliminarResoConBloqueo(element)"></button>
+
+                  <span *ngIf="
+                 element.estadoResolucion==Constantes.ESTADO_RESOLUCION_EN_PROCESO &&
+                  element.tipoResolucion==Constantes.CATALOGO_TIPO_RESOL_ACTAS_ENVIADAS_A_JEE" class="material-symbols-outlined color-celeste cursor-pointer ml-1"
+                          title="Asociar actas"
+                        (click)="openDialogAsociadasConBloqueo(element)"
+                        (keydown.enter)="openDialogAsociadasConBloqueo(element)"
+                        (keydown.space)="openDialogAsociadasConBloqueo(element)">conversion_path</span>
+
+                  <span *ngIf="
+                  element.estadoResolucion==Constantes.ESTADO_RESOLUCION_EN_PROCESO &&
+                  element.tipoResolucion==Constantes.CATALOGO_TIPO_RESOL_REPROCESADAS_JNE" class="material-symbols-outlined color-celeste cursor-pointer ml-1"
+                          title="Asociar actas"
+                        (click)="openDialogAsociadasConBloqueo(element)"
+                        (keydown.enter)="openDialogAsociadasConBloqueo(element)"
+                        (keydown.space)="openDialogAsociadasConBloqueo(element)">conversion_path</span>
+
+                  <span *ngIf="
+                  element.estadoResolucion==Constantes.ESTADO_RESOLUCION_EN_PROCESO &&
+                  element.tipoResolucion==Constantes.CATALOGO_TIPO_RESOL_REPROCESADAS_ONPE" class="material-symbols-outlined color-celeste cursor-pointer ml-1"
+                          title="Asociar actas"
+                        (click)="openDialogAsociadasConBloqueo(element)"
+                        (keydown.enter)="openDialogAsociadasConBloqueo(element)"
+                        (keydown.space)="openDialogAsociadasConBloqueo(element)">conversion_path</span>
+
+                  <span *ngIf="
+                  element.estadoResolucion==Constantes.ESTADO_RESOLUCION_REGISTRADA_SIN_PROCESAR &&
+                  element.tipoResolucion==Constantes.CATALOGO_TIPO_RESOL_MESAS_NO_INSTALADAS" class="material-symbols-outlined color-celeste cursor-pointer ml-1"
+                          title="Asociar actas"
+                        (click)="openDialogAsociadasConBloqueo(element)"
+                        (keydown.enter)="openDialogAsociadasConBloqueo(element)"
+                        (keydown.space)="openDialogAsociadasConBloqueo(element)">conversion_path</span>
+
+                  <span *ngIf="
+                  element.estadoResolucion==Constantes.ESTADO_RESOLUCION_REGISTRADA_SIN_PROCESAR &&
+                  element.tipoResolucion==Constantes.CATALOGO_TIPO_RESOL_ACTAS_EXTRAVIADAS" class="material-symbols-outlined color-celeste cursor-pointer ml-1"
+                          title="Asociar actas extraviadas"
+                        (click)="openDialogAsociadasConBloqueo(element)"
+                        (keydown.enter)="openDialogAsociadasConBloqueo(element)"
+                        (keydown.space)="openDialogAsociadasConBloqueo(element)">conversion_path</span>
+
+                  <span *ngIf="
+                  element.estadoResolucion==Constantes.ESTADO_RESOLUCION_REGISTRADA_SIN_PROCESAR &&
+                  element.tipoResolucion==Constantes.CATALOGO_TIPO_RESOL_ACTAS_SINIESTRADAS" class="material-symbols-outlined color-celeste cursor-pointer ml-1"
+                          title="Asociar actas siniestradas"
+                        (click)="openDialogAsociadasConBloqueo(element)"
+                        (keydown.enter)="openDialogAsociadasConBloqueo(element)"
+                        (keydown.space)="openDialogAsociadasConBloqueo(element)">conversion_path</span>
+
+                  <button *ngIf="
+                  element.estadoResolucion==Constantes.ESTADO_RESOLUCION_EN_PROCESO &&
+                  (element.tipoResolucion==Constantes.CATALOGO_TIPO_RESOL_MESAS_NO_INSTALADAS||
+                  element.tipoResolucion==Constantes.CATALOGO_TIPO_RESOL_ACTAS_EXTRAVIADAS||
+                  element.tipoResolucion==Constantes.CATALOGO_TIPO_RESOL_ACTAS_SINIESTRADAS)" class="btn_pdf ml-1"
+                          title="Descargar cargo de entrega y aplicar resolución/memo." (click)="descargarCargoEntregaMesasNoInstaladasExtSinConBloqueo(element)"></button>
+
+                  <button *ngIf="
+                  element.estadoResolucion==Constantes.ESTADO_RESOLUCION_EN_PROCESO &&
+                  (element.tipoResolucion==Constantes.CATALOGO_TIPO_RESOL_INFUNDADAS||
+                  element.tipoResolucion==Constantes.CATALOGO_TIPO_RESOL_INFUNDADAS_XUBIGEO)" class="btn_pdf ml-1"
+                          title="Descargar cargo de entrega de resoluciones infundadas." (click)="descargarCargoEntregaInfundadasConBloqueo(element)">
+
+                  </button>
+
+                  <button *ngIf="
+                  element.estadoResolucion==Constantes.ESTADO_RESOLUCION_EN_PROCESO &&
+                  element.tipoResolucion==Constantes.CATALOGO_TIPO_RESOL_ANULACION_ACTAS_X_UBIGEO" class="btn_pdf ml-1"
+                          title="Descargar cargo de entrega de actas anuladas por ubigeo." (click)="descargarCargoEntregaInfundadasConBloqueo(element)">
+
+                  </button>
+
+                  <span *ngIf="
+                  element.estadoResolucion==Constantes.ESTADO_RESOLUCION_EN_PROCESO &&
+                  (element.tipoResolucion==Constantes.CATALOGO_TIPO_RESOL_INFUNDADAS
+                  ||element.tipoResolucion==Constantes.CATALOGO_TIPO_RESOL_INFUNDADAS_XUBIGEO)" class="material-symbols-outlined color-celeste cursor-pointer ml-1"
+                          title="Asociar actas"
+                        (click)="openDialogAsociadasConBloqueo(element)"
+                        (keydown.enter)="openDialogAsociadasConBloqueo(element)"
+                        (keydown.space)="openDialogAsociadasConBloqueo(element)">conversion_path</span>
+
+                </mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="displayedColumns_listreso; sticky: true"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns_listreso;"></mat-row>
+            </mat-table>
+            </div>
+          </div>
+          <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </section>
+      </div>
+    </div>
+  </article>
+</section>

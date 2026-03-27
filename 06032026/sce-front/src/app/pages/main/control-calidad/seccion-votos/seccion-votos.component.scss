@@ -1,0 +1,36 @@
+$cantidadFilas: 41;//cantidad agrupols incluidos los vb, vn y vi
+$height-pres: 2300px;
+$height-pref: 3404px;
+
+.img-agrupol-pres{ 
+  height: $height-pres;
+}
+
+.img-agrupol-pref{ 
+  height: $height-pref;
+}
+
+//a las columnas preferenciales le quitamos 3 filas de altura
+.img-pref-col{ 
+  height: $height-pref - (3*$height-pref/$cantidadFilas);
+}
+
+.col-agrupol {
+  margin-right: 3rem;
+}
+
+::ng-deep .sol-nulidad .mdc-checkbox__background {
+  width: 25px;
+  height: 25px;
+}
+
+::ng-deep .sol-nulidad .mat-internal-form-field>label {
+  font-size: large;
+  margin-top: 0.6rem;
+}
+
+.padding-x-0 {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+

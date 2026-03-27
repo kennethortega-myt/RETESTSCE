@@ -1,0 +1,71 @@
+<section class="section-flex  ">
+    <article class="w-100">
+        <div class="cuadro-blanco-2">
+
+            <div class="w-20">
+                <label for="input1">Grupo de escaneo:</label>
+                <mat-form-field appearance="outline">
+                    <input id="input1" matInput [value]="GRUPO_ESCANEO" disabled="disabled" />
+                </mat-form-field>
+            </div>
+
+            <div class="w-20">
+                <label for="input1">Número de Acta</label>
+                <mat-form-field appearance="outline">
+                    <input id="input2" matInput [value]="NUMERO_MESA"  disabled="disabled" />
+                </mat-form-field>
+            </div>
+
+            <div class="w-20">
+                <label for="input1">Estado Mesa:</label>
+                <mat-form-field appearance="outline">
+                    <input id="input3" matInput [value]="ESTADO_MESA"   disabled="disabled" />
+                </mat-form-field>
+            </div>
+
+            <div class="w-20">
+                <label for="input1">Usuario Modificado:</label>
+                <mat-form-field appearance="outline">
+                    <input id="input4" matInput [value]="USUARIO_MODIFICADO"  disabled="disabled"  />
+                </mat-form-field>
+            </div>
+
+
+            <div class="w-20">
+                <label for="input1">Fecha Modificación:</label>
+                <mat-form-field appearance="outline">
+                    <input id="input5" matInput [value]="FECHA_MODIFICACION"   disabled="disabled" />
+                </mat-form-field>
+            </div>
+
+
+        </div>
+    </article>
+
+    <article class="w-50">
+        <div class="cuadro-blanco-2">
+            <div class="w-100 full">
+                <h3  class="titulo3">Estado de Acta</h3>
+            <label for="input1">Distrital:</label>
+            <mat-form-field *ngFor="let item of ESTADOS_ACTA" appearance="outline">
+                <input id="input6" matInput [value]="item.estado"  disabled="disabled" />
+            </mat-form-field>
+            </div>
+        </div>
+    </article>
+
+    <article class="w-50">
+
+        <div class="cuadro-blanco-2">
+            <h3  class="titulo3">Estado de Proceso</h3>
+            <div class="w-100 full">
+            <label for="input1">Distrital:</label>
+              <mat-form-field *ngFor="let item of ESTADOS_PROCESO" appearance="outline">
+                <input id="input7" matInput [value]="item.estado"  disabled="disabled" />
+              </mat-form-field>
+        </div>
+        </div>
+    </article>
+
+
+</section>

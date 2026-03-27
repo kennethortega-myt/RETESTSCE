@@ -1,0 +1,298 @@
+<section class="secciones puestacero " style="padding: 0px 25px;">
+  <div>
+    <h1 class="titulo1 p-0">Control de Digitalización de Actas</h1>
+    <section class="seccion-unidos control">
+      <article class="w-20 w-40 tranzabilidad-orientacion-end scroll">
+        <div class="">
+          <h1 class="titulocontrol titulo1 mt-0">{{ this.titulo }}</h1>
+          <div class="w-full mr-1">
+            <label for="cmbProceso">Proceso:</label>
+
+           <mat-form-field appearance="outline" >
+              <mat-select id="cmbProceso" type="" #txtProceso required name="idProceso" [(ngModel)]="idProceso"
+              (selectionChange)="obtenerEleccion()">
+                <mat-option [value]="0">SELECCIONE</mat-option>
+                <mat-option *ngFor="let proc of listProceso" [value]="proc.id">
+                  {{ proc.cnombre }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+
+          </div>
+          <div class="w-full mt-10">
+            <label for="cmbTipoEl">Tipo de elección:</label>
+            <mat-form-field appearance="outline" >
+              <mat-select id="cmbTipoEl" type="" #txtEleccion required name="idEleccion" [(ngModel)]="codigoEleccion" (selectionChange)="limpiarDatos()">
+                <mat-option value="0">SELECCIONE</mat-option>
+                <mat-option *ngFor="let elec of listEleccion" [value]="elec.ccodigo">
+                  {{ elec.cnombre }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="mt-10">
+            <button *ngIf="isVisibleBtnCargarDocumentos" class="m-0 estilo2 cargar-doc w-full" type="button"
+              (click)="cargarDocumentos()">
+              CARGAR DOCUMENTOS
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="isVisibleResumen" class="conte-cantidad">
+
+          <div class="w-100 p-0">
+            <div class="cuadro-blanco-2 p-3 cantidad">
+              <img src="../assets/img/estadoControlPendiente.svg" alt=""/>
+              <span class="control-pendiente mr-0">Actas Pendientes
+                <b>{{ totalActasPendiente }}</b>
+              </span>
+            </div>
+          </div>
+
+          <div class="w-100 p-0">
+            <div class="cuadro-blanco-2  cantidad">
+              <img src="../assets/img/estado03.svg" alt=""/>
+              <span class="verificar mr-0">Actas Digitalizadas
+                <b>{{ totalActasDigitalizadas }}</b>
+              </span>
+            </div>
+          </div>
+
+
+          <div class="w-100 p-0">
+            <div class="cuadro-blanco-2 p-3 cantidad">
+              <img src="../assets/img/estado01.svg" alt=""/>
+              <span class="validados mr-0">Actas Aprobadas
+                <b>{{ totalActasAprobadas }}</b>
+              </span>
+            </div>
+          </div>
+
+          <div class="w-100 p-0">
+            <div class="cuadro-blanco-2 p-3 cantidad">
+              <img src="../assets/img/estado02.svg" alt=""/>
+              <span class="control-observados mr-0">Actas Rechazadas
+                <b>{{ totalActasRechazadas }}</b>
+              </span>
+            </div>
+          </div>
+
+          <div class="w-100 p-0">
+            <div class="cuadro-blanco-2 p-3 cantidad">
+              <img src="../assets/img/estadoControlNoInstalada.svg" alt=""/>
+              <span class="control-no-instalada mr-0">No instaladas/Ext/Sin
+                <b>{{ totalActasNoInstaladosExtSin }}</b>
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </article>
+      <article class="w-80">
+        <ng-container *ngIf="!isDigitalizarActa">
+          <div class="w-full">
+            <div class="d-flex">
+              <div class="width-20 width-30-control">
+                <div *ngIf="isVisibleListaActas" class="seccion-lista-control contenido-scroll-control w-full">
+                  <mat-list  class="list-actas">
+                    <mat-list-item *ngFor="let acta of listaActas" [id]="acta.mesa" (click)="verActa(acta)"
+                      [ngClass]="{ active: acta.mesa === nroMesa }" (keydown.enter)="verActa(acta)" >
+                      <div class="centrar-item-list-actas">
+                        <img class="ico-estado-acta" src="../assets/img/ico-foto.svg" alt=""/>
+                        <span>{{ acta.mesa }}</span>
+                      </div>
+                      <ng-container>
+                        <img *ngIf="
+                            acta.estado === constantes.CE_ESTADO_MESA_APROBADO
+                          " src="../assets/img/ico_check.svg" alt=""/>
+                        <img *ngIf="
+                            acta.estado ===
+                              constantes.CE_ESTADO_MESA_REDIGITALIZADO ||
+                            acta.estado ===
+                              constantes.CE_ESTADO_MESA_REDIGITALIZADO_PARCIAL ||
+                            acta.estado === constantes.CE_ESTADO_MESA_OBSERVADO
+                          " src="../assets/img/ico_alert.svg" alt=""/>
+                        <img *ngIf="
+                            acta.estado ===
+                              constantes.CE_ESTADO_MESA_DIGITALIZADO ||
+                            acta.estado ===
+                              constantes.CE_ESTADO_MESA_DIGITALIZADO_PARCIAL
+                          " src="../assets/img/ico-alert-gris.svg" alt=""/>
+                      </ng-container>
+                    </mat-list-item>
+                  </mat-list>
+                </div>
+              </div>
+              <div class="w-full w-80 py-0">
+                <div class="contenido-scroll-control cont-anuncio">
+                  <div *ngIf="listaActas.length == 0" class="personaje-anuncio">
+                    <p>
+                      Haga clic para
+                      <strong>"cargar los documentos"</strong> para el Control de Digitalización
+                    </p>
+                    <img src="../assets/img/personaje1.svg" alt=""/>
+                  </div>
+                  <div *ngIf="listaActas.length !== 0" class="personaje-anuncio">
+                    <p>
+                      Documentos cargados
+                      <br />
+                      Seleccione una imagen para poder visualizar los detalles
+                      de los documentos a digitalizar
+                    </p>
+                    <img src="../assets/img/personaje1.svg" alt=""/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="isDigitalizarActa">
+          <div class="d-flex">
+            <div class="width-20 width-30-control">
+              <div *ngIf="isVisibleListaActas" class="seccion-lista-control contenido-scroll-control w-full">
+                <mat-list  class="list-actas">
+                  <mat-list-item *ngFor="let acta of listaActas" [id]="acta.mesa" (click)="verActa(acta)"
+                    [ngClass]="{ active: acta.mesa === nroMesa }" (keydown.enter)="verActa(acta)">
+                    <div class="centrar-item-list-actas">
+                      <img class="ico-estado-acta" src="../assets/img/ico-foto.svg" alt=""/>
+                      <span >{{ acta.mesa }} </span>
+                    </div>
+                    <ng-container>
+                      <img alt="" *ngIf="acta.estado ===constantes.CE_ESTADO_MESA_DIGITALIZADO" src="../assets/img/ico-alert-gris.svg" />
+                    </ng-container>
+                  </mat-list-item>
+                </mat-list>
+              </div>
+            </div>
+            <div class="w-80 py-0">
+              <h2 class="titulo3 mb-12 mt-0">Documento {{ this.nroMesa }}</h2>
+              <div class="row m-0">
+                <div class="w-50 padding-cont-img-acta">
+                  <div class="cont-img-acta-control-actas h-vh" >
+                    <div class="viewerBox container-scroll-bg">
+                      <img alt="" id="actaLadoEscrutinio" [src]="pngImageUrlAE" style="scale: 100%" class="scaler" />
+                    </div>
+                    <button *ngIf="!flagErrorConversionEscrutinio" class="btn-ico-ampliar" id="btnAmpliarAE"
+                      (click)="openDialogCtrl('AE')">
+                      <img alt="" src="../assets/img/icons/ico-ampliar.svg" />
+                    </button>
+
+                    <div *ngIf="!flagErrorConversionEscrutinio" class="bottom-actas-verificar justify-content-between"
+                      style="bottom: -11px">
+
+                      <div class="d-flex flex-column w-full">
+                        <div class="content-btn-zoom">
+                          <div class="conte-btn-zoom">
+                            <button class="btn-ico-control mr-05" (click)="rotarActaEscrutinio()">
+                              <img alt="" src="../assets/img/icons/ico-rotar.svg" />
+                            </button>
+                            <button class="btn-ico-control mr-05" (click)="zoomInActaEscrutinio()">
+                              <img alt="" src="../assets/img/icons/ico-zoom-in.svg" />
+                            </button>
+                            <button class="btn-ico-control" (click)="zoomOutActaEscrutinio()">
+                              <img alt="" src="../assets/img/icons/ico-zoom-out.svg" />
+                            </button>
+                          </div>
+                        </div>
+
+                        <div *ngIf="actaSeleccionada.acta1Status == Constantes.CE_ESTADO_ACTA_VALIDADO" class="d-flex content-alert-control">
+                          <span class="material-icons text-white">
+                            smart_toy
+                          </span>
+                          <span [title]="actaSeleccionada.observacionDigtalAe" class="text-white">Validado automáticamente por ONPE</span>
+                        </div>
+                        <div *ngIf="actaSeleccionada.acta1Status == Constantes.CE_ESTADO_ACTA_REDIGITALIZAR" class="d-flex content-alert-control-redigitalizar">
+                          <span class="material-icons text-white">
+                            smart_toy
+                          </span>
+                          <span [title]="actaSeleccionada.observacionDigtalAe" class="text-white">Para redigitalizar ONPE</span>
+                        </div>
+                        <div *ngIf="actaSeleccionada.acta1Status == Constantes.CE_ESTADO_ACTA_PARA_PROCESAMIENTO_MANUAL" class="d-flex content-alert-procesar_manualmente">
+                          <span class="material-icons text-white">
+                            smart_toy
+                          </span>
+                          <span class="text-white" [title]="actaSeleccionada.observacionDigtalAe">Para procesamiento manual</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="w-50 padding-cont-img-acta">
+                  <div class="cont-img-acta-control-actas h-vh">
+                    <div class="viewerBox container-scroll-bg">
+                      <img alt="" id="actaLadoInstalacion" [src]="pngImageUrlAI" style="scale: 100%" class="scaler" />
+                    </div>
+                    <button *ngIf="!flagErrorConversionInstalacion" class="btn-ico-ampliar"
+                      (click)="openDialogCtrl('AI')">
+                      <img alt="" src="../assets/img/icons/ico-ampliar.svg" />
+                    </button>
+                    <div *ngIf="!flagErrorConversionInstalacion" class="bottom-actas-verificar justify-content-between"
+                      style="bottom: -11px">
+                      <div class="d-flex flex-column w-full">
+                        <div class="content-btn-zoom">
+                          <div class="conte-btn-zoom">
+                            <button class="btn-ico-control mr-05" (click)="rotarActaInstalacion()">
+                              <img alt="" src="../assets/img/icons/ico-rotar.svg" />
+                            </button>
+                            <button class="btn-ico-control mr-05" (click)="zoomInActaInstalacion()">
+                              <img alt="" src="../assets/img/icons/ico-zoom-in.svg" />
+                            </button>
+                            <button class="btn-ico-control" (click)="zoomOutActaInstalacion()">
+                              <img alt="" src="../assets/img/icons/ico-zoom-out.svg" />
+                            </button>
+                          </div>
+                        </div>
+
+                        <div *ngIf="actaSeleccionada.acta2Status == Constantes.CE_ESTADO_ACTA_VALIDADO" class="d-flex content-alert-control">
+                          <span class="material-icons text-white">
+                            smart_toy
+                          </span>
+                          <span class="text-white" [title]="actaSeleccionada.observacionDigtalAis">Validado automáticamente por ONPE</span>
+                        </div>
+                        <div *ngIf="actaSeleccionada.acta2Status == Constantes.CE_ESTADO_ACTA_REDIGITALIZAR" class="d-flex content-alert-control-redigitalizar">
+                          <span class="material-icons text-white">
+                            smart_toy
+                          </span>
+                          <span class="text-white" [title]="actaSeleccionada.observacionDigtalAis">Para redigitalizar ONPE</span>
+                        </div>
+                        <div *ngIf="actaSeleccionada.acta2Status == Constantes.CE_ESTADO_ACTA_PARA_PROCESAMIENTO_MANUAL" class="d-flex content-alert-procesar_manualmente">
+                          <span class="material-icons text-white">
+                            smart_toy
+                          </span>
+                          <span class="text-white" [title]="actaSeleccionada.observacionDigtalAis">Para procesamiento manual</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </article>
+    </section>
+  </div>
+  <div class="tabs-navegacion">
+    <div style="display: flex; justify-content: space-between;">
+      <button *ngIf="isVisibleBtnFinalizarAtencion" class="estilo3 mr-1 m-0" type="button" (click)="confirmarFinalizarAtencion()">
+        FINALIZAR ATENCIÓN
+      </button>
+      <div class="d-flex">
+        <button style="margin-right: 10px !important;" *ngIf="isVisibleBtnRechazar"  class="estilo2 m-0" type="button" (click)="confirmarRechazarMesa()" >
+          RECHAZAR
+        </button>
+        <button style="margin-right: 10px !important;" *ngIf="isVisibleBtnDigitacionManual"  class="estilo2 m-0" type="button" (click)="procesarDigitacionManual()" >
+          APROBAR
+        </button>
+        <button *ngIf="isVisibleBtnAprobar" [disabled]="!isVisibleBtnAprobar"  class="estilo1 m-0 " type="button" (click)="confirmarAprobarMesa()">
+          APROBAR
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</section>

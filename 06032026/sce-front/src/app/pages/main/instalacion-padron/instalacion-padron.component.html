@@ -1,0 +1,49 @@
+<section class="section-flex secciones">
+    <article class="w-100  ">
+
+            <h3 class="contenedor-documento-titulo mb-10">Importación de padrones</h3>
+            <div class="contenedor-documento-descripcion d-flex between-flex">
+                <p>Cargar la Configuración del Padrón Electoral</p>
+            </div>
+
+            <div class="section-flex">
+
+                <article class="w-100   fondo-azul boxGen">
+
+                    <button *ngIf="btnSpinner; else loading" (click)="alertImportar()"  id="btnCarga" class="estilo2" [disabled]="!puedeImportar">
+                        <img alt="" src="../assets/img/icons/ico-carga-config.svg"> Cargar la configuración del padrón electoral
+                    </button>
+                    <ng-template #loading>
+                        <mat-spinner></mat-spinner>
+                    </ng-template>
+                </article>
+                <article class="w-100 boxMsg" *ngIf="false">
+                    <div class="cuadro-azulado-ns">
+                        <div class="personaje-anuncio">
+                            <p>
+                                Cuentas con la información más actual. Aún no existen actualizaciones.
+                            </p>
+                                <img alt="" src="../assets/img/personaje1.svg">
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <article class="w-100">
+                <div class="progressInfo">
+                    <h2 class="titulo2">Barra de progreso: {{this.progresoImport}} %</h2>
+
+                    <div class="boxBar">
+                        <mat-progress-bar mode="determinate" [value]="progresoImport"></mat-progress-bar>
+                    </div>
+                    <div class="contenido-scrollList">
+                        <div class="">
+                            <ul class="liActs">
+                                <li *ngFor="let mensaje of mensajes.slice().reverse()">{{ mensaje }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </article>
+</article>
+</section>

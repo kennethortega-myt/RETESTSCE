@@ -1,0 +1,45 @@
+<section class="secciones">
+    <h1 class="titulo1">Reportes - Actas</h1>
+        <div class="conte_sombra p-20">
+            <div class="botonera_header">
+              <button
+                  *ngIf="Constantes.CB_PERFILES_SCE.includes(usuario.perfil.descripcion)"
+                  mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/actas/resumen-total'}" (click)="navegar('/main/reportes/actas/resumen-total')">RESUMEN TOTAL</button>
+              <button
+                  *ngIf="Constantes.CB_PERFILES_SCE.includes(usuario.perfil.descripcion)"
+                  mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/actas/avance-estado-actas'}" (click)="navegar('/main/reportes/actas/avance-estado-actas')">AVANCE DE ESTADO DE ACTAS</button>
+              <button
+                  *ngIf="Constantes.CB_PERFILES_SCE.includes(usuario.perfil.descripcion)"
+                  mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/actas/mesa-por-mesa'}" (click)="navegar('/main/reportes/actas/mesa-por-mesa')">MESA POR MESA</button>
+              <button
+                  *ngIf="Constantes.CB_PERFILES_SCE.includes(usuario.perfil.descripcion)"
+                  mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/actas/mesas-por-estado'}" (click)="navegar('/main/reportes/actas/mesas-por-estado')">MESA POR ESTADO</button>
+              <button
+                  *ngIf="Constantes.CB_PERFILES_SCE.includes(usuario.perfil.descripcion)"
+                  mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/actas/resultados'}" (click)="navegar('/main/reportes/actas/resultados')">RESULTADOS</button>
+              <button
+                  *ngIf="Constantes.CB_PERFILES_TODOS.includes(usuario.perfil.descripcion)"
+                  mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/actas/digitalizacion'}" (click)="navegar('/main/reportes/actas/digitalizacion')">AVANCE DE DIGITALIZACIÓN</button>
+              <button
+                *ngIf="Constantes.CB_PERFILES_TODOS.includes(usuario.perfil.descripcion)"
+                mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/actas/actas-digitalizadas'}" (click)="navegar('/main/reportes/actas/actas-digitalizadas')">SEGUIMIENTO DE DIGITALIZACIÓN</button>
+
+            </div>
+            <div class="botonera_header">
+              <button
+                *ngIf="Constantes.CB_PERFILES_SCE.includes(usuario.perfil.descripcion)"
+                mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/actas/informacion-oficial'}" (click)="navegar('/main/reportes/actas/informacion-oficial')">INFORMACIÓN OFICIAL</button>
+              <button
+                  *ngIf="Constantes.CB_PERFILES_SCE.includes(usuario.perfil.descripcion)"
+                  mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/actas/auditoria-digitacion'}" (click)="navegar('/main/reportes/actas/auditoria-digitacion')">AUDITORÍA DE DIGITACIÓN</button>
+              <button
+                  *ngIf="Constantes.CB_PERFILES_SCE.includes(usuario.perfil.descripcion)"
+                  mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/actas/estado-actas-odpe'}" (click)="navegar('/main/reportes/actas/estado-actas-odpe')">ESTADO DE ACTAS POR ODPE</button>
+              <button
+                  *ngIf="Constantes.CB_PERFILES_SCE.includes(usuario.perfil.descripcion)"
+                  mat-button hidden [ngClass]="{'activo': activeMenu === '/main/reportes/actas/autoridades-revocadas'}" (click)="navegar('/main/reportes/actas/autoridades-revocadas')">POSIBLES AUTORIDADES REVOCADAS</button>
+            </div>
+            <router-outlet></router-outlet>
+        </div>
+
+</section>

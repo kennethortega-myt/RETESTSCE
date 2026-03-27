@@ -1,0 +1,28 @@
+<section class="section-flex  ">
+    <article class="w-100">
+        <div class="cuadro-blanco-2">
+          <div *ngFor="let item of ELECTORES_CIUDADANOS">
+            <div class="w-33 full">
+              <label for="sufragioInput">Sufragio:</label>
+              <mat-form-field appearance="outline">
+                <input id="sufragioInput" matInput [value]="item.sufragio" disabled="disabled"  />
+              </mat-form-field>
+            </div>
+
+            <div class="w-33 full">
+              <label for="eaInput">Electores Hábiles:</label>
+              <mat-form-field appearance="outline">
+                <input id="eaInput" matInput [value]="item.electoresHabiles"  disabled="disabled" />
+              </mat-form-field>
+            </div>
+
+            <div class="w-33 full">
+              <label for="auseInput">Ausentismo:</label>
+              <mat-form-field appearance="outline">
+                <input id="auseInput" matInput [value]="item.ausentismo"   disabled="disabled" />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+    </article>
+    </section>

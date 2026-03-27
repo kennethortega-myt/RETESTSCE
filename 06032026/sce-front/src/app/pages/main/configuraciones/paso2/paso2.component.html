@@ -1,0 +1,120 @@
+<div>
+  <h1 class="titulo1">Definir secciones y configuraciones de los documentos para la elección {{tipoEleccion.nombre}} </h1>
+  <div class="d-flex columnas3">
+
+    <section class="seccion-unidos">
+      <article class="w-20 paddTRBL10">
+        <app-menu-lateral titulo="Documentos Electorales" [data]="listDocumentoElectoral" [mostrarInput]="false"
+        (menuSeleccionado)="tipoDocumentoSeleccionado($event)"
+        [idMenuSeleccionado]="detalleTipoEleccion.id" class="lateralMenuW"></app-menu-lateral>
+      </article>
+      <article class="w-80">
+        <div class="d-flex">
+          <div class="w-70">
+            <h2 class="titulo3">Secciones del documento {{detalleTipoEleccion.nombre}}</h2>
+            <p class="texto">Seleccione las secciones del documento electoral.</p>
+          </div>
+          <div class="w-30">
+            <div class="cont-btn no-top no-bottom">
+              <button class="estilo1" (click)="openDialogNewSeccion()" >Secciones adicionales</button>
+            </div>
+          </div>
+        </div>
+
+
+        <div style="overflow: auto;
+        height: calc(100vh - 400px);">
+          <div class="cuadro-blanco-1 no-top no-bottom">
+            <ul class="ul-opciones" [formGroup]="formGroupParent">
+              <li class="seccion-i-b noPadd" *ngFor="let detConfig of listDetalleConfig">
+                <mat-slide-toggle (change)="validarTipo(detConfig.seccion.id)"  class="example-margin" [formControlName]="detConfig.seccion.id+'-radio'">
+                </mat-slide-toggle>
+                <div class="csFlexAuto">
+                  {{detConfig.seccion.nombre}}
+                </div>
+
+                <mat-form-field appearance="outline" class="w-30 select_responsive">
+                  <mat-select [formControlName]="detConfig.seccion.id+'-select'">
+                    <mat-option [value]="''"> Seleccione</mat-option>
+                    <mat-option *ngFor="let tip of tipoDatos" [value]="tip.id"> {{tip.nombre}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="formGroupParent.get(detConfig.seccion.id+'-select').hasError('required')">
+                    Seleccione un valor
+                  </mat-error>
+                </mat-form-field>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </article>
+    </section>
+    <section class="seccion-lateral">
+      <form [formGroup]="formGroupConfigLateral">
+        <h2 class="titulo3">Configuración del documento </h2>
+        <label for="tamanioHoja">Tamaño</label>
+        <mat-form-field appearance="outline">
+          <mat-select formControlName="tamanioHoja">
+            <mat-option [value]="-1"> Seleccione</mat-option>
+            <mat-option *ngFor="let ta of listTamanio" [value]="ta.codigoI"> {{ta.nombre}}</mat-option>
+
+          </mat-select>
+        </mat-form-field>
+
+        <label for="codigoBarraOrientacion">Orientación</label>
+        <mat-form-field appearance="outline">
+          <mat-select formControlName="codigoBarraOrientacion">
+            <mat-option [value]="-1"> Seleccione</mat-option>
+            <mat-option *ngFor="let ori of listOrientacion" [value]="ori.codigoI"> {{ori.nombre}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <label for="multipagina">Multipágina</label>
+        <mat-form-field appearance="outline">
+          <mat-select formControlName="multipagina">
+            <mat-option [value]="-1"> Seleccione</mat-option>
+            <mat-option *ngFor="let mu of listMultipagina" [value]="mu.codigoI"> {{mu.nombre}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <label for="abreviatura">Acrónimo</label>
+        <mat-form-field appearance="outline">
+          <input matInput formControlName="abreviatura">
+        </mat-form-field>
+      </form>
+
+        <div class="rangoCopia">
+          <h2 class="titulo3">Configuración de Rango de Copia</h2>
+          <form class="formulario section-flex " [formGroup]="formGroupRangoLateral" >
+            <label for="rangoInicial">Rango Inicial</label>
+            <mat-form-field appearance="outline" class="w-100 paddT6">
+              <input matInput placeholder="Ingrese rango de copia" name="rangoInicial" formControlName="rangoInicial" maxlength="3">
+            </mat-form-field>
+
+            <label for="rangoFinal">Rango Final</label>
+            <mat-form-field appearance="outline" class="w-100 paddT6">
+              <input matInput placeholder="Ingrese rango final" name="rangoFinal" formControlName="rangoFinal" maxlength="3">
+            </mat-form-field>
+
+            <label for="digitoChequeo">Dígito de Chequeo</label>
+            <mat-form-field appearance="outline" class="w-100 paddT6">
+              <input matInput placeholder="Ingrese dígito chequeo" name="digitoChequeo" formControlName="digitoChequeo" maxlength="20">
+            </mat-form-field>
+
+            <label for="digitoError">Dígito de error</label>
+            <mat-form-field appearance="outline" class="w-100 paddT6">
+              <input matInput placeholder="Ingrese dígito de error" name="digitoError" formControlName="digitoError" maxlength="1">
+            </mat-form-field>
+          </form>
+        </div>
+
+    </section>
+  </div>
+
+
+  <div class="cont-btn">
+    <button class="estilo3" routerLink="/main/configuraciones/paso1">Regresar</button>
+    <button class="estilo2" (click)="guardar(false)"> Guardar </button>
+    <button class="estilo1" (click)="continuar()">continuar</button>
+  </div>
+</div>

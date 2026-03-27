@@ -1,0 +1,22 @@
+<section class="menu_inicial contenedor-principal">
+  <div id="princMonitor">
+
+    <h1 class="titulo1 titulo-inicio">Bienvenido {{usuario.nombre}} al SCE <br><i class="subtitulo">(Sistema de Cómputo Electoral)</i> </h1>
+    <article class=" cont_menu" >
+
+      <a class="menu"  *ngFor="let menu of accesoPerfil; index as i"  (click)="seleccionar(menu,i)">
+        <div>
+          <img src="../assets/img/{{menu.icon}}" alt="">
+          <h2 class="titulo2">{{menu.nombre}}</h2>
+        </div>
+        <p class="descripcion">{{menu.descripcion}}</p>
+      </a>
+
+    </article>
+  </div>
+</section>
+
+
+
+
+

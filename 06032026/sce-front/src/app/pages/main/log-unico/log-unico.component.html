@@ -1,0 +1,75 @@
+<section class="secciones">
+  <div>
+    <h1 class="titulo1">Log de Transacciones</h1>
+    <section class="section-flex ">
+
+      <article class="w-20 cuadro-blanco-2 ">
+        <!-- cambiado form por div -->
+        <div class="formulario section-flex ">
+          <div class="w-100">
+            <label for="buscar">Filtros:</label>
+            <mat-form-field appearance="outline" class="w-100 paddT6">
+              <input matInput placeholder="Buscar" name="buscar" [(ngModel)]="search">
+            </mat-form-field>
+          </div>
+
+        </div>
+        <div class="w-100">
+          <button class="estilo1 w-full mx-0" (click)="buscar()" *ngIf="!clearSearch"> BUSCAR</button>
+          <button class="estilo2 w-full mx-0" (click)="clear()" *ngIf="clearSearch"> LIMPIAR</button>
+        </div>
+
+
+      </article>
+
+
+      <section class="w-80 pb-0 cont-info pl-2 pr-0 ">
+
+        <article class=" section-flex p-r">
+
+
+          <div class="w-100  contenido-scrosll px-0 ">
+            <div class="scrolltablamonitoreo">
+              <mat-table [dataSource]="dataSource" class="mat-elevation-z8 scrollheadermon">
+                <ng-container matColumnDef="#">
+                  <mat-header-cell *matHeaderCellDef class="w-n"> No.</mat-header-cell>
+                  <td mat-cell *matCellDef="let row; let i = index">{{ getRowIndex(i) }}</td>
+                </ng-container>
+                <ng-container matColumnDef="usuario">
+                  <mat-header-cell *matHeaderCellDef> Usuario</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.usuario}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="centro">
+                  <mat-header-cell *matHeaderCellDef> Centro de Cómputo</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.centroComputo}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="observacion">
+                  <mat-header-cell *matHeaderCellDef> Log</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.observacion}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="fecha">
+                  <mat-header-cell *matHeaderCellDef> Fecha Registro</mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    {{ element.fechaRegistro | date: 'dd/MM/yyyy HH:mm' }}
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+            </div>
+            <mat-paginator
+              (page)="eventosPaginador($event)"
+              [length]="totalRegistro"
+              [pageSize]="pageSize"
+              [pageSizeOptions]="[50, 100]"
+              showFirstLastButtons
+            ></mat-paginator>
+          </div>
+
+        </article>
+
+      </section>
+    </section>
+  </div>
+</section>

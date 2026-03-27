@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="31.756" height="42" viewBox="0 0 31.756 42">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectángulo_1477" data-name="Rectángulo 1477" width="31.756" height="42" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="Grupo_1963" data-name="Grupo 1963" transform="translate(-0.54 -0.039)">
+    <rect id="Rectángulo_1472" data-name="Rectángulo 1472" width="19.981" height="1.716" transform="translate(6.106 6.083)" fill="#fff"/>
+    <rect id="Rectángulo_1473" data-name="Rectángulo 1473" width="19.981" height="1.716" transform="translate(6.106 10.388)" fill="#fff"/>
+    <rect id="Rectángulo_1474" data-name="Rectángulo 1474" width="19.981" height="1.716" transform="translate(6.106 14.538)" fill="#fff"/>
+    <rect id="Rectángulo_1475" data-name="Rectángulo 1475" width="19.981" height="1.716" transform="translate(6.106 18.689)" fill="#fff"/>
+    <rect id="Rectángulo_1476" data-name="Rectángulo 1476" width="10.119" height="1.716" transform="translate(6.308 22.839)" fill="#fff"/>
+    <g id="Grupo_1962" data-name="Grupo 1962" transform="translate(0.54 0.039)">
+      <g id="Grupo_1961" data-name="Grupo 1961" transform="translate(0 0)" clip-path="url(#clip-path)">
+        <path id="Trazado_2181" data-name="Trazado 2181" d="M25.543,85.015l.8-1.352-1.37-.77.018-1.572-1.571.018-.77-1.37-1.352.8-1.352-.8-.77,1.37L17.6,81.321l.018,1.572-1.37.77.8,1.352-.8,1.352,1.37.77L17.6,88.709l1.572-.018.77,1.37,1.352-.8,1.352.8.77-1.37,1.571.018-.018-1.572,1.37-.77Zm-2.382,1.172H19.5a.358.358,0,1,1,0-.715h3.66a.358.358,0,0,1,0,.715m0-1.567H19.5a.358.358,0,0,1,0-.715h3.66a.358.358,0,0,1,0,.715" transform="translate(-10.808 -52.351)" fill="#fff"/>
+        <path id="Trazado_2182" data-name="Trazado 2182" d="M28.151,0H3.291A3.3,3.3,0,0,0,0,3.291v35.57a3.3,3.3,0,0,0,3.291,3.291h17.3l.069-.069,2.7-2.7,5.32-5.32,2.7-2.7.068-.069V3.291A3.3,3.3,0,0,0,28.151,0M2.764,38.861V3.291a.528.528,0,0,1,.527-.527h24.86a.528.528,0,0,1,.527.527V29.369H21.949a3.3,3.3,0,0,0-3.291,3.291v6.729H3.291a.528.528,0,0,1-.527-.527m18.658-1.424V32.66a.528.528,0,0,1,.527-.527h4.777Z" transform="translate(-0.172 -0.013)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>

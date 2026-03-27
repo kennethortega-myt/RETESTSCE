@@ -1,0 +1,33 @@
+<div class="p-25">
+    <div class="modal observaciones text-center">
+
+      <div class="conte_observaciones">
+          <div class="content-img-ob">
+            <img class="w-100 p-0 mt-18" [ngClass] = "imgObservacionesOmiso == '' ? 'd_none':'30%'" [src]="imgObservacionesOmiso" alt="" />
+          </div>
+
+        <label for="observacionInput" class="label-textarea text-left" >Ingresar Observaciones:</label>
+          <mat-form-field appearance="outline" class="text_area-100">
+              <textarea id="observacionInput"
+                        style="height: 150px; width:100%; resize: none;"
+                        maxlength="1000"
+                        placeholder="Máximo 1000 caracteres"
+                        (keydown)="preventEnterKey($event)"
+                        matInput
+                        [(ngModel)]="txtObservacionOmiso"></textarea>
+          </mat-form-field>
+      </div>
+
+      </div>
+
+    <div class="content-botones text-center mt-18 d-flex j-end">
+        <button class="estilo2 mb-40" cdkFocusInitial (click)="onCloseClick(true)">
+            ACEPTAR
+         </button>
+    </div>
+
+
+
+  </div>
+
+

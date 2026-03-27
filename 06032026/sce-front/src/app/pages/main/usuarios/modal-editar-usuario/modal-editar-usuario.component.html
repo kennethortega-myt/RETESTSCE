@@ -1,0 +1,88 @@
+<mat-dialog-content>
+    <h2 class="titulo1">Editar usuario: </h2>
+    <div class="grid grid-cols-2 gap-2" [formGroup]="userForm"
+        style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px;">
+        <div class="col-span-2">
+            <label for="mUsuario">Usuario</label>
+            <h2 id="mUsuario">{{ usuarioTitle }}</h2>
+        </div>
+        <div>
+            <label for="mPerfil">Perfil</label>
+            <mat-form-field appearance="outline">
+                <mat-select id="mPerfil" formControlName="perfil">
+                    @for (perfil of data.perfiles; track perfil.id) {
+                    <mat-option [value]="perfil.codigoS">{{perfil.nombre}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div>
+            <label for="mTipoDocumento">Tipo Documento</label>
+            <mat-form-field appearance="outline">
+                <mat-select id="mTipoDocumento" formControlName="tipoDocumento">
+                    @for (item of data.tiposDocumento; track item.codigoI) {
+                    <mat-option [value]="item.codigoI">{{ item.nombre }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div>
+            <label for="mDocumento">Documento</label>
+            <mat-form-field appearance="outline">
+                <input id="mDocumento" formControlName="documento" matInput [maxlength]="maxtDocumentLength">
+            </mat-form-field>
+        </div>
+        <div>
+            <label for="mApellidoPaterno">Apellido Paterno</label>
+            <mat-form-field appearance="outline">
+                <input id="mApellidoPaterno" formControlName="apellidoPaterno" matInput maxlength="100">
+            </mat-form-field>
+        </div>
+        <div>
+            <label for="mApellidoMaterno">Apellido Materno</label>
+            <mat-form-field appearance="outline">
+                <input id="mApellidoMaterno" formControlName="apellidoMaterno" matInput maxlength="100">
+            </mat-form-field>
+        </div>
+        <div>
+            <label for="mNombres">Nombres</label>
+            <mat-form-field appearance="outline">
+                <input id="mNombres" formControlName="nombres" matInput maxlength="100">
+            </mat-form-field>
+        </div>
+        <div>
+            <label for="mCorreo">Correo</label>
+            <mat-form-field appearance="outline">
+                <input id="mCorreo" type="email" formControlName="correo" matInput maxlength="100">
+            </mat-form-field>
+        </div>
+        <div>
+            <label for="mActivo">Activo</label>
+            <mat-form-field appearance="outline">
+                <mat-select id="mActivo" formControlName="activo">
+                    <mat-option [value]="1">Activo</mat-option>
+                    <mat-option [value]="0">Inactivo</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        @if (data.usuarioSasa === null) {
+        <div>
+            <p>{{ data.sasaMessage || 'Sin conexión al sasa' }}</p>
+        </div>
+        } @else {
+        <div style="display: flex; flex-direction: row; gap: 10px; align-items: center;">
+            <button class="btn_restablecer_pwd" matTooltip="Restablecer contraseña" [disabled]="loading" (click)="restablecerContrasenia()"></button>
+            @if(data.usuarioSasa.bloqueado === 1) {
+            <div style="display: flex; flex: 1; flex-direction: column;">
+                <button class="estilo2" [disabled]="loading" (click)="desbloquearUsuario()">Desbloquear</button>
+                <p>(Bloqueado el {{ data.usuarioSasa.fechaBloqueo | date: 'dd/MM/yyyy hh:mm a' }})</p>
+            </div>
+            }
+        </div>
+        }
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button class="estilo1" mat-dialog-close [disabled]="loading">CANCELAR</button>
+    <button class="estilo2" [disabled]="loading || userForm.invalid" (click)="actualizarUsuario()">GUARDAR</button>
+</mat-dialog-actions>

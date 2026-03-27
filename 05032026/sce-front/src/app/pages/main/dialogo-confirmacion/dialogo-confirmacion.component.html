@@ -1,0 +1,21 @@
+<div class="pop-content">
+  <div class="d-flex center-flex">
+    <img alt="" class="img-pop" src="../assets/img/icon-pop/quest.svg">
+  </div>
+  <h1 class="pop-title" >Confirmación</h1>
+  <div class="pop-description" >
+    <p class="mensaje-confirmacion" [style.text-align]="alineacion" >{{mensaje}}</p>
+  </div>
+  <div class="d-flex center-flex gap-10" >
+    <button #botonNo class="estilo3 m-0"
+            (click)="cerrarDialogo()"
+            cdkFocusInitial
+            (keydown)="handleBotonNoKeydown($event)"
+    >NO</button>
+    <button #botonSi class="estilo1 m-0"
+            (click)="confirmado()"
+            (keydown)="handleBotonSiKeydown($event)"
+    >SÍ</button>
+
+  </div>
+</div>

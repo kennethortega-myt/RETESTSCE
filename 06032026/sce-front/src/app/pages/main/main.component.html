@@ -1,0 +1,54 @@
+<app-header></app-header>
+<section class="contenedor-body">
+  <nav>
+
+    <ul style="padding-top: 80px">
+      <mat-accordion>
+        <mat-expansion-panel class="ocultar-transicion-panel" (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false">
+          <mat-expansion-panel-header class="ocultar-transicion">
+            <li class="w-full activeli" [class.active]="activeMenu === 'principal'" (opened)="panelOpenState = true"
+              (closed)="panelOpenState = false">
+              <a (click)="inicio()">Inicio</a>
+            </li>
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel #panelRefs routerLinkActive="active" *ngFor="let menu of accesoPerfil; index as i"
+          (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header
+  [ngClass]="{
+    'ocultar-transicion': !menu.hijos || menu.hijos.length === 0,
+    'mostrar-transicion': menu.hijos && menu.hijos.length > 0
+  }"
+  *ngIf="!menu.tieneHijo || !menu.hijos?.length">
+  <li class="w-full activeli"
+      [class.active]="activeMenu === menu.url"
+      (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false">
+    <a (click)="seleccionar(menu)">{{ menu.nombre }}</a>
+  </li>
+</mat-expansion-panel-header>
+
+
+          <mat-expansion-panel-header *ngIf="menu.tieneHijo">
+            <mat-panel-title *ngIf="menu.tieneHijo">
+              <a style="background-color: red" class="color-a-nav">{{
+                menu.nombre
+                }}</a>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <ul style="margin: 0" *ngFor="let d of menu.hijos">
+            <li [class.active]="activeMenu === d.url">
+              <a class="p-25-nav" (click)="seleccionar(d)">{{ d.nombre }}</a>
+            </li>
+          </ul>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </ul>
+  </nav>
+  <section class="contenedor-principal">
+    <router-outlet></router-outlet>
+  </section>
+</section>

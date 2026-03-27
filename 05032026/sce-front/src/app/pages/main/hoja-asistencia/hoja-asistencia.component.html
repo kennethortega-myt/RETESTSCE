@@ -1,0 +1,72 @@
+<section class="secciones hoja-asistencia" style=" max-height: calc(100vh - 85px);">
+  <div>
+    <h1 class="titulo1">{{tituloComponente}}</h1>
+
+    <section  class="seccion-unidos hoja-asistencia">
+      <article class="hojas-asistencia z-index1">
+        <div class="mt-10">
+          <button  class="m-0 estilo2 cargar-doc w-full" type="button"
+                   (click)="cargarDocumentos()">
+            CARGAR DOCUMENTOS
+          </button>
+        </div>
+
+        <div class="csFxBox paddLR posRel p-0">
+          <div class="csCenteredV ">
+            <h3 class="titulo3 asistencia">&nbsp;</h3>
+          </div>
+        </div>
+
+        <div class="w-100 p-0">
+          <mat-table class="head-flotante-asistencia mitad hoja-asistencia  "
+                     [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="mesa">
+              <mat-header-cell *matHeaderCellDef> Mesa </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.mesa}}  </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="estado">
+              <mat-header-cell *matHeaderCellDef> Estado Digitalizado </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.estado}}  </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="paginas">
+              <mat-header-cell *matHeaderCellDef> Páginas </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.paginas}}  </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row  *matRowDef="let row; columns: displayedColumns;"
+                      [ngClass]="{active: row.mesa===selectedRowMesa.mesa}"
+                      (click)="verMesa(row)" onkeypress="">
+            </mat-row>
+          </mat-table>
+          <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
+
+        </div>
+      </article>
+      <article class="w-80 p-0">
+        <div *ngIf="!isMostrarArchivo" class="contenedor-documento-muestra" >
+          <div class=" contenido-scroll cont-anuncio" >
+            <div  class="personaje-anuncio">
+              <p>
+                Seleccione una lista para ver su contenido.
+              </p>
+              <img src="../assets/img/personaje1.svg" alt="">
+            </div>
+          </div>
+        </div>
+        <app-pdf-viewer *ngIf="isMostrarArchivo"
+                        [pdfBlob]="selectedPDFBlob"
+                        [actualizarPaginas]="actualizarPaginasRevisadas"
+                        [paginasLabels]="['Pág. 1', 'Pág. 2']"
+        >
+        ></app-pdf-viewer>
+      </article>
+    </section>
+    <div *ngIf="isMostrarArchivo" class="cont-btn d-flex j-end">
+      <button class=" estilo2" (click)="confirRechazarListMM()"> REDIGITALIZAR</button>
+      <button class="estilo1" (click)="confirAprobarListaMM()"> APROBAR</button>
+    </div>
+  </div>
+
+</section>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="SubReporteMesasAInstalar" pageWidth="216" pageHeight="216" columnWidth="216" leftMargin="0"
+              rightMargin="0" topMargin="0" bottomMargin="0" uuid="5aef620f-435e-432a-9578-d9baad8fbc6d">
+    <property name="ireport.zoom" value="1.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <parameter name="TITULO_MESAS_A_INSTALAR" class="java.lang.String"/>
+    <parameter name="CANTIDAD_MESAS_A_INSTALAR" class="java.lang.Long"/>
+    <field name="descripcion" class="java.lang.String"/>
+    <field name="cantidad" class="java.lang.Long"/>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <columnHeader>
+        <band height="15">
+            <textField>
+                <reportElement x="0" y="0" width="140" height="15" uuid="cbc0e75f-9bd0-428b-92f2-c6e404015b0f"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Arial" size="7"/>
+                    <paragraph leftIndent="3"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{TITULO_MESAS_A_INSTALAR}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="140" y="0" width="76" height="15" uuid="8d16090e-f2ef-4509-85d1-3929d8348b47"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Arial" size="7"/>
+                    <paragraph rightIndent="2"/>
+                </textElement>
+                <textFieldExpression>
+                    <![CDATA[$P{CANTIDAD_MESAS_A_INSTALAR}==null ? "":$P{CANTIDAD_MESAS_A_INSTALAR}]]></textFieldExpression>
+            </textField>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="10" splitType="Stretch">
+            <textField>
+                <reportElement x="0" y="0" width="140" height="10" uuid="bc01d6be-e3a9-48e5-a4a1-bbd723221d36"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Arial" size="7"/>
+                    <paragraph leftIndent="5"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="140" y="0" width="76" height="10" uuid="2ed28fcf-d50c-4603-bcb9-83f6a16b2469"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Arial" size="7"/>
+                    <paragraph rightIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+</jasperReport>

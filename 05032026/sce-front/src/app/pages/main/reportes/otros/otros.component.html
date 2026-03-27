@@ -1,0 +1,26 @@
+<section class="secciones">
+    <h1 class="titulo1">Reportes - Datos</h1>
+        <div class="conte_sombra p-20">
+            <div class="botonera_header">
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/otros/mesas-ubigeo'}" (click)="navegar('/main/reportes/otros/mesas-ubigeo')">LISTADO DE MESAS POR UBIGEO</button>
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/otros/organizaciones-politicas'}" (click)="navegar('/main/reportes/otros/organizaciones-politicas')">LISTADO DE ORGANIZACIONES POLITICAS</button>
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/otros/candidatos-org-politica'}" (click)="navegar('/main/reportes/otros/candidatos-org-politica')">LISTADO DE CANDIDATOS POR ORGANIZACION POLITICA</button>
+                <button mat-button hidden [ngClass]="{'activo': activeMenu === '/main/reportes/otros/autoridades-consulta'}" (click)="navegar('/main/reportes/otros/autoridades-consulta')">LISTADO DE AUTORIDADES EN CONSULTA</button>
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/otros/relacion-puesta-cero'}" (click)="navegar('/main/reportes/otros/relacion-puesta-cero')">RELACIÓN PUESTA CERO</button>
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/otros/transacciones-realizadas'}" (click)="navegar('/main/reportes/otros/transacciones-realizadas')">TRANSACCIONES REALIZADAS</button>
+                <button *ngIf="!isNacion" mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/otros/transmision'}" (click)="navegar('/main/reportes/otros/transmision')">TRANSMISIÓN</button>
+                <button *ngIf="isNacion" mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/otros/recepcion'}" (click)="navegar('/main/reportes/otros/recepcion')">RECEPCIÓN</button>                
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/otros/sistemas-automatizados'}" (click)="navegar('/main/reportes/otros/sistemas-automatizados')">SISTEMAS AUTOMATIZADOS</button>
+            </div>
+            <div class="botonera_header">                
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/otros/precision-asist-automa-control-digitalizacion'}" (click)="navegar('/main/reportes/otros/precision-asist-automa-control-digitalizacion')">PRECISIÓN DEL ASISTENTE AUTOMATIZADO EN EL CONTROL DE DIGITALIZACIÓN</button>
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/otros/precision-asist-automa-digitacion'}" (click)="navegar('/main/reportes/otros/precision-asist-automa-digitacion')">PRECISIÓN DEL ASISTENTE AUTOMATIZADO DIGITACIÓN</button>
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/otros/comparacion-digitacion-asist-automa'}" (click)="navegar('/main/reportes/otros/comparacion-digitacion-asist-automa')">COMPARACIÓN DE DIGITACIÓN DEL ASISTENTE AUTOMATIZADO</button>
+                <button *ngIf="isNacion" mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/otros/probables-candidatos-electos'}" (click)="navegar('/main/reportes/otros/probables-candidatos-electos')">PROBABLES CANDIDATOS ELECTOS</button>
+                <button mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/otros/productividad-digitador'}" (click)="navegar('/main/reportes/otros/productividad-digitador')">PRODUCTIVIDAD POR DIGITADOR</button>
+                <button *ngIf="isNacion" mat-button [ngClass]="{'activo': activeMenu === '/main/reportes/otros/barrera-electoral'}" (click)="navegar('/main/reportes/otros/barrera-electoral')">BARRERA ELECTORAL</button>
+            </div>
+            <router-outlet></router-outlet>
+        </div>
+
+</section>

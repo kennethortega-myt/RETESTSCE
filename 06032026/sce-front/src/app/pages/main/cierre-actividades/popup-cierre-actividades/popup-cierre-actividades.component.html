@@ -1,0 +1,104 @@
+<div class="bg-white p-20">
+
+  <div class="d-flex center-flex">
+    <img alt="" class="img-pop" src="assets/img/icon-pop/alerta.svg">
+  </div>
+  <h1 class="pop-cierre">¡Advertencia!</h1>
+  <div class="mt-20">
+    <p class="texto-pop-observacion">Ingrese su clave para confirmar el cierre, el motivo y presione el botón Cerrar C.C.</p>
+    <p class="texto-pop-observacion">Si posteriormente necesita realizar la reanudación de actividades del Centro de Cómputo, se le solicitará el usuario y clave como confirmación.</p>
+  </div>
+  <form [formGroup]="cierreForm">
+    <div class="datos-actas mt-20">
+      <div class="filtro15">
+        <label for="txtUsuario">Usuario</label>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <mat-form-field class="example-full-width " appearance="outline">
+            <input #textUsuario
+                   id="txtUsuario"
+                   matInput
+                   placeholder="Ingrese el usuario"
+                   formControlName="usuario"
+                   autocomplete="off"
+                   [class.is-invalid]="isFieldInvalid('usuario')">
+            <mat-error *ngIf="hasFieldError('usuario')">
+              {{ getErrorMessage('usuario') }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="filtro15">
+        <label for="textClave">Clave</label>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <mat-form-field class="example-full-width " appearance="outline">
+            <input #textClave
+                   id="textClave"
+                   matInput
+                   placeholder="Ingrese la clave"
+                   formControlName="clave"
+                   autocomplete="off"
+                   maxlength="20"
+                   cdkFocusInitial
+                   [type]="hide() ? 'password' : 'text'"
+                   [class.is-invalid]="isFieldInvalid('clave')">
+            <button mat-icon-button matSuffix
+                    type="button"
+                    (click)="clickEvent($event)"
+                    [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide()">
+              <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="hasFieldError('clave')">
+              {{ getErrorMessage('clave') }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="datos-actas">
+      <div class="filtro15">
+        <label for="texMotivo">Motivo</label>
+        <mat-form-field class="example-full-width" appearance="outline">
+          <textarea #textMotivo
+                    id="texMotivo"
+                    matInput
+                    style="width: 100%; resize: none;"
+                    rows="4"
+                    maxlength="350"
+                    placeholder="Máximo 350 caracteres"
+                    formControlName="motivo"
+                    autocomplete="off"
+                    (keydown)="preventEnterKey($event)"
+                    [class.is-invalid]="isFieldInvalid('motivo')">
+          </textarea>
+          <!-- Contador de caracteres -->
+          <mat-hint align="end">
+            {{ getCharacterCount('motivo') }}/350
+          </mat-hint>
+
+          <!-- Mostrar errores -->
+          <mat-error *ngIf="hasFieldError('motivo')">
+            {{ getErrorMessage('motivo') }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+  <h1 style="color: red;text-align: center;">{{ errorMessage }}</h1>
+
+  <div class="d-flex justify-content-flex-end mt-20 gap-10" >
+    <button
+            class="estilo3 m-0"
+            (click)="salirModal()"
+            [disabled]="isSubmitting">
+      SALIR
+    </button>
+    <button
+            class="estilo1 m-0"
+            (click)="cerrarCC()"
+            [disabled]="isSubmitting || cierreForm.invalid">
+            <span *ngIf="isSubmitting">Procesando...</span>
+            <span *ngIf="!isSubmitting">CERRAR C.C.</span>
+    </button>
+  </div>
+</div>

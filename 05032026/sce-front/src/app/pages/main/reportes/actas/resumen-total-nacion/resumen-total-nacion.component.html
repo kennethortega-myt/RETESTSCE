@@ -1,0 +1,239 @@
+<div class="filtros" [formGroup]="form">
+    <div class="filtro">
+        <label for="tipoProceso">Proceso:</label>
+
+        <mat-form-field appearance="outline">
+            <mat-select id="proceso" formControlName="proceso">
+                <mat-option *ngFor="let proceso of listProceso" [value]="proceso">{{proceso.nombre}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="filtro">
+        <label for="eleccion">Elección:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="eleccion" formControlName="eleccion">
+                <mat-option *ngFor="let eleccion of listEleccion" [value]="eleccion">
+                    {{eleccion.nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="filtro">
+        <label for="centroComputo">Centro de Cómputo:</label>
+        <mat-form-field appearance="outline">
+            <mat-select id="centroComputo" formControlName="centroComputo">
+                <mat-option *ngFor="let centroComputo of listCentrosComputo" [value]="centroComputo">
+                    {{centroComputo.codigo}} {{centroComputo.nombre}}
+                  </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="filtro">
+        <label for="estado">Habilitado para cierre:</label>
+        <mat-form-field appearance="outline">
+            <mat-select name="estado" formControlName="habilitado">
+                <mat-option *ngFor="let habilitado of listHabilitado" [value]="habilitado">{{habilitado.nombre}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="conte-radio-boton">
+        <mat-radio-group aria-label="Select an option" formControlName="tipoReporte">
+            <mat-radio-button [value]="listTipoReporte[0]">{{listTipoReporte[0].nombre}}</mat-radio-button>
+            <mat-radio-button [value]="listTipoReporte[1]">{{listTipoReporte[1].nombre}}</mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+    <div class="filtro_boton">
+        <button class="estilo1 full noMarginLR" type="button" (click)="buscarReporte()">
+          Consultar
+        </button>
+      </div>
+
+</div>
+
+<h2 class="subtitulo_reportes">Resumen total por Centro de Cómputo</h2>
+<div class="cont-anuncio" *ngIf="!isShowReporte">
+    <div class="personaje-anuncio">
+      <p>
+        Por favor, seleccione los filtros para realizar la búsqueda.
+      </p>
+      <img alt="" src="../assets/img/personaje1.svg" />
+    </div>
+</div>
+
+
+<mat-table [dataSource]="resumenTotal" class="tabla-header-doble con-total mb-25" *ngIf="isShowReporte">
+    <ng-container matColumnDef="codigo">
+        <mat-header-cell *matHeaderCellDef class="header-codigo">
+            Código
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" [ngClass]="getColor(element)">
+            {{ element.codigoCc }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="cc">
+        <mat-header-cell *matHeaderCellDef>Centro de Cómputo</mat-header-cell>
+        <mat-cell *matCellDef="let element" [ngClass]="getColor(element)">
+            {{ element.centroComputo }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="hpc">
+        <mat-header-cell *matHeaderCellDef>Habilitado para Cierre</mat-header-cell>
+        <mat-cell *matCellDef="let element" [ngClass]="getColor(element)">
+            {{ element.habilitado}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="totalmesasinstalar">
+        <mat-header-cell *matHeaderCellDef>Total Mesas A Instalar</mat-header-cell>
+        <mat-cell *matCellDef="let element" [ngClass]="getColor(element)">
+            {{ element.mesasAInstalar}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="totalmesasinstaladas">
+        <mat-header-cell *matHeaderCellDef>Total Mesas Instaladas</mat-header-cell>
+        <mat-cell *matCellDef="let element" [ngClass]="getColor(element)">
+            {{ element.mesasInstal}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="totalmesasnoinstaladas">
+        <mat-header-cell *matHeaderCellDef>Total Mesas No Instaladas</mat-header-cell>
+        <mat-cell *matCellDef="let element" [ngClass]="getColor(element)">
+            {{ element.mesasNoInstal}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actassiniestradas">
+        <mat-header-cell *matHeaderCellDef> <span *ngIf="mostrarPorcentaje">%</span> Actas siniestradas Anuladas</mat-header-cell>
+        <mat-cell *matCellDef="let element" [ngClass]="getColor(element)">
+            <span *ngIf="!mostrarPorcentaje">{{ element.actasSiniestradas}}</span>
+            <span *ngIf="mostrarPorcentaje">{{ element.actasSiniestradas| number: '.3'}} %</span>
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actasextraviadas">
+        <mat-header-cell *matHeaderCellDef>  <span *ngIf="mostrarPorcentaje">%</span> Actas Extraviadas Anuladas</mat-header-cell>
+        <mat-cell *matCellDef="let element" [ngClass]="getColor(element)">
+            <span *ngIf="!mostrarPorcentaje">{{ element.actasExtraviadas}}</span>
+            <span *ngIf="mostrarPorcentaje">{{ element.actasExtraviadas| number: '.3'}} %</span>
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actasprocesadas">
+        <mat-header-cell *matHeaderCellDef>  <span *ngIf="mostrarPorcentaje">%</span>  Actas Procesadas</mat-header-cell>
+        <mat-cell *matCellDef="let element" [ngClass]="getColor(element)">
+            <span *ngIf="!mostrarPorcentaje">{{ element.actasProcesadas}}</span>
+            <span *ngIf="mostrarPorcentaje">{{ element.actasProcesadas| number: '.3'}} %</span>
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actascontabilizadas">
+        <mat-header-cell *matHeaderCellDef>  <span *ngIf="mostrarPorcentaje">%</span>  Actas Contabilizadas</mat-header-cell>
+        <mat-cell *matCellDef="let element" [ngClass]="getColor(element)">
+            <span *ngIf="!mostrarPorcentaje">{{ element.actasContabilizadas}}</span>
+            <span *ngIf="mostrarPorcentaje">{{ element.actasContabilizadas | number: '.3'}} %</span>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns1"></mat-row>
+</mat-table>
+
+<mat-table [dataSource]="resumenTotal" class="tabla-header-doble con-total" *ngIf="isShowReporte">
+    <ng-container matColumnDef="codigo">
+        <mat-header-cell *matHeaderCellDef class="header-codigo">
+            Código
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="header-codigo" [ngClass]="getColor(element)">
+            {{ element.codigoCc }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="cc">
+        <mat-header-cell *matHeaderCellDef>Centro de Cómputo</mat-header-cell>
+        <mat-cell *matCellDef="let element" [ngClass]="getColor(element)">
+            {{ element.centroComputo }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="digitalizacion">
+        <mat-header-cell *matHeaderCellDef class="padding-0">
+            <div class="header-tabla-doble">
+                <span style="border-bottom: 1px solid #ffffff; width: 100%; text-align: center;">Digitalización</span>
+
+                <div class="header-tabla-doble-sub tabla-header-4col">
+                    <span><span *ngIf="mostrarPorcentaje">%</span>Actas</span>
+                    <span><span *ngIf="mostrarPorcentaje">%</span>Lista Electores</span>
+                    <span><span *ngIf="mostrarPorcentaje">%</span>Hojas Asistencia</span>
+                    <span><span *ngIf="mostrarPorcentaje">%</span>Resoluciones</span>
+                </div>
+            </div>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="tabla-header-4col padding-0" [ngClass]="getColor(element)">
+            <span *ngIf="!mostrarPorcentaje" class="text-center">{{ element.digActas }}</span>
+            <span *ngIf="!mostrarPorcentaje" class="text-center">{{ element.digListaElectores }}</span>
+            <span *ngIf="!mostrarPorcentaje" class="text-center">{{ element.digHojasAsistencia }}</span>
+            <span *ngIf="!mostrarPorcentaje" class="text-center">{{ element.digResoluciones }}</span>
+            <span *ngIf="mostrarPorcentaje" class="text-center">{{ element.digActas | number: '.3'}} %</span>
+            <span *ngIf="mostrarPorcentaje" class="text-center">{{ element.digListaElectores | number: '.3'}} %</span>
+            <span *ngIf="mostrarPorcentaje" class="text-center">{{ element.digHojasAsistencia | number: '.3'}} %</span>
+            <span *ngIf="mostrarPorcentaje" class="text-center">{{ element.digResoluciones | number: '.3'}} %</span>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="transmision">
+        <mat-header-cell *matHeaderCellDef class="padding-0">
+            <div class="header-tabla-doble">
+                <span style="border-bottom: 1px solid #ffffff; width: 100%; text-align: center;">Transmisión de Imágenes</span>
+
+                <div class="header-tabla-doble-sub tabla-header-2col">
+                    <span><span *ngIf="mostrarPorcentaje">%</span>Actas</span>
+                    <span><span *ngIf="mostrarPorcentaje">%</span>Resoluciones</span>                    
+                </div>
+            </div>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="tabla-header-2col padding-0" [ngClass]="getColor(element)">
+            <span *ngIf="!mostrarPorcentaje" class="text-center">{{ element.txActas }}</span>
+            <span *ngIf="!mostrarPorcentaje" class="text-center">{{ element.txResolucion }}</span>            
+            <span *ngIf="mostrarPorcentaje" class="text-center">{{ element.txActas | number: '.3'}} %</span>
+            <span *ngIf="mostrarPorcentaje" class="text-center">{{ element.txResolucion | number: '.3'}} %</span>            
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="registro">
+        <mat-header-cell *matHeaderCellDef class="padding-0">
+            <div class="header-tabla-doble">
+                <span style="border-bottom: 1px solid #ffffff; width: 100%; text-align: center;">Registro de Omisos (Cantidad de mesas)</span>
+
+                <div class="header-tabla-doble-sub tabla-header-4col">
+                    <span><span *ngIf="mostrarPorcentaje">%</span>Miembros De mesa</span>
+                    <span><span *ngIf="mostrarPorcentaje">%</span>Votantes</span>
+                    <span><span *ngIf="mostrarPorcentaje">%</span>MM acta Escrutinio</span>
+                    <span><span *ngIf="mostrarPorcentaje">%</span>Personeros</span>
+                </div>
+            </div>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="tabla-header-4col padding-0" [ngClass]="getColor(element)">
+            <span  *ngIf="!mostrarPorcentaje" class="text-center">{{ element.omisosMm }}</span>
+            <span  *ngIf="!mostrarPorcentaje" class="text-center">{{ element.omisosVotantes }}</span>
+            <span  *ngIf="!mostrarPorcentaje" class="text-center">{{ element.omisosMmActaEscrutinio }}</span>
+            <span  *ngIf="!mostrarPorcentaje" class="text-center">{{ element.omisosPersoneros }}</span>
+            <span  *ngIf="mostrarPorcentaje" class="text-center">{{ element.omisosMm | number: '.3'}} %</span>
+            <span  *ngIf="mostrarPorcentaje" class="text-center">{{ element.omisosVotantes | number: '.3'}} %</span>
+            <span  *ngIf="mostrarPorcentaje" class="text-center">{{ element.omisosMmActaEscrutinio | number: '.3'}} %</span>
+            <span  *ngIf="mostrarPorcentaje" class="text-center">{{ element.omisosPersoneros | number: '.3'}} %</span>
+        </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns2"></mat-row>
+</mat-table>
+
+<div class="cont-btn" *ngIf="isShowReporte">
+    <button class="estilo1" (click)="imprimir()">IMPRIMIR</button>
+</div>

@@ -1,0 +1,17 @@
+<mat-dialog-content class="mat-typography mt-12">
+  <form class="formulario" [formGroup]="formAutorizacion">
+    <h3 class="titulo3">Advertencia </h3>
+    <h4 class="titulo4">{{data}}</h4>
+    <label for="password">Clave</label><br>
+
+    <mat-form-field appearance="outline">
+      <input id="password" matInput type="password"  formControlName="clavePuestaCero"/>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions class="mb-1" align="end">
+
+  <button class="btn-azul mr-1"  (click)="aceptar()">ACEPTAR</button>
+  <button class="btn-azul mr-1"  (click)="cancelar()">CANCELAR</button>
+
+</mat-dialog-actions>

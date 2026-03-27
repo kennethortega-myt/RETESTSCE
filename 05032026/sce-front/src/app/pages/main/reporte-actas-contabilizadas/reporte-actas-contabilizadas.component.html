@@ -1,0 +1,148 @@
+<section class="secciones">
+    <div>
+      <h1 class="titulo1">Reporte de actas contabilizadas </h1>
+      <section class="seccion-unidos">
+        <article class="w-20">
+          <form class="formulario" [formGroup]="formGroupRepoActasContaFiltro">
+            <div class="formulario section-flex ">
+              <div class="w-100">
+                <label for="cmbProceso">Proceso:</label>
+
+                <mat-form-field appearance="outline">
+                  <mat-select id="cmbProceso" name="idProceso" formControlName="procesoFormControl">
+                    <mat-option value="0">SELECCIONE</mat-option>
+                    <mat-option *ngFor="let proceso of listProceso" [value]="proceso.id">
+                      {{proceso.cnombre}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="w-100">
+                <label for="cmbTipoElec">Tipo de elección:</label>
+
+                <mat-form-field appearance="outline">
+                  <mat-select id="cmbTipoElec" name="idEleccion" formControlName="eleccionFormControl">
+                    <mat-option value="0">SELECCIONE</mat-option>
+                    <mat-option *ngFor="let eleccion of listEleccion" [value]="eleccion.id">
+                      {{eleccion.cnombre}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <ng-container *ngIf="formGroupRepoActasContaFiltro.get('avanceFormControl').value!==''">
+                  <mat-form-field appearance="outline" >
+                    <input matInput formControlName="avanceFormControl"
+                           [value]="formGroupRepoActasContaFiltro.get('avanceFormControl').value"   />
+                  </mat-form-field>
+                </ng-container>
+              </div>
+
+              <div class="w-100">
+                <label for="cmbAmbito">{{ambito.nombreTipoAmbito}}:</label>
+
+                <mat-form-field appearance="outline">
+                  <mat-select id="cmbAmbito" name="idAmbito" formControlName="ambitoFormControl">
+                    <mat-option value="0">SELECCIONE</mat-option>
+                    <mat-option *ngFor="let ambito of listAmbitos" [value]="ambito.id">
+                      {{ambito.nombre}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="w-100">
+                <label for="cmbCentCom">Centro de cómputo:</label>
+
+                <mat-form-field appearance="outline">
+                  <mat-select id="cmbCentCom" name="idCentroComputo" formControlName="centroComputoFormControl">
+                    <mat-option value="0">SELECCIONE</mat-option>
+                    <mat-option *ngFor="let centroComputo of listCentrosComputo" [value]="centroComputo.id">
+                      {{centroComputo.nombre}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="w-100">
+                <label for="cmbDepartamento">Departamento:</label>
+
+                <mat-form-field appearance="outline">
+                  <mat-select id="cmbDepartamento" name="idEleccion" formControlName="departamentoFormControl">
+                    <mat-option value="0">SELECCIONE</mat-option>
+                    <mat-option *ngFor="let departamento of listDepartamento" [value]="departamento.idUbigeo">
+                      {{departamento.ubigeo}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="w-100">
+                <label for="cmbProvincia">Provincia:</label>
+
+                <mat-form-field appearance="outline">
+                  <mat-select id="cmbProvincia" name="idEleccion" formControlName="provinciaFormControl">
+                    <mat-option value="0">SELECCIONE</mat-option>
+                    <mat-option *ngFor="let provincia of listProvincia" [value]="provincia.idUbigeo">
+                      {{provincia.ubigeo}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="w-100">
+                <label for="cmbDistrito">Distrito:</label>
+
+                <mat-form-field appearance="outline">
+                  <mat-select id="cmbDistrito" name="idEleccion" formControlName="distritoFormControl">
+                    <mat-option value="0">SELECCIONE</mat-option>
+                    <mat-option *ngFor="let distrito of listDistrito" [value]="distrito.idUbigeo">
+                      {{distrito.ubigeo}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+
+              <div class="boton-full px-0">
+                <button class="estilo1 full noMarginLR" type="button" (click)="buscarReporteActasContabilizadas()">
+                  BUSCAR
+                </button>
+              </div>
+
+            </div>
+          </form>
+        </article>
+        <article class="w-80">
+          <div *ngIf="isShowReporte">
+            <mat-tab-group>
+              <mat-tab label="Resultados">
+                <app-reporte-actas-contabilizadas-resultados [ELEMENT_DATA]="ELEMENT_DATA" [ELEMENT_DATA2]="ELEMENT_DATA2"></app-reporte-actas-contabilizadas-resultados>
+
+              </mat-tab>
+              <mat-tab label="Resumen de Actas y Mesas">
+                <app-reporte-actas-contabilizadas-resumen
+                  [resumenMesaAInstalar] = "resumenMesaAInstalar"
+                  [resumenActasProcesadas] = "resumenActasProcesadas"
+                  [resumenActasPorResolverJEE] = "resumenActasPorResolverJEE"
+                  [resumenActasAnuladasPorResolucion] = "resumenActasAnuladasPorResolucion"
+                  [resumenActasPorProcesar] = "resumenActasPorProcesar"
+                >
+                </app-reporte-actas-contabilizadas-resumen>
+
+              </mat-tab>
+
+            </mat-tab-group>
+          </div>
+          <div *ngIf="!isShowReporte" class="contenedor-documento-muestra">
+            <div class=" contenido-scroll cont-anuncio">
+              <div class="personaje-anuncio">
+                <p>Llene los campos del reporte para poder descargar el archivo a imprimir</p>
+                <img src="../assets/img/personaje1.svg" alt="">
+              </div>
+            </div>
+          </div>
+
+        </article>
+      </section>
+      <div class="cont-btn">
+        <button *ngIf="isShowReporte" class=" estilo1" (click)="descargarReporte()"> IMPRIMIR </button>
+      </div>
+    </div>
+</section>

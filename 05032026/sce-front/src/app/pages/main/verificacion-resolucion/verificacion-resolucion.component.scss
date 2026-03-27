@@ -1,0 +1,28 @@
+.secciones.veri-resolucion{
+    height: calc(100vh - 85px);
+}
+
+.seccion-unidos.veri-resolucion{
+height: calc(100vh - 229px);
+
+}
+
+.tabla-veri-resolucion-scroll{
+    overflow: auto;
+            height: calc(100vh - 500px);
+}
+
+@media (max-height: 890px) {
+
+    .tabla-veri-resolucion-scroll{
+        overflow: auto;
+                height: calc(100vh - 400px);
+    }
+    
+ 
+    
+}
+
+.mb-16{
+    margin-bottom: 16px!important;
+}
